@@ -1,0 +1,101 @@
+<nav
+  class="fixed left-0 z-50 h-screen  top-0 {{
+    isNavbarOn ? 'w-52 shadow-lg' : 'w-sidebarWidth'
+  }} bg-primary duration-100 transition-all "
+>
+  <div class="flex flex-col items-center h-full">
+    <ul class="flex items-center justify-center w-full gap-2 flex-col py-2">
+      <!-- <li>
+        <a routerLink="/">
+          <oms-avatar [imgSrc]="logoSrc"></oms-avatar>
+        </a>
+      </li> -->
+
+      <li
+        *ngFor="let element of menuElements"
+        class="relative flex w-full duration-100 ease-linear group border-b-0 border-l-0 opacity-50 cursor-pointer group hover:opacity-100"
+        routerLinkActive="active"
+      >
+        <a
+          class=" gap-4 w-full {{
+            isNavbarOn ? 'w-auto ml-4 block' : 'flex items-center'
+          }} text-white py-4  "
+          [routerLink]="element.path"
+        >
+          <i class="{{ element.icon }} mx-auto"></i>
+
+          <span *ngIf="isNavbarOn" class="capitalize ml-4">{{
+            element.name | titlecase
+          }}</span>
+        </a>
+
+        <div
+          class="absolute top-0 bottom-0 left-0 opacity-0 invisible pointer-events-none w-[2px] h-full hover:block duration-100 ease-linear bg-secondary"
+        ></div>
+
+        <section
+          class="absolute p-4 z-10 hidden w-full min-w-[220px] submenu group-hover:block rounded-xl rounded-l-none top-0 left-full bg-white shadow-md"
+        >
+          <span class="flex items-center mb-6 gap-2 pointer-events-none">
+            <i class="pi pi-th-large"></i>
+
+            <span class="font-bold">{{ element.submenu.title }}</span>
+          </span>
+
+          <ul
+            class="flex flex-col items-center justify-center h-full w-full gap-8"
+          >
+            <li
+              *ngFor="let item of element.submenu?.items"
+              class="relative flex w-full duration-200 ease-linear border-b-0 border-l-0 opacity-50 cursor-pointer hover:opacity-100"
+              routerLinkActive="active"
+              [routerLink]="item.path"
+              [queryParams]="item.param"
+            >
+              <a class="flex items-center w-full gap-2 md:py-0">
+                <div class="">
+                  <i class="pi {{ item.icon }}  text-gray-600 mx-auto "></i>
+                </div>
+                <div class="flex justify-between flex-1">
+                  <span class="text-gray-600 break-words whitespace-normal">{{
+                    item.content | titlecase
+                  }}</span>
+                  <div
+                    *ngIf="item.value"
+                    class="bg-slate-500 rounded-2xl w-[25px] h-[25px] flex justify-center items-center"
+                  >
+                    <span
+                      class="text-white break-words whitespace-normal justify-end"
+                      >{{ item.value }}</span
+                    >
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </li>
+    </ul>
+
+    <div
+      class="flex {{
+        isNavbarOn ? 'flex-row' : 'flex-col'
+      }} w-full gap-2 mt-auto text-center text-white duration-100 ease-linear"
+    >
+      <i
+        class="mx-auto w-full opacity-50 {{
+          isNavbarOn ? 'ml-4' : ''
+        }} cursor-pointer pi pi-cog md:py-4 hover:opacity-100"
+      >
+        <span *ngIf="isNavbarOn" class="ml-4">Setting</span>
+      </i>
+
+      <!-- <i
+        class="py-2 mx-auto w-full opacity-50 cursor-pointer pi {{
+          isNavbarOn ? 'pi-angle-double-left' : 'pi-angle-double-right'
+        }} md:py-4 hover:opacity-100 "
+        (click)="layoutService.changeNavbarState()"
+      ></i> -->
+    </div>
+  </div>
+</nav>
