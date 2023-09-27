@@ -22,7 +22,8 @@
           }} text-white py-4  "
           [routerLink]="element.path"
         >
-          <i class="{{ element.icon }} mx-auto"></i>
+          <!-- <i class="{{ element.icon }} mx-auto"></i> -->
+          <span class="pi pi-user mx-auto"></span>
 
           <span *ngIf="isNavbarOn" class="capitalize ml-4">{{
             element.name | titlecase
@@ -39,7 +40,7 @@
           <span class="flex items-center mb-6 gap-2 pointer-events-none">
             <i class="pi pi-th-large"></i>
 
-            <span class="font-bold">{{ element.submenu.title }}</span>
+            <span class="font-bold">{{ element.submenu?.title }}</span>
           </span>
 
           <ul
@@ -54,7 +55,8 @@
             >
               <a class="flex items-center w-full gap-2 md:py-0">
                 <div class="">
-                  <i class="pi {{ item.icon }}  text-gray-600 mx-auto "></i>
+                  <!-- <i class="pi {{ item.icon }}  text-gray-600 mx-auto "></i> -->
+                  <i class="pi pi-user  text-gray-600 mx-auto "></i>
                 </div>
                 <div class="flex justify-between flex-1">
                   <span class="text-gray-600 break-words whitespace-normal">{{

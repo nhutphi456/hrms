@@ -1,6 +1,9 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "primeicons/primeicons.css";
+
+@import "./layout/styles/layout.scss";
 
 @layer components {
   /* For Webkit-based browsers (Chrome, Safari and Opera) */
