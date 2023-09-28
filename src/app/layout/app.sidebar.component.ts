@@ -18,7 +18,7 @@ const dummies: MenuItem[] = [
   {
     name: "Employee Management",
     icon: '',
-    path: ''
+    path: 'employee-management'
   },
   {
     name: "Competency Management",
