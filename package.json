@@ -23,6 +23,7 @@
     "@angular/router": "^16.2.0",
     "@apollo/client": "^3.8.4",
     "@auth0/angular-jwt": "^5.1.2",
+    "@ngrx/component-store": "^16.2.0",
     "@ngrx/effects": "^16.2.0",
     "@ngrx/store": "^16.2.0",
     "all": "^0.0.0",
