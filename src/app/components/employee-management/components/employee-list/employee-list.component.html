@@ -1,0 +1,6 @@
+<hrms-table
+    *ngIf="employees$ | async as employees"
+    [data]="employees"
+    [loading]="false"
+    [columns]="columns"
+></hrms-table>

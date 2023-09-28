@@ -9,6 +9,7 @@ import { EmployeeManagementRoutingModule } from './employee-management-routing.m
 import { EmployeeManagementComponent } from './employee-management.component';
 import { EmployeeManagementService } from './services/employee-management.service';
 import { EmployeeStore } from './store/employee-management.store.service';
+import { ShareModule } from '../share/share.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { EmployeeStore } from './store/employee-management.store.service';
     AppLayoutModule,
     RouterModule,
     AppTopbarModule,
+    ShareModule
   ],
   providers: [EmployeeManagementService, EmployeeStore]
 })
