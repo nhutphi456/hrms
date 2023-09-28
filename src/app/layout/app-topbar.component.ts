@@ -42,7 +42,6 @@ export class AppTopbarComponent implements OnInit {
     this.layoutService.currentNavbarState.subscribe(
       state => (this.isNavbarOn = state)
     );
-      this.route.data.subscribe(data => console.log({data1: data}))
     this.titles = this.route.snapshot.data['title'];
 
     this.initUser();
