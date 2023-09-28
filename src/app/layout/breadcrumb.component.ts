@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
-  styleUrls: ['./breadcrumb.style.scss']
+  styleUrls: ['./breadcrumb.style.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BreadcrumbComponent implements OnInit{
-  readonly home = { label: 'Home', url: `/`, target: '_self' };
+  readonly home = { label: 'Home', url: `/`, target: '_self', icon: '' };
   menuItems: MenuItem[] = [];
 
   constructor(private activatedRoute: ActivatedRoute) {}
