@@ -1,0 +1,11 @@
+div.p-breadcrumb.p-component {
+    @apply bg-transparent p-0 border-none ;
+}
+
+div.p-breadcrumb.p-component ul li.p-element a span{
+    @apply hover:text-primary hover:font-medium p-2 ease-linear duration-100 transition-all;
+}
+
+.p-breadcrumb ul li .p-menuitem-link{
+    @apply focus:outline-none focus:shadow-none
+}

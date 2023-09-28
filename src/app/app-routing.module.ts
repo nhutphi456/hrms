@@ -3,11 +3,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app-layout.component';
 
 const routes: Routes = [
-  {path: 'login', loadChildren: () => import('./components/login/login.module').then(m => m.LoginModule)},
   {
-    path: "",
+    path: 'login',
+    loadChildren: () =>
+      import('./components/login/login.module').then(m => m.LoginModule),
+  },
+  {
+    path: '',
     component: AppLayoutComponent,
-  }
+    children: [
+      {
+        path: 'employee-management',
+        loadChildren: () =>
+          import(
+            './components/employee-management/employee-management.module'
+          ).then(m => m.EmployeeManagementModule),
+      },
+    ],
+  },
 ];
 
 @NgModule({
