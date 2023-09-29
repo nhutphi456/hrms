@@ -1,0 +1,35 @@
+<div class="bg-gray-100 shadow-sm rounded">
+    <p-carousel *ngIf="employees$ | async as employees" [value]="employees" [numVisible]="3" [numScroll]="3"
+        [circular]="false" styleClass="p-5">
+        <ng-template pTemplate="header">
+            <h2 class="mb-2">New Employee</h2>
+        </ng-template>
+        <ng-template let-employee pTemplate="item">
+            <div class="bg-white employee-item rounded overflow-hidden shadow-lg p-4 mx-4">
+                <div class="employee-item-content flex">
+                    <div class="mb-3">
+                        <p-avatar styleClass="mr-2" size="xlarge" shape="circle"
+                            image="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"></p-avatar>
+                    </div>
+                    <div>
+                        <div class="mb-1 text-xl font-bold">
+                            <span> {{employee.firstName}} {{employee.lastName}}</span>
+                        </div>
+                        <div class="mb-1">
+                            <i class="pi pi-briefcase mr-1"></i>
+                            <span>{{employee.position}}</span>
+                        </div>
+                        <div class="mb-1">
+                            <i class="pi pi-envelope mr-1"></i>
+                            <span> {{employee.email}}</span>
+                        </div>
+                        <div class="mb-1">
+                            <i class="pi pi-phone mr-1"></i>
+                            <span> {{employee.phone}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+</div>
