@@ -1,13 +1,14 @@
-import { Component, EventEmitter, HostBinding, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { HrmsTable } from '../models/hrms-table.model';
 
 @Component({
   selector: 'hrms-table',
   templateUrl: './hrms-table.component.html',
   styleUrls: ['./hrms-table.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HrmsTableComponent {
-  @HostBinding('class') hostClass = 'oms-table-host';
+  @HostBinding('class') hostClass = 'hrms-table-host';
 
   @Output() pagingInfo = new EventEmitter();
 
