@@ -2,9 +2,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
 import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
-import { employeeTableCols } from '../../constants/employee-management.constant';
+import {
+  employeeLabelItems,
+  employeeTableCols,
+} from '../../constants/employee-management.constant';
 import { IEmployee } from '../../models/employee-management.model';
 import { EmployeeStore } from '../../store/employee-management.store.service';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,6 +17,8 @@ import { EmployeeStore } from '../../store/employee-management.store.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class EmployeeListComponent implements OnInit {
+  labelItems: MenuItem[] = employeeLabelItems;
+  activeItem: MenuItem = this.labelItems[0];
   employees$!: Observable<IEmployee[]>;
   tableData: HrmsTable<IEmployee> = {
     page: 0,
@@ -25,6 +31,7 @@ export class EmployeeListComponent implements OnInit {
       body: [],
     },
   };
+
   constructor(private employeeStore: EmployeeStore) {}
 
   ngOnInit(): void {
@@ -48,5 +55,9 @@ export class EmployeeListComponent implements OnInit {
 
   onPageChange() {
     return '';
+  }
+
+  onActiveItemChange(e: Event) {
+    return null;
   }
 }
