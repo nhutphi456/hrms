@@ -16,7 +16,7 @@ export class HrmsPaginationComponent {
     totalRecord: 0,
   };
 
-  onPageChange(event: any) {
+  onPageChange(event: unknown) {
     this.pagingInfo.emit(event);
   }
 }

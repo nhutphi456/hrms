@@ -17,9 +17,9 @@ export class HrmsTableComponent {
 
   @Input() isSortIconShown = false;
 
-  @Input() contentRef!: TemplateRef<any>;
+  @Input() contentRef!: TemplateRef<unknown>;
 
-  @Input() table: HrmsTable<any> = {
+  @Input() table: HrmsTable<unknown> = {
     page: 0,
     first: 0,
     rows: 0,
