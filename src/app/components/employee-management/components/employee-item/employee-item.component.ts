@@ -10,5 +10,7 @@ export class EmployeeItemComponent {
   @HostBinding('class') hostClass = 'employee-item';
   @Input() employee!: IEmployee
 
-  handleEmployeeDetail(e: Event) {}
+  handleEmployeeDetail() {
+    return ''
+  }
 }

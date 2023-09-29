@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
 import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
@@ -10,6 +10,7 @@ import { EmployeeStore } from '../../store/employee-management.store.service';
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class EmployeeListComponent implements OnInit {
   employees$!: Observable<IEmployee[]>;
@@ -30,9 +31,22 @@ export class EmployeeListComponent implements OnInit {
     this.employeeStore.getEmployees();
     this.employees$ = this.employeeStore.employees$;
     this.employees$.subscribe(employees => {
-      this.tableData.data.body = employees
+      const data = {
+        page: 1,
+        first: 1,
+        rows: 3,
+        pageCount: 1,
+        totalRecord: 3,
+        data: {
+          header: [...this.tableData.data.header],
+          body: employees,
+        },
+      };
+      this.tableData = data;
     });
   }
 
-  onPageChange(e: PageChangeEvent): void {}
+  onPageChange() {
+    return '';
+  }
 }

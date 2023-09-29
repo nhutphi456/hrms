@@ -1,13 +1,5 @@
-<hrms-table (pagingInfo)="onPageChange($event)" [isPaginationShown]="true" [table]="tableData"
-    [contentRef]="contentRef">
+<hrms-table (pagingInfo)="onPageChange()" [isPaginationShown]="true" [table]="tableData" [contentRef]="contentRef">
     <ng-template #contentRef let-rowData>
-        <!-- <employee-item [employee]="rowData"></employee-item> -->
-        <tr>
-            <td>{{rowData.firstName}}</td>
-            <td>{{rowData.lastName}}</td>
-            <td>{{rowData.email}}</td>
-            <td>{{rowData.phone}}</td>
-            <td>{{rowData.address}}</td>
-        </tr>
+        <employee-item [employee]="rowData"></employee-item>
     </ng-template>
 </hrms-table>
