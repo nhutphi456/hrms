@@ -12,8 +12,7 @@ const routes: Routes = [
     path: '',
     component: AppLayoutComponent,
   },
-  { path: 'register', loadChildren: () => import('./components/register/register.module').then(m => m.RegisterModule) }
-    children: [
+  { path: 'register', loadChildren: () => import('./components/register/register.module').then(m => m.RegisterModule) } ,
       {
         path: 'employee-management',
         loadChildren: () =>
@@ -21,8 +20,6 @@ const routes: Routes = [
             './components/employee-management/employee-management.module'
           ).then(m => m.EmployeeManagementModule),
       },
-    ],
-  },
 ];
 
 @NgModule({
