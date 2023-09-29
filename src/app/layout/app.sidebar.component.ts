@@ -31,6 +31,7 @@ const dummies: MenuItem[] = [
     path: 'performance-management',
   },
 ];
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './app.sidebar.component.html',

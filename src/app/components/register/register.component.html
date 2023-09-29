@@ -15,15 +15,15 @@
   >
     <div class="shadow-2xl p-6 rounded-lg pt-10">
       <div >
-        <h2 class="text-3xl font-bold py-2">Welcome back 👋</h2>
-        <p class="text-lg text-neutral-500">Log in your account</p>
+        <h2 class="text-3xl font-bold py-2">Let's Get Started 🚀</h2>
+        <p class="text-lg text-neutral-500">Sign up your account</p>
 
         <form [formGroup]="signInForm" class="py-2 pt-14" (ngSubmit)="onSubmit()">
           <div class="flex flex-col gap-1 mb-6 relative">
             <input
               required
               formControlName="userName"
-              placeholder="What is your e-mail?"
+              placeholder="User Name"
               type="text"
               class="input-class text-sm"
               id="username"
@@ -48,13 +48,17 @@
           <div class="flex flex-col gap-1 mb-6 relative">
             <input
               required
-              formControlName="Enter your password"
+              formControlName="userPassword"
               placeholder="Password"
               type="{{ showPassword ? 'text' : 'password' }}"
               class="input-class text-sm !pr-12"
               id="password"
               required
+
             />
+            <div class="password-strength-meter" >
+              <div appTestpassword [userPassword]="signInForm.get('userPassword')?.value" class="progress-bar"></div>
+            </div>
 
             <i
               :[class]="!showPassword ? 'pi-eye': 'pi-eye-slash'"
@@ -81,25 +85,6 @@
             </ng-container>
           </div>
 
-          <div
-            class="flex w-full flex-1 mb-4 items-end md:flex-wrap justify-between transition-all duration-200"
-          >
-            <div class="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                class="mr-2 cursor-pointer"
-                id="checkbox_id"
-              />
-
-              <label for="checkbox_id" class="cursor-pointer"
-                >Remember me</label
-              >
-            </div>
-            <a routerLink="" class="no-underline	 text-primary hover:bg-opacity-95"
-              >Forget password?</a
-            >
-          </div>
-
           <button
             type="submit"
             class="py-3 w-full text-lg bg-primary text-white rounded-lg hover:bg-opacity-95 transition-all duration-200 font-medium flex items-center justify-center"
@@ -114,10 +99,15 @@
           </button>
         </form>
 
+        <div class=" pt-8 align-top">
+                 <span class=" flex justify-center text-neutral-500">By continuing you agree to our</span>
+                 <p class="flex justify-center"> Terms & Conditions and Privacy Policy</p>
+        </div>
+
         <div class="pt-32 flex justify-center gap-2">
-          <p>Don't have an account?</p>
-          <a routerLink="/register" class="no-underline	 text-primary hover:bg-opacity-95"
-            >Sign up</a
+          <p>Already have an account?</p>
+          <a routerLink="/login"  class="no-underline	 text-primary hover:bg-opacity-95"
+            >Login</a
           >
         </div>
       </div>
