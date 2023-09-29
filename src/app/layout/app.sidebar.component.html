@@ -23,7 +23,7 @@
           [routerLink]="element.path"
         >
           <!-- <i class="{{ element.icon }} mx-auto"></i> -->
-          <span class="pi pi-user mx-auto"></span>
+          <span class="pi pi-home  mx-auto"></span>
 
           <span *ngIf="isNavbarOn" class="capitalize ml-4">{{
             element.name | titlecase
@@ -56,7 +56,7 @@
               <a class="flex items-center w-full gap-2 md:py-0">
                 <div class="">
                   <!-- <i class="pi {{ item.icon }}  text-gray-600 mx-auto "></i> -->
-                  <i class="pi pi-user  text-gray-600 mx-auto "></i>
+                  <i class="pi pi-user text-gray-600 mx-auto"></i>
                 </div>
                 <div class="flex justify-between flex-1">
                   <span class="text-gray-600 break-words whitespace-normal">{{
@@ -92,12 +92,18 @@
         <span *ngIf="isNavbarOn" class="ml-4">Setting</span>
       </i>
 
-      <!-- <i
-        class="py-2 mx-auto w-full opacity-50 cursor-pointer pi {{
-          isNavbarOn ? 'pi-angle-double-left' : 'pi-angle-double-right'
-        }} md:py-4 hover:opacity-100 "
+      <button
+        class="py-2 mx-auto w-full opacity-50 cursor-pointer md:py-4 hover:opacity-100"
         (click)="layoutService.changeNavbarState()"
-      ></i> -->
+        (keydown.enter)="layoutService.changeNavbarState()"
+        tabindex="0"
+      >
+        <i
+          class="pi {{
+            isNavbarOn ? 'pi-angle-double-left' : 'pi-angle-double-right'
+          }}"
+        ></i>
+      </button>
     </div>
   </div>
 </nav>

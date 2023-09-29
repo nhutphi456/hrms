@@ -7,30 +7,30 @@ import { LayoutService } from './services/app.layout.service';
 const dummies: MenuItem[] = [
   {
     name: "Dashboard",
-    icon: '',
+    icon: 'pi-home',
     path: ''
   },
   {
     name: "User Management",
-    icon: '',
+    icon: 'pi-user',
     path: ''
   },
   {
     name: "Employee Management",
-    icon: '',
+    icon: 'pi-user',
     path: ''
   },
   {
     name: "Competency Management",
-    icon: '',
+    icon: 'pi-user',
     path: ''
   },
   {
     name: "Performance Management",
-    icon: '',
+    icon: 'pi-user',
     path: ''
   }
-  
+
 ]
 @Component({
   selector: 'app-sidebar',
