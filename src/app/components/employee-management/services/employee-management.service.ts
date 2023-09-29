@@ -5,7 +5,7 @@ import { IEmployee } from '../models/employee-management.model';
 const mockData: IEmployee[] = [
   {
     firstName: 'Erling',
-    lastName: 'Haha',
+    lastName: 'Haaland',
     gender: 1,
     dob: '01/01/1999',
     position: 'Frontend Developer',
@@ -16,11 +16,11 @@ const mockData: IEmployee[] = [
     reportTo: 1,
   },
   {
-    firstName: 'Erling',
-    lastName: 'Haha',
+    firstName: 'Bernado',
+    lastName: 'Silva',
     gender: 1,
     dob: '01/01/1999',
-    position: 'Frontend Developer',
+    position: 'Backend Developer',
     phone: '0123456789',
     email: 'test@gmail.com',
     address: 'manchester',
@@ -28,11 +28,11 @@ const mockData: IEmployee[] = [
     reportTo: 1,
   },
   {
-    firstName: 'Erling',
-    lastName: 'Haha',
+    firstName: 'Lionel',
+    lastName: 'Messi',
     gender: 1,
     dob: '01/01/1999',
-    position: 'Frontend Developer',
+    position: 'Tester',
     phone: '0123456789',
     email: 'test@gmail.com',
     address: 'manchester',

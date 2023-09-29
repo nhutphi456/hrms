@@ -7,7 +7,7 @@ import { IEmployee } from '../../models/employee-management.model';
   styleUrls: ['./employee-item.component.scss']
 })
 export class EmployeeItemComponent {
-  @HostBinding('class') hostClass = 'employee-item';
+  @HostBinding('class') hostClass = 'hrms-employee-item';
   @Input() employee!: IEmployee
 
   handleEmployeeDetail() {
