@@ -10,11 +10,12 @@ import { EmployeeManagementComponent } from './employee-management.component';
 import { EmployeeManagementService } from './services/employee-management.service';
 import { EmployeeStore } from './store/employee-management.store.service';
 import { ShareModule } from '../share/share.module';
-
+import { EmployeeItemComponent } from './components/employee-item/employee-item.component';
 @NgModule({
   declarations: [
     EmployeeManagementComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    EmployeeItemComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +23,7 @@ import { ShareModule } from '../share/share.module';
     AppLayoutModule,
     RouterModule,
     AppTopbarModule,
-    ShareModule
+    ShareModule,
   ],
   providers: [EmployeeManagementService, EmployeeStore]
 })

@@ -1,6 +1,13 @@
-<hrms-table
-    *ngIf="employees$ | async as employees"
-    [data]="employees"
-    [loading]="false"
-    [columns]="columns"
-></hrms-table>
+<hrms-table (pagingInfo)="onPageChange($event)" [isPaginationShown]="true" [table]="tableData"
+    [contentRef]="contentRef">
+    <ng-template #contentRef let-rowData>
+        <!-- <employee-item [employee]="rowData"></employee-item> -->
+        <tr>
+            <td>{{rowData.firstName}}</td>
+            <td>{{rowData.lastName}}</td>
+            <td>{{rowData.email}}</td>
+            <td>{{rowData.phone}}</td>
+            <td>{{rowData.address}}</td>
+        </tr>
+    </ng-template>
+</hrms-table>

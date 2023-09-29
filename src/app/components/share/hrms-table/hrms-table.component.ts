@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, TemplateRef } from '@angular/core';
+import { HrmsTable } from '../models/hrms-table.model';
 
 @Component({
   selector: 'hrms-table',
@@ -6,7 +7,35 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./hrms-table.component.scss'],
 })
 export class HrmsTableComponent {
-  @Input({ required: true }) data!: unknown[];
-  @Input({ required: true }) loading!: boolean;
-  @Input({ required: true }) columns!: { label: string; field: string }[];
+  @HostBinding('class') hostClass = 'oms-table-host';
+
+  @Output() pagingInfo = new EventEmitter();
+
+  @Input() isCheckboxShown = false;
+
+  @Input() isPaginationShown = false;
+
+  @Input() isSortIconShown = false;
+
+  @Input() contentRef!: TemplateRef<any>;
+
+  @Input() table: HrmsTable<any> = {
+    page: 0,
+    first: 0,
+    rows: 0,
+    pageCount: 0,
+    totalRecord: 0,
+    data: {
+      header: [],
+      body: [],
+    },
+  };
+
+  onPageChange(event: Event) {
+    this.pagingInfo.emit(event);
+  }
+
+  isNumber(val: unknown): boolean {
+    return typeof val === 'number';
+  }
 }
