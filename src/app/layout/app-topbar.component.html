@@ -1,1 +1,36 @@
-<p>app-topbar works!</p>
+<div
+  class="absolute top-0 left-0 right-0 flex items-center justify-between p-2 pl-0 border-b-2 border-gray-300 shadow-sm md:shadow-none border-opacity-70 lg:py-3 md:pr-3 lg:pr-4"
+>
+  <div
+    class="flex items-center font-medium transition-all  duration-150 ease-linear {{
+      isNavbarOn ? 'md:pl-52 lg:pl-56' : 'pl-18'
+    }}"
+  >
+    <app-breadcrumb></app-breadcrumb>
+  </div>
+
+  <div class="flex items-center gap-20 ml-auto md:justify-between user">
+    <div class="flex gap-4 items-center">
+      <i class="pi pi-bell cursor-pointer"></i>
+
+      <i class="pi pi-comments cursor-pointer"></i>
+
+      <a [routerLink]="routerLink" class="w-8 h-8">
+        <img
+          [src]="user['avatar']"
+          alt="Avatar"
+          class="object-cover w-full h-full rounded-full"
+        />
+      </a>
+    </div>
+
+    <button
+      class="flex gap-2 cursor-pointer items-end transition-all duration-100 hover:text-primary hover:opacity-100 opacity-60"
+      (click)="logOut()"
+    >
+      <span>Log out</span>
+
+      <i class="pi pi-sign-out"></i>
+    </button>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { ɵ$localize } from '@angular/localize';
+// import { ɵ$localize } from '@angular/localize';
 import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';

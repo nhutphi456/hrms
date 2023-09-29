@@ -1,0 +1,11 @@
+<div>
+    <hrms-tab-menu [labelItems]="labelItems" [activeItem]="activeItem"
+        (onActiveItemChange)="onActiveItemChange($event)"></hrms-tab-menu>
+</div>
+<div class="mt-3">
+    <hrms-table (pagingInfo)="onPageChange()" [isPaginationShown]="true" [table]="tableData" [contentRef]="contentRef">
+        <ng-template #contentRef let-rowData>
+            <employee-item [employee]="rowData"></employee-item>
+        </ng-template>
+    </hrms-table>
+</div>

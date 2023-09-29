@@ -1,0 +1,18 @@
+<p-tabMenu
+  [model]="labelItems"
+  [activeItem]="activeItem"
+  (activeItemChange)="itemChanges($event)"
+>
+  <ng-template pTemplate="item" let-item let-i="index">
+    <span class="px-3 py-1 ml-2">
+      {{ item.title | titlecase }}
+    </span>
+
+    <!-- <span
+      class="px-2 py-1 rounded-full bg-primary text-white"
+      *ngIf="item.badge"
+    >
+      {{ item.badge }}
+    </span> -->
+  </ng-template>
+</p-tabMenu>
