@@ -1,4 +1,4 @@
 export interface TableHeader {
-  label: string;
+  col: string;
   field: string;
 }
