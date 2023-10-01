@@ -1,0 +1,31 @@
+:host ::ng-deep {
+    .p-tabmenu .p-tabmenu-nav {
+        border: none;
+        @apply bg-transparent;
+
+        .p-tabmenuitem {
+
+            // @apply mr-4;
+            
+            .p-menuitem-link {
+                border-radius: 50px;
+                border: none;
+                @apply p-2 m-0 mr-1 bg-transparent;
+                
+                &:not(.p-disabled):focus {
+                    box-shadow: none;
+                }
+            }
+
+            &:hover {
+                .p-menuitem-link {
+                    @apply bg-transparent;
+                }
+            }
+            
+            &.p-highlight .p-menuitem-link {
+                background-color: aquamarine;
+            }
+        }
+    }
+}
