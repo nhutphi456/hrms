@@ -4,4 +4,8 @@
     & td {
       @apply p-4;
     }
+    
+    a {
+      color: var(--text-color);
+    }
   }

@@ -1,0 +1,11 @@
+:host ::ng-deep {
+    .p-avatar {
+        @apply absolute w-24 h-24;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .label {
+        @apply font-bold;
+    }
+}

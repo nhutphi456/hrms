@@ -1,0 +1,128 @@
+<!-- <app-topbar></app-topbar> -->
+<div class="flex gap-20">
+    <div class="left">
+        <div class="max-w-sm rounded overflow-hidden shadow-lg">
+            <div class="profile-img relative">
+                <img class="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains">
+                <p-avatar [image]="employee.avatarImg" shape="circle" size="xlarge"></p-avatar>
+            </div>
+            <div class="px-6 py-4 mt-4">
+                <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
+                <p class="text-center">{{employee.position}}</p>
+                <p class="text-gray-700 text-base text-center mt-5">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maio
+                </p>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h1 class="text-2xl mb-4">Team Management</h1>
+            <div class="flex justify-between">
+                <div>
+                    <p class="label">Reporting to</p>
+                    <p>{{employee.reportTo}}</p>
+                </div>
+                <div>
+                    <p class="label">Manager</p>
+                    <p>{{employee.manager}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h1 class="text-2xl mb-4">Skill Tag</h1>
+            <div>
+                <span *ngFor="let skill of employee.skillsTags"
+                class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-md font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="right flex-1">
+        <div class="employee-detail">
+            <h1 class="text-2xl mb-4">Employee Detail</h1>
+            <div class="grid grid-cols-3 justify-between mt-4">
+                <div>
+                    <p class="label">First Name</p>
+                    <p>{{employee.firstName}}</p>
+                </div>
+                <div>
+                    <p class="label">Last Name</p>
+                    <p>{{employee.lastName}}</p>
+                </div>
+                <div>
+                    <p class="label">Gender</p>
+                    <p>{{employee.gender}}</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 mt-4">
+                <div>
+                    <p class="label">Birthday</p>
+                    <p>{{employee.dob}}</p>
+                </div>
+                <div>
+                    <p class="label">Phone</p>
+                    <p>{{employee.phone}} <i class="pi pi-copy"></i></p>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 mt-4">
+                <div>
+                    <p class="label">Email</p>
+                    <p>{{employee.email}}</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 mt-4">
+                <div>
+                    <p class="label">Address</p>
+                    <p>{{employee.address}} <i class="pi pi-copy"></i></p>
+                </div>
+            </div>
+        </div>
+        <div class="joined-projects">
+            <h1 class="text-2xl mt-4 mb-1">Joined Projects</h1>
+            <div class="card">
+                <p-table [value]="employee.joinedProjects" [tableStyle]="{ 'min-width': '50rem' }">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Name</th>
+                            <th>Work as</th>
+                            <th>Skill Tags</th>
+                            <th>Contributed Hours</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-project>
+                        <tr>
+                            <td>{{ project.name }}</td>
+                            <td>{{ project.workAs }}</td>
+                            <td>
+                                <span *ngFor="let skill of project.skillTags"
+                                    class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-md font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
+                            </td>
+                            <td>{{ project.contributedHours }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="emergency-contact">
+            <h1 class="text-2xl mt-4 mb-1">Emergency Contacts</h1>
+            <div class="card">
+                <p-table [value]="employee.emergencyContacts" [tableStyle]="{ 'min-width': '50rem' }">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Phone</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-contact>
+                        <tr>
+                            <td>{{ contact.firstName }}</td>
+                            <td>{{ contact.lastName }}</td>
+                            <td>
+                                {{contact.phone}} <i class="pi pi-copy"></i>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
