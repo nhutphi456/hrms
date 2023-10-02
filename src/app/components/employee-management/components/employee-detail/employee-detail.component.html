@@ -1,5 +1,4 @@
-<!-- <app-topbar></app-topbar> -->
-<div class="flex gap-20">
+<div class="flex gap-20 w-10/12 mx-auto">
     <div class="left">
         <div class="max-w-sm rounded overflow-hidden shadow-lg">
             <div class="profile-img relative">
@@ -78,7 +77,7 @@
         <div class="joined-projects">
             <h1 class="text-2xl mt-4 mb-1">Joined Projects</h1>
             <div class="card">
-                <p-table [value]="employee.joinedProjects" [tableStyle]="{ 'min-width': '50rem' }">
+                <p-table [value]="employee.joinedProjects" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm">
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Name</th>
@@ -104,7 +103,7 @@
         <div class="emergency-contact">
             <h1 class="text-2xl mt-4 mb-1">Emergency Contacts</h1>
             <div class="card">
-                <p-table [value]="employee.emergencyContacts" [tableStyle]="{ 'min-width': '50rem' }">
+                <p-table [value]="employee.emergencyContacts" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm">
                     <ng-template pTemplate="header">
                         <tr>
                             <th>First Name</th>

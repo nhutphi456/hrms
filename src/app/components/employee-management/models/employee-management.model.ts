@@ -9,4 +9,6 @@ export interface IEmployee {
   address: string;
   status: number;
   reportTo: number;
+  department?: string;
+  currentContract?: string;
 }
