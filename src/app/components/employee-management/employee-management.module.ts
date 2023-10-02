@@ -5,10 +5,9 @@ import { RouterModule } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import { ToastModule } from 'primeng/toast';
 import { MenuModule } from 'primeng/menu';
+import { ToastModule } from 'primeng/toast';
 
-import { AppLayoutModule } from 'src/app/layout/app-layout.module';
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeManagementRoutingModule } from './employee-management-routing.module';
@@ -19,17 +18,18 @@ import { ShareModule } from '../share/share.module';
 import { EmployeeItemComponent } from './components/employee-item/employee-item.component';
 import { EmployeeCarouselModule } from './components/employee-carousel/employee-carousel.module';
 import { EmployeeDetailComponent } from './components/employee-detail/employee-detail.component';
+import { EmployeeEditComponent } from './components/employee-edit/employee-edit.component';
 @NgModule({
   declarations: [
     EmployeeManagementComponent,
     EmployeeListComponent,
     EmployeeItemComponent,
     EmployeeDetailComponent,
+    EmployeeEditComponent,
   ],
   imports: [
     CommonModule,
     EmployeeManagementRoutingModule,
-    AppLayoutModule,
     RouterModule,
     AppTopbarModule,
     ShareModule,
@@ -37,8 +37,8 @@ import { EmployeeDetailComponent } from './components/employee-detail/employee-d
     AvatarModule, 
     TableModule,
     ButtonModule,
-    ToastModule,
-    MenuModule
+    MenuModule,
+    ToastModule
   ],
   providers: [EmployeeManagementService, EmployeeStore]
 })

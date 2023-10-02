@@ -12,8 +12,10 @@ const mockData: IEmployee[] = [
     phone: '0123456789',
     email: 'test@gmail.com',
     address: 'manchester',
-    status: 1,
+    status: 0,
     reportTo: 1,
+    department: 'Software Development',
+    currentContract: 'Full-time',
   },
   {
     firstName: 'Bernado',
@@ -26,6 +28,8 @@ const mockData: IEmployee[] = [
     address: 'manchester',
     status: 1,
     reportTo: 1,
+    department: 'Software Development',
+    currentContract: 'Full-time',
   },
   {
     firstName: 'Lionel',
@@ -38,6 +42,8 @@ const mockData: IEmployee[] = [
     address: 'manchester',
     status: 1,
     reportTo: 1,
+    department: 'Software Development',
+    currentContract: 'Full-time',
   },
   {
     firstName: 'Erling',
@@ -50,6 +56,8 @@ const mockData: IEmployee[] = [
     address: 'manchester',
     status: 1,
     reportTo: 1,
+    department: 'Software Development',
+    currentContract: 'Full-time',
   },
   {
     firstName: 'Bernado',
@@ -62,6 +70,8 @@ const mockData: IEmployee[] = [
     address: 'manchester',
     status: 1,
     reportTo: 1,
+    department: 'Software Development',
+    currentContract: 'Full-time',
   },
   {
     firstName: 'Lionel',
@@ -74,6 +84,8 @@ const mockData: IEmployee[] = [
     address: 'manchester',
     status: 1,
     reportTo: 1,
+    department: 'Software Development',
+    currentContract: 'Full-time',
   },
 ];
 @Injectable({

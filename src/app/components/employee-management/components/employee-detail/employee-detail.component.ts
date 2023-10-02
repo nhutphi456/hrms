@@ -9,7 +9,7 @@ const mockEmployee = {
   email: 'hello@gmail.com',
   address: '12 Le Loi',
   reportTo: 'Kirk Mitrolin',
-  manager: 'Gold Rogers',
+  manager: 'Drake Rogers',
   position: 'Frontend Developer',
   skillsTags: ['Html', 'Css', 'Javascript'],
   avatarImg: 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png',
