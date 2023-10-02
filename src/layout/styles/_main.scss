@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../../assets/fonts/Inter-VariableFont_slnt\,wght.ttf') format('truetype');
+}
 * {
     box-sizing: border-box;
 }
@@ -6,9 +10,10 @@ html {
     height: 100%;
     font-size: $scale;
 }
-
+body, .p-component {
+    font-family: 'Inter', sans-serif!important;
+}
 body {
-    font-family: var(--font-family);
     color: var(--text-color);
     background-color: var(--surface-ground);
     margin: 0;

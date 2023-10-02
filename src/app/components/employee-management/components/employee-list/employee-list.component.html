@@ -1,16 +1,21 @@
-<!-- <app-topbar></app-topbar> -->
-<div>
+<div class="my-2 font-bold flex justify-between items-center">
+    <h1 class="text-2xl">Employee Dashboard</h1>
+    <p-button icon="pi pi-plus" styleClass="p-button-sm" label="New"></p-button>
+</div>
+<div class="card-container bg-gray-100">
     <employee-carousel></employee-carousel>
 </div>
-<div class="flex justify-between items-center mt-4">
-    <hrms-tab-menu [labelItems]="labelItems" [activeItem]="activeItem"
-        (onActiveItemChange)="onActiveItemChange($event)"></hrms-tab-menu>
-    <hrms-screen-filter></hrms-screen-filter>
-</div>
-<div class="mt-3">
-    <hrms-table (pagingInfo)="onPageChange()" [isPaginationShown]="true" [table]="tableData" [contentRef]="contentRef">
-        <ng-template #contentRef let-rowData>
-            <employee-item [employee]="rowData"></employee-item>
-        </ng-template>
-    </hrms-table>
+<div class="card-container">
+    <div class="flex justify-between items-center">
+        <hrms-tab-menu [labelItems]="labelItems" [activeItem]="activeItem"
+            (onActiveItemChange)="onActiveItemChange($event)"></hrms-tab-menu>
+        <hrms-screen-filter></hrms-screen-filter>
+    </div>
+    <div class="mt-3">
+        <hrms-table (pagingInfo)="onPageChange()" [isPaginationShown]="true" [table]="tableData" [contentRef]="contentRef">
+            <ng-template #contentRef let-rowData>
+                <employee-item [employee]="rowData"></employee-item>
+            </ng-template>
+        </hrms-table>
+    </div>
 </div>
