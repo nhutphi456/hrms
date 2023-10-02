@@ -7,6 +7,8 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
+import { MultiSelectModule } from 'primeng/multiselect';
+
 
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
@@ -19,6 +21,7 @@ import { EmployeeItemComponent } from './components/employee-item/employee-item.
 import { EmployeeCarouselModule } from './components/employee-carousel/employee-carousel.module';
 import { EmployeeDetailComponent } from './components/employee-detail/employee-detail.component';
 import { EmployeeEditComponent } from './components/employee-edit/employee-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     EmployeeManagementComponent,
@@ -38,7 +41,9 @@ import { EmployeeEditComponent } from './components/employee-edit/employee-edit.
     TableModule,
     ButtonModule,
     MenuModule,
-    ToastModule
+    ToastModule,
+    ReactiveFormsModule,
+    MultiSelectModule
   ],
   providers: [EmployeeManagementService, EmployeeStore]
 })

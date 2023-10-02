@@ -15,13 +15,21 @@ import { HrmsTabMenuComponent } from './hrms-tab-menu/hrms-tab-menu.component';
     HrmsTableComponent,
     HrmsPaginationComponent,
     HrmsScreenFilterComponent,
-    HrmsTabMenuComponent
+    HrmsTabMenuComponent,
   ],
-  imports: [CommonModule, PaginatorModule, TableModule, SkeletonModule, TabMenuModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    PaginatorModule,
+    TableModule,
+    SkeletonModule,
+    TabMenuModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   exports: [
     HrmsTableComponent,
     HrmsTabMenuComponent,
-    HrmsScreenFilterComponent
-  ]
+    HrmsScreenFilterComponent,
+  ],
 })
 export class ShareModule {}
