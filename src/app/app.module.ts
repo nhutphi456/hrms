@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppLayoutModule } from './layout/app-layout.module';
 import { SharedModule } from './shared/shared.module';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,8 +23,9 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
+    ToastModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
