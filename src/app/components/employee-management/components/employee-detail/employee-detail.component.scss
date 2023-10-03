@@ -1,10 +1,47 @@
 :host ::ng-deep {
-    .p-avatar {
-        @apply absolute w-24 h-24;
+    .profile-img {
+        @apply absolute;
         bottom: -30px;
         left: 50%;
         transform: translateX(-50%);
+
+        .p-avatar {
+            @apply w-24 h-24;
+
+        }
+
+        .p-fileupload {
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+            height: 2rem;
+            width: 2rem;
+            cursor: pointer;
+            border-radius: 9999px;
+            --tw-bg-opacity: 1;
+            background-color: rgb(39 68 124 / var(--tw-bg-opacity));
+            --tw-text-opacity: 1;
+            color: rgb(255 255 255 / var(--tw-text-opacity));
+
+            .p-fileupload-choose {
+                @apply bg-transparent p-0;
+                width: 28px;
+                height: 28px;
+                border: none;
+            }
+
+            .p-fileupload-choose-selected {
+                @apply flex justify-center;
+                .p-button-icon-left {
+                    @apply m-0;
+                }
+            }
+            .p-button-label {
+                display: none;
+            }
+        }
     }
+
     .label {
         @apply font-bold;
     }

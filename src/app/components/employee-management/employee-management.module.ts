@@ -8,7 +8,10 @@ import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
 import { MultiSelectModule } from 'primeng/multiselect';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
@@ -43,7 +46,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MenuModule,
     ToastModule,
     ReactiveFormsModule,
-    MultiSelectModule
+    MultiSelectModule,
+    InputTextModule,
+    DropdownModule,
+    CalendarModule,
+    FileUploadModule
   ],
   providers: [EmployeeManagementService, EmployeeStore]
 })
