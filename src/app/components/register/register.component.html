@@ -20,12 +20,17 @@
 
         <form [formGroup]="signInForm" class="py-2 pt-14" (ngSubmit)="onSubmit()">
           <div class="flex flex-col gap-1 mb-6 relative">
+            <div class="input-class flex flex-auto">
+              <label for="search">
+                <i class="pi pi-envelope"></i>
+              </label>
             <input
               required
               formControlName="userName"
-              placeholder="User Name"
-              type="text"
-              class="input-class text-sm"
+              placeholder="Your E-Mail?"
+              type="email"
+              pattern="[^ @]*@[^ @]*"
+              class="ml-2 bg-transparent outline-none w-full "
               id="username"
               required
             />
@@ -36,6 +41,12 @@
                 signInForm.get('userName')?.touched
               "
             >
+            <div
+            *ngIf="signInForm.get('userName')?.hasError('email')"
+            class="validate"
+          >
+             Invalid Email!!.
+          </div>
               <div
                 *ngIf="signInForm.get('userName')?.hasError('required')"
                 class="validate"
@@ -44,21 +55,24 @@
               </div>
             </ng-container>
           </div>
+          </div>
 
           <div class="flex flex-col gap-1 mb-6 relative">
+            <div class="input-class flex flex-auto  ">
+              <label for="search">
+                <i class="pi pi-lock"></i>
+              </label>  
             <input
               required
               formControlName="userPassword"
               placeholder="Password"
               type="{{ showPassword ? 'text' : 'password' }}"
-              class="input-class text-sm !pr-12"
+              class="ml-2 bg-transparent outline-none w-[95%]"
               id="password"
               required
 
             />
-            <div class="password-strength-meter" >
-              <div appTestpassword [userPassword]="signInForm.get('userPassword')?.value" class="progress-bar"></div>
-            </div>
+      
 
             <i
               :[class]="!showPassword ? 'pi-eye': 'pi-eye-slash'"
@@ -84,10 +98,16 @@
               </div>
             </ng-container>
           </div>
-
+        </div>
+        <div class="">
+        <div class="password-strength-meter " >
+          <div appTestpassword [userPassword]="signInForm.get('userPassword')?.value" class="progress-bar"></div>
+        </div>
+      </div>
+      <div class="pt-6">
           <button
             type="submit"
-            class="py-3 w-full text-lg bg-primary text-white rounded-lg hover:bg-opacity-95 transition-all duration-200 font-medium flex items-center justify-center"
+            class="py-3  w-full text-lg bg-primary text-white rounded-lg hover:bg-opacity-95 transition-all duration-200 font-medium flex items-center justify-center"
             [ngClass]="{ 'bg-opacity-80': isLoading }"
           >
             <div
@@ -97,6 +117,7 @@
 
             <span *ngIf="!isLoading">Continue</span>
           </button>
+        </div>
         </form>
 
         <div class=" pt-8 align-top">

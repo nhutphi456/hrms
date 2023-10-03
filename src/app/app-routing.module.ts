@@ -19,9 +19,24 @@ const routes: Routes = [
             './components/employee-management/employee-management.module'
           ).then(m => m.EmployeeManagementModule),
       },
+      {
+        path: 'system-admin',
+        loadChildren: () =>
+          import('./components/system-admin/system-admin.module').then(
+            m => m.SystemAdminModule,
+          ),
+      },
+
     ],
   },
-  { path: 'register', loadChildren: () => import('./components/register/register.module').then(m => m.RegisterModule) }
+
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('./components/register/register.module').then(
+        m => m.RegisterModule,
+      ),
+  },
 ];
 
 @NgModule({

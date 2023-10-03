@@ -6,5 +6,6 @@ import { AppRoutingModule } from '../app-routing.module';
 @NgModule({
   declarations: [],
   imports: [CommonModule, HttpClientModule, AppRoutingModule],
+  
 })
 export class SharedModule {}
