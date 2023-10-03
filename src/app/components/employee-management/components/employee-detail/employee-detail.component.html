@@ -65,7 +65,7 @@
                             </div>
                         </ng-template>
                     </div>
-                    <div class="grid grid-cols-3 justify-between mt-3">
+                    <div class="grid grid-cols-3 justify-between mt-3 text-lg">
                         <div>
                             <p class="label">First Name</p>
                             <p *ngIf="!isEditOn; else firstNameInput">{{employee.firstName}}</p>
@@ -85,12 +85,12 @@
                                     optionLabel="label"></p-dropdown></ng-template>
                         </div>
                     </div>
-                    <div class="grid grid-cols-3 mt-3">
+                    <div class="grid grid-cols-3 mt-3 text-lg">
                         <div>
                             <p class="label">Birthday</p>
                             <p *ngIf="!isEditOn; else dateInput">{{employee.dob}}</p>
                             <ng-template #dateInput>
-                                <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
+                                <p-calendar formControlName="dob"></p-calendar>
                             </ng-template>
                         </div>
                         <div>
@@ -101,14 +101,14 @@
                             </ng-template>
                         </div>
                     </div>
-                    <div class="grid grid-cols-3 mt-3">
+                    <div class="grid grid-cols-3 mt-3 text-lg">
                         <div>
                             <p class="label">Email</p>
                             <p *ngIf="!isEditOn; else emailInput">{{employee.email}}</p>
                             <ng-template #emailInput><input pInputText formControlName="email" /></ng-template>
                         </div>
                     </div>
-                    <div class="grid grid-cols-3 mt-3">
+                    <div class="grid grid-cols-3 mt-3 text-lg">
                         <div>
                             <p class="label">Address</p>
                             <p *ngIf="!isEditOn; else addressInput">{{employee.address}} <i class="pi pi-copy"></i></p>
@@ -120,7 +120,7 @@
                     <h1 class="text-xl mt-10 mb-1">Joined Projects</h1>
                     <div class="card">
                         <p-table [value]="employee.joinedProjects" [tableStyle]="{ 'min-width': '50rem' }"
-                            styleClass="p-datatable-sm p-datatable-gridlines">
+                            styleClass="p-datatable-gridlines">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>Name</th>
@@ -147,7 +147,7 @@
                     <h1 class="text-xl mt-10 mb-1">Emergency Contacts</h1>
                     <div class="card">
                         <p-table [value]="employee.emergencyContacts" [tableStyle]="{ 'min-width': '50rem' }"
-                            styleClass="p-datatable-sm p-datatable-gridlines">
+                            styleClass="p-datatable-gridlines">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>First Name</th>

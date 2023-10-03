@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ActivatedRoute } from '@angular/router';
 
 const mockEmployee = {
   firstName: 'Russel',
@@ -67,11 +67,15 @@ export class EmployeeDetailComponent implements OnInit {
   tempImg = '';
   constructor(
     private fb: FormBuilder,
-    private messageService: MessageService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
     this.initEmployeeForm();
+    this.route.queryParams.subscribe(params => {
+      const editParam = params['mode'];
+      this.isEditOn = editParam === 'edit' ? true : false;
+    });
   }
 
   initEmployeeForm() {
