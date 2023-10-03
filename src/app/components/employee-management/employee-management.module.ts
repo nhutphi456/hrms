@@ -11,7 +11,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
-import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
@@ -51,7 +50,6 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
     DropdownModule,
     CalendarModule,
     FileUploadModule,
-    DialogModule,
     RadioButtonModule
   ],
   providers: [EmployeeManagementService, EmployeeStore],

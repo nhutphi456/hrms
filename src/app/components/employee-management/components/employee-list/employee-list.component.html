@@ -10,7 +10,7 @@
         <hrms-screen-filter></hrms-screen-filter>
     </div>
     <div class="mt-2 flex justify-between">
-        <form class="flex gap-2" [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm.value)">
+        <form class="flex gap-2" [formGroup]="filterForm" (ngSubmit)="onFilter(filterForm.value)">
             <button pButton type="submit" icon="pi pi-filter" label="Filter"> </button>
             <p-button *ngIf="isClearAllVisible()" (onClick)="handleClearAll()" styleClass="p-button-link"
             label="Clear all"> </p-button>
@@ -32,4 +32,3 @@
         </hrms-table>
     </div>
 </div>
-<employee-form [visible]="isModalVisible" (handleClose)="closeAddEmployeeModal()"></employee-form>

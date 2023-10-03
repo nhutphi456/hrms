@@ -11,6 +11,8 @@ import { IEmployee } from '../../models/employee-management.model';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { MenuItem } from 'primeng/api';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 
 @Component({
   selector: 'app-employee-list',
@@ -59,12 +61,12 @@ export class EmployeeListComponent implements OnInit {
       value: 'internship',
     },
   ];
-  selectedDepartments!: any[];
-  isModalVisible = false;
+  ref!: DynamicDialogRef;
 
   constructor(
     private employeeStore: EmployeeStore,
     private fb: FormBuilder,
+    public dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -101,18 +103,16 @@ export class EmployeeListComponent implements OnInit {
   onActiveItemChange(e: Event) {
     return null;
   }
-  onSelectDepartment(e: any) {
-    console.log({ e2: e });
-  }
 
-  onSubmit(val: any) {
+  onFilter(val: any) {
     console.log({ val });
   }
   openAddEmployeeModal() {
-    this.isModalVisible = true;
-  }
-  closeAddEmployeeModal() {
-    this.isModalVisible = false;
+    this.ref = this.dialogService.open(EmployeeFormComponent, {
+      header: 'Create profile',
+      contentStyle: { overflow: 'auto' },
+      width: '60vw'
+    })
   }
 
   handleClearAll() {

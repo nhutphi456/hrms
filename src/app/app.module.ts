@@ -11,7 +11,7 @@ import { AppLayoutModule } from './layout/app-layout.module';
 import { SharedModule } from './shared/shared.module';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-
+import { DialogService } from 'primeng/dynamicdialog';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -26,7 +26,7 @@ import { MessageService } from 'primeng/api';
     StoreModule.forRoot({}),
     ToastModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, DialogService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
