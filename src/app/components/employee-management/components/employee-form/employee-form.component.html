@@ -3,25 +3,12 @@
     <div class="m-0">
         <form action="" [formGroup]="addEmployeeForm">
             <div class="grid grid-cols-3 gap-6">
-                <div class="employee-type-card flex items-center">
-                    <p-radioButton name="type" value="fulltime" id="fulltime" formControlName="type"></p-radioButton>
-                    <label for="fulltime" class="ml-2 !text-base">
-                        <p class="font-bold">Full-time</p>
-                        <p class="text-sm">Exercitation veniam</p>
-                    </label>
-                </div>
-                <div class="employee-type-card flex items-center">
-                    <p-radioButton name="type" value="parttime" id="parttime" formControlName="type"></p-radioButton>
-                    <label for="parttime" class="ml-2 !text-base">
-                        <p class="font-bold">Part-time</p>
-                        <p class="text-sm">Exercitation veniam</p>
-                    </label>
-                </div>
-                <div class="employee-type-card flex items-center">
-                    <p-radioButton name="type" value="internship" id="internship" formControlName="type"></p-radioButton>
-                    <label for="internship" class="ml-2 !text-base">
-                        <p class="font-bold">Internship</p>
-                        <p class="text-sm">Exercitation veniam</p>
+                <div *ngFor="let eType of employeeTypes" class="employee-type-card flex items-center"
+                    [class.active]="eType.value === employeeType">
+                    <p-radioButton name="type" [value]="eType.value" [id]="eType.label | lowercase"
+                        formControlName="type"></p-radioButton>
+                    <label [for]="eType.label | lowercase" class="ml-3 !text-base">
+                        <p class="font-bold">{{eType.label}}</p>
                     </label>
                 </div>
             </div>

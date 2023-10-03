@@ -12,14 +12,14 @@ export class EmployeeFormComponent implements OnInit {
   addEmployeeForm!: FormGroup;
   employeeTypes = [
     {
-      label: 'Fulltime',
+      label: 'Full-time',
       value: 0,
     },
     {
       label: 'Part-time',
       value: 1,
     },
-    { label: 'Internship', value: 0 },
+    { label: 'Internship', value: 2 },
   ];
 
   departmentOptions = [
@@ -38,7 +38,7 @@ export class EmployeeFormComponent implements OnInit {
   ];
   tempImg = '';
   constructor(private fb: FormBuilder) {}
-
+  get employeeType() { return this.addEmployeeForm.get('type')?.value; }
   ngOnInit(): void {
     this.initForm();
   }

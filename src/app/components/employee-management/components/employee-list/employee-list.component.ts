@@ -65,12 +65,7 @@ export class EmployeeListComponent implements OnInit {
   constructor(
     private employeeStore: EmployeeStore,
     private fb: FormBuilder,
-  ) {
-    this.filterForm = this.fb.group({
-      departments: '',
-      contracts: '',
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.employeeStore.getEmployees();
@@ -88,6 +83,11 @@ export class EmployeeListComponent implements OnInit {
         },
       };
       this.tableData = data;
+    });
+
+    this.filterForm = this.fb.group({
+      departments: '',
+      contracts: '',
     });
   }
 

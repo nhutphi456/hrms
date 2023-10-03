@@ -59,9 +59,13 @@
     }
 
     .employee-type-card {
-        @apply p-4 rounded;
-        border: 1px solid #56B4B8FF;
-        background: #F4FAFAFF;
+        @apply p-6 rounded;
+        border: 1px solid #DEE1E6FF;
+
+        &.active {
+            border: 1px solid #56B4B8FF;
+            background: #F4FAFAFF;
+        }
     }
 
     .p-calendar {
