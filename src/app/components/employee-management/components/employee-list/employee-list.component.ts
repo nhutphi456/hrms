@@ -65,12 +65,7 @@ export class EmployeeListComponent implements OnInit {
   constructor(
     private employeeStore: EmployeeStore,
     private fb: FormBuilder,
-  ) {
-    this.filterForm = this.fb.group({
-      departments: '',
-      contracts: '',
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.employeeStore.getEmployees();
@@ -89,7 +84,15 @@ export class EmployeeListComponent implements OnInit {
       };
       this.tableData = data;
     });
+
+    this.filterForm = this.fb.group({
+      departments: '',
+      contracts: '',
+    });
   }
+
+  get deparments() {return this.filterForm.get('departments')?.value}
+  get contracts() {return this.filterForm.get('contracts')?.value}
 
   onPageChange() {
     return '';
@@ -110,5 +113,16 @@ export class EmployeeListComponent implements OnInit {
   }
   closeAddEmployeeModal() {
     this.isModalVisible = false;
+  }
+
+  handleClearAll() {
+    this.filterForm.patchValue({
+      departments: [],
+      contracts: [],
+    });
+  }
+
+  isClearAllVisible() {
+    return this.deparments.length || this.contracts.length 
   }
 }

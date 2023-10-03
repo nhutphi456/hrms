@@ -15,8 +15,10 @@ export class EmployeeItemComponent {
   constructor(private router: Router) {}
   menuItems: MenuItem[] = [
     {
-      label: 'Update',
+      label: 'Edit',
       icon: 'pi pi-pencil',
+      routerLink: 'detail',
+      queryParams: { mode: 'edit' },
     },
   ];
 
