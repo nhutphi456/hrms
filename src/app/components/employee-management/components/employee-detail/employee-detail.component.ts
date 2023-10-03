@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 
 const mockEmployee = {
   firstName: 'Russel',
@@ -12,20 +13,20 @@ const mockEmployee = {
   reportTo: 'Kirk Mitrolin',
   manager: 'Drake Rogers',
   position: 'Frontend Developer',
-  skillsTags: ['Html', 'Css', 'Javascript'],
+  skillsTags: ['HTML', 'CSS', 'JAVASCRIPT'],
   avatarImg:
     'https://www.primefaces.org/paradise-ng/assets/demo/images/avatar/ivanmagalhaes.png',
   joinedProjects: [
     {
       name: 'SAG',
       workAs: 'Frontend Developer',
-      skillTags: ['Html', 'Css', 'Javascript'],
+      skillTags: ['HTML', 'CSS', 'JAVASCRIPT'],
       contributedHours: 40,
     },
     {
       name: 'SAG',
       workAs: 'Frontend Developer',
-      skillTags: ['Html', 'Css', 'Javascript'],
+      skillTags: ['HTML', 'CSS', 'JAVASCRIPT'],
       contributedHours: 40,
     },
   ],
@@ -64,7 +65,10 @@ export class EmployeeDetailComponent implements OnInit {
   ];
 
   tempImg = '';
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private messageService: MessageService,
+  ) {}
 
   ngOnInit(): void {
     this.initEmployeeForm();

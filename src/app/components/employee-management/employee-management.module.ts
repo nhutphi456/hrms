@@ -6,7 +6,6 @@ import { AvatarModule } from 'primeng/avatar';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
-import { ToastModule } from 'primeng/toast';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
@@ -44,7 +43,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     TableModule,
     ButtonModule,
     MenuModule,
-    ToastModule,
     ReactiveFormsModule,
     MultiSelectModule,
     InputTextModule,
