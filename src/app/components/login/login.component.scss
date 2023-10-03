@@ -1,6 +1,6 @@
 .oms-login-host {
   .input-class {
-    @apply hover:shadow-sm focus:shadow-sm duration-200 transition-all focus:shadow-primary hover:shadow-primary border border-gray-400 outline-none px-4 py-2 text-lg focus:outline-none rounded-md;
+    @apply  focus:shadow-sm duration-200 transition-all focus:shadow-primary  shadow-md outline-none px-4 py-2 text-lg focus:outline-none rounded-md bg-neutral-100;
   }
 
   .validate {

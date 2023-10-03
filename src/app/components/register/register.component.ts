@@ -26,7 +26,7 @@ export class RegisterComponent {
   ) {}
 
   signInForm = new FormGroup({
-    userName: new FormControl('', Validators.required),
+    userName: new FormControl('', [Validators.required,Validators.email]),
     userPassword: new FormControl('', Validators.required),
   });
 
