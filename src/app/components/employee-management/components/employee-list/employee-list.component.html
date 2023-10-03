@@ -1,6 +1,6 @@
 <div class="my-2 font-bold flex justify-between items-center">
     <h1 class="text-2xl">Employee Dashboard</h1>
-    <p-button icon="pi pi-plus" styleClass="p-button-sm" label="New"></p-button>
+    <p-button icon="pi pi-plus" styleClass="p-button-sm" label="New" (click)="openAddEmployeeModal()"></p-button>
 </div>
 <div class="card-container bg-gray-100">
     <employee-carousel></employee-carousel>
@@ -29,3 +29,7 @@
         </hrms-table>
     </div>
 </div>
+<employee-form
+    [visible]="isModalVisible"
+    (handleClose)="closeAddEmployeeModal()"
+></employee-form>

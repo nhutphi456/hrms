@@ -69,7 +69,7 @@
     @apply border-primary border-opacity-80 border placeholder:opacity-100 duration-100 transition-all;
   }
   .p-inputtext {
-    @apply cursor-pointer border-gray-300  placeholder:opacity-50;
+    @apply cursor-pointer border-gray-300  placeholder:opacity-50 p-2 rounded-md;
   }
   .p-button {
     @apply border-none bg-primary;
