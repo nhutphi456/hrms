@@ -1,31 +1,36 @@
 <form [formGroup]="profileForm" (ngSubmit)="onUpdateEmployee(profileForm.value)">
-    <div class="flex gap-4 p-4 w-11/12">
-        <div class="left">
-            <div class="max-w-sm rounded overflow-hidden shadow-md">
-                <div class="relative">
+    <div class="flex gap-4 p-4">
+        <div class="left w-3/12">
+            <div class="w-full rounded overflow-hidden shadow-md">
+                <div class="background-cover-img relative">
                     <img class="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains">
                     <div class="profile-img relative">
-                        <div *ngIf="!tempImg" class="w-24 h-24">
-                            <img class="w-full" [src]="employee.avatarImg" alt=""/>
+                        <div *ngIf="!tempImg" class="profile-image-container">
+                            <img style="background: #CDE9EAFF; border-radius: 60px;" class="w-full"
+                                src="assets/images/avatar-default.jpg" alt="" />
                         </div>
-                        <p-avatar
-                            *ngIf="tempImg"
-                            [image]="tempImg"
-                            shape="circle" size="xlarge"></p-avatar>
-                        <p-fileUpload *ngIf="isEditOn" mode="basic" chooseIcon="pi pi-pencil" (onSelect)="onUpload($event.currentFiles[0])"></p-fileUpload>
+                        <p-avatar *ngIf="tempImg" [image]="tempImg" shape="circle" size="xlarge"></p-avatar>
+                        <p-fileUpload *ngIf="isEditOn" mode="basic" chooseIcon="pi pi-pencil"
+                            (onSelect)="onUpload($event.currentFiles[0])"></p-fileUpload>
                     </div>
                 </div>
-                <div class="px-6 py-4 mt-6">
+                <div class="px-6 py-4 mt-16">
                     <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
                     <p class="text-center">{{employee.position}}</p>
                     <p class="text-gray-700 text-base text-center mt-5">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maio
                     </p>
+                    <div class="social-icons mt-10 flex justify-center gap-10">
+                        <i class="pi pi-twitter"></i>
+                        <i class="pi pi-linkedin"></i>
+                        <i class="pi pi-facebook"></i>
+                        <i class="pi pi-instagram"></i>
+                    </div>
                 </div>
             </div>
             <div class="card-container mt-4">
                 <div>
-                    <h1 class="text-xl mb-4">Team Management</h1>
+                    <h1 class="text-xl mb-2">Team Management</h1>
                     <div class="flex justify-between">
                         <div>
                             <p class="label">Reporting to</p>
@@ -38,15 +43,15 @@
                     </div>
                 </div>
                 <div class="mt-5">
-                    <h1 class="text-xl mb-4">Skill Tag</h1>
+                    <h1 class="text-xl mb-2">Skill Tag</h1>
                     <div>
                         <span *ngFor="let skill of employee.skillsTags"
-                            class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-md font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
+                            class="skill-tag inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-md font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="right flex-1">
+        <div class="right w-9/12 flex-1">
             <div class="card-container">
                 <div class="employee-detail">
                     <div class="flex justify-between items-center mb-4">
@@ -56,7 +61,7 @@
                         <ng-template #groupButtons>
                             <div>
                                 <p-button (click)="closeEdit()" styleClass="p-button-link" label="Cancel"> </p-button>
-                                <p-button type="submit" styleClass="p-button-link" label="Save"> </p-button>
+                                <p-button type="submit" label="Save" icon="pi pi-save"> </p-button>
                             </div>
                         </ng-template>
                     </div>
@@ -85,7 +90,7 @@
                             <p class="label">Birthday</p>
                             <p *ngIf="!isEditOn; else dateInput">{{employee.dob}}</p>
                             <ng-template #dateInput>
-                                <p-calendar formControlName="dob"></p-calendar>
+                                <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
                             </ng-template>
                         </div>
                         <div>
@@ -130,7 +135,7 @@
                                     <td>{{ project.workAs }}</td>
                                     <td>
                                         <span *ngFor="let skill of project.skillTags"
-                                            class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-md font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
+                                            class="skill-tag inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-md font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
                                     </td>
                                     <td>{{ project.contributedHours }}</td>
                                 </tr>
