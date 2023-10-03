@@ -25,7 +25,6 @@
                 <i class="pi pi-envelope"></i>
               </label>
             <input
-              required
               formControlName="userName"
               placeholder="Your E-Mail?"
               type="email"
@@ -61,7 +60,7 @@
             <div class="input-class flex flex-auto  ">
               <label for="search">
                 <i class="pi pi-lock"></i>
-              </label>  
+              </label>
             <input
               required
               formControlName="userPassword"
@@ -72,7 +71,7 @@
               required
 
             />
-      
+
 
             <i
               :[class]="!showPassword ? 'pi-eye': 'pi-eye-slash'"
@@ -99,12 +98,12 @@
             </ng-container>
           </div>
         </div>
-        <div class="">
+        <div class="pl-44">
         <div class="password-strength-meter " >
           <div appTestpassword [userPassword]="signInForm.get('userPassword')?.value" class="progress-bar"></div>
         </div>
       </div>
-      <div class="pt-6">
+      <div class="pt-8">
           <button
             type="submit"
             class="py-3  w-full text-lg bg-primary text-white rounded-lg hover:bg-opacity-95 transition-all duration-200 font-medium flex items-center justify-center"
@@ -115,12 +114,12 @@
               class="w-7 h-7 rounded-full bg-transparent border-2 border-white border-t-transparent animate-spin"
             ></div>
 
-            <span *ngIf="!isLoading">Continue</span>
+            <span *ngIf="!isLoading">Sign Up</span>
           </button>
         </div>
         </form>
 
-        <div class=" pt-8 align-top">
+        <div class=" pt-4 align-top">
                  <span class=" flex justify-center text-neutral-500">By continuing you agree to our</span>
                  <p class="flex justify-center"> Terms & Conditions and Privacy Policy</p>
         </div>
