@@ -1,9 +1,22 @@
 :host ::ng-deep {
+
+    input,
+    label {
+        display: block;
+        @apply w-full;
+    }
+
+    .control-label {
+        @apply mb-1 font-bold;
+    }
+
+    .profile-image-container {
+        width: 120px;
+        height: 120px;
+    }
+
     .profile-img {
-        @apply absolute;
-        bottom: -50px;
-        left: 50%;
-        transform: translateX(-50%);
+        width: 120px;
 
         .p-avatar {
             // @apply w-24 h-24;
@@ -33,40 +46,25 @@
 
             .p-fileupload-choose-selected {
                 @apply flex justify-center;
+
                 .p-button-icon-left {
                     @apply m-0;
                 }
             }
+
             .p-button-label {
                 display: none;
             }
         }
     }
 
-    .label {
-        @apply font-bold;
+    .employee-type-card {
+        @apply p-4 rounded;
+        border: 1px solid #56B4B8FF;
+        background: #F4FAFAFF;
     }
 
-    .skill-tag {
-        border-radius: 50px;
-        @apply text-sm;
-    }
-    .social-icons {
-        .pi-twitter {
-            color: #2ED2E8FF;
-        }
-        .pi-linkedin {
-            color: #255ABBFF;
-        }
-        .pi-facebook {
-            color: #0D78C9FF;
-        }
-        .pi {
-            @apply text-2xl;
-        }
-    }
-    .profile-image-container {
-        width: 120px;
-        height: 120px;
+    .p-calendar {
+        @apply w-full h-11;
     }
 }

@@ -1,0 +1,99 @@
+<p-dialog header="Create profile" [(visible)]="visible" [modal]="true" [style]="{ width: '60vw' }" [draggable]="false"
+    [resizable]="false" (onHide)="onHideModal()" [contentStyle]="{'overflow':'visible'}">
+    <div class="m-0">
+        <form action="" [formGroup]="addEmployeeForm">
+            <div class="grid grid-cols-3 gap-6">
+                <div class="employee-type-card flex items-center">
+                    <p-radioButton name="type" value="fulltime" id="fulltime" formControlName="type"></p-radioButton>
+                    <label for="fulltime" class="ml-2 !text-base">
+                        <p class="font-bold">Full-time</p>
+                        <p class="text-sm">Exercitation veniam</p>
+                    </label>
+                </div>
+                <div class="employee-type-card flex items-center">
+                    <p-radioButton name="type" value="parttime" id="parttime" formControlName="type"></p-radioButton>
+                    <label for="parttime" class="ml-2 !text-base">
+                        <p class="font-bold">Part-time</p>
+                        <p class="text-sm">Exercitation veniam</p>
+                    </label>
+                </div>
+                <div class="employee-type-card flex items-center">
+                    <p-radioButton name="type" value="internship" id="internship" formControlName="type"></p-radioButton>
+                    <label for="internship" class="ml-2 !text-base">
+                        <p class="font-bold">Internship</p>
+                        <p class="text-sm">Exercitation veniam</p>
+                    </label>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-6 mt-4">
+                <div>
+                    <label class="control-label" for="">First Name</label>
+                    <input pInputText formControlName="firstName" placeholder="Enter your first name" />
+                </div>
+                <div>
+                    <label class="control-label" for="">Last Name</label>
+                    <input pInputText formControlName="lastName" placeholder="Enter your last name" />
+                </div>
+                <div>
+                    <label class="control-label" for="">Date of Birth</label>
+                    <p-calendar formControlName="dob" [showIcon]="true" appendTo="body"
+                        placeholder="Your birthday"></p-calendar>
+                </div>
+                <div>
+                    <label class="control-label" for="">Phone</label>
+                    <input pInputText formControlName="phone" placeholder="Enter your phone" />
+                </div>
+                <div>
+                    <label class="control-label" for="">Address</label>
+                    <input pInputText formControlName="address" placeholder="Enter your address" />
+                </div>
+                <div>
+                    <label class="control-label" for="">Email</label>
+                    <input pInputText formControlName="email" placeholder="Enter your email">
+                </div>
+                <div>
+                    <label class="control-label" for="">Type of employee</label>
+                    <p-dropdown styleClass="w-full" formControlName="type" [options]="employeeTypes" optionLabel="label"
+                        placeholder="Choose employee type"></p-dropdown>
+                </div>
+                <div>
+                    <label class="control-label" for="">Department</label>
+                    <p-dropdown styleClass="w-full" formControlName="department" [options]="departmentOptions"
+                        optionLabel="label" placeholder="Choose department"></p-dropdown>
+                </div>
+                <div>
+                    <label class="control-label" for="">Gender</label>
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center">
+                            <p-radioButton name="gender" value="MALE" id="male"
+                                formControlName="gender"></p-radioButton>
+
+                            <label for="male" class="ml-2 !text-base">Male</label>
+                        </div>
+                        <div class="flex items-center">
+                            <p-radioButton name="gender" value="FEMALE" id="female"
+                                formControlName="gender"></p-radioButton>
+
+                            <label for="female" class="ml-2 !text-base">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="control-label" for="">Avatar</label>
+                    <div class="profile-img relative">
+                        <div *ngIf="!tempImg" class="profile-image-container">
+                            <img style="background: #CDE9EAFF; border-radius: 60px;" class="w-full"
+                                src="assets/images/profile-image-default.jpg" alt="" />
+                        </div>
+                        <p-avatar *ngIf="tempImg" [image]="tempImg" shape="circle" size="xlarge"></p-avatar>
+                        <p-fileUpload mode="basic" chooseIcon="pi pi-pencil"
+                            (onSelect)="onUpload($event.currentFiles[0])"></p-fileUpload>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button type="submit" pButton label="Create"> </button>
+            </div>
+        </form>
+    </div>
+</p-dialog>

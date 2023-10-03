@@ -11,6 +11,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
+import { DialogModule } from 'primeng/dialog';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
@@ -22,15 +24,15 @@ import { ShareModule } from '../share/share.module';
 import { EmployeeItemComponent } from './components/employee-item/employee-item.component';
 import { EmployeeCarouselModule } from './components/employee-carousel/employee-carousel.module';
 import { EmployeeDetailComponent } from './components/employee-detail/employee-detail.component';
-import { EmployeeEditComponent } from './components/employee-edit/employee-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 @NgModule({
   declarations: [
     EmployeeManagementComponent,
     EmployeeListComponent,
     EmployeeItemComponent,
     EmployeeDetailComponent,
-    EmployeeEditComponent,
+    EmployeeFormComponent,
   ],
   imports: [
     CommonModule,
@@ -38,8 +40,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     AppTopbarModule,
     ShareModule,
-    EmployeeCarouselModule, 
-    AvatarModule, 
+    EmployeeCarouselModule,
+    AvatarModule,
     TableModule,
     ButtonModule,
     MenuModule,
@@ -48,8 +50,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     InputTextModule,
     DropdownModule,
     CalendarModule,
-    FileUploadModule
+    FileUploadModule,
+    DialogModule,
+    RadioButtonModule
   ],
-  providers: [EmployeeManagementService, EmployeeStore]
+  providers: [EmployeeManagementService, EmployeeStore],
 })
-export class EmployeeManagementModule { }
+export class EmployeeManagementModule {}

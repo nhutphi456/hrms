@@ -60,6 +60,7 @@ export class EmployeeListComponent implements OnInit {
     },
   ];
   selectedDepartments!: any[];
+  isModalVisible = false;
 
   constructor(
     private employeeStore: EmployeeStore,
@@ -99,10 +100,15 @@ export class EmployeeListComponent implements OnInit {
   }
   onSelectDepartment(e: any) {
     console.log({ e2: e });
-    console.log({ selectedd: this.selectedDepartments });
   }
 
   onSubmit(val: any) {
     console.log({ val });
+  }
+  openAddEmployeeModal() {
+    this.isModalVisible = true;
+  }
+  closeAddEmployeeModal() {
+    this.isModalVisible = false;
   }
 }
