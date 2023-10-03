@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
 import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
+
 import {
   employeeLabelItems,
   employeeTableCols,
@@ -9,6 +10,7 @@ import {
 import { IEmployee } from '../../models/employee-management.model';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { MenuItem } from 'primeng/api';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-list',
@@ -31,8 +33,43 @@ export class EmployeeListComponent implements OnInit {
       body: [],
     },
   };
+  filterForm!: FormGroup;
+  departmentOptions: { label: string; value: unknown }[] = [
+    {
+      label: 'Software Development',
+      value: 'SD',
+    },
+    {
+      label: 'Design',
+      value: 'DS',
+    },
+  ];
 
-  constructor(private employeeStore: EmployeeStore) {}
+  contractOptions: { label: string; value: unknown }[] = [
+    {
+      label: 'Fulltime',
+      value: 'fulltime',
+    },
+    {
+      label: 'Part-time',
+      value: 'parttime',
+    },
+    {
+      label: 'Internship',
+      value: 'internship',
+    },
+  ];
+  selectedDepartments!: any[];
+
+  constructor(
+    private employeeStore: EmployeeStore,
+    private fb: FormBuilder,
+  ) {
+    this.filterForm = this.fb.group({
+      departments: '',
+      contracts: '',
+    });
+  }
 
   ngOnInit(): void {
     this.employeeStore.getEmployees();
@@ -59,5 +96,13 @@ export class EmployeeListComponent implements OnInit {
 
   onActiveItemChange(e: Event) {
     return null;
+  }
+  onSelectDepartment(e: any) {
+    console.log({ e2: e });
+    console.log({ selectedd: this.selectedDepartments });
+  }
+
+  onSubmit(val: any) {
+    console.log({ val });
   }
 }

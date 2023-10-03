@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 const mockEmployee = {
   firstName: 'Russel',
@@ -12,7 +13,8 @@ const mockEmployee = {
   manager: 'Drake Rogers',
   position: 'Frontend Developer',
   skillsTags: ['Html', 'Css', 'Javascript'],
-  avatarImg: 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png',
+  avatarImg:
+    'https://www.primefaces.org/paradise-ng/assets/demo/images/avatar/ivanmagalhaes.png',
   joinedProjects: [
     {
       name: 'SAG',
@@ -45,6 +47,78 @@ const mockEmployee = {
   templateUrl: './employee-detail.component.html',
   styleUrls: ['./employee-detail.component.scss'],
 })
-export class EmployeeDetailComponent {
-  employee = mockEmployee
+export class EmployeeDetailComponent implements OnInit {
+  employee = mockEmployee;
+  isEditOn = false;
+  profileForm!: FormGroup;
+
+  genderOptions = [
+    {
+      label: 'Male',
+      value: 1,
+    },
+    {
+      label: 'Female',
+      value: 0,
+    },
+  ];
+
+  tempImg = '';
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.initEmployeeForm();
+  }
+
+  initEmployeeForm() {
+    const { firstName, lastName, gender, dob, phone, email, address } =
+      this.employee;
+    this.profileForm = this.fb.group({
+      firstName,
+      lastName,
+      gender,
+      dob,
+      phone,
+      email,
+      address,
+    });
+  }
+
+  openEdit() {
+    this.isEditOn = true;
+  }
+  closeEdit() {
+    this.isEditOn = false;
+    this.tempImg = '';
+  }
+
+  onUpdateEmployee(val: any): void {
+    console.log({ data: val });
+  }
+
+  onUpload(f: File): void {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const fileContent = reader.result as string; // Get the file content as base64 string
+
+      this.tempImg = fileContent;
+
+      // this.notificationService.successNotification(
+      //   $localize`Uploaded new photo`
+      // );
+
+      this.parseToByteArray(fileContent);
+    };
+
+    reader.readAsDataURL(f); // Read the file as base64 data
+  }
+
+  private parseToByteArray(base64: string) {
+    // const avaBytesArr = this.helperService.base64ToBytes(base64); // Convert base64 string to bytes
+    // const byteArr = Array.from(avaBytesArr);
+    // this.editForm.patchValue({
+    //   avatar: byteArr,
+    // });
+  }
 }

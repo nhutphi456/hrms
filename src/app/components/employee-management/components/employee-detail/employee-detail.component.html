@@ -1,127 +1,168 @@
-<div class="flex gap-20 w-10/12 mx-auto">
-    <div class="left">
-        <div class="max-w-sm rounded overflow-hidden shadow-lg">
-            <div class="profile-img relative">
-                <img class="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains">
-                <p-avatar [image]="employee.avatarImg" shape="circle" size="xlarge"></p-avatar>
-            </div>
-            <div class="px-6 py-4 mt-4">
-                <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
-                <p class="text-center">{{employee.position}}</p>
-                <p class="text-gray-700 text-base text-center mt-5">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maio
-                </p>
-            </div>
-        </div>
-        <div class="mt-5">
-            <h1 class="text-2xl mb-4">Team Management</h1>
-            <div class="flex justify-between">
-                <div>
-                    <p class="label">Reporting to</p>
-                    <p>{{employee.reportTo}}</p>
+<form [formGroup]="profileForm" (ngSubmit)="onUpdateEmployee(profileForm.value)">
+    <div class="flex gap-4 p-4 w-11/12">
+        <div class="left">
+            <div class="max-w-sm rounded overflow-hidden shadow-md">
+                <div class="relative">
+                    <img class="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains">
+                    <div class="profile-img relative">
+                        <div *ngIf="!tempImg" class="w-24 h-24">
+                            <img class="w-full" [src]="employee.avatarImg" alt=""/>
+                        </div>
+                        <p-avatar
+                            *ngIf="tempImg"
+                            [image]="tempImg"
+                            shape="circle" size="xlarge"></p-avatar>
+                        <p-fileUpload *ngIf="isEditOn" mode="basic" chooseIcon="pi pi-pencil" (onSelect)="onUpload($event.currentFiles[0])"></p-fileUpload>
+                    </div>
                 </div>
-                <div>
-                    <p class="label">Manager</p>
-                    <p>{{employee.manager}}</p>
+                <div class="px-6 py-4 mt-6">
+                    <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
+                    <p class="text-center">{{employee.position}}</p>
+                    <p class="text-gray-700 text-base text-center mt-5">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maio
+                    </p>
                 </div>
             </div>
+            <div class="card-container mt-4">
+                <div>
+                    <h1 class="text-xl mb-4">Team Management</h1>
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="label">Reporting to</p>
+                            <p>{{employee.reportTo}}</p>
+                        </div>
+                        <div>
+                            <p class="label">Manager</p>
+                            <p>{{employee.manager}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <h1 class="text-xl mb-4">Skill Tag</h1>
+                    <div>
+                        <span *ngFor="let skill of employee.skillsTags"
+                            class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-md font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mt-5">
-            <h1 class="text-2xl mb-4">Skill Tag</h1>
-            <div>
-                <span *ngFor="let skill of employee.skillsTags"
-                class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-md font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
+        <div class="right flex-1">
+            <div class="card-container">
+                <div class="employee-detail">
+                    <div class="flex justify-between items-center mb-4">
+                        <h1 class="text-xl">Employee Detail</h1>
+                        <p-button *ngIf="!isEditOn; else groupButtons" (click)="openEdit()" icon="pi pi-pencil"
+                            styleClass="p-button-link"> </p-button>
+                        <ng-template #groupButtons>
+                            <div>
+                                <p-button (click)="closeEdit()" styleClass="p-button-link" label="Cancel"> </p-button>
+                                <p-button type="submit" styleClass="p-button-link" label="Save"> </p-button>
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div class="grid grid-cols-3 justify-between mt-3">
+                        <div>
+                            <p class="label">First Name</p>
+                            <p *ngIf="!isEditOn; else firstNameInput">{{employee.firstName}}</p>
+                            <ng-template #firstNameInput><input formControlName="firstName" type="text"
+                                    pInputText /></ng-template>
+                        </div>
+                        <div>
+                            <p class="label">Last Name</p>
+                            <p *ngIf="!isEditOn; else lastNameInput">{{employee.lastName}}</p>
+                            <ng-template #lastNameInput><input formControlName="lastName" type="text"
+                                    pInputText /></ng-template>
+                        </div>
+                        <div>
+                            <p class="label">Gender</p>
+                            <p *ngIf="!isEditOn; else dropdown">{{employee.gender}}</p>
+                            <ng-template #dropdown><p-dropdown formControlName="gender" [options]="genderOptions"
+                                    optionLabel="label"></p-dropdown></ng-template>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 mt-3">
+                        <div>
+                            <p class="label">Birthday</p>
+                            <p *ngIf="!isEditOn; else dateInput">{{employee.dob}}</p>
+                            <ng-template #dateInput>
+                                <p-calendar formControlName="dob"></p-calendar>
+                            </ng-template>
+                        </div>
+                        <div>
+                            <p class="label">Phone</p>
+                            <p *ngIf="!isEditOn; else phoneInput">{{employee.phone}} <i class="pi pi-copy"></i></p>
+                            <ng-template #phoneInput>
+                                <input pInputText formControlName="phone" />
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 mt-3">
+                        <div>
+                            <p class="label">Email</p>
+                            <p *ngIf="!isEditOn; else emailInput">{{employee.email}}</p>
+                            <ng-template #emailInput><input pInputText formControlName="email" /></ng-template>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 mt-3">
+                        <div>
+                            <p class="label">Address</p>
+                            <p *ngIf="!isEditOn; else addressInput">{{employee.address}} <i class="pi pi-copy"></i></p>
+                            <ng-template #addressInput><input pInputText formControlName="address" /></ng-template>
+                        </div>
+                    </div>
+                </div>
+                <div class="joined-projects">
+                    <h1 class="text-xl mt-10 mb-1">Joined Projects</h1>
+                    <div class="card">
+                        <p-table [value]="employee.joinedProjects" [tableStyle]="{ 'min-width': '50rem' }"
+                            styleClass="p-datatable-sm p-datatable-gridlines">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Work as</th>
+                                    <th>Skill Tags</th>
+                                    <th>Contributed Hours</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-project>
+                                <tr>
+                                    <td>{{ project.name }}</td>
+                                    <td>{{ project.workAs }}</td>
+                                    <td>
+                                        <span *ngFor="let skill of project.skillTags"
+                                            class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-md font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
+                                    </td>
+                                    <td>{{ project.contributedHours }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+                <div class="emergency-contact">
+                    <h1 class="text-xl mt-10 mb-1">Emergency Contacts</h1>
+                    <div class="card">
+                        <p-table [value]="employee.emergencyContacts" [tableStyle]="{ 'min-width': '50rem' }"
+                            styleClass="p-datatable-sm p-datatable-gridlines">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Phone</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-contact>
+                                <tr>
+                                    <td>{{ contact.firstName }}</td>
+                                    <td>{{ contact.lastName }}</td>
+                                    <td>
+                                        {{contact.phone}} <i class="pi pi-copy"></i>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="right flex-1">
-        <div class="employee-detail">
-            <h1 class="text-2xl mb-4">Employee Detail</h1>
-            <div class="grid grid-cols-3 justify-between mt-4">
-                <div>
-                    <p class="label">First Name</p>
-                    <p>{{employee.firstName}}</p>
-                </div>
-                <div>
-                    <p class="label">Last Name</p>
-                    <p>{{employee.lastName}}</p>
-                </div>
-                <div>
-                    <p class="label">Gender</p>
-                    <p>{{employee.gender}}</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-3 mt-4">
-                <div>
-                    <p class="label">Birthday</p>
-                    <p>{{employee.dob}}</p>
-                </div>
-                <div>
-                    <p class="label">Phone</p>
-                    <p>{{employee.phone}} <i class="pi pi-copy"></i></p>
-                </div>
-            </div>
-            <div class="grid grid-cols-3 mt-4">
-                <div>
-                    <p class="label">Email</p>
-                    <p>{{employee.email}}</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-3 mt-4">
-                <div>
-                    <p class="label">Address</p>
-                    <p>{{employee.address}} <i class="pi pi-copy"></i></p>
-                </div>
-            </div>
-        </div>
-        <div class="joined-projects">
-            <h1 class="text-2xl mt-4 mb-1">Joined Projects</h1>
-            <div class="card">
-                <p-table [value]="employee.joinedProjects" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>Name</th>
-                            <th>Work as</th>
-                            <th>Skill Tags</th>
-                            <th>Contributed Hours</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-project>
-                        <tr>
-                            <td>{{ project.name }}</td>
-                            <td>{{ project.workAs }}</td>
-                            <td>
-                                <span *ngFor="let skill of project.skillTags"
-                                    class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-md font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
-                            </td>
-                            <td>{{ project.contributedHours }}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
-        <div class="emergency-contact">
-            <h1 class="text-2xl mt-4 mb-1">Emergency Contacts</h1>
-            <div class="card">
-                <p-table [value]="employee.emergencyContacts" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Phone</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-contact>
-                        <tr>
-                            <td>{{ contact.firstName }}</td>
-                            <td>{{ contact.lastName }}</td>
-                            <td>
-                                {{contact.phone}} <i class="pi pi-copy"></i>
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
-    </div>
-</div>
+</form>

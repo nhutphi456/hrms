@@ -9,10 +9,20 @@
     <div class="flex justify-between items-center">
         <hrms-tab-menu [labelItems]="labelItems" [activeItem]="activeItem"
             (onActiveItemChange)="onActiveItemChange($event)"></hrms-tab-menu>
-        <hrms-screen-filter></hrms-screen-filter>
+        <div class="flex gap-1">
+            <hrms-screen-filter></hrms-screen-filter>
+            <form class="flex gap-1" [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm.value)">
+                <p-multiSelect display="chip" [options]="departmentOptions" defaultLabel="Select department"
+                    formControlName="departments"></p-multiSelect>
+                <p-multiSelect display="chip" [options]="contractOptions" defaultLabel="Select current contract"
+                    formControlName="contracts"></p-multiSelect>
+                <button pButton type="submit">Filter</button>
+            </form>
+        </div>
     </div>
     <div class="mt-3">
-        <hrms-table (pagingInfo)="onPageChange()" [isPaginationShown]="true" [table]="tableData" [contentRef]="contentRef">
+        <hrms-table (pagingInfo)="onPageChange()" [isPaginationShown]="true" [table]="tableData"
+            [contentRef]="contentRef">
             <ng-template #contentRef let-rowData>
                 <employee-item [employee]="rowData"></employee-item>
             </ng-template>
