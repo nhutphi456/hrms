@@ -91,6 +91,9 @@ export class EmployeeListComponent implements OnInit {
     });
   }
 
+  get deparments() {return this.filterForm.get('departments')?.value}
+  get contracts() {return this.filterForm.get('contracts')?.value}
+
   onPageChange() {
     return '';
   }
@@ -110,5 +113,16 @@ export class EmployeeListComponent implements OnInit {
   }
   closeAddEmployeeModal() {
     this.isModalVisible = false;
+  }
+
+  handleClearAll() {
+    this.filterForm.patchValue({
+      departments: [],
+      contracts: [],
+    });
+  }
+
+  isClearAllVisible() {
+    return this.deparments.length || this.contracts.length 
   }
 }
