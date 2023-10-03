@@ -30,6 +30,11 @@ const dummies: MenuItem[] = [
     icon: '',
     path: 'performance-management',
   },
+  {
+    name: 'System Admin',
+    icon: '',
+    path: 'system-admin',
+  },
 ];
 
 @Component({

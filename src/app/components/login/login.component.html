@@ -2,7 +2,7 @@
   <div
     class="md:fixed md:left-0 md:bottom-0 md:right-0 md:w-full md:h-16 lg:w-5/12 lg:h-full lg:static lg:flex lg:flex-col items-center bg-white"
   >
-    <div class="lg:w-full md:hidden sm:hidden lg:block lg:py-32  ">
+    <div class="lg:w-full md:hidden sm:hidden lg:block lg:py-32">
       <img
         src="assets/banner.png"
         class="w-full h-full object-cover min-h-[60vh]"
@@ -14,71 +14,90 @@
     class="lg:py-6 md:py-4 lg:w-7/12 md:w-full md:pt-0 lg:mt-0 h-full flex lg:px-40 md:px-6 flex-col justify-center"
   >
     <div class="shadow-2xl p-6 rounded-lg pt-10">
-      <div >
+      <div>
         <h2 class="text-3xl font-bold py-2">Welcome back 👋</h2>
         <p class="text-lg text-neutral-500">Log in your account</p>
 
-        <form [formGroup]="signInForm" class="py-2 pt-14" (ngSubmit)="onSubmit()">
-          <div class="flex flex-col gap-1 mb-6 relative">
-            <input
-              required
-              formControlName="userName"
-              placeholder="What is your e-mail?"
-              type="text"
-              class="input-class text-sm"
-              id="username"
-              required
-            />
+        <form
+          [formGroup]="signInForm"
+          class="py-2 pt-14"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="flex flex-col gap-2 mb-6 relative">
+            <div class="input-class flex flex-auto">
+              <label for="search">
+                <i class="pi pi-envelope"></i>
+              </label>
+              <input
+                formControlName="userName"
+                placeholder="Your E-Mail"
+                type="text"
+                id="username"
+                class="ml-2 bg-transparent outline-none w-full"
+                required
+              />
 
-            <ng-container
-              *ngIf="
-                signInForm.get('userName')?.dirty ||
-                signInForm.get('userName')?.touched
-              "
-            >
-              <div
-                *ngIf="signInForm.get('userName')?.hasError('required')"
-                class="validate"
+              <ng-container
+                *ngIf="
+                  signInForm.get('userName')?.dirty ||
+                  signInForm.get('userName')?.touched
+                "
               >
-                Username is required.
-              </div>
-            </ng-container>
+                <div
+                  *ngIf="signInForm.get('userName')?.hasError('email')"
+                  class="validate"
+                >
+                  Invalid Email.
+                </div>
+                <div
+                  *ngIf="signInForm.get('userName')?.hasError('required')"
+                  class="validate"
+                >
+                  Username is required.
+                </div>
+              </ng-container>
+            </div>
           </div>
 
           <div class="flex flex-col gap-1 mb-6 relative">
-            <input
-              required
-              formControlName="Enter your password"
-              placeholder="Password"
-              type="{{ showPassword ? 'text' : 'password' }}"
-              class="input-class text-sm !pr-12"
-              id="password"
-              required
-            />
+            <div class="input-class flex flex-auto">
+              <label for="search">
+                <i class="pi pi-lock"></i>
+              </label>
+              <input
+                required
+                formControlName="userPassword"
+                placeholder="Enter your password"
+                type="{{ showPassword ? 'text' : 'password' }}"
+                class="ml-2 bg-transparent outline-none w-[95%]"
+                id="password"
+                required
+              />
 
-            <i
-              :[class]="!showPassword ? 'pi-eye': 'pi-eye-slash'"
-              class="pi absolute right-0 -translate-x-1/2 top-1/3 cursor-pointer"
-              (click)="togglePassword()"
-              (keydown.enter)="togglePassword()"
-              tabindex="0"
-              role="button"
-              aria-label="Toggle password visibility"
-            ></i>
+              <i
+                :[class]="!showPassword ? 'pi-eye': 'pi-eye-slash'"
+                class="pi absolute right-0 -translate-x-1/2 top-1/3 cursor-pointer"
+                (click)="togglePassword()"
+                (keydown.enter)="togglePassword()"
+                tabindex="0"
+                role="button"
+                aria-label="Toggle password visibility"
+              ></i>
 
-            <ng-container
-              *ngIf="
-                signInForm.get('userPassword')?.dirty ||
-                signInForm.get('userPassword')?.touched
-              "
-            >
-              <div
-                *ngIf="signInForm.get('userPassword')?.hasError('required')"
-                class="validate"
+              <ng-container
+                *ngIf="
+                  signInForm.get('userPassword')?.dirty ||
+                  signInForm.get('userPassword')?.touched
+                "
               >
-                Password is required.
-              </div>
-            </ng-container>
+                <div
+                  *ngIf="signInForm.get('userPassword')?.hasError('required')"
+                  class="validate"
+                >
+                  Password is required.
+                </div>
+              </ng-container>
+            </div>
           </div>
 
           <div
@@ -95,7 +114,9 @@
                 >Remember me</label
               >
             </div>
-            <a routerLink="" class="no-underline	 text-primary hover:bg-opacity-95"
+            <a
+              routerLink=""
+              class="no-underline text-primary hover:bg-opacity-95"
               >Forget password?</a
             >
           </div>
@@ -116,7 +137,9 @@
 
         <div class="pt-32 flex justify-center gap-2">
           <p>Don't have an account?</p>
-          <a routerLink="/register" class="no-underline	 text-primary hover:bg-opacity-95"
+          <a
+            routerLink="/register"
+            class="no-underline text-primary hover:bg-opacity-95"
             >Sign up</a
           >
         </div>

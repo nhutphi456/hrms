@@ -25,6 +25,7 @@ export class TestpasswordDirective implements OnChanges {
   }
 
   calculatePasswordStrength(password: string): number {
+    // calculate password strength
     let strength = 0;
     const passwordLength = password.length;
     if (passwordLength >= 8) {
@@ -51,7 +52,7 @@ export class TestpasswordDirective implements OnChanges {
 
     this.renderer.setStyle(progressBar, 'background-color', color);
 
-    // Tạo phần tử HTML chứa thông báo
+    // create HTML notification element
 
     const messageElement = this.renderer.createElement('div');
     this.renderer.addClass(messageElement, 'password-message');
@@ -59,14 +60,17 @@ export class TestpasswordDirective implements OnChanges {
     if (strength > 40) {
       this.renderer.setAttribute(messageElement, 'style', 'color: green');
       this.renderer.setStyle(messageElement, 'font-weight', 'bold');
+      this.renderer.setStyle(messageElement, 'font-size','12px');
       this.renderer.setProperty(messageElement, 'innerText', 'Great job! Your password is strong.');
     } else if (strength <= 40 && strength >= 1) {
       this.renderer.setAttribute(messageElement, 'style', 'color: red');
       this.renderer.setStyle(messageElement, 'font-weight','bold');
+      this.renderer.setStyle(messageElement, 'font-size','12px');
+
       this.renderer.setProperty(messageElement, 'innerText', 'Your password is weak');
     }
 
-    // Gắn thông báo vào DOM
+    // add notification element to the DOM
     this.renderer.appendChild(
       this.el.nativeElement.parentElement,
       messageElement,
@@ -85,7 +89,7 @@ export class TestpasswordDirective implements OnChanges {
   }
 
   clearMessages(): void {
-    // Xóa các thông báo cũ
+    // remove old messages
     const parentElement = this.el.nativeElement.parentElement;
     const oldMessages = parentElement.querySelectorAll('.password-message');
 
