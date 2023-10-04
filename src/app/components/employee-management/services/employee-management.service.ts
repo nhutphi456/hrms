@@ -95,4 +95,16 @@ export class EmployeeManagementService {
   getEmployees(): Observable<IEmployee[]> {
     return from([mockData]);
   }
+
+  getEmployee(id: string) {
+    return id;
+  }
+
+  updateEmployee(employee: IEmployee) {
+    return employee;
+  }
+
+  addEmployee(employee: IEmployee) {
+    return employee;
+  }
 }

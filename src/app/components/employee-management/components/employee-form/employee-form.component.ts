@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { NotificationService } from 'src/app/shared/message/notification.service';
 
 @Component({
   selector: 'employee-form',
@@ -37,20 +39,32 @@ export class EmployeeFormComponent implements OnInit {
     },
   ];
   tempImg = '';
-  constructor(private fb: FormBuilder) {}
-  get employeeType() { return this.addEmployeeForm.get('type')?.value; }
+
+  constructor(
+    private fb: FormBuilder,
+    public ref: DynamicDialogRef,
+    private notificationService: NotificationService
+  ) {}
+
+  get employeeType() {
+    return this.addEmployeeForm.get('type')?.value;
+  }
+
+  get formControls() {
+    return this.addEmployeeForm.controls;
+  }
   ngOnInit(): void {
     this.initForm();
   }
   initForm() {
     this.addEmployeeForm = this.fb.group({
-      firstName: '',
-      lastName: '',
-      dob: '',
-      email: '',
-      phone: '',
-      address: '',
-      type: 0,
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      dob: ['', Validators.required],
+      email: ['', Validators.required],
+      phone: ['', Validators.required],
+      address: ['', Validators.required],
+      type: [0, Validators.required],
       gender: 'MALE',
       department: 'se',
     });
@@ -67,9 +81,9 @@ export class EmployeeFormComponent implements OnInit {
 
       this.tempImg = fileContent;
 
-      // this.notificationService.successNotification(
-      //   $localize`Uploaded new photo`
-      // );
+      this.notificationService.successNotification(
+        $localize`Uploaded new photo`
+      );
 
       this.parseToByteArray(fileContent);
     };
@@ -83,5 +97,10 @@ export class EmployeeFormComponent implements OnInit {
     // this.editForm.patchValue({
     //   avatar: byteArr,
     // });
+  }
+
+  onSubmit() {
+    console.log({ values: this.addEmployeeForm });
+    // this.ref.close()
   }
 }

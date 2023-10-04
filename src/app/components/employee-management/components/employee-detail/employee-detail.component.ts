@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { FileUpload } from 'primeng/fileupload';
+import { NotificationService } from 'src/app/shared/message/notification.service';
 
 const mockEmployee = {
   firstName: 'Russel',
@@ -49,6 +51,7 @@ const mockEmployee = {
   styleUrls: ['./employee-detail.component.scss'],
 })
 export class EmployeeDetailComponent implements OnInit {
+  @ViewChild('fileUpload') fileUpload!: FileUpload;
   employee = mockEmployee;
   isEditOn = false;
   profileForm!: FormGroup;
@@ -64,10 +67,17 @@ export class EmployeeDetailComponent implements OnInit {
     },
   ];
 
+  managerOptions = [
+    { label: 'Jake Hudson', value: 1 },
+    { label: 'John Newton', value: 2 },
+  ];
+
   tempImg = '';
+  checked=false;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit(): void {
@@ -105,6 +115,8 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   onUpload(f: File): void {
+    this.fileUpload.clear();
+    this.fileUpload.choose();
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -112,9 +124,9 @@ export class EmployeeDetailComponent implements OnInit {
 
       this.tempImg = fileContent;
 
-      // this.notificationService.successNotification(
-      //   $localize`Uploaded new photo`
-      // );
+      this.notificationService.successNotification(
+        $localize`Uploaded new photo`,
+      );
 
       this.parseToByteArray(fileContent);
     };
