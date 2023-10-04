@@ -99,6 +99,7 @@ export class EmployeeDetailComponent implements OnInit {
       phone,
       email,
       address,
+      avatar: ''
     });
   }
 
@@ -110,13 +111,17 @@ export class EmployeeDetailComponent implements OnInit {
     this.tempImg = '';
   }
 
-  onUpdateEmployee(val: any): void {
-    console.log({ data: val });
+  onUpdateEmployee(): void {
+    this.profileForm.patchValue({
+      avatar: this.tempImg
+    })
+    console.log({ data: this.profileForm.value });
   }
 
   onUpload(f: File): void {
     this.fileUpload.clear();
     this.fileUpload.choose();
+    
     const reader = new FileReader();
 
     reader.onload = () => {
