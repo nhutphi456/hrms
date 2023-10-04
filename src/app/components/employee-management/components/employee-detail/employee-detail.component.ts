@@ -7,7 +7,7 @@ import { NotificationService } from 'src/app/shared/message/notification.service
 const mockEmployee = {
   firstName: 'Russel',
   lastName: 'Sims',
-  gender: 'Male',
+  gender: 'MALE',
   dob: '01/01/1999',
   phone: '0313564644',
   email: 'hello@gmail.com',
@@ -73,7 +73,7 @@ export class EmployeeDetailComponent implements OnInit {
   ];
 
   tempImg = '';
-  checked=false;
+  
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -89,7 +89,7 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   initEmployeeForm() {
-    const { firstName, lastName, gender, dob, phone, email, address } =
+    const { firstName, lastName, gender, dob, phone, email, address, manager } =
       this.employee;
     this.profileForm = this.fb.group({
       firstName,
@@ -99,6 +99,8 @@ export class EmployeeDetailComponent implements OnInit {
       phone,
       email,
       address,
+      avatar: '',
+      manager
     });
   }
 
@@ -110,13 +112,17 @@ export class EmployeeDetailComponent implements OnInit {
     this.tempImg = '';
   }
 
-  onUpdateEmployee(val: any): void {
-    console.log({ data: val });
+  onUpdateEmployee(): void {
+    this.profileForm.patchValue({
+      avatar: this.tempImg
+    })
+    console.log({ data: this.profileForm.value });
   }
 
   onUpload(f: File): void {
     this.fileUpload.clear();
     this.fileUpload.choose();
+    
     const reader = new FileReader();
 
     reader.onload = () => {

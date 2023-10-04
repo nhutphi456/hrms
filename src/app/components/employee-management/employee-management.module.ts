@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AvatarModule } from 'primeng/avatar';
 import { TableModule } from 'primeng/table';
@@ -13,7 +14,6 @@ import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
-import { InputSwitchModule } from 'primeng/inputswitch';
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeManagementRoutingModule } from './employee-management-routing.module';
@@ -24,7 +24,6 @@ import { ShareModule } from '../share/share.module';
 import { EmployeeItemComponent } from './components/employee-item/employee-item.component';
 import { EmployeeCarouselModule } from './components/employee-carousel/employee-carousel.module';
 import { EmployeeDetailComponent } from './components/employee-detail/employee-detail.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 @NgModule({
   declarations: [
@@ -51,9 +50,7 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
     DropdownModule,
     CalendarModule,
     FileUploadModule,
-    RadioButtonModule,
-    InputSwitchModule, 
-    FormsModule
+    RadioButtonModule
   ],
   providers: [EmployeeManagementService, EmployeeStore],
 })

@@ -48,7 +48,6 @@
 
     .skill-tag {
         border-radius: 50px;
-        @apply text-sm;
     }
     .social-icons {
         .pi-twitter {
@@ -67,5 +66,13 @@
     .profile-image-container {
         width: 120px;
         height: 120px;
+    }
+
+    .info-field {
+        @apply lg:text-lg md:text-base;
+    }
+
+    input, .p-calendar {
+        @apply lg:w-9/12 md:w-full;
     }
 }

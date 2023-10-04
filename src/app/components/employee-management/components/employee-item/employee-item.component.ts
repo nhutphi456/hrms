@@ -12,7 +12,9 @@ import { Router } from '@angular/router';
 export class EmployeeItemComponent {
   @HostBinding('class') hostClass = 'hrms-employee-item';
   @Input() employee!: IEmployee;
+
   constructor(private router: Router) {}
+  
   menuItems: MenuItem[] = [
     {
       label: 'Edit',
