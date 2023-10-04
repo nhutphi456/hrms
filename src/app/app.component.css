@@ -116,13 +116,10 @@
   .p-inputswitch .p-inputswitch-slider:before {
     @apply bg-gray-400;
   }
-<<<<<<< HEAD
 
-=======
   .p-button-link:enabled:focus {
     @apply shadow-none border-primary border-opacity-80 !important;
   }
->>>>>>> 81c6c07 (feat(ui): update employee detail)
   .p-dropdown {
     @apply min-w-max;
   }
