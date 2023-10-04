@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { NotificationService } from 'src/app/shared/message/notification.service';
 
 @Component({
   selector: 'employee-form',
@@ -42,6 +43,7 @@ export class EmployeeFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public ref: DynamicDialogRef,
+    private notificationService: NotificationService
   ) {}
 
   get employeeType() {
@@ -79,9 +81,9 @@ export class EmployeeFormComponent implements OnInit {
 
       this.tempImg = fileContent;
 
-      // this.notificationService.successNotification(
-      //   $localize`Uploaded new photo`
-      // );
+      this.notificationService.successNotification(
+        $localize`Uploaded new photo`
+      );
 
       this.parseToByteArray(fileContent);
     };
@@ -99,7 +101,6 @@ export class EmployeeFormComponent implements OnInit {
 
   onSubmit() {
     console.log({ values: this.addEmployeeForm });
-    console.log((this.formControls['firstName'] as any).hasError('required'))
     // this.ref.close()
   }
 }

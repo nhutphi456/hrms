@@ -10,8 +10,8 @@
                                 src="assets/images/avatar-default.jpg" alt="" />
                         </div>
                         <p-avatar *ngIf="tempImg" [image]="tempImg" shape="circle" size="xlarge"></p-avatar>
-                        <p-fileUpload *ngIf="isEditOn" mode="basic" chooseIcon="pi pi-pencil"
-                            (onSelect)="onUpload($event.currentFiles[0])"></p-fileUpload>
+                        <p-fileUpload #fileUpload *ngIf="isEditOn" mode="basic" chooseIcon="pi pi-pencil"
+                            (onSelect)="onUpload($event.currentFiles[0])" [auto]="true"></p-fileUpload>
                     </div>
                 </div>
                 <div class="px-6 py-4 mt-16">
@@ -31,14 +31,18 @@
             <div class="card-container mt-4">
                 <div>
                     <h1 class="text-xl mb-2">Team Management</h1>
-                    <div class="flex justify-between">
+                    <div class="grid grid-cols-2">
                         <div>
                             <p class="label">Reporting to</p>
                             <p>{{employee.reportTo}}</p>
                         </div>
                         <div>
                             <p class="label">Manager</p>
-                            <p>{{employee.manager}}</p>
+                            <p *ngIf="!isEditOn; else managerSelect">{{employee.manager}}</p>
+                            <ng-template #managerSelect>
+                                <p-dropdown formControlName="gender" [options]="managerOptions"
+                                    optionLabel="label"></p-dropdown>
+                            </ng-template>
                         </div>
                     </div>
                 </div>
