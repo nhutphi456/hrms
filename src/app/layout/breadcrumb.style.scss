@@ -6,6 +6,6 @@ div.p-breadcrumb.p-component ul li.p-element a span{
     @apply hover:text-primary hover:font-medium p-2 ease-linear duration-100 transition-all;
 }
 
-.p-breadcrumb ul li .p-menuitem-link{
+.p-breadcrumb .p-breadcrumb-list li .p-menuitem-link{
     @apply focus:outline-none focus:shadow-none
 }

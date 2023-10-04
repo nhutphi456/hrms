@@ -2,6 +2,9 @@
     @apply shadow-none;
 }
 
+/* .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link:not(.p-disabled):focus {
+  @apply shadow-none;
+} */
 /* .p-tabmenu-nav a {
     @apply block bg-transparent !important;
   }
@@ -16,10 +19,7 @@
   .p-tabmenu.p-tabmenu-nav.p-tabmenuitem.p-highlight.p-menuitem-link {
     @apply bg-transparent hover:border-primary hover:text-primary;
   }
-
-  .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link:not(.p-disabled):focus {
-    @apply shadow-none;
-  }
+  
   .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
     @apply m-auto p-2;
   }
@@ -116,7 +116,13 @@
   .p-inputswitch .p-inputswitch-slider:before {
     @apply bg-gray-400;
   }
+<<<<<<< HEAD
 
+=======
+  .p-button-link:enabled:focus {
+    @apply shadow-none border-primary border-opacity-80 !important;
+  }
+>>>>>>> 81c6c07 (feat(ui): update employee detail)
   .p-dropdown {
     @apply min-w-max;
   }
