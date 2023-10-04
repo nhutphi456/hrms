@@ -1,6 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { FileUpload } from 'primeng/fileupload';
 import { NotificationService } from 'src/app/shared/message/notification.service';
 
 @Component({
@@ -11,6 +19,7 @@ import { NotificationService } from 'src/app/shared/message/notification.service
 export class EmployeeFormComponent implements OnInit {
   @Input() visible!: boolean;
   @Output() handleClose = new EventEmitter();
+  @ViewChild('fileUpload') fileUpload!: FileUpload;
   addEmployeeForm!: FormGroup;
   employeeTypes = [
     {
@@ -43,7 +52,7 @@ export class EmployeeFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public ref: DynamicDialogRef,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {}
 
   get employeeType() {
@@ -74,6 +83,8 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onUpload(f: File): void {
+    this.fileUpload.clear();
+    this.fileUpload.choose();
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -82,7 +93,7 @@ export class EmployeeFormComponent implements OnInit {
       this.tempImg = fileContent;
 
       this.notificationService.successNotification(
-        $localize`Uploaded new photo`
+        $localize`Uploaded new photo`,
       );
 
       this.parseToByteArray(fileContent);

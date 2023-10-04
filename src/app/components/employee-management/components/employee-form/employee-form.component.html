@@ -73,7 +73,7 @@
                             src="assets/images/profile-image-default.jpg" alt="" />
                     </div>
                     <p-avatar *ngIf="tempImg" [image]="tempImg" shape="circle" size="xlarge"></p-avatar>
-                    <p-fileUpload mode="basic" chooseIcon="pi pi-pencil"
+                    <p-fileUpload #fileUpload mode="basic" chooseIcon="pi pi-pencil"
                         (onSelect)="onUpload($event.currentFiles[0])"></p-fileUpload>
                 </div>
             </div>
