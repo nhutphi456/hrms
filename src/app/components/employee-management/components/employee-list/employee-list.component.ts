@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { MenuItem } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
 import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
-
 import {
   employeeLabelItems,
   employeeTableCols,
 } from '../../constants/employee-management.constant';
 import { IEmployee } from '../../models/employee-management.model';
 import { EmployeeStore } from '../../store/employee-management.store.service';
-import { MenuItem } from 'primeng/api';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 
 @Component({
@@ -110,7 +110,6 @@ export class EmployeeListComponent implements OnInit {
   }
   searchValue(search: string): void {
     this.handleEmployeeParams('keyword', search);
-
     this.getEmployees();
   }
   onPageChange(e: PageChangeEvent): void {
@@ -126,7 +125,6 @@ export class EmployeeListComponent implements OnInit {
 
   onFilter() {
     const formValues = this.filterForm.value;
-    console.log({ formValues });
     for (const key in formValues) {
       const value = formValues[key];
       if (value) {
