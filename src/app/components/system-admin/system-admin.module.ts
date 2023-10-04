@@ -8,6 +8,15 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserItemComponent } from './user-item/user-item.component';
 import { SystemAdminService } from './services/system-admin.service';
 import { EmployeeAccountStore } from './store/userAccount.store.service';
+import { MenuModule } from 'primeng/menu';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
+import { FileUploadModule } from 'primeng/fileupload';
+import { InputSwitchModule } from 'primeng/inputswitch';
+
 
 
 @NgModule({
@@ -21,7 +30,17 @@ import { EmployeeAccountStore } from './store/userAccount.store.service';
     CommonModule,
     SystemAdminRoutingModule,
     ShareModule,
-    AppTopbarModule
+    AppTopbarModule,
+    MenuModule,
+    ReactiveFormsModule,
+    MultiSelectModule,
+    InputTextModule,
+    DropdownModule,
+    CalendarModule,
+    FileUploadModule,
+    ShareModule,
+    InputSwitchModule,
+    FormsModule
 
   ] ,
   providers: [SystemAdminService, EmployeeAccountStore]

@@ -1,5 +1,5 @@
 <div class="mt-3">
-  <hrms-table (pagingInfo)="onPageChange()" [isPaginationShown]="false" [table]="tableData" [contentRef]="contentRef">
+  <hrms-table (pagingInfo)="onPageChange()" [isPaginationShown]="true" [table]="tableData" [contentRef]="contentRef">
       <ng-template #contentRef let-rowData>
           <app-user-item [employeesAccount]="rowData"></app-user-item>
       </ng-template>
