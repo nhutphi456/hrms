@@ -1,7 +1,18 @@
-:host {
+:host ::ng-deep{
   display: contents;
-
-  & td {
-    @apply p-4;
+  .action-col {
+    @apply flex justify-center;
+  }
+  td {
+    @apply p-3 align-middle;
+  }
+  a {
+    color: var(--text-color);
+  }
+  .avatar-img {
+    width: 3rem;
+  }
+  .employment-tag {
+    border-radius: 50px;
   }
 }

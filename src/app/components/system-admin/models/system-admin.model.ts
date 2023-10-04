@@ -1,4 +1,5 @@
 export interface IEmployeeAccount {
+  images:string;
   firstName: string;
   lastName: string;
   gender: number;
@@ -9,4 +10,7 @@ export interface IEmployeeAccount {
   address: string;
   status: number;
   reportTo: number;
+  action: string;
+  role:number;
+  createOn: string;
 }

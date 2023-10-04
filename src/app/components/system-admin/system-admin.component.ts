@@ -5,9 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './system-admin.component.html',
   styleUrls: ['./system-admin.component.scss']
 })
-export class SystemAdminComponent {
+export class SystemAdminComponent  {
   title = "User Management";
   listAccount = "  List accounts ";
-
 
 }

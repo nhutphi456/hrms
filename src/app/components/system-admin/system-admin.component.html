@@ -1,8 +1,14 @@
-<div class="text-xl font-bold">
-  {{title}}
-  <p class="p-2 text-xs">
-    {{listAccount}}
-  </p>
+<div class="p-2">
 <app-topbar></app-topbar>
+<div class="text-xl font-bold">
+  {{title}} <br>
+  <span class="p-2 text-xs text-neutral-500">
+    {{listAccount}}
+  </span>
+</div>
+<app-system-header></app-system-header>
+<div class="pt-5">
+<button pButton type="submit"  styleClass="p-button-sm" label="Update fields"> </button>
+</div>
 <app-user-list></app-user-list>
 </div>

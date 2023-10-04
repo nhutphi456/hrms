@@ -5,18 +5,18 @@
 /* .p-tabmenu-nav a {
     @apply block bg-transparent !important;
   }
-  
+
   .p-tabmenu .p-tabmenu-nav {
     @apply bg-transparent border-none;
   }
-  
+
   .p-tabmenu .p-tabmenu-nav .p-tabmenuitem:hover {
     @apply border-b-0 border-none !important;
   }
   .p-tabmenu.p-tabmenu-nav.p-tabmenuitem.p-highlight.p-menuitem-link {
     @apply bg-transparent hover:border-primary hover:text-primary;
   }
-  
+
   .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link:not(.p-disabled):focus {
     @apply shadow-none;
   }
@@ -32,39 +32,39 @@
   .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link .badge {
     @apply bg-opacity-100 text-white;
   }
-  
+
   .p-tabmenu-nav-content {
     @apply overflow-y-auto !important;
   } */
-  
+
   .text-heading {
     @apply text-2xl font-bold;
   }
-  
+
   .flex-center {
     @apply flex justify-center items-center;
   }
-  
+
   .flex-between-center {
     @apply flex justify-between items-center;
   }
-  
+
   .dashboard-detail-container {
     @apply px-4 py-2 bg-white rounded-lg;
   }
-  
+
   .p-calendar .p-button-icon-only {
     @apply bg-primary text-white outline-none opacity-90 transition-all duration-100 ease-linear;
   }
-  
+
   .p-ink {
     @apply hidden;
   }
-  
+
   .p-button:enabled:hover {
     @apply bg-primary outline-none opacity-100;
   }
-  
+
   .p-inputtext:enabled:hover {
     @apply border-primary border-opacity-80 border placeholder:opacity-100 duration-100 transition-all;
   }
@@ -80,161 +80,162 @@
   .filter-button {
     @apply lg:min-w-[80px] border-gray-300 border bg-white rounded-lg text-gray-500 hover:border-primary  transition-all duration-100 hover:text-primary px-2 py-3;
   }
-  
+
   .active {
     @apply text-primary border-primary;
   }
-  
+
   .p-button-icon.pi.pi-calendar.active {
     @apply text-white;
   }
-  
+
   .p-inputSwitch input {
     @apply opacity-0;
   }
-  
+
   .p-inputswitch.p-focus .p-inputswitch-slider {
     @apply shadow-none;
   }
-  
-  .p-inputswitch .p-inputswitch-slider {
+
+  /* .p-inputswitch .p-inputswitch-slider {
     @apply h-[10px] my-auto;
-  }
-  
+  } */
+
   .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
     @apply bg-primary-2;
   }
-  
+
   .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
     @apply bg-primary-1;
   }
-  
+
   .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
     @apply bg-primary;
   }
-  
+
   .p-inputswitch .p-inputswitch-slider:before {
     @apply bg-gray-400;
   }
-  
+
   .p-dropdown {
     @apply min-w-max;
   }
-  
+
   .p-dropdown input {
     @apply block;
   }
-  
+
   .p-hidden-accessible {
     @apply hidden;
   }
-  
+
   .p-radiobutton {
     @apply cursor-pointer;
   }
-  
+
   .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
     @apply border-primary bg-primary;
   }
-  
+
   .p-radiobutton .p-radiobutton-box.p-highlight {
     @apply border-primary bg-primary;
   }
-  
+
   .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
     @apply border-primary;
   }
-  
+
   .p-toast .p-toast-message .p-toast-message-content {
     @apply border-none;
   }
-  
+
   .p-tabmenuitem {
     @apply opacity-60;
   }
-  
+
   .p-tabmenuitem.p-highlight {
     @apply opacity-100;
   }
-  
+
   /* Firefox */
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--secondary) var(--primary);
   }
-  
+
   /* Chrome, Edge, and Safari */
   *::-webkit-scrollbar {
     @apply w-2;
   }
-  
+
   *::-webkit-scrollbar-track {
     @apply bg-transparent rounded;
   }
-  
+
   *::-webkit-scrollbar-thumb {
     @apply bg-primary border-2 border-white;
   }
-  
+
   .p-avatar img {
     @apply object-contain;
   }
-  
+
   .title {
     @apply text-xl font-bold;
   }
-  
+
   .main-dashboard-container {
     @apply bg-white rounded-md lg:col-span-2 md:col-span-3;
   }
-  
+
   oms-table tr {
     @apply cursor-pointer hover:!bg-gray-200 transition-all duration-100;
   }
-  
+
   .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
     @apply text-primary font-medium bg-primary bg-opacity-30;
   }
   .p-overlay.p-component {
     @apply min-w-[200px] right-0 left-auto !important;
   }
-  
+
   .p-dropdown:not(.p-disabled):hover {
     @apply border-primary;
   }
-  
+
   .p-dropdown-items-wrapper {
     @apply [&::-webkit-scrollbar]:hidden;
   }
   .p-dropdown-panel .p-dropdown-header {
+
     @apply py-2 px-3;
   }
-  
+
   .p-datepicker table td > span.p-highlight,
   .p-datatable .p-sortable-column.p-highlight:hover,
   .p-datatable .p-sortable-column.p-highlight,
   .p-datepicker table td.p-datepicker-today > span.p-highlight {
     @apply text-primary bg-primary bg-opacity-20;
   }
-  
+
   .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover,
   .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover,
   .p-datepicker table td.p-datepicker-today > span.p-highlight {
     @apply text-primary;
   }
-  
+
   .p-datatable .p-sortable-column:focus {
     @apply shadow-none;
   }
-  
+
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     @apply text-primary bg-primary-1 bg-opacity-30 border-primary-2;
   }
-  
+
   .p-link:focus {
     @apply shadow-none;
   }
-  
+
   .p-sidebar-mask{
     position: absolute;
     left: 0;
@@ -242,7 +243,7 @@
     height: 200%;
     width: 100%;
   }
-  
+
   body:has(> .p-sidebar-mask) {
     overflow: hidden;
   }
