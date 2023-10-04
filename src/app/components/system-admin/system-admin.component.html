@@ -1,32 +1,14 @@
+<div class="p-2">
+<app-topbar></app-topbar>
 <div class="text-xl font-bold">
   {{title}} <br>
   <span class="p-2 text-xs text-neutral-500">
     {{listAccount}}
   </span>
 </div>
-<div class="flex flex-auto pt-3">
-  <!-- component -> filter flex start ( chưa chia component) -->
-<div class="flex gap-2 flex-auto justify-start">
-  <button pButton type="submit" icon="pi pi-filter" label="Newest"> </button>
-  <form class="flex gap-1" [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm.value)">
-    <p-multiSelect display="chip" [options]="departmentOptions" defaultLabel="Status"
-        formControlName="departments"></p-multiSelect>
-    <p-multiSelect display="chip" [options]="contractOptions" defaultLabel="Role"
-        formControlName="contracts"></p-multiSelect>
-    <a class="pt-3 p-2">Clear all</a>
-</form>
-</div>
-<!-- component flex end -> search filter (chưa chia component) -->
-<div class="flex gap-4 flex-auto justify-end">
-    <hrms-screen-filter></hrms-screen-filter>
-    <button pButton type="submit" icon="pi pi-plus" styleClass="p-button-sm" label="Create User"> </button>
-</div>
-</div>
+<app-system-header></app-system-header>
 <div class="pt-5">
 <button pButton type="submit"  styleClass="p-button-sm" label="Update fields"> </button>
 </div>
-
-
-<app-topbar></app-topbar>
 <app-user-list></app-user-list>
-
+</div>

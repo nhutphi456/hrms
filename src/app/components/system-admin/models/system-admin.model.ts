@@ -11,6 +11,6 @@ export interface IEmployeeAccount {
   status: number;
   reportTo: number;
   action: string;
-  role:string;
+  role:number;
   createOn: string;
 }

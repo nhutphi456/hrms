@@ -1,0 +1,16 @@
+<div class="flex flex-auto pt-3">
+  <div class="flex gap-2 flex-auto justify-start">
+    <button pButton type="submit" icon="pi pi-filter" label="Newest"> </button>
+    <form class="flex gap-1" [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm.value)">
+      <p-multiSelect display="chip" [options]="statusOptions" defaultLabel="Status"
+          formControlName="departments"></p-multiSelect>
+      <p-multiSelect display="chip" [options]="roleOptions" defaultLabel="Role"
+          formControlName="contracts"></p-multiSelect>
+      <a class="pt-3 p-2">Clear all</a>
+  </form>
+  </div>
+  <div class="flex gap-4 flex-auto justify-end">
+      <hrms-screen-filter></hrms-screen-filter>
+      <button pButton type="submit" icon="pi pi-plus" styleClass="p-button-sm" label="Create User"> </button>
+  </div>
+  </div>

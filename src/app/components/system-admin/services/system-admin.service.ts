@@ -15,7 +15,7 @@ const mockData: IEmployeeAccount[] = [
     reportTo: 1,
     images: '',
     action: '',
-    role: 'Admin',
+    role: 0,
     createOn: '01/01/1999',
   },
   {
@@ -31,7 +31,7 @@ const mockData: IEmployeeAccount[] = [
     reportTo: 1,
     images: '',
     action: '',
-    role: 'Manager',
+    role: 0,
     createOn: '01/01/1999',
   },
   {
@@ -47,7 +47,7 @@ const mockData: IEmployeeAccount[] = [
     reportTo: 1,
     images: '',
     action: '',
-    role: 'Admin',
+    role: 1,
     createOn: '01/01/1999',
   },
   {
@@ -63,7 +63,7 @@ const mockData: IEmployeeAccount[] = [
     reportTo: 1,
     images: '',
     action: '',
-    role: 'Manager',
+    role: 0,
     createOn: '01/01/1999',
   },
   {
@@ -79,7 +79,7 @@ const mockData: IEmployeeAccount[] = [
     reportTo: 1,
     images: '',
     action: '',
-    role: 'Admin',
+    role: 1,
     createOn: '01/01/1999',
   },
   {
@@ -95,7 +95,7 @@ const mockData: IEmployeeAccount[] = [
     reportTo: 1,
     images: '',
     action: '',
-    role: 'Admin',
+    role: 1,
     createOn: '01/01/1999',
   },
 ];

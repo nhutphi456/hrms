@@ -16,6 +16,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { SystemHeaderComponent } from './system-header/system-header.component';
 
 
 
@@ -24,6 +25,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     SystemAdminComponent,
     UserListComponent,
     UserItemComponent,
+    SystemHeaderComponent,
 
   ],
   imports: [
