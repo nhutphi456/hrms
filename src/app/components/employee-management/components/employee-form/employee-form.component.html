@@ -15,7 +15,7 @@
                 <label class="control-label" for="">First Name</label>
                 <input pInputText formControlName="firstName" placeholder="Enter your first name" />
                 <div class="text-xs" *ngIf="formControls['firstName']?.hasError('required')">
-                    
+
                 </div>
             </div>
             <div>
@@ -27,27 +27,44 @@
                 <p-calendar formControlName="dob" [showIcon]="true" appendTo="body"
                     placeholder="Your birthday"></p-calendar>
             </div>
-            <div>
-                <label class="control-label" for="">Phone</label>
-                <input pInputText formControlName="phone" placeholder="Enter your phone" />
-            </div>
-            <div>
+            <div class="col-span-2">
                 <label class="control-label" for="">Address</label>
                 <input pInputText formControlName="address" placeholder="Enter your address" />
+            </div>
+            <div>
+                <label class="control-label" for="">Phone</label>
+                <p-inputMask mask="999-999-9999" formControlName="phone" placeholder="Enter your phone" />
             </div>
             <div>
                 <label class="control-label" for="">Email</label>
                 <input pInputText formControlName="email" placeholder="Enter your email" />
             </div>
-            <div>
+            <!-- <div>
                 <label class="control-label" for="">Type of employee</label>
                 <p-dropdown styleClass="w-full" formControlName="type" [options]="employeeTypes" optionLabel="label"
                     placeholder="Choose employee type"></p-dropdown>
-            </div>
+            </div> -->
             <div>
                 <label class="control-label" for="">Department</label>
                 <p-dropdown styleClass="w-full" formControlName="department" [options]="departmentOptions"
                     optionLabel="label" placeholder="Choose department"></p-dropdown>
+            </div>
+            <div>
+                <label class="control-label" for="">Position</label>
+                <p-dropdown styleClass="w-full" formControlName="position" [options]="positionOptions"
+                    optionLabel="label" placeholder="Choose position"></p-dropdown>
+            </div>
+            <div>
+                <label class="control-label" for="">Avatar</label>
+                <div class="profile-img relative">
+                    <div *ngIf="!tempImg" class="profile-image-container">
+                        <img style="background: #CDE9EAFF; border-radius: 60px;" class="w-full"
+                            src="assets/images/profile-image-default.jpg" alt="" />
+                    </div>
+                    <p-avatar *ngIf="tempImg" [image]="tempImg" shape="circle" size="xlarge"></p-avatar>
+                    <p-fileUpload #fileUpload mode="basic" chooseIcon="pi pi-pencil"
+                        (onSelect)="onUpload($event.currentFiles[0])"></p-fileUpload>
+                </div>
             </div>
             <div>
                 <label class="control-label" for="">Gender</label>
@@ -65,18 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <label class="control-label" for="">Avatar</label>
-                <div class="profile-img relative">
-                    <div *ngIf="!tempImg" class="profile-image-container">
-                        <img style="background: #CDE9EAFF; border-radius: 60px;" class="w-full"
-                            src="assets/images/profile-image-default.jpg" alt="" />
-                    </div>
-                    <p-avatar *ngIf="tempImg" [image]="tempImg" shape="circle" size="xlarge"></p-avatar>
-                    <p-fileUpload #fileUpload mode="basic" chooseIcon="pi pi-pencil"
-                        (onSelect)="onUpload($event.currentFiles[0])"></p-fileUpload>
-                </div>
-            </div>
+
         </div>
         <div class="mt-6 text-right">
             <button type="submit" pButton label="Create"> </button>

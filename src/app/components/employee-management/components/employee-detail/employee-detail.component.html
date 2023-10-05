@@ -29,14 +29,10 @@
                 </div>
                 <div class="p-4 mt-4 pb-5">
                     <div>
-                        <h1 class="text-lg mb-1">Team Management</h1>
-                        <div class="grid grid-cols-2">
-                            <div>
+                        <!-- <h1 class="text-lg mb-1">Team Management</h1> -->
+                        <div class="">
+                            <div class="flex gap-4 items-center">
                                 <p class="label">Reporting to</p>
-                                <p>{{employee.reportTo}}</p>
-                            </div>
-                            <div>
-                                <p class="label">Manager</p>
                                 <p *ngIf="!isEditOn; else managerSelect">{{employee.manager}}</p>
                                 <ng-template #managerSelect>
                                     <p-dropdown styleClass="w-full" formControlName="manager" [options]="managerOptions"
@@ -54,32 +50,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="card-container mt-4">
-                <div>
-                    <h1 class="text-xl mb-2">Team Management</h1>
-                    <div class="grid grid-cols-2">
-                        <div>
-                            <p class="label">Reporting to</p>
-                            <p>{{employee.reportTo}}</p>
-                        </div>
-                        <div>
-                            <p class="label">Manager</p>
-                            <p *ngIf="!isEditOn; else managerSelect">{{employee.manager}}</p>
-                            <ng-template #managerSelect>
-                                <p-dropdown formControlName="manager" [options]="managerOptions"
-                                    optionLabel="label"></p-dropdown>
-                            </ng-template>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-5">
-                    <h1 class="text-xl mb-2">Skill Tag</h1>
-                    <div>
-                        <span *ngFor="let skill of employee.skillsTags"
-                        class="skill-tag inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
-                    </div>
-                </div>
-            </div> -->
         </div>
         <div class="right lg:w-9/12 md:w-6/12 flex-1">
             <div class="card-container">
@@ -142,7 +112,7 @@
                             <p class="label">Phone</p>
                             <p *ngIf="!isEditOn; else phoneInput">{{employee.phone}} <i class="pi pi-copy"></i></p>
                             <ng-template #phoneInput>
-                                <input pInputText formControlName="phone" />
+                                <p-inputMask mask="999-999-9999" formControlName="phone" />
                             </ng-template>
                         </div>
                         <div class="info-field">
@@ -150,7 +120,7 @@
                             <p *ngIf="!isEditOn; else emailInput">{{employee.email}}</p>
                             <ng-template #emailInput><input pInputText formControlName="email" /></ng-template>
                         </div>
-                        <div class="info-field">
+                        <div class="info-field col-span-2">
                             <p class="label">Address</p>
                             <p *ngIf="!isEditOn; else addressInput">{{employee.address}} <i class="pi pi-copy"></i></p>
                             <ng-template #addressInput><input pInputText formControlName="address" /></ng-template>

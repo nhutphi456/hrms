@@ -47,6 +47,21 @@ export class EmployeeFormComponent implements OnInit {
       value: 'qa',
     },
   ];
+
+  positionOptions = [
+    {
+      label: 'Frontend Developer',
+      value: 'frontend',
+    },
+    {
+      label: 'Backend Developer',
+      value: 'backend',
+    },
+    {
+      label: 'UI/UX Designer',
+      value: 'uiuxdesigner',
+    },
+  ];
   tempImg = '';
 
   constructor(
