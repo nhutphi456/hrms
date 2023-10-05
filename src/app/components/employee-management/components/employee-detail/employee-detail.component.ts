@@ -71,6 +71,7 @@ export class EmployeeDetailComponent implements OnInit {
   managerOptions = [
     { label: 'Jake Hudson', value: 1 },
     { label: 'John Newton', value: 2 },
+    { label: 'Test manager', value: 3 },
   ];
   positionOptions = [
     {
