@@ -12,6 +12,8 @@ import { SharedModule } from './shared/shared.module';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { GraphQLModule } from './grapql.module';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -24,7 +26,8 @@ import { DialogService } from 'primeng/dynamicdialog';
     ToastModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
-    ToastModule
+    ToastModule,
+    GraphQLModule
   ],
   providers: [MessageService, DialogService],
   bootstrap: [AppComponent],

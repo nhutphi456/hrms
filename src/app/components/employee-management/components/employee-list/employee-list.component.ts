@@ -13,7 +13,6 @@ import {
 import { IEmployee } from '../../models/employee-management.model';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
-
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -98,7 +97,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   getEmployees() {
-    this.employeeStore.getEmployees();
+    this.employeeStore.getEmployees(this.employeeParams);
     console.log({ params: this.employeeParams });
   }
 
@@ -119,7 +118,7 @@ export class EmployeeListComponent implements OnInit {
 
   onActiveItemChange(label: MenuItem): void {
     this.activeItem = label;
-    this.handleEmployeeParams('status', this.activeItem.id ?? 0);
+    this.handleEmployeeParams('status', parseInt(this.activeItem.id ?? ''));
     this.getEmployees();
   }
 

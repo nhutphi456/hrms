@@ -12,3 +12,13 @@ export interface IEmployee {
   department?: string;
   currentContract?: string;
 }
+
+export interface IEmployeeApiResponse {
+  employees: IEmployee[];
+}
+
+export interface IEmployeeParams {
+  status?: number;
+  departments?: string[];
+  types?: string[];
+}
