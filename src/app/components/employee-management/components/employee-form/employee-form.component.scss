@@ -69,6 +69,7 @@
     }
 
     .p-calendar {
-        @apply w-full h-11;
+        @apply w-full;
+        height: 2.35rem;
     }
 }

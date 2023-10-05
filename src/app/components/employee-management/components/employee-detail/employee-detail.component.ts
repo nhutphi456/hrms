@@ -44,6 +44,7 @@ const mockEmployee = {
       phone: '0123456789',
     },
   ],
+  bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maio',
 };
 @Component({
   selector: 'employee-detail',
@@ -71,9 +72,22 @@ export class EmployeeDetailComponent implements OnInit {
     { label: 'Jake Hudson', value: 1 },
     { label: 'John Newton', value: 2 },
   ];
-
+  positionOptions = [
+    {
+      label: 'Frontend Developer',
+      value: 'frontend',
+    },
+    {
+      label: 'Backend Developer',
+      value: 'backend',
+    },
+    {
+      label: 'UI/UX Designer',
+      value: 'uiuxdesigner',
+    },
+  ];
   tempImg = '';
-  
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -89,8 +103,18 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   initEmployeeForm() {
-    const { firstName, lastName, gender, dob, phone, email, address, manager } =
-      this.employee;
+    const {
+      firstName,
+      lastName,
+      gender,
+      dob,
+      phone,
+      email,
+      address,
+      manager,
+      position,
+      bio
+    } = this.employee;
     this.profileForm = this.fb.group({
       firstName,
       lastName,
@@ -100,7 +124,9 @@ export class EmployeeDetailComponent implements OnInit {
       email,
       address,
       avatar: '',
-      manager
+      manager,
+      position,
+      bio
     });
   }
 
@@ -114,15 +140,15 @@ export class EmployeeDetailComponent implements OnInit {
 
   onUpdateEmployee(): void {
     this.profileForm.patchValue({
-      avatar: this.tempImg
-    })
+      avatar: this.tempImg,
+    });
     console.log({ data: this.profileForm.value });
   }
 
   onUpload(f: File): void {
     this.fileUpload.clear();
     this.fileUpload.choose();
-    
+
     const reader = new FileReader();
 
     reader.onload = () => {

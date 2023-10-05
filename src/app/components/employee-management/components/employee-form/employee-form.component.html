@@ -39,11 +39,6 @@
                 <label class="control-label" for="">Email</label>
                 <input pInputText formControlName="email" placeholder="Enter your email" />
             </div>
-            <!-- <div>
-                <label class="control-label" for="">Type of employee</label>
-                <p-dropdown styleClass="w-full" formControlName="type" [options]="employeeTypes" optionLabel="label"
-                    placeholder="Choose employee type"></p-dropdown>
-            </div> -->
             <div>
                 <label class="control-label" for="">Department</label>
                 <p-dropdown styleClass="w-full" formControlName="department" [options]="departmentOptions"
@@ -53,6 +48,27 @@
                 <label class="control-label" for="">Position</label>
                 <p-dropdown styleClass="w-full" formControlName="position" [options]="positionOptions"
                     optionLabel="label" placeholder="Choose position"></p-dropdown>
+            </div>
+            <div class="col-span-3">
+                <span class="control-label">Social Media</span>
+                <div class="grid grid-cols-2 gap-4">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-twitter"></i>
+                        <input type="text" pInputText placeholder="Enter your twitter account" />
+                    </span>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-facebook"></i>
+                        <input type="text" pInputText placeholder="Enter your twitter account" />
+                    </span>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-linkedin"></i>
+                        <input type="text" pInputText placeholder="Enter your twitter account" />
+                    </span>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-github"></i>
+                        <input type="text" pInputText placeholder="Enter your twitter account" />
+                    </span>
+                </div>
             </div>
             <div>
                 <label class="control-label" for="">Avatar</label>
@@ -84,7 +100,7 @@
             </div>
 
         </div>
-        <div class="mt-6 text-right">
+        <div class="mt-4 text-right">
             <button type="submit" pButton label="Create"> </button>
         </div>
     </form>
