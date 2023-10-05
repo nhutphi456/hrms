@@ -13,6 +13,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
@@ -50,7 +52,9 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
     DropdownModule,
     CalendarModule,
     FileUploadModule,
-    RadioButtonModule
+    RadioButtonModule,
+    InputMaskModule,
+    InputTextareaModule
   ],
   providers: [EmployeeManagementService, EmployeeStore],
 })

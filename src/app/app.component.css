@@ -69,7 +69,8 @@
     @apply border-primary border-opacity-80 border placeholder:opacity-100 duration-100 transition-all;
   }
   .p-inputtext {
-    @apply cursor-pointer border-gray-300  placeholder:opacity-50 p-2 rounded-md;
+    @apply cursor-pointer border-gray-300  placeholder:opacity-50 rounded-md;
+    padding: 5px 11px;
   }
   .p-button {
     @apply border-none bg-primary;
@@ -83,6 +84,11 @@
 
   .active {
     @apply text-primary border-primary;
+  }
+
+  .p-button {
+    @apply text-sm;
+    padding: 0.65625rem 1.09375rem;
   }
 
   .p-button-icon.pi.pi-calendar.active {
@@ -249,4 +255,12 @@
 
   body:has(> .p-sidebar-mask) {
     overflow: hidden;
+  }
+
+  .p-multiselect .p-multiselect-label, .p-inputwrapper-filled .p-multiselect.p-multiselect-chip .p-multiselect-label {
+    padding: 5px 11px;;
+  }
+  .p-multiselect.p-multiselect-chip .p-multiselect-token{
+    padding: 0 0.75rem;
+    margin-left: 1px;
   }

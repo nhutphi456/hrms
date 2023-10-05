@@ -16,10 +16,19 @@
                 </div>
                 <div class="px-6 py-4 mt-16">
                     <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
-                    <p class="text-center">{{employee.position}}</p>
-                    <p class="text-gray-700 text-base text-center mt-5">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maio
-                    </p>
+                    <p *ngIf="!isEditOn; else positionSelect" class="text-center">{{employee.position}}</p>
+                    <ng-template #positionSelect>
+                        <p-dropdown styleClass="w-full" formControlName="position" [options]="positionOptions"
+                            optionLabel="label"></p-dropdown>
+                    </ng-template>
+                    <div class="mt-5">
+                        <p *ngIf="!isEditOn; else bioInput" class="text-gray-700 text-base text-center">
+                            {{employee.bio}}
+                        </p>
+                        <ng-template #bioInput>
+                            <textarea class="w-full" rows="5" cols="30" pInputTextarea formControlName="bio"></textarea>
+                        </ng-template>
+                    </div>
                     <div class="social-icons mt-5 flex justify-center gap-10">
                         <i class="pi pi-twitter"></i>
                         <i class="pi pi-linkedin"></i>
@@ -27,59 +36,24 @@
                         <i class="pi pi-instagram"></i>
                     </div>
                 </div>
-                <div class="p-4 mt-4 pb-5">
-                    <div>
-                        <h1 class="text-lg mb-1">Team Management</h1>
-                        <div class="grid grid-cols-2">
-                            <div>
-                                <p class="label">Reporting to</p>
-                                <p>{{employee.reportTo}}</p>
-                            </div>
-                            <div>
-                                <p class="label">Manager</p>
-                                <p *ngIf="!isEditOn; else managerSelect">{{employee.manager}}</p>
-                                <ng-template #managerSelect>
-                                    <p-dropdown styleClass="w-full" formControlName="manager" [options]="managerOptions"
-                                        optionLabel="label"></p-dropdown>
-                                </ng-template>
-                            </div>
-                        </div>
+                <div class="p-4 pb-8">
+                    <div class="flex gap-4 justify-between items-center">
+                        <p class="label">Reporting to</p>
+                        <p *ngIf="!isEditOn; else managerSelect">{{employee.manager}}</p>
+                        <ng-template #managerSelect>
+                            <p-dropdown styleClass="w-full" class="w-full flex-1" formControlName="manager"
+                                [options]="managerOptions" optionLabel="label"></p-dropdown>
+                        </ng-template>
                     </div>
-                    <div class="mt-6">
-                        <h1 class="text-lg mb-1">Skill Tag</h1>
+                    <div class="flex gap-4 justify-between items-center mt-2">
+                        <h1 class="text-md mb-1 font-bold">Skill Tag</h1>
                         <div>
                             <span *ngFor="let skill of employee.skillsTags"
-                            class="skill-tag inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
+                                class="skill-tag inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="card-container mt-4">
-                <div>
-                    <h1 class="text-xl mb-2">Team Management</h1>
-                    <div class="grid grid-cols-2">
-                        <div>
-                            <p class="label">Reporting to</p>
-                            <p>{{employee.reportTo}}</p>
-                        </div>
-                        <div>
-                            <p class="label">Manager</p>
-                            <p *ngIf="!isEditOn; else managerSelect">{{employee.manager}}</p>
-                            <ng-template #managerSelect>
-                                <p-dropdown formControlName="manager" [options]="managerOptions"
-                                    optionLabel="label"></p-dropdown>
-                            </ng-template>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-5">
-                    <h1 class="text-xl mb-2">Skill Tag</h1>
-                    <div>
-                        <span *ngFor="let skill of employee.skillsTags"
-                        class="skill-tag inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
-                    </div>
-                </div>
-            </div> -->
         </div>
         <div class="right lg:w-9/12 md:w-6/12 flex-1">
             <div class="card-container">
@@ -112,8 +86,6 @@
                             <p class="label">Gender</p>
                             <p *ngIf="!isEditOn; else dropdown">{{employee.gender | titlecase}}</p>
                             <ng-template #dropdown>
-                                <!-- <p-dropdown formControlName="gender" [options]="genderOptions"
-                                    optionLabel="label"></p-dropdown> -->
                                 <div class="flex items-center gap-4">
                                     <div class="flex items-center">
                                         <p-radioButton name="gender" value="MALE" id="male"
@@ -142,7 +114,7 @@
                             <p class="label">Phone</p>
                             <p *ngIf="!isEditOn; else phoneInput">{{employee.phone}} <i class="pi pi-copy"></i></p>
                             <ng-template #phoneInput>
-                                <input pInputText formControlName="phone" />
+                                <p-inputMask mask="999-999-9999" formControlName="phone" />
                             </ng-template>
                         </div>
                         <div class="info-field">
@@ -150,11 +122,30 @@
                             <p *ngIf="!isEditOn; else emailInput">{{employee.email}}</p>
                             <ng-template #emailInput><input pInputText formControlName="email" /></ng-template>
                         </div>
-                        <div class="info-field">
+                        <div class="info-field col-span-2">
                             <p class="label">Address</p>
                             <p *ngIf="!isEditOn; else addressInput">{{employee.address}} <i class="pi pi-copy"></i></p>
                             <ng-template #addressInput><input pInputText formControlName="address" /></ng-template>
                         </div>
+                    </div>
+                </div>
+                <div *ngIf="isEditOn">
+                    <h1 class="text-xl mt-10 mb-1 font-bold">Social Media</h1>
+                    <div class="grid grid-cols-2 gap-4">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-twitter"></i>
+                            <input type="text" pInputText placeholder="Enter your twitter account" />
+                        </span>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-facebook"></i>
+                            <input type="text" pInputText placeholder="Enter your facebook account" />
+                        </span><span class="p-input-icon-left">
+                            <i class="pi pi-linkedin"></i>
+                            <input type="text" pInputText placeholder="Enter your linkedin account" />
+                        </span><span class="p-input-icon-left">
+                            <i class="pi pi-github"></i>
+                            <input type="text" pInputText placeholder="Enter your github account" />
+                        </span>
                     </div>
                 </div>
                 <div class="joined-projects">

@@ -5,7 +5,6 @@ export const employeeTableCols: TableHeader[] = [
   { col: 'Name', field: 'firstName' },
   { col: 'Position', field: 'position' },
   { col: 'Email', field: 'email' },
-  { col: 'Phone Number', field: 'phone' },
   { col: 'Department', field: 'department' },
   { col: 'Current Contract', field: 'currentContract' },
   { col: 'Status', field: 'status' },
