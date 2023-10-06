@@ -1,6 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable, from } from 'rxjs';
-import { IEmployee } from '../models/employee-management.model';
+import { Observable, from, map } from 'rxjs';
+import {
+  IEmployee,
+  IEmployeeApiResponse,
+  IEmployeeDetailApiResponse,
+  IEmployeeParams,
+} from '../models/employee-management.model';
+import { Apollo } from 'apollo-angular';
+import {
+  GET_EMPLOYEE,
+  GET_EMPLOYEES,
+} from '../constants/employee-management.constant';
 
 const mockData: IEmployee[] = [
   {
@@ -92,12 +102,25 @@ const mockData: IEmployee[] = [
   providedIn: 'root',
 })
 export class EmployeeManagementService {
-  getEmployees(): Observable<IEmployee[]> {
-    return from([mockData]);
+  constructor(private apollo: Apollo) {}
+
+  getEmployees(params: IEmployeeParams): Observable<IEmployeeApiResponse> {
+    // return from([mockData]);
+    return this.apollo
+      .watchQuery<IEmployeeApiResponse>({
+        query: GET_EMPLOYEES,
+        variables: params,
+      })
+      .valueChanges.pipe(map(res => res.data));
   }
 
-  getEmployee(id: string) {
-    return id;
+  getEmployee(id: string): Observable<IEmployeeDetailApiResponse> {
+    return this.apollo
+      .watchQuery<IEmployeeDetailApiResponse>({
+        query: GET_EMPLOYEE,
+        variables: { id },
+      })
+      .valueChanges.pipe(map(res => res.data));
   }
 
   updateEmployee(employee: IEmployee) {

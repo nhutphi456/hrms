@@ -14,7 +14,7 @@
                             (onSelect)="onUpload($event.currentFiles[0])" [auto]="true"></p-fileUpload>
                     </div>
                 </div>
-                <div class="px-6 py-4 mt-16">
+                <div class="p-4 mt-16">
                     <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
                     <p *ngIf="!isEditOn; else positionSelect" class="text-center">{{employee.position}}</p>
                     <ng-template #positionSelect>
@@ -42,7 +42,7 @@
                         <p *ngIf="!isEditOn; else managerSelect">{{employee.manager}}</p>
                         <ng-template #managerSelect>
                             <p-dropdown styleClass="w-full" class="w-full flex-1" formControlName="manager"
-                                [options]="managerOptions" optionLabel="label"></p-dropdown>
+                                [options]="managerOptions" optionLabel="label" appendTo="managerSelect"></p-dropdown>
                         </ng-template>
                     </div>
                     <div class="flex gap-4 justify-between items-center mt-2">

@@ -1,0 +1,13 @@
+:host ::ng-deep {
+    .employee-item {
+        border: 1px solid var(--surface-d);
+        max-width: 450px;
+    }
+    .pi {
+        font-size: 0.835rem;
+        @apply text-gray-400;
+    }
+    .employment-tag {
+        border-radius: 50px;
+    }
+}

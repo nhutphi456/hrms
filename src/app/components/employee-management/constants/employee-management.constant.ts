@@ -1,3 +1,4 @@
+import { gql } from 'apollo-angular';
 import { MenuItem } from 'primeng/api';
 import { TableHeader } from 'src/app/models/global.model';
 
@@ -14,17 +15,55 @@ export const employeeTableCols: TableHeader[] = [
 export const employeeLabelItems: MenuItem[] = [
   {
     label: 'all',
-    id: '0',
+    id: '',
     title: 'All Employees',
   },
   {
     label: 'active',
-    id: '1',
+    id: '0',
     title: 'Active',
   },
   {
     label: 'inactive',
-    id: '2',
+    id: '1',
     title: 'Inactive',
   },
 ];
+
+export const GET_EMPLOYEES = gql`
+  query GetEmployees($status: Int, $departments: String) {
+    employees(status: $status, departments: $departments) {
+      id
+      firstName
+      lastName
+      gender
+      dob
+      position
+      phone
+      email
+      address
+      status
+      department
+      currentContract
+    }
+  }
+`;
+
+export const GET_EMPLOYEE = gql`
+  query GetEmployee($id: ID) {
+    employee(id: $id) {
+      id
+      firstName
+      lastName
+      gender
+      dob
+      position
+      phone
+      email
+      address
+      status
+      department
+      currentContract
+    }
+  }
+`;

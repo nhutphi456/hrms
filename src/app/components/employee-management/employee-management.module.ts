@@ -15,6 +15,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CarouselModule } from 'primeng/carousel';
 
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
@@ -24,9 +25,10 @@ import { EmployeeManagementService } from './services/employee-management.servic
 import { EmployeeStore } from './store/employee-management.store.service';
 import { ShareModule } from '../share/share.module';
 import { EmployeeItemComponent } from './components/employee-item/employee-item.component';
-import { EmployeeCarouselModule } from './components/employee-carousel/employee-carousel.module';
 import { EmployeeDetailComponent } from './components/employee-detail/employee-detail.component';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
+import { EmployeeCardComponent } from './components/employee-card/employee-card.component';
+import { EmployeeCarouselComponent } from './components/employee-carousel/employee-carousel.component';
 @NgModule({
   declarations: [
     EmployeeManagementComponent,
@@ -34,6 +36,8 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
     EmployeeItemComponent,
     EmployeeDetailComponent,
     EmployeeFormComponent,
+    EmployeeCardComponent,
+    EmployeeCarouselComponent,
   ],
   imports: [
     CommonModule,
@@ -41,7 +45,6 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
     RouterModule,
     AppTopbarModule,
     ShareModule,
-    EmployeeCarouselModule,
     AvatarModule,
     TableModule,
     ButtonModule,
@@ -54,8 +57,9 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
     FileUploadModule,
     RadioButtonModule,
     InputMaskModule,
-    InputTextareaModule
+    InputTextareaModule,
+    CarouselModule
   ],
-  providers: [EmployeeManagementService, EmployeeStore],
+  providers: [EmployeeManagementService, EmployeeStore ],
 })
 export class EmployeeManagementModule {}

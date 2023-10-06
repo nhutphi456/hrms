@@ -19,7 +19,7 @@ export class EmployeeItemComponent {
     {
       label: 'Edit',
       icon: 'pi pi-pencil',
-      routerLink: 'detail',
+      routerLink: `detail/${this.employee?.id}`,
       queryParams: { mode: 'edit' },
     },
   ];

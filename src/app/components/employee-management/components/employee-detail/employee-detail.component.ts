@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FileUpload } from 'primeng/fileupload';
 import { NotificationService } from 'src/app/shared/message/notification.service';
+import { EmployeeStore } from '../../store/employee-management.store.service';
 
 const mockEmployee = {
   firstName: 'Russel',
@@ -53,6 +54,7 @@ const mockEmployee = {
 })
 export class EmployeeDetailComponent implements OnInit {
   @ViewChild('fileUpload') fileUpload!: FileUpload;
+  employeeDetail$ = this.employeeStore.employeeDetail$;
   employee = mockEmployee;
   isEditOn = false;
   profileForm!: FormGroup;
@@ -71,6 +73,7 @@ export class EmployeeDetailComponent implements OnInit {
   managerOptions = [
     { label: 'Jake Hudson', value: 1 },
     { label: 'John Newton', value: 2 },
+    { label: 'Test manager', value: 3 },
   ];
   positionOptions = [
     {
@@ -92,6 +95,7 @@ export class EmployeeDetailComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private notificationService: NotificationService,
+    private employeeStore: EmployeeStore,
   ) {}
 
   ngOnInit(): void {
@@ -99,6 +103,13 @@ export class EmployeeDetailComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       const editParam = params['mode'];
       this.isEditOn = editParam === 'edit' ? true : false;
+    });
+
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.employeeStore.getEmployee(id);
+      }
     });
   }
 
@@ -113,7 +124,7 @@ export class EmployeeDetailComponent implements OnInit {
       address,
       manager,
       position,
-      bio
+      bio,
     } = this.employee;
     this.profileForm = this.fb.group({
       firstName,
@@ -126,7 +137,7 @@ export class EmployeeDetailComponent implements OnInit {
       avatar: '',
       manager,
       position,
-      bio
+      bio,
     });
   }
 
