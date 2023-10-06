@@ -1,0 +1,11 @@
+p-progressbar {
+    @apply fixed w-full z-50 top-0;
+
+    .p-progressbar {
+        @apply rounded-none h-2 bg-transparent;
+
+        & .p-progressbar-value {
+            @apply bg-secondary;
+        }
+    }
+}

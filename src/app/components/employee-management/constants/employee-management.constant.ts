@@ -33,6 +33,26 @@ export const employeeLabelItems: MenuItem[] = [
 export const GET_EMPLOYEES = gql`
   query GetEmployees($status: Int, $departments: String) {
     employees(status: $status, departments: $departments) {
+      id
+      firstName
+      lastName
+      gender
+      dob
+      position
+      phone
+      email
+      address
+      status
+      department
+      currentContract
+    }
+  }
+`;
+
+export const GET_EMPLOYEE = gql`
+  query GetEmployee($id: ID) {
+    employee(id: $id) {
+      id
       firstName
       lastName
       gender

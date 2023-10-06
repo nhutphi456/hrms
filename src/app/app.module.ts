@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StoreModule } from '@ngrx/store';
@@ -13,10 +13,13 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { GraphQLModule } from './grapql.module';
+import { ProgressBarInterceptor } from './http/progress-bar.interceptor';
+import { ProgressBarComponent } from './components/share/progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    ProgressBarComponent,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -27,9 +30,17 @@ import { GraphQLModule } from './grapql.module';
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
     ToastModule,
-    GraphQLModule
+    GraphQLModule,
   ],
-  providers: [MessageService, DialogService],
+  providers: [
+    MessageService,
+    DialogService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ProgressBarInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

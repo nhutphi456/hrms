@@ -4,12 +4,13 @@ import {
   IEmployeeParams,
 } from '../models/employee-management.model';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Observable, exhaustMap, switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { EmployeeManagementService } from '../services/employee-management.service';
 
 export interface IEmployeeMngmentState {
   employees: IEmployee[];
   loading: boolean;
+  employeeDetail: IEmployee | null;
 }
 
 @Injectable()
@@ -18,12 +19,17 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
     super({
       employees: [],
       loading: false,
+      employeeDetail: null,
     });
   }
 
   //SELECTOR
   readonly employees$: Observable<IEmployee[]> = this.select(
     state => state.employees,
+  );
+
+  readonly employeeDetail$: Observable<IEmployee | null> = this.select(
+    state => state.employeeDetail,
   );
   //UPDATER
   readonly setLoading = this.updater(
@@ -42,6 +48,11 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
       };
     },
   );
+  readonly setEmployee = this.updater(
+    (state: IEmployeeMngmentState, employee: IEmployee) => {
+      return { ...state, employee };
+    },
+  );
   //EFFECTS
   readonly getEmployees = this.effect((params$: Observable<IEmployeeParams>) =>
     params$.pipe(
@@ -49,6 +60,19 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
         this.employeeMngmentService.getEmployees(params).pipe(
           tapResponse({
             next: res => this.setEmployees(res.employees),
+            error: error => console.log(error),
+          }),
+        ),
+      ),
+    ),
+  );
+
+  readonly getEmployee = this.effect((id$: Observable<string>) =>
+    id$.pipe(
+      switchMap(id =>
+        this.employeeMngmentService.getEmployee(id).pipe(
+          tapResponse({
+            next: res => this.setEmployee(res.employee),
             error: error => console.log(error),
           }),
         ),

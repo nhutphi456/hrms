@@ -3,10 +3,14 @@ import { Observable, from, map } from 'rxjs';
 import {
   IEmployee,
   IEmployeeApiResponse,
+  IEmployeeDetailApiResponse,
   IEmployeeParams,
 } from '../models/employee-management.model';
 import { Apollo } from 'apollo-angular';
-import { GET_EMPLOYEES } from '../constants/employee-management.constant';
+import {
+  GET_EMPLOYEE,
+  GET_EMPLOYEES,
+} from '../constants/employee-management.constant';
 
 const mockData: IEmployee[] = [
   {
@@ -107,11 +111,16 @@ export class EmployeeManagementService {
         query: GET_EMPLOYEES,
         variables: params,
       })
-      .valueChanges.pipe(map((res) => res.data));
+      .valueChanges.pipe(map(res => res.data));
   }
 
-  getEmployee(id: string) {
-    return id;
+  getEmployee(id: string): Observable<IEmployeeDetailApiResponse> {
+    return this.apollo
+      .watchQuery<IEmployeeDetailApiResponse>({
+        query: GET_EMPLOYEE,
+        variables: { id },
+      })
+      .valueChanges.pipe(map(res => res.data));
   }
 
   updateEmployee(employee: IEmployee) {
