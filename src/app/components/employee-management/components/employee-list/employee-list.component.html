@@ -2,10 +2,8 @@
     <h1 class="text-2xl">Employee Dashboard</h1>
     <p-button icon="pi pi-plus" styleClass="p-button-sm" label="New" (click)="openAddEmployeeModal()"></p-button>
 </div>
-<div class="card-container bg-gray-100">
-    <employee-carousel></employee-carousel>
-</div>
-<div class="card-container">
+<employee-carousel></employee-carousel>
+<div class="card-container mt-4">
     <div class="flex justify-between items-center">
         <hrms-screen-filter (getSearchValue)="searchValue($event)"></hrms-screen-filter>
     </div>
@@ -13,9 +11,9 @@
         <form class="flex gap-2" [formGroup]="filterForm" (ngSubmit)="onFilter()">
             <button pButton type="submit" icon="pi pi-filter" label="Filter"> </button>
             <p-multiSelect display="chip" [options]="departmentOptions" defaultLabel="Select department"
-                formControlName="departments" ></p-multiSelect>
+                formControlName="departments"></p-multiSelect>
             <p-multiSelect display="chip" [options]="contractOptions" defaultLabel="Select current contract"
-                formControlName="contracts"></p-multiSelect>
+                formControlName="currentContracts"></p-multiSelect>
             <p-button *ngIf="isClearAllVisible()" (onClick)="handleClearAll()" styleClass="p-button-link"
                 label="Clear all"> </p-button>
         </form>

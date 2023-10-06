@@ -31,8 +31,16 @@ export const employeeLabelItems: MenuItem[] = [
 ];
 
 export const GET_EMPLOYEES = gql`
-  query GetEmployees($status: Int, $departments: String) {
-    employees(status: $status, departments: $departments) {
+  query GetEmployees(
+    $status: Int
+    $departments: String
+    $currentContracts: String
+  ) {
+    employees(
+      status: $status
+      departments: $departments
+      currentContracts: $currentContracts
+    ) {
       id
       firstName
       lastName
@@ -45,6 +53,45 @@ export const GET_EMPLOYEES = gql`
       status
       department
       currentContract
+      avatarImg
+    }
+  }
+`;
+
+export const GET_EMPLOYEES_2 = gql`
+  query GetEmployees(
+    $status: Int
+    $departments: String
+    $currentContracts: String
+    $page: Int
+    $per_page: Int
+  ) {
+    employees(
+      status: $status
+      departments: $departments
+      currentContracts: $currentContracts
+      page: $page
+      per_page: $per_page
+    ) {
+      page
+      per_page
+      total_pages
+      total_items
+      data {
+        id
+        firstName
+        lastName
+        gender
+        dob
+        position
+        phone
+        email
+        address
+        status
+        department
+        currentContract
+        avatarImg
+      }
     }
   }
 `;
@@ -57,13 +104,28 @@ export const GET_EMPLOYEE = gql`
       lastName
       gender
       dob
-      position
       phone
       email
       address
+      reportTo
+      position
+      currentContract
       status
       department
-      currentContract
+      skillsTags
+      avatarImg
+      bio
+      joinedProjects {
+        name
+        workAs
+        skillTags
+        contributedHours
+      }
+      emergencyContacts {
+        firstName
+        lastName
+        phone
+      }
     }
   }
 `;

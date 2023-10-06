@@ -1,11 +1,13 @@
-<div class="rounded-md">
-    <p-carousel *ngIf="employees$ | async as employees" [value]="employees" [numVisible]="3" [numScroll]="3"
-        [circular]="false"  [showIndicators]="false" [responsiveOptions]="responsiveOptions">
-        <ng-template pTemplate="header">
-            <h2 class="mb-4 text-xl">New Employee</h2>
-        </ng-template>
-        <ng-template let-employee pTemplate="item">
-            <employee-card [employee]="employee"></employee-card>
-        </ng-template>
-    </p-carousel>
+<div class="card-container bg-gray-100">
+    <div class="rounded-md">
+        <p-carousel [value]="employees" [numVisible]="3" [numScroll]="3" [circular]="false" [showIndicators]="false"
+            [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+                <h2 class="mb-4 text-xl">New Employee</h2>
+            </ng-template>
+            <ng-template let-employee pTemplate="item">
+                <employee-card [employee]="employee"></employee-card>
+            </ng-template>
+        </p-carousel>
+    </div>
 </div>
