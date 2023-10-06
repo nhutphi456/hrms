@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { IEmployee } from '../../models/employee-management.model';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -9,22 +9,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./employee-item.component.scss'],
   providers: [MessageService],
 })
-export class EmployeeItemComponent {
+export class EmployeeItemComponent implements OnChanges {
   @HostBinding('class') hostClass = 'hrms-employee-item';
   @Input() employee!: IEmployee;
 
   constructor(private router: Router) {}
-  
-  menuItems: MenuItem[] = [
-    {
-      label: 'Edit',
-      icon: 'pi pi-pencil',
-      routerLink: `detail/${this.employee?.id}`,
-      queryParams: { mode: 'edit' },
-    },
-  ];
 
-  onEdit() {
-    this.router.navigate(['employee-management/edit']);
+  menuItems!: MenuItem[]
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ('employee' in changes) {
+      const newEmployee = changes['employee'].currentValue;
+      if (newEmployee) {
+        this.menuItems = [
+          {
+            label: 'Edit',
+            icon: 'pi pi-pencil',
+            routerLink: `detail/${newEmployee.id}`,
+            queryParams: { mode: 'edit' },
+          },
+        ];
+      } else {
+        this.menuItems = [];
+      }
+    }
   }
 }

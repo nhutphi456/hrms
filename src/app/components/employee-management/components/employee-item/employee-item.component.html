@@ -1,7 +1,7 @@
 <tr class="mt-3 p-selectable-row">
   <td>
     <div class="flex items-center">
-      <img class="avatar-img" src="https://www.primefaces.org/paradise-ng/assets/demo/images/avatar/ivanmagalhaes.png" [alt]="employee.firstName">
+      <img class="avatar-img" src={{employee.avatarImg}} [alt]="employee.firstName">
     <a class="text-black ml-4" [routerLink]="['detail', employee.id]">{{employee.firstName}} {{ employee.lastName }}</a>
     </div>
   </td>

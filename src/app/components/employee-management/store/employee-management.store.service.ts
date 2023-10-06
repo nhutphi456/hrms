@@ -4,11 +4,12 @@ import {
   IEmployeeParams,
 } from '../models/employee-management.model';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, exhaustMap, mergeMap, switchMap } from 'rxjs';
 import { EmployeeManagementService } from '../services/employee-management.service';
+import { DataResponse } from 'src/app/models/global.model';
 
 export interface IEmployeeMngmentState {
-  employees: IEmployee[];
+  employees: DataResponse<IEmployee>;
   loading: boolean;
   employeeDetail: IEmployee | null;
 }
@@ -17,14 +18,20 @@ export interface IEmployeeMngmentState {
 export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
   constructor(private employeeMngmentService: EmployeeManagementService) {
     super({
-      employees: [],
+      employees: {
+        page: 0,
+        per_page: 0,
+        total_items: 0,
+        total_pages: 0,
+        data: []
+      },
       loading: false,
       employeeDetail: null,
     });
   }
 
   //SELECTOR
-  readonly employees$: Observable<IEmployee[]> = this.select(
+  readonly employees$: Observable<DataResponse<IEmployee>> = this.select(
     state => state.employees,
   );
 
@@ -41,7 +48,7 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
     },
   );
   readonly setEmployees = this.updater(
-    (state: IEmployeeMngmentState, employees: IEmployee[]) => {
+    (state: IEmployeeMngmentState, employees: DataResponse<IEmployee>) => {
       return {
         ...state,
         employees,
@@ -50,7 +57,7 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
   );
   readonly setEmployee = this.updater(
     (state: IEmployeeMngmentState, employee: IEmployee) => {
-      return { ...state, employee };
+      return { ...state, employeeDetail: employee };
     },
   );
   //EFFECTS
@@ -72,7 +79,11 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
       switchMap(id =>
         this.employeeMngmentService.getEmployee(id).pipe(
           tapResponse({
-            next: res => this.setEmployee(res.employee),
+            next: res => {
+              if (res.employee !== null) {
+                this.setEmployee(res.employee);
+              }
+            },
             error: error => console.log(error),
           }),
         ),

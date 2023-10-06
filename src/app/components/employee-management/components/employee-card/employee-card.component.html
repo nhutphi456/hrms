@@ -3,11 +3,11 @@
         <div class="flex">
             <div class="mb-4">
                 <p-avatar styleClass="mr-2" size="xlarge" shape="circle"
-                    image="https://www.primefaces.org/paradise-ng/assets/demo/images/avatar/ivanmagalhaes.png"></p-avatar>
+                    [image]="employee.avatarImg"></p-avatar>
             </div>
             <div class="ml-4">
                 <div class="mb-4 text-2xl font-bold">
-                    <a [routerLink]="['detail']" class="text-black">
+                    <a [routerLink]="['detail', employee.id]" class="text-black">
                         <span>{{employee.firstName}} {{employee.lastName}}</span>
                     </a>
                 </div>
@@ -23,7 +23,7 @@
                     <i class="pi pi-phone mr-3"></i>
                     <span class="text-gray-400">{{employee.phone}}</span>
                 </div>
-                <div class="mt-4">
+                <div class="mt-8">
                     <span
                         class="employment-tag inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-base font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Fulltime</span>
                 </div>

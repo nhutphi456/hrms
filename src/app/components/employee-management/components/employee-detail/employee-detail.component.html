@@ -1,4 +1,4 @@
-<form [formGroup]="profileForm" (ngSubmit)="onUpdateEmployee()">
+<form *ngIf="employeeDetail$ | async as employee" [formGroup]="profileForm" (ngSubmit)="onUpdateEmployee()">
     <div class="flex gap-4 lg:p-4 md:p-0">
         <div class="left lg:w-3/12 md:w-5/12">
             <div class="w-full rounded overflow-hidden shadow-md">
@@ -7,7 +7,7 @@
                     <div class="profile-img relative">
                         <div *ngIf="!tempImg" class="profile-image-container">
                             <img style="background: #CDE9EAFF; border-radius: 60px;" class="w-full"
-                                src="assets/images/avatar-default.jpg" alt="" />
+                                src={{employee.avatarImg}} alt="" />
                         </div>
                         <p-avatar *ngIf="tempImg" [image]="tempImg" shape="circle" size="xlarge"></p-avatar>
                         <p-fileUpload #fileUpload *ngIf="isEditOn" mode="basic" chooseIcon="pi pi-pencil"
@@ -39,10 +39,10 @@
                 <div class="p-4 pb-8">
                     <div class="flex gap-4 justify-between items-center">
                         <p class="label">Reporting to</p>
-                        <p *ngIf="!isEditOn; else managerSelect">{{employee.manager}}</p>
+                        <p *ngIf="!isEditOn; else managerSelect">{{employee.reportTo}}</p>
                         <ng-template #managerSelect>
-                            <p-dropdown styleClass="w-full" class="w-full flex-1" formControlName="manager"
-                                [options]="managerOptions" optionLabel="label" appendTo="managerSelect"></p-dropdown>
+                            <p-dropdown styleClass="w-full" class="w-full flex-1" formControlName="reportTo"
+                                [options]="managerOptions" optionLabel="label"></p-dropdown>
                         </ng-template>
                     </div>
                     <div class="flex gap-4 justify-between items-center mt-2">
@@ -84,7 +84,7 @@
                         </div>
                         <div class="info-field">
                             <p class="label">Gender</p>
-                            <p *ngIf="!isEditOn; else dropdown">{{employee.gender | titlecase}}</p>
+                            <p *ngIf="!isEditOn; else dropdown">{{employee.gender}}</p>
                             <ng-template #dropdown>
                                 <div class="flex items-center gap-4">
                                     <div class="flex items-center">

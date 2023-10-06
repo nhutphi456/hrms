@@ -1,3 +1,5 @@
+import { DataResponse } from "src/app/models/global.model";
+
 export interface IEmployee {
   id?: string;
   firstName: string;
@@ -12,10 +14,28 @@ export interface IEmployee {
   reportTo: number;
   department?: string;
   currentContract?: string;
+  bio: string;
+  skillsTags: string[];
+  joinedProjects: Project[];
+  emergencyContacts: EmergencyContact[];
+  avatarImg: string;
+}
+
+export interface Project {
+  name: string;
+  workAs: string;
+  skillsTags: string[];
+  contributedHours: number;
+}
+
+export interface EmergencyContact {
+  firstName: string;
+  lastName: string;
+  phone: string;
 }
 
 export interface IEmployeeApiResponse {
-  employees: IEmployee[];
+  employees: DataResponse<IEmployee>;
 }
 
 export interface IEmployeeDetailApiResponse {

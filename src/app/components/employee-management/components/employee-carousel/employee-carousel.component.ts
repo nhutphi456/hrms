@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { Observable } from 'rxjs';
 import { IEmployee } from '../../models/employee-management.model';
+import { DataResponse } from 'src/app/models/global.model';
 
 @Component({
   selector: 'employee-carousel',
@@ -9,7 +10,8 @@ import { IEmployee } from '../../models/employee-management.model';
   styleUrls: ['./employee-carousel.component.scss'],
 })
 export class EmployeeCarouselComponent implements OnInit {
-  employees$!: Observable<IEmployee[]>;
+  employees$: Observable<DataResponse<IEmployee>> = this.employeeStore.employees$;
+  employees!: IEmployee[]
   responsiveOptions;
 
   constructor(private employeeStore: EmployeeStore) {
@@ -33,6 +35,8 @@ export class EmployeeCarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.employees$ = this.employeeStore.employees$;
+    this.employees$.subscribe(res => {
+      this.employees = res.data
+    });
   }
 }

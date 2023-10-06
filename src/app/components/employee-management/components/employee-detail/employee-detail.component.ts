@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FileUpload } from 'primeng/fileupload';
 import { NotificationService } from 'src/app/shared/message/notification.service';
 import { EmployeeStore } from '../../store/employee-management.store.service';
+import { IEmployee } from '../../models/employee-management.model';
 
 const mockEmployee = {
   firstName: 'Russel',
@@ -55,7 +56,7 @@ const mockEmployee = {
 export class EmployeeDetailComponent implements OnInit {
   @ViewChild('fileUpload') fileUpload!: FileUpload;
   employeeDetail$ = this.employeeStore.employeeDetail$;
-  employee = mockEmployee;
+  defaultImg = "assets/images/avatar-default.jpg"
   isEditOn = false;
   profileForm!: FormGroup;
 
@@ -99,21 +100,25 @@ export class EmployeeDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initEmployeeForm();
     this.route.queryParams.subscribe(params => {
       const editParam = params['mode'];
       this.isEditOn = editParam === 'edit' ? true : false;
     });
-
+    
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
         this.employeeStore.getEmployee(id);
       }
     });
+    
+    this.employeeDetail$.subscribe(employee => {
+      if(!employee) return
+      this.initEmployeeForm(employee);
+    });
   }
 
-  initEmployeeForm() {
+  initEmployeeForm(employee: IEmployee) {
     const {
       firstName,
       lastName,
@@ -122,10 +127,10 @@ export class EmployeeDetailComponent implements OnInit {
       phone,
       email,
       address,
-      manager,
       position,
       bio,
-    } = this.employee;
+      reportTo
+    } = employee;
     this.profileForm = this.fb.group({
       firstName,
       lastName,
@@ -135,9 +140,9 @@ export class EmployeeDetailComponent implements OnInit {
       email,
       address,
       avatar: '',
-      manager,
       position,
       bio,
+      reportTo
     });
   }
 
@@ -166,7 +171,6 @@ export class EmployeeDetailComponent implements OnInit {
       const fileContent = reader.result as string; // Get the file content as base64 string
 
       this.tempImg = fileContent;
-
       this.notificationService.successNotification(
         $localize`Uploaded new photo`,
       );

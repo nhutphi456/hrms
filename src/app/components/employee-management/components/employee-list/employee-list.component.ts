@@ -13,6 +13,7 @@ import {
 import { IEmployee } from '../../models/employee-management.model';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
+import { DataResponse } from 'src/app/models/global.model';
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -22,7 +23,8 @@ import { EmployeeFormComponent } from '../employee-form/employee-form.component'
 export class EmployeeListComponent implements OnInit {
   labelItems: MenuItem[] = employeeLabelItems;
   activeItem: MenuItem = this.labelItems[0];
-  employees$: Observable<IEmployee[]> = this.employeeStore.employees$;
+  employees$: Observable<DataResponse<IEmployee>> =
+    this.employeeStore.employees$;
   tableData: HrmsTable<IEmployee> = {
     page: 0,
     first: 0,
@@ -38,25 +40,25 @@ export class EmployeeListComponent implements OnInit {
   departmentOptions: { label: string; value: string }[] = [
     {
       label: 'Software Development',
-      value: 'SD',
+      value: 'Software Development',
     },
     {
       label: 'Design',
-      value: 'DS',
+      value: 'Design',
     },
   ];
   contractOptions: { label: string; value: string }[] = [
     {
-      label: 'Fulltime',
-      value: 'fulltime',
+      label: 'Full-time',
+      value: 'Full-time',
     },
     {
       label: 'Part-time',
-      value: 'parttime',
+      value: 'Part-time',
     },
     {
       label: 'Internship',
-      value: 'internship',
+      value: 'Internship',
     },
   ];
   ref!: DynamicDialogRef;
@@ -71,19 +73,19 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployees();
-    this.employees$.subscribe(employees => {
-      const data = {
-        page: 1,
+    this.employees$.subscribe(result => {
+      const tData = {
+        page: result.page,
         first: 1,
-        rows: 3,
-        pageCount: 1,
-        totalRecord: 3,
+        rows: result.per_page,
+        pageCount: result.total_pages,
+        totalRecord: result.total_items,
         data: {
           header: [...this.tableData.data.header],
-          body: employees,
+          body: result.data,
         },
       };
-      this.tableData = data;
+      this.tableData = tData;
     });
 
     this.initFilterForm();
@@ -92,8 +94,8 @@ export class EmployeeListComponent implements OnInit {
   get deparments() {
     return this.filterForm.get('departments')?.value;
   }
-  get contracts() {
-    return this.filterForm.get('contracts')?.value;
+  get currentContracts() {
+    return this.filterForm.get('currentContracts')?.value;
   }
 
   getEmployees() {
@@ -104,7 +106,7 @@ export class EmployeeListComponent implements OnInit {
   initFilterForm() {
     this.filterForm = this.fb.group({
       departments: '',
-      contracts: '',
+      currentContracts: '',
     });
   }
   searchValue(search: string): void {
@@ -154,11 +156,11 @@ export class EmployeeListComponent implements OnInit {
   handleClearAll() {
     this.filterForm.patchValue({
       departments: [],
-      contracts: [],
+      currentContracts: [],
     });
   }
 
   isClearAllVisible() {
-    return this.deparments.length || this.contracts.length;
+    return this.deparments.length || this.currentContracts.length;
   }
 }
