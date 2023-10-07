@@ -5,6 +5,7 @@ import { FileUpload } from 'primeng/fileupload';
 import { NotificationService } from 'src/app/shared/message/notification.service';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { IEmployee } from '../../models/employee-management.model';
+import { HelperService } from 'src/app/services/helper.service';
 
 const mockEmployee = {
   firstName: 'Russel',
@@ -56,7 +57,7 @@ const mockEmployee = {
 export class EmployeeDetailComponent implements OnInit {
   @ViewChild('fileUpload') fileUpload!: FileUpload;
   employeeDetail$ = this.employeeStore.employeeDetail$;
-  defaultImg = "assets/images/avatar-default.jpg"
+  defaultImg = 'assets/images/avatar-default.jpg';
   isEditOn = false;
   profileForm!: FormGroup;
 
@@ -97,6 +98,7 @@ export class EmployeeDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private notificationService: NotificationService,
     private employeeStore: EmployeeStore,
+    private helperService: HelperService,
   ) {}
 
   ngOnInit(): void {
@@ -104,16 +106,16 @@ export class EmployeeDetailComponent implements OnInit {
       const editParam = params['mode'];
       this.isEditOn = editParam === 'edit' ? true : false;
     });
-    
+
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
         this.employeeStore.getEmployee(id);
       }
     });
-    
+
     this.employeeDetail$.subscribe(employee => {
-      if(!employee) return
+      if (!employee) return;
       this.initEmployeeForm(employee);
     });
   }
@@ -129,7 +131,7 @@ export class EmployeeDetailComponent implements OnInit {
       address,
       position,
       bio,
-      reportTo
+      reportTo,
     } = employee;
     this.profileForm = this.fb.group({
       firstName,
@@ -142,7 +144,7 @@ export class EmployeeDetailComponent implements OnInit {
       avatar: '',
       position,
       bio,
-      reportTo
+      reportTo,
     });
   }
 
@@ -155,16 +157,16 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   onUpdateEmployee(): void {
-    this.profileForm.patchValue({
-      avatar: this.tempImg,
-    });
+    // this.profileForm.patchValue({
+    //   avatar: this.tempImg,
+    // });
     console.log({ data: this.profileForm.value });
   }
 
   onUpload(f: File): void {
     this.fileUpload.clear();
     this.fileUpload.choose();
-
+    console.log({f})
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -182,10 +184,10 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   private parseToByteArray(base64: string) {
-    // const avaBytesArr = this.helperService.base64ToBytes(base64); // Convert base64 string to bytes
-    // const byteArr = Array.from(avaBytesArr);
-    // this.editForm.patchValue({
-    //   avatar: byteArr,
-    // });
+    const avaBytesArr = this.helperService.base64ToBytes(base64); // Convert base64 string to bytes
+    const byteArr = Array.from(avaBytesArr);
+    this.profileForm.patchValue({
+      avatar: byteArr,
+    });
   }
 }

@@ -13,7 +13,7 @@ import {
 import { IEmployee } from '../../models/employee-management.model';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
-import { DataResponse } from 'src/app/models/global.model';
+import { PaginatedData } from 'src/app/models/global.model';
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -23,7 +23,7 @@ import { DataResponse } from 'src/app/models/global.model';
 export class EmployeeListComponent implements OnInit {
   labelItems: MenuItem[] = employeeLabelItems;
   activeItem: MenuItem = this.labelItems[0];
-  employees$: Observable<DataResponse<IEmployee>> =
+  employees$: Observable<PaginatedData<IEmployee>> =
     this.employeeStore.employees$;
   tableData: HrmsTable<IEmployee> = {
     page: 0,

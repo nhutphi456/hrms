@@ -1,17 +1,17 @@
-<div class="bg-white employee-item rounded overflow-hidden p-4 mx-2">
+<div class="bg-white employee-item rounded-lg overflow-hidden p-4 mx-2">
     <div class="employee-item-content flex justify-between">
-        <div class="flex">
+        <div class="flex flex-1">
             <div class="mb-4">
                 <p-avatar styleClass="mr-2" size="xlarge" shape="circle"
                     [image]="employee.avatarImg"></p-avatar>
             </div>
-            <div class="ml-4">
+            <div class="ml-4 flex-1">
                 <div class="mb-4 text-2xl font-bold">
                     <a [routerLink]="['detail', employee.id]" class="text-black">
                         <span>{{employee.firstName}} {{employee.lastName}}</span>
                     </a>
                 </div>
-                <div class="mb-1">
+                <div class="mb-1 whitespace-nowrap">
                     <i class="pi pi-briefcase mr-3"></i>
                     <span class="text-gray-400">{{employee.position}}</span>
                 </div>

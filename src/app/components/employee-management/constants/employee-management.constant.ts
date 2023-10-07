@@ -35,34 +35,6 @@ export const GET_EMPLOYEES = gql`
     $status: Int
     $departments: String
     $currentContracts: String
-  ) {
-    employees(
-      status: $status
-      departments: $departments
-      currentContracts: $currentContracts
-    ) {
-      id
-      firstName
-      lastName
-      gender
-      dob
-      position
-      phone
-      email
-      address
-      status
-      department
-      currentContract
-      avatarImg
-    }
-  }
-`;
-
-export const GET_EMPLOYEES_2 = gql`
-  query GetEmployees(
-    $status: Int
-    $departments: String
-    $currentContracts: String
     $page: Int
     $per_page: Int
   ) {
@@ -129,3 +101,23 @@ export const GET_EMPLOYEE = gql`
     }
   }
 `;
+
+export const ADD_EMPLOYEE = gql`
+  mutation AddEmployee($input: EmployeeInput!) {
+    addEmployee(input: $input) {
+      id
+      firstName
+      lastName
+      dob
+      email
+      phone
+      address
+      currentContract
+      gender
+      department
+      avatarImg
+      position
+    }
+  }
+`;
+

@@ -71,7 +71,7 @@
   .p-inputtext {
     @apply cursor-pointer border-gray-300  placeholder:opacity-50 rounded-md;
     padding: 5px 11px;
-    /* background-color: #f8f9faff; */
+    background-color: #f8f9faff;
   }
   .p-button {
     @apply border-none bg-primary;
