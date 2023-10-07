@@ -8,9 +8,9 @@ import {
 } from '../models/employee-management.model';
 import { Apollo } from 'apollo-angular';
 import {
+  ADD_EMPLOYEE,
   GET_EMPLOYEE,
   GET_EMPLOYEES,
-  GET_EMPLOYEES_2,
 } from '../constants/employee-management.constant';
 
 // const mockData: IEmployee[] = [
@@ -109,7 +109,7 @@ export class EmployeeManagementService {
     // return from([mockData]);
     return this.apollo
       .watchQuery<IEmployeeApiResponse>({
-        query: GET_EMPLOYEES_2,
+        query: GET_EMPLOYEES,
         variables: params,
       })
       .valueChanges.pipe(map(res => res.data));
@@ -128,7 +128,10 @@ export class EmployeeManagementService {
     return employee;
   }
 
-  addEmployee(employee: IEmployee) {
-    return employee;
+  addEmployee(employee: any) {
+    return this.apollo.mutate({
+      mutation: ADD_EMPLOYEE,
+      variables: {input: employee },
+    });
   }
 }

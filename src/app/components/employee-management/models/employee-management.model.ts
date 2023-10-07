@@ -1,4 +1,4 @@
-import { DataResponse } from "src/app/models/global.model";
+import { PaginatedData } from "src/app/models/global.model";
 
 export interface IEmployee {
   id?: string;
@@ -35,7 +35,7 @@ export interface EmergencyContact {
 }
 
 export interface IEmployeeApiResponse {
-  employees: DataResponse<IEmployee>;
+  employees: PaginatedData<IEmployee>;
 }
 
 export interface IEmployeeDetailApiResponse {

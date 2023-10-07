@@ -6,10 +6,10 @@ import {
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, exhaustMap, mergeMap, switchMap } from 'rxjs';
 import { EmployeeManagementService } from '../services/employee-management.service';
-import { DataResponse } from 'src/app/models/global.model';
+import { PaginatedData } from 'src/app/models/global.model';
 
 export interface IEmployeeMngmentState {
-  employees: DataResponse<IEmployee>;
+  employees: PaginatedData<IEmployee>;
   loading: boolean;
   employeeDetail: IEmployee | null;
 }
@@ -31,7 +31,7 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
   }
 
   //SELECTOR
-  readonly employees$: Observable<DataResponse<IEmployee>> = this.select(
+  readonly employees$: Observable<PaginatedData<IEmployee>> = this.select(
     state => state.employees,
   );
 
@@ -48,7 +48,7 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
     },
   );
   readonly setEmployees = this.updater(
-    (state: IEmployeeMngmentState, employees: DataResponse<IEmployee>) => {
+    (state: IEmployeeMngmentState, employees: PaginatedData<IEmployee>) => {
       return {
         ...state,
         employees,

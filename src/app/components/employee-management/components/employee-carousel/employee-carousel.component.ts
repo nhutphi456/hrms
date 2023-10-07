@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { Observable } from 'rxjs';
 import { IEmployee } from '../../models/employee-management.model';
-import { DataResponse } from 'src/app/models/global.model';
+import { PaginatedData } from 'src/app/models/global.model';
 
 @Component({
   selector: 'employee-carousel',
@@ -10,7 +10,7 @@ import { DataResponse } from 'src/app/models/global.model';
   styleUrls: ['./employee-carousel.component.scss'],
 })
 export class EmployeeCarouselComponent implements OnInit {
-  employees$: Observable<DataResponse<IEmployee>> = this.employeeStore.employees$;
+  employees$: Observable<PaginatedData<IEmployee>> = this.employeeStore.employees$;
   employees!: IEmployee[]
   responsiveOptions;
 

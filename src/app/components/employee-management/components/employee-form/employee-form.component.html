@@ -2,9 +2,9 @@
     <form action="" [formGroup]="addEmployeeForm" (ngSubmit)="onSubmit()">
         <div class="grid grid-cols-3 gap-6">
             <div *ngFor="let eType of employeeTypes" class="employee-type-card flex items-center"
-                [class.active]="eType.value === employeeType">
-                <p-radioButton name="type" [value]="eType.value" [id]="eType.label | lowercase"
-                    formControlName="type"></p-radioButton>
+                [class.active]="eType.value === currentContract">
+                <p-radioButton name="currentContract" [value]="eType.value" [id]="eType.label | lowercase"
+                    formControlName="currentContract"></p-radioButton>
                 <label [for]="eType.label | lowercase" class="ml-3 !text-base">
                     <p class="font-bold">{{eType.label}}</p>
                 </label>
@@ -49,24 +49,24 @@
                 <p-dropdown styleClass="w-full" formControlName="position" [options]="positionOptions"
                     optionLabel="label" placeholder="Choose position"></p-dropdown>
             </div>
-            <div class="col-span-3">
+            <div class="col-span-3" formGroupName="socialAccounts">
                 <span class="control-label">Social Media</span>
                 <div class="grid grid-cols-2 gap-4">
                     <span class="p-input-icon-left">
                         <i class="pi pi-twitter"></i>
-                        <input type="text" pInputText placeholder="Enter your twitter account" />
+                        <input type="text" formControlName="twitter" pInputText placeholder="Enter your twitter account" />
                     </span>
                     <span class="p-input-icon-left">
                         <i class="pi pi-facebook"></i>
-                        <input type="text" pInputText placeholder="Enter your twitter account" />
+                        <input type="text" formControlName="facebook" pInputText placeholder="Enter your twitter account" />
                     </span>
                     <span class="p-input-icon-left">
                         <i class="pi pi-linkedin"></i>
-                        <input type="text" pInputText placeholder="Enter your twitter account" />
+                        <input type="text" formControlName="linkedin" pInputText placeholder="Enter your twitter account" />
                     </span>
                     <span class="p-input-icon-left">
                         <i class="pi pi-github"></i>
-                        <input type="text" pInputText placeholder="Enter your twitter account" />
+                        <input type="text" formControlName="github" pInputText placeholder="Enter your twitter account" />
                     </span>
                 </div>
             </div>
@@ -86,12 +86,12 @@
                 <label class="control-label" for="">Gender</label>
                 <div class="flex items-center gap-4">
                     <div class="flex items-center">
-                        <p-radioButton name="gender" value="MALE" id="male" formControlName="gender"></p-radioButton>
+                        <p-radioButton name="gender" value="0" id="male" formControlName="gender"></p-radioButton>
 
                         <label for="male" class="ml-2 !text-base">Male</label>
                     </div>
                     <div class="flex items-center">
-                        <p-radioButton name="gender" value="FEMALE" id="female"
+                        <p-radioButton name="gender" value="1" id="female"
                             formControlName="gender"></p-radioButton>
 
                         <label for="female" class="ml-2 !text-base">Female</label>

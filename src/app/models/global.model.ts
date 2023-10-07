@@ -3,7 +3,7 @@ export interface TableHeader {
   field: string;
 }
 
-export interface DataResponse<T> {
+export interface PaginatedData<T> {
   page: number;
   per_page: number;
   total_pages: number;
