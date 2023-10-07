@@ -9,7 +9,7 @@
   <td>{{ employee.email }}</td>
   <td>{{ employee.department }}</td>
   <td>
-    <span class="employment-tag inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-base font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{{employee.currentContract}}</span>
+    <span class="employment-tag inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{{employee.currentContract}}</span>
   </td>
   <td class="user-item-row" [class.text-success]="employee.status === 0" [class.text-danger]="employee.status === 1">
     <div class="flex gap-2 items-center">

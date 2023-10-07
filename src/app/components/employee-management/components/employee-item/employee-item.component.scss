@@ -4,7 +4,7 @@
       @apply flex justify-center;
     }
     td {
-      @apply p-2 align-middle;
+      @apply p-1 align-middle;
     }
     .avatar-img {
       width: 3rem;
@@ -12,5 +12,8 @@
     }
     .employment-tag {
       border-radius: 50px;
+    }
+    .user-item-row {
+      @apply text-sm;
     }
   }

@@ -1,15 +1,9 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileUpload } from 'primeng/fileupload';
 import { NotificationService } from 'src/app/shared/message/notification.service';
+import { EmployeeManagementService } from '../../services/employee-management.service';
 
 @Component({
   selector: 'employee-form',
@@ -18,19 +12,18 @@ import { NotificationService } from 'src/app/shared/message/notification.service
 })
 export class EmployeeFormComponent implements OnInit {
   @Input() visible!: boolean;
-  @Output() handleClose = new EventEmitter();
   @ViewChild('fileUpload') fileUpload!: FileUpload;
   addEmployeeForm!: FormGroup;
   employeeTypes = [
     {
       label: 'Full-time',
-      value: 0,
+      value: 'Full-time',
     },
     {
       label: 'Part-time',
-      value: 1,
+      value: 'Part-time',
     },
-    { label: 'Internship', value: 2 },
+    { label: 'Internship', value: 'Internship' },
   ];
 
   departmentOptions = [
@@ -68,10 +61,11 @@ export class EmployeeFormComponent implements OnInit {
     private fb: FormBuilder,
     public ref: DynamicDialogRef,
     private notificationService: NotificationService,
+    private employeeService: EmployeeManagementService,
   ) {}
 
-  get employeeType() {
-    return this.addEmployeeForm.get('type')?.value;
+  get currentContract() {
+    return this.addEmployeeForm.get('currentContract')?.value;
   }
 
   get formControls() {
@@ -88,13 +82,18 @@ export class EmployeeFormComponent implements OnInit {
       email: ['', Validators.required],
       phone: ['', Validators.required],
       address: ['', Validators.required],
-      type: [0, Validators.required],
-      gender: 'MALE',
+      currentContract: ['Full-time', Validators.required],
+      gender: 0,
       department: 'se',
+      socialAccounts: this.fb.group({
+        twitter: '',
+        facebook: '',
+        linkedin: '',
+        github: '',
+      }),
+
+      position: '',
     });
-  }
-  onHideModal() {
-    this.handleClose.emit();
   }
 
   onUpload(f: File): void {
@@ -126,7 +125,18 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log({ values: this.addEmployeeForm });
+    const { department, position, gender } = this.addEmployeeForm.value;
+    const employee = {
+      ...this.addEmployeeForm.value,
+      department: department.value,
+      position: position.value,
+      gender: '0',
+      avatarImg: '',
+    };
+    delete employee.socialAccounts 
+    console.log({ employee });
+
+    this.employeeService.addEmployee(employee).subscribe();
     // this.ref.close()
   }
 }
