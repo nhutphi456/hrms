@@ -27,7 +27,7 @@ export interface IEmployee {
   user: { isEnabled: boolean } | null;
 }
 
-interface Department {
+export interface Department {
   id: number;
   departmentName: string;
   sum: {
@@ -35,7 +35,6 @@ interface Department {
     lastName: string;
   };
 }
-
 interface EmployeeSkill {
   skill: {
     skillName: string;
@@ -63,7 +62,7 @@ export interface IEmployeeDetailApiResponse {
 }
 
 export interface IEmployeeParams {
-  pageNo: number;
+  pageNo?: number;
   status?: number;
   departments?: string[];
   types?: string[];

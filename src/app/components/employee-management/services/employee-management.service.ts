@@ -138,4 +138,12 @@ export class EmployeeManagementService {
       variables: { input: employee },
     });
   }
+
+  getDepartments() {
+    return ''
+  }
+
+  getCurrentContracts() {
+    return ''
+  }
 }
