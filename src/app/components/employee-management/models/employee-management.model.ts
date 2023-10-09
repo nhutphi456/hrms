@@ -18,7 +18,7 @@ export interface IEmployee {
   skillsTags?: string[];
   joinedProjects?: Project[];
   emergencyContacts: EmergencyContact[];
-  avatarImg: string;
+  profilePicture: string;
   employeeSkills: EmployeeSkill[];
   twitterLink: string;
   facebookLink: string;
