@@ -136,17 +136,18 @@ export const GET_EMPLOYEE = gql`
       email
       address
       positionLevel {
-        id
-        name
+        position {
+          id
+          positionName
+        }
       }
       currentContract
-      status
       employeeSkills {
         skill {
           skillName
         }
       }
-      avatarImg
+      profilePicture
       profileBio
       emergencyContacts {
         firstName
