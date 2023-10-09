@@ -24,7 +24,7 @@ export interface IEmployee {
   facebookLink: string;
   instagramLink: string;
   linkedinLink: string;
-  user: { isEnabled: boolean };
+  user: { isEnabled: boolean } | null;
 }
 
 interface Department {

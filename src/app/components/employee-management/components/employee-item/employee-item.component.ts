@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class EmployeeItemComponent implements OnChanges {
   @HostBinding('class') hostClass = 'hrms-employee-item';
   @Input() employee!: IEmployee;
-
+  defaultImg = 'assets/images/avatar-default.jpg';
   constructor(private router: Router) {}
 
   menuItems!: MenuItem[]

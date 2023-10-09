@@ -42,7 +42,7 @@ export class EmployeeListComponent implements OnInit {
   departmentOptions = departments;
   contractOptions = currentContracts;
   ref!: DynamicDialogRef;
-  employeeParams = { pageNo: 0 };
+  employeeParams = { pageNo: 1 };
   gapPageNumber = 1;
 
   constructor(
