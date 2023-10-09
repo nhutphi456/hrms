@@ -194,3 +194,12 @@ export const UPDATE_EMPLOYEE = gql`
     updateEmployee(input: $input)
   }
 `;
+
+export const GET_DEPARTMENTS = gql`
+  query GetDepartments {
+    departments {
+      id
+      departmentName
+    }
+  }
+`

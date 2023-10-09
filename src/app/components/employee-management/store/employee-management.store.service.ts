@@ -70,6 +70,11 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
       return { ...state, employeeDetail: employee };
     },
   );
+  readonly setDepartments = this.updater(
+    (state: IEmployeeMngmentState, departments: Department[]) => {
+      return { ...state, departments };
+    },
+  );
   //EFFECTS
   readonly getEmployees = this.effect((params$: Observable<IEmployeeParams>) =>
     params$.pipe(
@@ -94,6 +99,19 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
                 this.setEmployee(res.employee);
               }
             },
+            error: error => console.log(error),
+          }),
+        ),
+      ),
+    ),
+  );
+
+  readonly getDepartments = this.effect<void>(trigger$ =>
+    trigger$.pipe(
+      switchMap(() =>
+        this.employeeMngmentService.getDepartments().pipe(
+          tapResponse({
+            next: res => this.setDepartments(res.departments),
             error: error => console.log(error),
           }),
         ),

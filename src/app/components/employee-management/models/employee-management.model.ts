@@ -6,7 +6,7 @@ export interface IEmployee {
   lastName: string;
   gender: number;
   dateOfBirth: string;
-  positionLevel: { position: { id: number, positionName: string } };
+  positionLevel: { position: { id: number; positionName: string } };
   phoneNumber: string;
   email: string;
   address: string;
@@ -61,6 +61,9 @@ export interface IEmployeeDetailApiResponse {
   employee: IEmployee;
 }
 
+export interface IDepartmentApiResponse {
+  departments: Array<Department>;
+}
 export interface IEmployeeParams {
   pageNo?: number;
   status?: number;
