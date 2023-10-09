@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Observable, from, map } from 'rxjs';
 import {
+  IAddEmployeeApiResponse,
   IDepartmentApiResponse,
   IEmployee,
   IEmployeeApiResponse,
   IEmployeeDetailApiResponse,
+  IEmployeeInput,
   IEmployeeParams,
   INewEmployeeApiResponse,
+  IPositionApiResponse,
 } from '../models/employee-management.model';
-import { Apollo } from 'apollo-angular';
+import { Apollo, MutationResult } from 'apollo-angular';
 import {
   ADD_EMPLOYEE,
   GET_DEPARTMENTS,
   GET_EMPLOYEE,
   GET_EMPLOYEES,
   GET_NEW_EMPLOYEES,
+  GET_POSITIONS,
   UPDATE_EMPLOYEE,
 } from '../constants/employee-management.constant';
 
@@ -136,10 +140,12 @@ export class EmployeeManagementService {
     });
   }
 
-  addEmployee(employee: any) {
-    return this.apollo.mutate({
+  addEmployee(
+    employee: IEmployeeInput,
+  ): Observable<MutationResult<IAddEmployeeApiResponse>> {
+    return this.apollo.mutate<IAddEmployeeApiResponse>({
       mutation: ADD_EMPLOYEE,
-      variables: { input: employee },
+      variables: { ...employee },
     });
   }
 
@@ -155,6 +161,14 @@ export class EmployeeManagementService {
     return this.apollo
       .watchQuery<INewEmployeeApiResponse>({
         query: GET_NEW_EMPLOYEES,
+      })
+      .valueChanges.pipe(map(res => res.data));
+  }
+
+  getPositions(): Observable<IPositionApiResponse> {
+    return this.apollo
+      .watchQuery<IPositionApiResponse>({
+        query: GET_POSITIONS,
       })
       .valueChanges.pipe(map(res => res.data));
   }

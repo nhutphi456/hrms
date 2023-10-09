@@ -27,6 +27,24 @@ export interface IEmployee {
   user: { isEnabled: boolean } | null;
 }
 
+export interface IEmployeeInput {
+  firstName: string;
+  lastName: string;
+  email: string;
+  gender: string;
+  dateOfBirth: string;
+  phoneNumber: string;
+  address: string;
+  dateJoined: string;
+  currentContract: number;
+  profileBio: string;
+  facebookLink: string;
+  twitterLink: string;
+  linkedinLink: string;
+  instagramLink: string;
+  positionLevelId: number;
+  departmentId: number;
+}
 export interface Department {
   id: number;
   departmentName: string;
@@ -34,6 +52,11 @@ export interface Department {
     firstName: string;
     lastName: string;
   };
+}
+
+export interface IPosition {
+  id: number;
+  positionName: string;
 }
 interface EmployeeSkill {
   skill: {
@@ -66,7 +89,14 @@ export interface IDepartmentApiResponse {
 }
 
 export interface INewEmployeeApiResponse {
-  employeeOfTheMonth: IEmployee[]
+  employeeOfTheMonth: IEmployee[];
+}
+
+export interface IAddEmployeeApiResponse {
+  employee: IEmployee;
+}
+export interface IPositionApiResponse {
+  positions: IPosition[];
 }
 export interface IEmployeeParams {
   pageNo?: number;
