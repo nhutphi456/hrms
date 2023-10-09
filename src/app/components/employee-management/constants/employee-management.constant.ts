@@ -227,7 +227,8 @@ export const ADD_EMPLOYEE = gql`
       positionId: $positionLevelId
       departmentId: $departmentId
     ) {
-      Employee
+      firstName
+      lastName
     }
   }
 `;
