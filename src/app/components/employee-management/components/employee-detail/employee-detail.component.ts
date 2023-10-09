@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FileUpload } from 'primeng/fileupload';
 import { NotificationService } from 'src/app/shared/message/notification.service';
@@ -119,13 +119,13 @@ export class EmployeeDetailComponent implements OnInit {
       linkedinLink,
     } = employee;
     this.profileForm = this.fb.group({
-      firstName,
-      lastName,
-      gender,
-      dateOfBirth: new Date(dateOfBirth),
-      phoneNumber,
-      email,
-      address,
+      firstName: [firstName, Validators.required],
+      lastName: [lastName, Validators.required],
+      gender: [gender, Validators.required],
+      dateOfBirth: [new Date(dateOfBirth), Validators.required],
+      phoneNumber: [phoneNumber, Validators.required],
+      email: [email, [Validators.required, Validators.email]],
+      address: [address, Validators.required],
       avatarImg: '',
       positionLevel: {
         label: positionLevel.name,

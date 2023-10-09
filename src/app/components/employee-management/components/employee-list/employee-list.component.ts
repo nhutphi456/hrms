@@ -110,7 +110,7 @@ export class EmployeeListComponent implements OnInit {
     for (const key in formValues) {
       const value = formValues[key];
       if (value) {
-        this.handleEmployeeParams(key, value.join(','));
+        this.handleEmployeeParams(key, value);
       }
     }
 

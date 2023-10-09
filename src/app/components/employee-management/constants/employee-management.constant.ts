@@ -80,8 +80,8 @@ export const currentContracts = [
 export const GET_EMPLOYEES = gql`
   query GetEmployees(
     $status: Int
-    $departments: String
-    $currentContracts: String
+    $departments: [Int]
+    $currentContracts: [Int]
     $pageNo: Int
     $pageSize: Int
   ) {
