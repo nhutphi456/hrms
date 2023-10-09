@@ -42,7 +42,7 @@ export class EmployeeListComponent implements OnInit {
   departmentOptions = departments;
   contractOptions = currentContracts;
   ref!: DynamicDialogRef;
-  employeeParams = {};
+  employeeParams = { pageNo: 1 };
   gapPageNumber = 1;
 
   constructor(
@@ -54,7 +54,7 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit(): void {
     this.getEmployees();
     this.employees$.subscribe(result => {
-      const {pageNo, pageSize, totalItems, totalPages} = result.pagination
+      const { pageNo, pageSize, totalItems, totalPages } = result.pagination;
       const tData = {
         page: pageNo,
         first: 1,
@@ -72,8 +72,8 @@ export class EmployeeListComponent implements OnInit {
     this.initFilterForm();
   }
 
-  get deparments() {
-    return this.filterForm.get('departments')?.value;
+  get departmentIds() {
+    return this.filterForm.get('departmentIds')?.value;
   }
   get currentContracts() {
     return this.filterForm.get('currentContracts')?.value;
@@ -86,7 +86,7 @@ export class EmployeeListComponent implements OnInit {
 
   initFilterForm() {
     this.filterForm = this.fb.group({
-      departments: '',
+      departmentIds: '',
       currentContracts: '',
     });
   }
@@ -101,7 +101,10 @@ export class EmployeeListComponent implements OnInit {
 
   onActiveItemChange(label: MenuItem): void {
     this.activeItem = label;
-    this.handleEmployeeParams('status', parseInt(this.activeItem.id ?? ''));
+    this.handleEmployeeParams(
+      'status',
+      this.activeItem.id === '1' ? true : false,
+    );
     this.getEmployees();
   }
 
@@ -119,7 +122,7 @@ export class EmployeeListComponent implements OnInit {
 
   handleEmployeeParams(
     key: string,
-    value: string | number | Date | string[],
+    value: string | number | Date | string[] | boolean,
   ): void {
     this.employeeParams = {
       ...this.employeeParams,
@@ -136,12 +139,12 @@ export class EmployeeListComponent implements OnInit {
 
   handleClearAll() {
     this.filterForm.patchValue({
-      departments: [],
+      departmentIds: [],
       currentContracts: [],
     });
   }
 
   isClearAllVisible() {
-    return this.deparments.length || this.currentContracts.length;
+    return this.departmentIds.length || this.currentContracts.length;
   }
 }

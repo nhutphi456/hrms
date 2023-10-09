@@ -24,6 +24,7 @@ export interface IEmployee {
   facebookLink: string;
   instagramLink: string;
   linkedinLink: string;
+  user: { isEnabled: boolean }
 }
 
 interface Department {
@@ -62,6 +63,7 @@ export interface IEmployeeDetailApiResponse {
 }
 
 export interface IEmployeeParams {
+  pageNo: number;
   status?: number;
   departments?: string[];
   types?: string[];
