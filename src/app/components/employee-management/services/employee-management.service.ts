@@ -6,6 +6,7 @@ import {
   IEmployeeApiResponse,
   IEmployeeDetailApiResponse,
   IEmployeeParams,
+  INewEmployeeApiResponse,
 } from '../models/employee-management.model';
 import { Apollo } from 'apollo-angular';
 import {
@@ -13,6 +14,7 @@ import {
   GET_DEPARTMENTS,
   GET_EMPLOYEE,
   GET_EMPLOYEES,
+  GET_NEW_EMPLOYEES,
   UPDATE_EMPLOYEE,
 } from '../constants/employee-management.constant';
 
@@ -149,7 +151,11 @@ export class EmployeeManagementService {
       .valueChanges.pipe(map(res => res.data));
   }
 
-  getCurrentContracts() {
-    return '';
+  getNewEmployees(): Observable<INewEmployeeApiResponse> {
+    return this.apollo
+      .watchQuery<INewEmployeeApiResponse>({
+        query: GET_NEW_EMPLOYEES,
+      })
+      .valueChanges.pipe(map(res => res.data));
   }
 }

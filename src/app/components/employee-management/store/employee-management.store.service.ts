@@ -14,6 +14,7 @@ export interface IEmployeeMngmentState {
   loading: boolean;
   employeeDetail: IEmployee | null;
   departments: Department[];
+  newEmployees: IEmployee[];
 }
 
 @Injectable()
@@ -32,6 +33,7 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
       loading: false,
       employeeDetail: null,
       departments: [],
+      newEmployees: [],
     });
   }
 
@@ -48,6 +50,9 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
     state => state.departments,
   );
 
+  readonly newEmployee$: Observable<IEmployee[]> = this.select(
+    state => state.newEmployees,
+  );
   //UPDATER
   readonly setLoading = this.updater(
     (state: IEmployeeMngmentState, loading: boolean) => {
@@ -73,6 +78,11 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
   readonly setDepartments = this.updater(
     (state: IEmployeeMngmentState, departments: Department[]) => {
       return { ...state, departments };
+    },
+  );
+  readonly setNewEmployees = this.updater(
+    (state: IEmployeeMngmentState, newEmployees: IEmployee[]) => {
+      return { ...state, newEmployees };
     },
   );
   //EFFECTS
@@ -112,6 +122,19 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
         this.employeeMngmentService.getDepartments().pipe(
           tapResponse({
             next: res => this.setDepartments(res.departments),
+            error: error => console.log(error),
+          }),
+        ),
+      ),
+    ),
+  );
+
+  readonly getNewEmployees = this.effect<void>(trigger$ =>
+    trigger$.pipe(
+      switchMap(() =>
+        this.employeeMngmentService.getNewEmployees().pipe(
+          tapResponse({
+            next: res => this.setNewEmployees(res.employeeOfTheMonth),
             error: error => console.log(error),
           }),
         ),

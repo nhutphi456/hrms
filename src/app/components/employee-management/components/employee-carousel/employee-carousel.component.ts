@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { Observable } from 'rxjs';
 import { IEmployee } from '../../models/employee-management.model';
@@ -74,11 +74,8 @@ const mockCarouselData = [
   templateUrl: './employee-carousel.component.html',
   styleUrls: ['./employee-carousel.component.scss'],
 })
-export class EmployeeCarouselComponent {
-  employees$: Observable<PaginatedData<IEmployee>> =
-    this.employeeStore.employees$;
-  // employees!: IEmployee[];
-  employees = mockCarouselData;
+export class EmployeeCarouselComponent implements OnInit {
+  employees$: Observable<IEmployee[]> = this.employeeStore.newEmployee$;
   responsiveOptions;
 
   constructor(private employeeStore: EmployeeStore) {
@@ -96,9 +93,7 @@ export class EmployeeCarouselComponent {
     ];
   }
 
-  // ngOnInit(): void {
-    // this.employees$.subscribe(res => {
-    //   this.employees = res.data;
-    // });
-  // }
+  ngOnInit(): void {
+    this.employeeStore.getNewEmployees();
+  }
 }
