@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
+  Department,
   IEmployee,
   IEmployeeParams,
 } from '../models/employee-management.model';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Observable, exhaustMap, mergeMap, switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { EmployeeManagementService } from '../services/employee-management.service';
 import { PaginatedData } from 'src/app/models/global.model';
 
@@ -12,6 +13,7 @@ export interface IEmployeeMngmentState {
   employees: PaginatedData<IEmployee>;
   loading: boolean;
   employeeDetail: IEmployee | null;
+  departments: Department[];
 }
 
 @Injectable()
@@ -29,6 +31,7 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
       },
       loading: false,
       employeeDetail: null,
+      departments: [],
     });
   }
 
@@ -40,6 +43,11 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
   readonly employeeDetail$: Observable<IEmployee | null> = this.select(
     state => state.employeeDetail,
   );
+
+  readonly departments$: Observable<Department[]> = this.select(
+    state => state.departments,
+  );
+
   //UPDATER
   readonly setLoading = this.updater(
     (state: IEmployeeMngmentState, loading: boolean) => {

@@ -1,9 +1,11 @@
 <tr class="mt-3 p-selectable-row">
   <td>
     <div class="flex items-center">
-      <img class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;" [src]="employee.profilePicture || defaultImg" [alt]="employee.firstName">
-      
-    <a class="text-black ml-4" [routerLink]="['detail', employee.id]">{{employee.firstName}} {{ employee.lastName }}</a>
+      <img class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;"
+        [src]="employee.profilePicture || defaultImg" [alt]="employee.firstName">
+
+      <a class="text-black ml-4" [routerLink]="['detail', employee.id]">{{employee.firstName}} {{ employee.lastName
+        }}</a>
     </div>
   </td>
   <td>{{ employee.positionLevel.position.positionName }}</td>
@@ -12,7 +14,7 @@
   <td>
     <contract-badge [currentContract]="employee.currentContract ?? 0"></contract-badge>
   </td>
-  <td class="user-item-row" [class.text-success]="employee.status === 0" [class.text-danger]="employee.status === 1">
+  <td class="user-item-row" [class.text-success]="employee.user?.isEnabled" [class.text-danger]="!employee.user?.isEnabled">
     <div class="flex gap-2 items-center">
       <i class="pi-circle-fill pi"></i>
       <span>
