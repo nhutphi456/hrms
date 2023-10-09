@@ -3,6 +3,7 @@ import {
   Department,
   IEmployee,
   IEmployeeParams,
+  IPosition,
 } from '../models/employee-management.model';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, switchMap } from 'rxjs';
@@ -15,6 +16,7 @@ export interface IEmployeeMngmentState {
   employeeDetail: IEmployee | null;
   departments: Department[];
   newEmployees: IEmployee[];
+  positions: IPosition[];
 }
 
 @Injectable()
@@ -34,6 +36,7 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
       employeeDetail: null,
       departments: [],
       newEmployees: [],
+      positions: [],
     });
   }
 
@@ -53,6 +56,11 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
   readonly newEmployee$: Observable<IEmployee[]> = this.select(
     state => state.newEmployees,
   );
+
+  readonly positions$: Observable<IPosition[]> = this.select(
+    state => state.positions,
+  );
+
   //UPDATER
   readonly setLoading = this.updater(
     (state: IEmployeeMngmentState, loading: boolean) => {
@@ -83,6 +91,11 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
   readonly setNewEmployees = this.updater(
     (state: IEmployeeMngmentState, newEmployees: IEmployee[]) => {
       return { ...state, newEmployees };
+    },
+  );
+  readonly setPositions = this.updater(
+    (state: IEmployeeMngmentState, positions: IPosition[]) => {
+      return { ...state, positions };
     },
   );
   //EFFECTS
@@ -135,6 +148,19 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
         this.employeeMngmentService.getNewEmployees().pipe(
           tapResponse({
             next: res => this.setNewEmployees(res.employeeOfTheMonth),
+            error: error => console.log(error),
+          }),
+        ),
+      ),
+    ),
+  );
+
+  readonly getPositions = this.effect<void>(trigger$ =>
+    trigger$.pipe(
+      switchMap(() =>
+        this.employeeMngmentService.getPositions().pipe(
+          tapResponse({
+            next: res => this.setPositions(res.positions),
             error: error => console.log(error),
           }),
         ),

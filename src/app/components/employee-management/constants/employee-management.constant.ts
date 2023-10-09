@@ -65,17 +65,17 @@ export const positions = [
 export const currentContracts = [
   {
     label: 'Full-time',
-    value: 0
+    value: 0,
   },
   {
     label: 'Part-time',
-    value: 1
+    value: 1,
   },
   {
     label: 'Internship',
-    value: 2
-  }
-]
+    value: 2,
+  },
+];
 
 export const GET_EMPLOYEES = gql`
   query GetEmployees(
@@ -170,22 +170,64 @@ export const GET_EMPLOYEE = gql`
   }
 `;
 
+// export const ADD_EMPLOYEE = gql`
+//   mutation AddEmployee($input: EmployeeInput!) {
+//     addEmployee(input: $input) {
+//       firstName
+//       lastName
+//       dateOfBirth
+//       email
+//       phoneNumber
+//       address
+//       currentContract
+//       gender
+//       avatarImg
+//       facebookLink
+//       twitterLink
+//       instagramLink
+//       linkedinLink
+//     }
+//   }
+// `;
+
 export const ADD_EMPLOYEE = gql`
-  mutation AddEmployee($input: EmployeeInput!) {
-    addEmployee(input: $input) {
-      firstName
-      lastName
-      dateOfBirth
-      email
-      phoneNumber
-      address
-      currentContract
-      gender
-      avatarImg
-      facebookLink
-      twitterLink
-      instagramLink
-      linkedinLink
+  mutation AddEmployee(
+    $firstName: String!
+    $lastName: String!
+    $email: String!
+    $gender: String!
+    $dateOfBirth: String!
+    $phoneNumber: String!
+    $address: String!
+    $dateJoined: String!
+    $currentContract: Int!
+    $profileBio: String!
+    $facebookLink: String!
+    $twitterLink: String!
+    $linkedinLink: String!
+    $instagramLink: String!
+    $positionId: Int!
+    $departmentId: Int!
+  ) {
+    createProfile(
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+      gender: $gender
+      dateOfBirth: $dateOfBirth
+      phoneNumber: $phoneNumber
+      address: $address
+      dateJoined: $dateJoined
+      currentContract: $currentContract
+      profileBio: $profileBio
+      facebookLink: $facebookLink
+      twitterLink: $twitterLink
+      linkedinLink: $linkedinLink
+      instagramLink: $instagramLink
+      positionId: $positionLevelId
+      departmentId: $departmentId
+    ) {
+      Employee
     }
   }
 `;
@@ -203,7 +245,7 @@ export const GET_DEPARTMENTS = gql`
       departmentName
     }
   }
-`
+`;
 
 export const GET_NEW_EMPLOYEES = gql`
   query GetEmployeesCarousel {
@@ -221,4 +263,13 @@ export const GET_NEW_EMPLOYEES = gql`
       currentContract
     }
   }
-`
+`;
+
+export const GET_POSITIONS = gql`
+  query GetPositions {
+    positions {
+      id
+      positionName
+    }
+  }
+`;

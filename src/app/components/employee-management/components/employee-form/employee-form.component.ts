@@ -9,11 +9,13 @@ import {
   departments,
   positions,
 } from '../../constants/employee-management.constant';
+import { EmployeeStore } from '../../store/employee-management.store.service';
 
 @Component({
   selector: 'employee-form',
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.scss'],
+  providers: [EmployeeStore],
 })
 export class EmployeeFormComponent implements OnInit {
   @Input() visible!: boolean;
@@ -31,9 +33,9 @@ export class EmployeeFormComponent implements OnInit {
     { label: 'Internship', value: 2 },
   ];
 
-  departmentOptions = departments;
+  departmentOptions!: { label: string; value: number }[];
 
-  positionOptions = positions;
+  positionOptions!: { label: string; value: number }[];
   tempImg = '';
 
   constructor(
@@ -42,6 +44,7 @@ export class EmployeeFormComponent implements OnInit {
     private notificationService: NotificationService,
     private employeeService: EmployeeManagementService,
     private helperService: HelperService,
+    private employeeStore: EmployeeStore,
   ) {}
 
   get currentContract() {
@@ -53,6 +56,22 @@ export class EmployeeFormComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initForm();
+    this.employeeStore.departments$.subscribe(departments => {
+      this.departmentOptions = departments.map(dep => {
+        return {
+          label: dep.departmentName,
+          value: dep.id,
+        };
+      });
+    });
+    this.employeeStore.positions$.subscribe(positions => {
+      this.positionOptions = positions.map(pos => {
+        return {
+          label: pos.positionName,
+          value: pos.id,
+        };
+      });
+    });
   }
   initForm() {
     this.addEmployeeForm = this.fb.group({
@@ -69,8 +88,8 @@ export class EmployeeFormComponent implements OnInit {
       facebookLink: '',
       linkedinLink: '',
       instagramLink: '',
-      position: ['', Validators.required],
-      avatarImg: '',
+      position: '',
+      // profilePicture: '',
       profileBio: '',
     });
   }
@@ -114,8 +133,9 @@ export class EmployeeFormComponent implements OnInit {
     const employee = {
       ...this.addEmployeeForm.value,
       departmentId: department.value,
-      positionLevelId: position.value,
+      positionId: position.value,
       dateOfBirth: new Date(dateOfBirth).toISOString(),
+      dateJoined: new Date().toISOString()
       // avatarImg: '',
     };
 
