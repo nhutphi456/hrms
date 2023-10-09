@@ -1,26 +1,41 @@
-import { PaginatedData } from "src/app/models/global.model";
+import { PaginatedData } from 'src/app/models/global.model';
 
 export interface IEmployee {
   id?: string;
   firstName: string;
   lastName: string;
   gender: number;
-  dob: string;
-  position: string;
-  phone: string;
+  dateOfBirth: string;
+  positionLevel: { id: number; name: string };
+  phoneNumber: string;
   email: string;
   address: string;
   status: number;
-  reportTo: number;
-  department?: string;
-  currentContract?: string;
-  bio: string;
-  skillsTags: string[];
-  joinedProjects: Project[];
+  reportTo?: number;
+  department?: Department;
+  currentContract?: number;
+  profileBio: string;
+  skillsTags?: string[];
+  joinedProjects?: Project[];
   emergencyContacts: EmergencyContact[];
   avatarImg: string;
+  employeeSkills: EmployeeSkill[];
 }
 
+interface Department {
+  id: number;
+  departmentName: string;
+  sum: {
+    firstName: string;
+    lastName: string;
+  };
+}
+
+interface EmployeeSkill {
+  skill: {
+    skillName: string;
+  };
+}
 export interface Project {
   name: string;
   workAs: string;
@@ -31,7 +46,7 @@ export interface Project {
 export interface EmergencyContact {
   firstName: string;
   lastName: string;
-  phone: string;
+  phoneNumber: string;
 }
 
 export interface IEmployeeApiResponse {
@@ -46,4 +61,10 @@ export interface IEmployeeParams {
   status?: number;
   departments?: string[];
   types?: string[];
+}
+
+export enum ContractType {
+  Fulltime = 0,
+  Parttime = 1,
+  Internship = 2,
 }

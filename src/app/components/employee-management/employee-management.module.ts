@@ -29,6 +29,7 @@ import { EmployeeDetailComponent } from './components/employee-detail/employee-d
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 import { EmployeeCardComponent } from './components/employee-card/employee-card.component';
 import { EmployeeCarouselComponent } from './components/employee-carousel/employee-carousel.component';
+import { ContractBadgeComponent } from './components/contract-badge/contract-badge.component';
 @NgModule({
   declarations: [
     EmployeeManagementComponent,
@@ -38,6 +39,7 @@ import { EmployeeCarouselComponent } from './components/employee-carousel/employ
     EmployeeFormComponent,
     EmployeeCardComponent,
     EmployeeCarouselComponent,
+    ContractBadgeComponent,
   ],
   imports: [
     CommonModule,

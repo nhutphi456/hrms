@@ -5,11 +5,11 @@
     <a class="text-black ml-4" [routerLink]="['detail', employee.id]">{{employee.firstName}} {{ employee.lastName }}</a>
     </div>
   </td>
-  <td>{{ employee.position }}</td>
+  <td>{{ employee.positionLevel.name }}</td>
   <td>{{ employee.email }}</td>
-  <td>{{ employee.department }}</td>
+  <td>{{ employee.department?.departmentName }}</td>
   <td>
-    <span class="employment-tag inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{{employee.currentContract}}</span>
+    <contract-badge [currentContract]="employee.currentContract ?? 0"></contract-badge>
   </td>
   <td class="user-item-row" [class.text-success]="employee.status === 0" [class.text-danger]="employee.status === 1">
     <div class="flex gap-2 items-center">

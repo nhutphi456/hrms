@@ -115,7 +115,7 @@ export class EmployeeManagementService {
       .valueChanges.pipe(map(res => res.data));
   }
 
-  getEmployee(id: string): Observable<IEmployeeDetailApiResponse> {
+  getEmployee(id: number): Observable<IEmployeeDetailApiResponse> {
     return this.apollo
       .watchQuery<IEmployeeDetailApiResponse>({
         query: GET_EMPLOYEE,

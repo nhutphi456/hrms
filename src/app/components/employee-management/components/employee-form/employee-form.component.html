@@ -24,7 +24,7 @@
             </div>
             <div>
                 <label class="control-label" for="">Date of Birth</label>
-                <p-calendar formControlName="dob" [showIcon]="true" appendTo="body"
+                <p-calendar formControlName="dateOfBirth" [showIcon]="true" appendTo="body"
                     placeholder="Your birthday"></p-calendar>
             </div>
             <div class="col-span-2">
@@ -33,7 +33,7 @@
             </div>
             <div>
                 <label class="control-label" for="">Phone</label>
-                <p-inputMask mask="999-999-9999" formControlName="phone" placeholder="Enter your phone" />
+                <p-inputMask mask="999-999-9999" formControlName="phoneNumber" placeholder="Enter your phone" />
             </div>
             <div>
                 <label class="control-label" for="">Email</label>
@@ -49,24 +49,28 @@
                 <p-dropdown styleClass="w-full" formControlName="position" [options]="positionOptions"
                     optionLabel="label" placeholder="Choose position"></p-dropdown>
             </div>
-            <div class="col-span-3" formGroupName="socialAccounts">
+            <div class="col-span-3">
                 <span class="control-label">Social Media</span>
                 <div class="grid grid-cols-2 gap-4">
                     <span class="p-input-icon-left">
                         <i class="pi pi-twitter"></i>
-                        <input type="text" formControlName="twitter" pInputText placeholder="Enter your twitter account" />
+                        <input type="text" formControlName="twitterLink" pInputText
+                            placeholder="Enter your twitter account" />
                     </span>
                     <span class="p-input-icon-left">
                         <i class="pi pi-facebook"></i>
-                        <input type="text" formControlName="facebook" pInputText placeholder="Enter your twitter account" />
+                        <input type="text" formControlName="facebookLink" pInputText
+                            placeholder="Enter your twitter account" />
                     </span>
                     <span class="p-input-icon-left">
                         <i class="pi pi-linkedin"></i>
-                        <input type="text" formControlName="linkedin" pInputText placeholder="Enter your twitter account" />
+                        <input type="text" formControlName="linkedinLink" pInputText
+                            placeholder="Enter your twitter account" />
                     </span>
                     <span class="p-input-icon-left">
                         <i class="pi pi-github"></i>
-                        <input type="text" formControlName="github" pInputText placeholder="Enter your twitter account" />
+                        <input type="text" formControlName="instagramLink" pInputText
+                            placeholder="Enter your twitter account" />
                     </span>
                 </div>
             </div>
@@ -86,12 +90,12 @@
                 <label class="control-label" for="">Gender</label>
                 <div class="flex items-center gap-4">
                     <div class="flex items-center">
-                        <p-radioButton name="gender" value="0" id="male" formControlName="gender"></p-radioButton>
+                        <p-radioButton name="gender" value="Male" id="male" formControlName="gender"></p-radioButton>
 
                         <label for="male" class="ml-2 !text-base">Male</label>
                     </div>
                     <div class="flex items-center">
-                        <p-radioButton name="gender" value="1" id="female"
+                        <p-radioButton name="gender" value="Female" id="female"
                             formControlName="gender"></p-radioButton>
 
                         <label for="female" class="ml-2 !text-base">Female</label>

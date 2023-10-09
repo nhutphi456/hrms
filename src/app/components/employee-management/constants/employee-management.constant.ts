@@ -30,6 +30,38 @@ export const employeeLabelItems: MenuItem[] = [
   },
 ];
 
+export const genders = [
+  {
+    label: 'Male',
+    value: 1,
+  },
+  {
+    label: 'Female',
+    value: 0,
+  },
+];
+
+export const departments = [
+  { label: 'Software Development', value: 1 },
+  { label: 'Design', value: 2 },
+  { label: 'Quality Assurance', value: 3 },
+];
+
+export const positions = [
+  {
+    label: 'Frontend Developer',
+    value: 1,
+  },
+  {
+    label: 'Backend Developer',
+    value: 2,
+  },
+  {
+    label: 'Business Analyst',
+    value: 3,
+  },
+]
+
 export const GET_EMPLOYEES = gql`
   query GetEmployees(
     $status: Int
@@ -53,50 +85,61 @@ export const GET_EMPLOYEES = gql`
         id
         firstName
         lastName
-        gender
-        dob
-        position
-        phone
+        currentContract
+        status
+        avatarImg
         email
         address
-        status
-        department
-        currentContract
-        avatarImg
+        phoneNumber
+        positionLevel {
+          id
+          name
+        }
+        department {
+          id
+          departmentName
+        }
       }
     }
   }
 `;
 
 export const GET_EMPLOYEE = gql`
-  query GetEmployee($id: ID) {
+  query GetEmployee($id: Int) {
     employee(id: $id) {
       id
       firstName
       lastName
       gender
-      dob
-      phone
+      dateOfBirth
+      phoneNumber
       email
       address
-      reportTo
-      position
+      positionLevel {
+        id
+        name
+      }
       currentContract
       status
-      department
-      skillsTags
-      avatarImg
-      bio
-      joinedProjects {
-        name
-        workAs
-        skillTags
-        contributedHours
+      employeeSkills {
+        skill {
+          skillName
+        }
       }
+      avatarImg
+      profileBio
       emergencyContacts {
         firstName
         lastName
-        phone
+        phoneNumber
+      }
+      department {
+        id
+        departmentName
+        sum {
+          firstName
+          lastName
+        }
       }
     }
   }
@@ -105,19 +148,19 @@ export const GET_EMPLOYEE = gql`
 export const ADD_EMPLOYEE = gql`
   mutation AddEmployee($input: EmployeeInput!) {
     addEmployee(input: $input) {
-      id
       firstName
       lastName
-      dob
+      dateOfBirth
       email
-      phone
+      phoneNumber
       address
       currentContract
       gender
-      department
       avatarImg
-      position
+      facebookLink
+      twitterLink
+      instagramLink
+      linkedinLink
     }
   }
 `;
-
