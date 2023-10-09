@@ -56,6 +56,7 @@ export class EmployeeFormComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.employeeStore.getPositions();
+    this.employeeStore.getDepartments();
     this.employeeStore.departments$.subscribe(departments => {
       this.departmentOptions = departments.map(dep => {
         return {
