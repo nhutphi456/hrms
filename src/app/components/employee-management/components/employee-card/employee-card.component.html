@@ -2,7 +2,7 @@
     <div class="employee-item-content flex justify-between">
         <div class="flex flex-1">
             <div class="mb-4">
-                <p-avatar styleClass="mr-2" size="xlarge" shape="circle" [image]="employee.avatarImg"></p-avatar>
+                <p-avatar styleClass="mr-2" size="xlarge" shape="circle" [image]="employee.profilePicture"></p-avatar>
             </div>
             <div class="ml-4 flex-1">
                 <div class="mb-4 text-2xl font-bold">
@@ -12,7 +12,7 @@
                 </div>
                 <div class="mb-1 whitespace-nowrap">
                     <i class="pi pi-briefcase mr-3"></i>
-                    <span class="text-gray-400">{{employee.positionLevel.name}}</span>
+                    <span class="text-gray-400">{{employee.positionLevel.position.positionName}}</span>
                 </div>
                 <div class="mb-1">
                     <i class="pi pi-envelope mr-3"></i>

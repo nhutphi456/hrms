@@ -6,7 +6,7 @@ export interface IEmployee {
   lastName: string;
   gender: number;
   dateOfBirth: string;
-  positionLevel: { id: number; name: string };
+  positionLevel: { position: { id: number, positionName: string } };
   phoneNumber: string;
   email: string;
   address: string;
@@ -18,13 +18,13 @@ export interface IEmployee {
   skillsTags?: string[];
   joinedProjects?: Project[];
   emergencyContacts: EmergencyContact[];
-  avatarImg: string;
+  profilePicture: string;
   employeeSkills: EmployeeSkill[];
   twitterLink: string;
   facebookLink: string;
   instagramLink: string;
   linkedinLink: string;
-  user: { isEnabled: boolean }
+  user: { isEnabled: boolean };
 }
 
 interface Department {

@@ -7,7 +7,7 @@
                     <div class="profile-img relative">
                         <div *ngIf="!tempImg" class="profile-image-container">
                             <img style="background: #CDE9EAFF; border-radius: 60px;" class="w-full"
-                                [src]="employee.avatarImg || defaultImg" alt="" />
+                                [src]="employee.profilePicture || defaultImg" alt="" />
                         </div>
                         <p-avatar *ngIf="tempImg" [image]="tempImg" shape="circle" size="xlarge"></p-avatar>
                         <p-fileUpload #fileUpload *ngIf="isEditOn" mode="basic" chooseIcon="pi pi-pencil"
@@ -16,7 +16,7 @@
                 </div>
                 <div class="p-4 mt-16 pt-1">
                     <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
-                    <p *ngIf="!isEditOn; else positionSelect" class="text-center">{{employee.positionLevel.name}}</p>
+                    <p *ngIf="!isEditOn; else positionSelect" class="text-center">{{employee.positionLevel.position.positionName}}</p>
                     <ng-template #positionSelect>
                         <p-dropdown styleClass="w-full" formControlName="positionLevel" [options]="positionOptions"
                             optionLabel="label"></p-dropdown>

@@ -128,8 +128,8 @@ export class EmployeeDetailComponent implements OnInit {
       address: [address, Validators.required],
       avatarImg: '',
       positionLevel: {
-        label: positionLevel.name,
-        value: positionLevel.id,
+        label: positionLevel.position.positionName,
+        value: positionLevel.position.id,
       },
       profileBio,
       department: {

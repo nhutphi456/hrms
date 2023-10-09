@@ -103,14 +103,14 @@ export const GET_EMPLOYEES = gql`
         firstName
         lastName
         currentContract
-        status
-        avatarImg
+        profilePicture
         email
         address
         phoneNumber
         positionLevel {
-          id
-          name
+          position {
+            positionName
+          }
         }
         department {
           id
