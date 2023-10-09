@@ -19,7 +19,9 @@ export interface IEmployeeMngmentState {
   positions: IPosition[];
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
   constructor(private employeeMngmentService: EmployeeManagementService) {
     super({

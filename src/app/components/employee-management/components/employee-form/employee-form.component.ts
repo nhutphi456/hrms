@@ -15,7 +15,6 @@ import { EmployeeStore } from '../../store/employee-management.store.service';
   selector: 'employee-form',
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.scss'],
-  providers: [EmployeeStore],
 })
 export class EmployeeFormComponent implements OnInit {
   @Input() visible!: boolean;
@@ -42,9 +41,9 @@ export class EmployeeFormComponent implements OnInit {
     private fb: FormBuilder,
     public ref: DynamicDialogRef,
     private notificationService: NotificationService,
+    private employeeStore: EmployeeStore,
     private employeeService: EmployeeManagementService,
     private helperService: HelperService,
-    private employeeStore: EmployeeStore,
   ) {}
 
   get currentContract() {
@@ -56,6 +55,7 @@ export class EmployeeFormComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initForm();
+    this.employeeStore.getPositions();
     this.employeeStore.departments$.subscribe(departments => {
       this.departmentOptions = departments.map(dep => {
         return {
@@ -135,7 +135,7 @@ export class EmployeeFormComponent implements OnInit {
       departmentId: department.value,
       positionId: position.value,
       dateOfBirth: new Date(dateOfBirth).toISOString(),
-      dateJoined: new Date().toISOString()
+      dateJoined: new Date().toISOString(),
       // avatarImg: '',
     };
 
