@@ -11,7 +11,7 @@
         <form class="flex gap-2" [formGroup]="filterForm" (ngSubmit)="onFilter()">
             <button pButton type="submit" icon="pi pi-filter" label="Filter"> </button>
             <p-multiSelect display="chip" [options]="departmentOptions" defaultLabel="Select department"
-                formControlName="departmentIds" optionLabel="departmentName"></p-multiSelect>
+                formControlName="departmentIds"></p-multiSelect>
             <p-multiSelect display="chip" [options]="contractOptions" defaultLabel="Select current contract"
                 formControlName="currentContracts"></p-multiSelect>
             <p-button *ngIf="isClearAllVisible()" (onClick)="handleClearAll()" styleClass="p-button-link"

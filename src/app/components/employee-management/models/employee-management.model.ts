@@ -64,6 +64,10 @@ export interface IEmployeeDetailApiResponse {
 export interface IDepartmentApiResponse {
   departments: Array<Department>;
 }
+
+export interface INewEmployeeApiResponse {
+  employeeOfTheMonth: IEmployee[]
+}
 export interface IEmployeeParams {
   pageNo?: number;
   status?: number;

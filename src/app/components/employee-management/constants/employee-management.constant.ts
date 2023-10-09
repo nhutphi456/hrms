@@ -203,3 +203,21 @@ export const GET_DEPARTMENTS = gql`
     }
   }
 `
+
+export const GET_NEW_EMPLOYEES = gql`
+  query GetEmployeesCarousel {
+    employeeOfTheMonth {
+      profilePicture
+      firstName
+      lastName
+      email
+      positionLevel {
+        position {
+          positionName
+        }
+      }
+      phoneNumber
+      currentContract
+    }
+  }
+`
