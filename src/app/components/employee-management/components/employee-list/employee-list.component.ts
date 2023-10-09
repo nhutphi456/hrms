@@ -54,6 +54,7 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployees();
+    this.employeeStore.getDepartments();
     this.employees$.subscribe(result => {
       const { pageNo, pageSize, totalItems, totalPages } = result.pagination;
       const tData = {
