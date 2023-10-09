@@ -59,7 +59,7 @@ export class EmployeeFormComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required],
       address: ['', Validators.required],
       currentContract: [0, Validators.required],
@@ -69,8 +69,9 @@ export class EmployeeFormComponent implements OnInit {
       facebookLink: '',
       linkedinLink: '',
       instagramLink: '',
-      position: '',
+      position: ['', Validators.required],
       avatarImg: '',
+      profileBio: '',
     });
   }
 
@@ -90,8 +91,8 @@ export class EmployeeFormComponent implements OnInit {
       );
 
       this.addEmployeeForm.patchValue({
-        avatarImg: this.tempImg
-      })
+        avatarImg: this.tempImg,
+      });
 
       // this.parseToByteArray(fileContent);
     };
@@ -109,18 +110,19 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const { department, position } = this.addEmployeeForm.value;
+    const { department, position, dateOfBirth } = this.addEmployeeForm.value;
     const employee = {
       ...this.addEmployeeForm.value,
       departmentId: department.value,
       positionLevelId: position.value,
+      dateOfBirth: new Date(dateOfBirth).toISOString(),
       // avatarImg: '',
     };
-    
+
     delete employee.department;
     delete employee.position;
 
-    console.log({ employee });
+    console.log({ employee: this.addEmployeeForm });
 
     this.employeeService.addEmployee(employee).subscribe();
     // this.ref.close()

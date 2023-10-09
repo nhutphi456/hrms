@@ -60,27 +60,44 @@ export const positions = [
     label: 'Business Analyst',
     value: 3,
   },
+];
+
+export const currentContracts = [
+  {
+    label: 'Full-time',
+    value: 0
+  },
+  {
+    label: 'Part-time',
+    value: 1
+  },
+  {
+    label: 'Internship',
+    value: 2
+  }
 ]
 
 export const GET_EMPLOYEES = gql`
   query GetEmployees(
     $status: Int
-    $departments: String
-    $currentContracts: String
-    $page: Int
-    $per_page: Int
+    $departments: [Int]
+    $currentContracts: [Int]
+    $pageNo: Int
+    $pageSize: Int
   ) {
     employees(
       status: $status
       departments: $departments
       currentContracts: $currentContracts
-      page: $page
-      per_page: $per_page
+      pageNo: $pageNo
+      pageSize: $pageSize
     ) {
-      page
-      per_page
-      total_pages
-      total_items
+      pagination {
+        pageNo
+        pageSize
+        totalItems
+        totalPages
+      }
       data {
         id
         firstName
@@ -141,6 +158,10 @@ export const GET_EMPLOYEE = gql`
           lastName
         }
       }
+      twitterLink
+      facebookLink
+      instagramLink
+      linkedinLink
     }
   }
 `;
@@ -162,5 +183,11 @@ export const ADD_EMPLOYEE = gql`
       instagramLink
       linkedinLink
     }
+  }
+`;
+
+export const UPDATE_EMPLOYEE = gql`
+  mutation UpdateEmployee($input: EmployeeUpdateInput!) {
+    updateEmployee(input: $input)
   }
 `;

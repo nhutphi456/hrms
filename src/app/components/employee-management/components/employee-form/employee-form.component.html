@@ -50,6 +50,10 @@
                     optionLabel="label" placeholder="Choose position"></p-dropdown>
             </div>
             <div class="col-span-3">
+                <label class="control-label" for="">Profile Bio</label>
+                <textarea class="w-full" rows="3" cols="30" pInputTextarea formControlName="profileBio" placeholder="Enter your email"></textarea>
+            </div>
+            <div class="col-span-3">
                 <span class="control-label">Social Media</span>
                 <div class="grid grid-cols-2 gap-4">
                     <span class="p-input-icon-left">
@@ -105,7 +109,7 @@
 
         </div>
         <div class="mt-4 text-right">
-            <button type="submit" pButton label="Create"> </button>
+            <button type="submit" pButton label="Create" [disabled]="addEmployeeForm.invalid"> </button>
         </div>
     </form>
 </div>

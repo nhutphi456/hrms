@@ -11,6 +11,7 @@ import {
   ADD_EMPLOYEE,
   GET_EMPLOYEE,
   GET_EMPLOYEES,
+  UPDATE_EMPLOYEE,
 } from '../constants/employee-management.constant';
 
 // const mockData: IEmployee[] = [
@@ -124,14 +125,17 @@ export class EmployeeManagementService {
       .valueChanges.pipe(map(res => res.data));
   }
 
-  updateEmployee(employee: IEmployee) {
-    return employee;
+  updateEmployee(employee: any) {
+    return this.apollo.mutate({
+      mutation: UPDATE_EMPLOYEE,
+      variables: { input: employee },
+    });
   }
 
   addEmployee(employee: any) {
     return this.apollo.mutate({
       mutation: ADD_EMPLOYEE,
-      variables: {input: employee },
+      variables: { input: employee },
     });
   }
 }

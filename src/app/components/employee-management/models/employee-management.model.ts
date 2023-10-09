@@ -20,6 +20,10 @@ export interface IEmployee {
   emergencyContacts: EmergencyContact[];
   avatarImg: string;
   employeeSkills: EmployeeSkill[];
+  twitterLink: string;
+  facebookLink: string;
+  instagramLink: string;
+  linkedinLink: string;
 }
 
 interface Department {

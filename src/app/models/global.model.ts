@@ -4,9 +4,11 @@ export interface TableHeader {
 }
 
 export interface PaginatedData<T> {
-  page: number;
-  per_page: number;
-  total_pages: number;
-  total_items: number;
+  pagination: {
+    pageNo: number;
+    pageSize: number;
+    totalPages: number;
+    totalItems: number;
+  }
   data: T[]
 }
