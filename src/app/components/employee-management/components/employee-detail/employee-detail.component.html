@@ -16,7 +16,7 @@
                 </div>
                 <div class="p-4 mt-16 pt-1">
                     <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
-                    <p *ngIf="!isEditOn; else positionSelect" class="text-center">{{employee.positionLevel.name}}</p>
+                    <p *ngIf="!isEditOn; else positionSelect" class="text-center">{{employee.positionLevel.position.positionName}}</p>
                     <ng-template #positionSelect>
                         <p-dropdown styleClass="w-full" formControlName="positionLevel" [options]="positionOptions"
                             optionLabel="label"></p-dropdown>

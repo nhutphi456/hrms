@@ -108,8 +108,9 @@ export const GET_EMPLOYEES = gql`
         address
         phoneNumber
         positionLevel {
-          id
-          name
+          position {
+            positionName
+          }
         }
         department {
           id

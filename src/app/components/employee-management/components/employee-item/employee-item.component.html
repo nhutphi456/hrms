@@ -5,7 +5,7 @@
     <a class="text-black ml-4" [routerLink]="['detail', employee.id]">{{employee.firstName}} {{ employee.lastName }}</a>
     </div>
   </td>
-  <td>{{ employee.positionLevel.name }}</td>
+  <td>{{ employee.positionLevel.position.positionName }}</td>
   <td>{{ employee.email }}</td>
   <td>{{ employee.department?.departmentName }}</td>
   <td>
