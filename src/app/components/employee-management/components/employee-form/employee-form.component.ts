@@ -4,6 +4,11 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileUpload } from 'primeng/fileupload';
 import { NotificationService } from 'src/app/shared/message/notification.service';
 import { EmployeeManagementService } from '../../services/employee-management.service';
+import { HelperService } from 'src/app/services/helper.service';
+import {
+  departments,
+  positions,
+} from '../../constants/employee-management.constant';
 
 @Component({
   selector: 'employee-form',
@@ -17,44 +22,18 @@ export class EmployeeFormComponent implements OnInit {
   employeeTypes = [
     {
       label: 'Full-time',
-      value: 'Full-time',
+      value: 0,
     },
     {
       label: 'Part-time',
-      value: 'Part-time',
+      value: 1,
     },
-    { label: 'Internship', value: 'Internship' },
+    { label: 'Internship', value: 2 },
   ];
 
-  departmentOptions = [
-    {
-      label: 'Software Development',
-      value: 'se',
-    },
-    {
-      label: 'Business Analysis',
-      value: 'ba',
-    },
-    {
-      label: 'Quality Assurance',
-      value: 'qa',
-    },
-  ];
+  departmentOptions = departments;
 
-  positionOptions = [
-    {
-      label: 'Frontend Developer',
-      value: 'frontend',
-    },
-    {
-      label: 'Backend Developer',
-      value: 'backend',
-    },
-    {
-      label: 'UI/UX Designer',
-      value: 'uiuxdesigner',
-    },
-  ];
+  positionOptions = positions;
   tempImg = '';
 
   constructor(
@@ -62,6 +41,7 @@ export class EmployeeFormComponent implements OnInit {
     public ref: DynamicDialogRef,
     private notificationService: NotificationService,
     private employeeService: EmployeeManagementService,
+    private helperService: HelperService,
   ) {}
 
   get currentContract() {
@@ -78,21 +58,19 @@ export class EmployeeFormComponent implements OnInit {
     this.addEmployeeForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      dob: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
       email: ['', Validators.required],
-      phone: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
       address: ['', Validators.required],
-      currentContract: ['Full-time', Validators.required],
-      gender: 0,
-      department: 'se',
-      socialAccounts: this.fb.group({
-        twitter: '',
-        facebook: '',
-        linkedin: '',
-        github: '',
-      }),
-
+      currentContract: [0, Validators.required],
+      gender: 'Male',
+      department: '',
+      twitterLink: '',
+      facebookLink: '',
+      linkedinLink: '',
+      instagramLink: '',
       position: '',
+      avatarImg: '',
     });
   }
 
@@ -105,35 +83,43 @@ export class EmployeeFormComponent implements OnInit {
       const fileContent = reader.result as string; // Get the file content as base64 string
 
       this.tempImg = fileContent;
+      console.log({ temp: this.tempImg });
 
       this.notificationService.successNotification(
         $localize`Uploaded new photo`,
       );
 
-      this.parseToByteArray(fileContent);
+      this.addEmployeeForm.patchValue({
+        avatarImg: this.tempImg
+      })
+
+      // this.parseToByteArray(fileContent);
     };
 
     reader.readAsDataURL(f); // Read the file as base64 data
   }
 
   private parseToByteArray(base64: string) {
-    // const avaBytesArr = this.helperService.base64ToBytes(base64); // Convert base64 string to bytes
-    // const byteArr = Array.from(avaBytesArr);
-    // this.editForm.patchValue({
-    //   avatar: byteArr,
-    // });
+    const avaBytesArr = this.helperService.base64ToBytes(base64); // Convert base64 string to bytes
+    const byteArr = Array.from(avaBytesArr);
+    console.log('parse');
+    this.addEmployeeForm.patchValue({
+      avatarImg: byteArr,
+    });
   }
 
   onSubmit() {
-    const { department, position, gender } = this.addEmployeeForm.value;
+    const { department, position } = this.addEmployeeForm.value;
     const employee = {
       ...this.addEmployeeForm.value,
-      department: department.value,
-      position: position.value,
-      gender: '0',
-      avatarImg: '',
+      departmentId: department.value,
+      positionLevelId: position.value,
+      // avatarImg: '',
     };
-    delete employee.socialAccounts 
+    
+    delete employee.department;
+    delete employee.position;
+
     console.log({ employee });
 
     this.employeeService.addEmployee(employee).subscribe();

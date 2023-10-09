@@ -6,6 +6,7 @@ import { NotificationService } from 'src/app/shared/message/notification.service
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { IEmployee } from '../../models/employee-management.model';
 import { HelperService } from 'src/app/services/helper.service';
+import { departments, genders, positions } from '../../constants/employee-management.constant';
 
 const mockEmployee = {
   firstName: 'Russel',
@@ -61,36 +62,10 @@ export class EmployeeDetailComponent implements OnInit {
   isEditOn = false;
   profileForm!: FormGroup;
 
-  genderOptions = [
-    {
-      label: 'Male',
-      value: 1,
-    },
-    {
-      label: 'Female',
-      value: 0,
-    },
-  ];
+  genderOptions = genders
 
-  managerOptions = [
-    { label: 'Jake Hudson', value: 1 },
-    { label: 'John Newton', value: 2 },
-    { label: 'Test manager', value: 3 },
-  ];
-  positionOptions = [
-    {
-      label: 'Frontend Developer',
-      value: 'frontend',
-    },
-    {
-      label: 'Backend Developer',
-      value: 'backend',
-    },
-    {
-      label: 'UI/UX Designer',
-      value: 'uiuxdesigner',
-    },
-  ];
+  departments = departments
+  positionOptions = positions
   tempImg = '';
 
   constructor(
@@ -110,7 +85,7 @@ export class EmployeeDetailComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
-        this.employeeStore.getEmployee(id);
+        this.employeeStore.getEmployee(+id);
       }
     });
 
@@ -125,27 +100,35 @@ export class EmployeeDetailComponent implements OnInit {
       firstName,
       lastName,
       gender,
-      dob,
-      phone,
+      dateOfBirth,
+      phoneNumber,
       email,
       address,
-      position,
-      bio,
-      reportTo,
+      positionLevel,
+      profileBio,
+      department,
     } = employee;
     this.profileForm = this.fb.group({
       firstName,
       lastName,
       gender,
-      dob,
-      phone,
+      dateOfBirth: new Date(dateOfBirth),
+      phoneNumber,
       email,
       address,
       avatar: '',
-      position,
-      bio,
-      reportTo,
+      positionLevel: {
+        label: positionLevel.name,
+        value: positionLevel.id,
+      },
+      profileBio,
+      department: {
+        label: department?.departmentName,
+        value: department?.id,
+      },
     });
+
+    console.log({profileForm: this.profileForm})
   }
 
   openEdit() {
@@ -166,7 +149,7 @@ export class EmployeeDetailComponent implements OnInit {
   onUpload(f: File): void {
     this.fileUpload.clear();
     this.fileUpload.choose();
-    console.log({f})
+    console.log({ f });
     const reader = new FileReader();
 
     reader.onload = () => {

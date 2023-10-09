@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { IEmployee } from '../../models/employee-management.model';
+import { ContractType, IEmployee } from '../../models/employee-management.model';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 
@@ -16,6 +16,7 @@ export class EmployeeItemComponent implements OnChanges {
   constructor(private router: Router) {}
 
   menuItems!: MenuItem[]
+  contractType = ContractType
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('employee' in changes) {

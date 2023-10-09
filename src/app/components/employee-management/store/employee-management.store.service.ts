@@ -74,7 +74,7 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
     ),
   );
 
-  readonly getEmployee = this.effect((id$: Observable<string>) =>
+  readonly getEmployee = this.effect((id$: Observable<number>) =>
     id$.pipe(
       switchMap(id =>
         this.employeeMngmentService.getEmployee(id).pipe(

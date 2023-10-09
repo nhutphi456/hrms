@@ -16,17 +16,18 @@
                 </div>
                 <div class="p-4 mt-16">
                     <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
-                    <p *ngIf="!isEditOn; else positionSelect" class="text-center">{{employee.position}}</p>
+                    <p *ngIf="!isEditOn; else positionSelect" class="text-center">{{employee.positionLevel.name}}</p>
                     <ng-template #positionSelect>
-                        <p-dropdown styleClass="w-full" formControlName="position" [options]="positionOptions"
+                        <p-dropdown styleClass="w-full" formControlName="positionLevel" [options]="positionOptions"
                             optionLabel="label"></p-dropdown>
                     </ng-template>
                     <div class="mt-5">
                         <p *ngIf="!isEditOn; else bioInput" class="text-gray-700 text-base text-center">
-                            {{employee.bio}}
+                            {{employee.profileBio}}
                         </p>
                         <ng-template #bioInput>
-                            <textarea class="w-full" rows="5" cols="30" pInputTextarea formControlName="bio"></textarea>
+                            <textarea class="w-full" rows="5" cols="30" pInputTextarea
+                                formControlName="profileBio"></textarea>
                         </ng-template>
                     </div>
                     <div class="social-icons mt-5 flex justify-center gap-10">
@@ -39,17 +40,17 @@
                 <div class="p-4 pb-8">
                     <div class="flex gap-4 justify-between items-center">
                         <p class="label">Reporting to</p>
-                        <p *ngIf="!isEditOn; else managerSelect">{{employee.reportTo}}</p>
-                        <ng-template #managerSelect>
+                        <p>{{employee.department?.sum?.firstName}} {{employee.department?.sum?.lastName}}</p>
+                        <!-- <ng-template #managerSelect>
                             <p-dropdown styleClass="w-full" class="w-full flex-1" formControlName="reportTo"
                                 [options]="managerOptions" optionLabel="label"></p-dropdown>
-                        </ng-template>
+                        </ng-template> -->
                     </div>
                     <div class="flex gap-4 justify-between items-center mt-2">
                         <h1 class="text-md mb-1 font-bold">Skill Tag</h1>
                         <div>
-                            <span *ngFor="let skill of employee.skillsTags"
-                                class="skill-tag inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{skill}}</span>
+                            <span *ngFor="let employeeSkill of employee.employeeSkills"
+                                class="skill-tag inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mr-1">{{employeeSkill.skill.skillName}}</span>
                         </div>
                     </div>
                 </div>
@@ -105,16 +106,17 @@
 
                         <div class="info-field">
                             <p class="label">Birthday</p>
-                            <p *ngIf="!isEditOn; else dateInput">{{employee.dob}}</p>
+                            <p *ngIf="!isEditOn; else dateInput">{{employee.dateOfBirth | date}}</p>
                             <ng-template #dateInput>
-                                <p-calendar class="block w-full" formControlName="dob"></p-calendar>
+                                <p-calendar class="block w-full" formControlName="dateOfBirth"></p-calendar>
                             </ng-template>
                         </div>
                         <div class="info-field">
                             <p class="label">Phone</p>
-                            <p *ngIf="!isEditOn; else phoneInput">{{employee.phone}} <i class="pi pi-copy"></i></p>
+                            <p *ngIf="!isEditOn; else phoneInput">{{employee.phoneNumber}} <i class="pi pi-copy"></i>
+                            </p>
                             <ng-template #phoneInput>
-                                <p-inputMask mask="999-999-9999" formControlName="phone" />
+                                <p-inputMask mask="999-999-9999" formControlName="phoneNumber" />
                             </ng-template>
                         </div>
                         <div class="info-field">
@@ -126,6 +128,15 @@
                             <p class="label">Address</p>
                             <p *ngIf="!isEditOn; else addressInput">{{employee.address}} <i class="pi pi-copy"></i></p>
                             <ng-template #addressInput><input pInputText formControlName="address" /></ng-template>
+                        </div>
+                        <div class="info-field col-span-2">
+                            <p class="label">Department</p>
+                            <p *ngIf="!isEditOn; else departmentSelect">{{employee.department?.departmentName}}
+                            </p>
+                            <ng-template #departmentSelect>
+                                <p-dropdown styleClass="w-full" class="w-full flex-1" formControlName="department"
+                                    [options]="departments" optionLabel="label"></p-dropdown>
+                            </ng-template>
                         </div>
                     </div>
                 </div>
@@ -148,7 +159,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="joined-projects">
+                <!-- <div class="joined-projects">
                     <h1 class="text-xl mt-10 mb-1 font-bold">Joined Projects</h1>
                     <div class="card">
                         <p-table [value]="employee.joinedProjects" [tableStyle]="{ 'min-width': '50rem' }"
@@ -174,7 +185,7 @@
                             </ng-template>
                         </p-table>
                     </div>
-                </div>
+                </div> -->
                 <div class="emergency-contact">
                     <h1 class="text-xl mt-10 mb-1 font-bold">Emergency Contacts</h1>
                     <div class="card">
@@ -192,7 +203,7 @@
                                     <td>{{ contact.firstName }}</td>
                                     <td>{{ contact.lastName }}</td>
                                     <td>
-                                        {{contact.phone}} <i class="pi pi-copy"></i>
+                                        {{contact.phoneNumber}} <i class="pi pi-copy"></i>
                                     </td>
                                 </tr>
                             </ng-template>
