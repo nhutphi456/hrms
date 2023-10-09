@@ -6,7 +6,12 @@ import { NotificationService } from 'src/app/shared/message/notification.service
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { IEmployee } from '../../models/employee-management.model';
 import { HelperService } from 'src/app/services/helper.service';
-import { departments, genders, positions } from '../../constants/employee-management.constant';
+import {
+  departments,
+  genders,
+  positions,
+} from '../../constants/employee-management.constant';
+import { EmployeeManagementService } from '../../services/employee-management.service';
 
 const mockEmployee = {
   firstName: 'Russel',
@@ -61,12 +66,11 @@ export class EmployeeDetailComponent implements OnInit {
   defaultImg = 'assets/images/avatar-default.jpg';
   isEditOn = false;
   profileForm!: FormGroup;
-
-  genderOptions = genders
-
-  departments = departments
-  positionOptions = positions
+  genderOptions = genders;
+  departments = departments;
+  positionOptions = positions;
   tempImg = '';
+  employeeId!: number;
 
   constructor(
     private fb: FormBuilder,
@@ -74,6 +78,7 @@ export class EmployeeDetailComponent implements OnInit {
     private notificationService: NotificationService,
     private employeeStore: EmployeeStore,
     private helperService: HelperService,
+    private employeeService: EmployeeManagementService,
   ) {}
 
   ngOnInit(): void {
@@ -86,6 +91,7 @@ export class EmployeeDetailComponent implements OnInit {
       const id = params.get('id');
       if (id) {
         this.employeeStore.getEmployee(+id);
+        this.employeeId = +id;
       }
     });
 
@@ -107,6 +113,10 @@ export class EmployeeDetailComponent implements OnInit {
       positionLevel,
       profileBio,
       department,
+      twitterLink,
+      facebookLink,
+      instagramLink,
+      linkedinLink,
     } = employee;
     this.profileForm = this.fb.group({
       firstName,
@@ -116,7 +126,7 @@ export class EmployeeDetailComponent implements OnInit {
       phoneNumber,
       email,
       address,
-      avatar: '',
+      avatarImg: '',
       positionLevel: {
         label: positionLevel.name,
         value: positionLevel.id,
@@ -126,9 +136,13 @@ export class EmployeeDetailComponent implements OnInit {
         label: department?.departmentName,
         value: department?.id,
       },
+      twitterLink,
+      facebookLink,
+      instagramLink,
+      linkedinLink,
     });
 
-    console.log({profileForm: this.profileForm})
+    console.log({ profileForm: this.profileForm });
   }
 
   openEdit() {
@@ -143,7 +157,20 @@ export class EmployeeDetailComponent implements OnInit {
     // this.profileForm.patchValue({
     //   avatar: this.tempImg,
     // });
-    console.log({ data: this.profileForm.value });
+    const { department, positionLevel, dateOfBirth } = this.profileForm.value;
+    const updatedEmployee = {
+      ...this.profileForm.value,
+      // departmentId: department.value,
+      // positionLevelId: positionLevel.value,
+      dateOfBirth: new Date(dateOfBirth).toISOString(),
+      id: this.employeeId,
+    };
+
+    delete updatedEmployee.department;
+    delete updatedEmployee.positionLevel;
+
+    this.employeeService.updateEmployee(updatedEmployee).subscribe();
+    console.log({ updatedEmployee });
   }
 
   onUpload(f: File): void {

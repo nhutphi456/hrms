@@ -19,11 +19,13 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
   constructor(private employeeMngmentService: EmployeeManagementService) {
     super({
       employees: {
-        page: 0,
-        per_page: 0,
-        total_items: 0,
-        total_pages: 0,
-        data: []
+        pagination: {
+          pageNo: 0,
+          pageSize: 0,
+          totalItems: 0,
+          totalPages: 0,
+        },
+        data: [],
       },
       loading: false,
       employeeDetail: null,

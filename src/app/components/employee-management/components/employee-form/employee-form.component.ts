@@ -71,6 +71,7 @@ export class EmployeeFormComponent implements OnInit {
       instagramLink: '',
       position: '',
       avatarImg: '',
+      profileBio: '',
     });
   }
 
@@ -90,8 +91,8 @@ export class EmployeeFormComponent implements OnInit {
       );
 
       this.addEmployeeForm.patchValue({
-        avatarImg: this.tempImg
-      })
+        avatarImg: this.tempImg,
+      });
 
       // this.parseToByteArray(fileContent);
     };
@@ -116,7 +117,7 @@ export class EmployeeFormComponent implements OnInit {
       positionLevelId: position.value,
       // avatarImg: '',
     };
-    
+
     delete employee.department;
     delete employee.position;
 

@@ -1,19 +1,21 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Observable } from 'rxjs';
 
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
 import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
+import { PaginatedData } from 'src/app/models/global.model';
 import {
+  currentContracts,
+  departments,
   employeeLabelItems,
   employeeTableCols,
 } from '../../constants/employee-management.constant';
 import { IEmployee } from '../../models/employee-management.model';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
-import { PaginatedData } from 'src/app/models/global.model';
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -37,30 +39,8 @@ export class EmployeeListComponent implements OnInit {
     },
   };
   filterForm!: FormGroup;
-  departmentOptions: { label: string; value: string }[] = [
-    {
-      label: 'Software Development',
-      value: 'Software Development',
-    },
-    {
-      label: 'Design',
-      value: 'Design',
-    },
-  ];
-  contractOptions: { label: string; value: string }[] = [
-    {
-      label: 'Full-time',
-      value: 'Full-time',
-    },
-    {
-      label: 'Part-time',
-      value: 'Part-time',
-    },
-    {
-      label: 'Internship',
-      value: 'Internship',
-    },
-  ];
+  departmentOptions = departments;
+  contractOptions = currentContracts;
   ref!: DynamicDialogRef;
   employeeParams = {};
   gapPageNumber = 1;
@@ -74,12 +54,13 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit(): void {
     this.getEmployees();
     this.employees$.subscribe(result => {
+      const {pageNo, pageSize, totalItems, totalPages} = result.pagination
       const tData = {
-        page: result.page,
+        page: pageNo,
         first: 1,
-        rows: result.per_page,
-        pageCount: result.total_pages,
-        totalRecord: result.total_items,
+        rows: pageSize,
+        pageCount: totalPages,
+        totalRecord: totalItems,
         data: {
           header: [...this.tableData.data.header],
           body: result.data,
@@ -114,7 +95,7 @@ export class EmployeeListComponent implements OnInit {
     this.getEmployees();
   }
   onPageChange(e: PageChangeEvent): void {
-    this.handleEmployeeParams('page', e.page + this.gapPageNumber);
+    this.handleEmployeeParams('pageNo', e.page + this.gapPageNumber);
     this.getEmployees();
   }
 

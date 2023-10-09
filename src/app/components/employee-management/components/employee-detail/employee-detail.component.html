@@ -7,14 +7,14 @@
                     <div class="profile-img relative">
                         <div *ngIf="!tempImg" class="profile-image-container">
                             <img style="background: #CDE9EAFF; border-radius: 60px;" class="w-full"
-                                src={{employee.avatarImg}} alt="" />
+                                [src]="employee.avatarImg || defaultImg" alt="" />
                         </div>
                         <p-avatar *ngIf="tempImg" [image]="tempImg" shape="circle" size="xlarge"></p-avatar>
                         <p-fileUpload #fileUpload *ngIf="isEditOn" mode="basic" chooseIcon="pi pi-pencil"
                             (onSelect)="onUpload($event.currentFiles[0])" [auto]="true"></p-fileUpload>
                     </div>
                 </div>
-                <div class="p-4 mt-16">
+                <div class="p-4 mt-16 pt-1">
                     <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
                     <p *ngIf="!isEditOn; else positionSelect" class="text-center">{{employee.positionLevel.name}}</p>
                     <ng-template #positionSelect>
@@ -31,10 +31,10 @@
                         </ng-template>
                     </div>
                     <div class="social-icons mt-5 flex justify-center gap-10">
-                        <i class="pi pi-twitter"></i>
-                        <i class="pi pi-linkedin"></i>
-                        <i class="pi pi-facebook"></i>
-                        <i class="pi pi-instagram"></i>
+                        <a [href]="employee.twitterLink" target="_blank"><i class="pi pi-twitter"></i></a>
+                        <a [href]="employee.linkedinLink" target="_blank"><i class="pi pi-linkedin"></i></a>
+                        <a [href]="employee.facebookLink" target="_blank"><i class="pi pi-facebook"></i></a>
+                        <a [href]="employee.instagramLink" target="_blank"><i class="pi pi-github"></i></a>
                     </div>
                 </div>
                 <div class="p-4 pb-8">
@@ -89,13 +89,13 @@
                             <ng-template #dropdown>
                                 <div class="flex items-center gap-4">
                                     <div class="flex items-center">
-                                        <p-radioButton name="gender" value="MALE" id="male"
+                                        <p-radioButton name="gender" value="Male" id="male"
                                             formControlName="gender"></p-radioButton>
 
                                         <label for="male" class="ml-2 !text-base">Male</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <p-radioButton name="gender" value="FEMALE" id="female"
+                                        <p-radioButton name="gender" value="Female" id="female"
                                             formControlName="gender"></p-radioButton>
 
                                         <label for="female" class="ml-2 !text-base">Female</label>
@@ -145,17 +145,21 @@
                     <div class="grid grid-cols-2 gap-4">
                         <span class="p-input-icon-left">
                             <i class="pi pi-twitter"></i>
-                            <input type="text" pInputText placeholder="Enter your twitter account" />
+                            <input formControlName="twitterLink" type="text" pInputText
+                                placeholder="Link to twitter account" />
                         </span>
                         <span class="p-input-icon-left">
                             <i class="pi pi-facebook"></i>
-                            <input type="text" pInputText placeholder="Enter your facebook account" />
+                            <input formControlName="facebookLink" type="text" pInputText
+                                placeholder="Link to facebook account" />
                         </span><span class="p-input-icon-left">
                             <i class="pi pi-linkedin"></i>
-                            <input type="text" pInputText placeholder="Enter your linkedin account" />
+                            <input formControlName="linkedinLink" type="text" pInputText
+                                placeholder="Link to linkedin account" />
                         </span><span class="p-input-icon-left">
                             <i class="pi pi-github"></i>
-                            <input type="text" pInputText placeholder="Enter your github account" />
+                            <input formControlName="instagramLink" type="text" pInputText
+                                placeholder="Link to github account" />
                         </span>
                     </div>
                 </div>
