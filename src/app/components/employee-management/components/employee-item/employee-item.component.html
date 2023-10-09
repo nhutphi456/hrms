@@ -15,7 +15,7 @@
     <div class="flex gap-2 items-center">
       <i class="pi-circle-fill pi"></i>
       <span>
-        {{ employee.status === 0 ? 'Active' : 'Inactive' | titlecase }}
+        {{ employee.user.isEnabled ? 'Active' : 'Inactive' | titlecase }}
       </span>
     </div>
   </td>

@@ -20,12 +20,12 @@ export const employeeLabelItems: MenuItem[] = [
   },
   {
     label: 'active',
-    id: '0',
+    id: '1',
     title: 'Active',
   },
   {
     label: 'inactive',
-    id: '1',
+    id: '0',
     title: 'Inactive',
   },
 ];
@@ -79,15 +79,15 @@ export const currentContracts = [
 
 export const GET_EMPLOYEES = gql`
   query GetEmployees(
-    $status: Int
-    $departments: [Int]
+    $status: Boolean
+    $departmentIds: [Int]
     $currentContracts: [Int]
-    $pageNo: Int
+    $pageNo: Int!
     $pageSize: Int
   ) {
     employees(
       status: $status
-      departments: $departments
+      departmentIds: $departmentIds
       currentContracts: $currentContracts
       pageNo: $pageNo
       pageSize: $pageSize
@@ -115,6 +115,9 @@ export const GET_EMPLOYEES = gql`
         department {
           id
           departmentName
+        }
+        user {
+          isEnabled
         }
       }
     }
