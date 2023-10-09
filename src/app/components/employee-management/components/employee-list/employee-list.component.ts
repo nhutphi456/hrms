@@ -13,7 +13,7 @@ import {
   employeeLabelItems,
   employeeTableCols,
 } from '../../constants/employee-management.constant';
-import { IEmployee } from '../../models/employee-management.model';
+import { Department, IEmployee } from '../../models/employee-management.model';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 @Component({
@@ -27,6 +27,7 @@ export class EmployeeListComponent implements OnInit {
   activeItem: MenuItem = this.labelItems[0];
   employees$: Observable<PaginatedData<IEmployee>> =
     this.employeeStore.employees$;
+  department$: Observable<Department[]> = this.employeeStore.departments$;
   tableData: HrmsTable<IEmployee> = {
     page: 0,
     first: 0,
@@ -39,7 +40,7 @@ export class EmployeeListComponent implements OnInit {
     },
   };
   filterForm!: FormGroup;
-  departmentOptions = departments;
+  departmentOptions!: { label: string; value: number }[];
   contractOptions = currentContracts;
   ref!: DynamicDialogRef;
   employeeParams = { pageNo: 1 };
@@ -67,6 +68,14 @@ export class EmployeeListComponent implements OnInit {
         },
       };
       this.tableData = tData;
+    });
+    this.department$.subscribe(departments => {
+      this.departmentOptions = departments.map(dep => {
+        return {
+          label: dep.departmentName,
+          value: dep.id,
+        };
+      });
     });
 
     this.initFilterForm();
@@ -110,6 +119,7 @@ export class EmployeeListComponent implements OnInit {
 
   onFilter() {
     const formValues = this.filterForm.value;
+    console.log({ formValues });
     for (const key in formValues) {
       const value = formValues[key];
       if (value) {

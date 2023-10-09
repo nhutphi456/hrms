@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, from, map } from 'rxjs';
 import {
+  IDepartmentApiResponse,
   IEmployee,
   IEmployeeApiResponse,
   IEmployeeDetailApiResponse,
@@ -9,6 +10,7 @@ import {
 import { Apollo } from 'apollo-angular';
 import {
   ADD_EMPLOYEE,
+  GET_DEPARTMENTS,
   GET_EMPLOYEE,
   GET_EMPLOYEES,
   UPDATE_EMPLOYEE,
@@ -139,11 +141,15 @@ export class EmployeeManagementService {
     });
   }
 
-  getDepartments() {
-    return ''
+  getDepartments(): Observable<IDepartmentApiResponse> {
+    return this.apollo
+      .watchQuery<IDepartmentApiResponse>({
+        query: GET_DEPARTMENTS,
+      })
+      .valueChanges.pipe(map(res => res.data));
   }
 
   getCurrentContracts() {
-    return ''
+    return '';
   }
 }
