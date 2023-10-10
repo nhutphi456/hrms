@@ -258,6 +258,10 @@
     overflow: hidden;
   }
 
+  .p-multiselect, .p-dropdown {
+    background-color: #f8f9faff;
+  }
+
   .p-multiselect .p-multiselect-label, .p-inputwrapper-filled .p-multiselect.p-multiselect-chip .p-multiselect-label {
     padding: 5px 11px;;
   }

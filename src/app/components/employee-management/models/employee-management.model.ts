@@ -26,7 +26,6 @@ export interface IEmployee {
   linkedinLink: string;
   user: { isEnabled: boolean } | null;
 }
-
 export interface IEmployeeInput {
   firstName: string;
   lastName: string;
@@ -58,6 +57,11 @@ export interface IPosition {
   id: number;
   positionName: string;
 }
+
+export interface IJobLevel {
+  id: number;
+  jobLevelName: string;
+}
 interface EmployeeSkill {
   skill: {
     skillName: string;
@@ -71,6 +75,7 @@ export interface Project {
 }
 
 export interface EmergencyContact {
+  id: number;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -99,10 +104,11 @@ export interface IPositionApiResponse {
   positions: IPosition[];
 }
 export interface IEmployeeParams {
+  status?: boolean;
+  departments?: number[];
+  currentContracts?: number[];
+  keyword?: string;
   pageNo?: number;
-  status?: number;
-  departments?: string[];
-  types?: string[];
 }
 
 export enum ContractType {

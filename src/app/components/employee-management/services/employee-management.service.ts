@@ -1,17 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, from, map } from 'rxjs';
-import {
-  IAddEmployeeApiResponse,
-  IDepartmentApiResponse,
-  IEmployee,
-  IEmployeeApiResponse,
-  IEmployeeDetailApiResponse,
-  IEmployeeInput,
-  IEmployeeParams,
-  INewEmployeeApiResponse,
-  IPositionApiResponse,
-} from '../models/employee-management.model';
 import { Apollo, MutationResult } from 'apollo-angular';
+import { Observable, map } from 'rxjs';
 import {
   ADD_EMPLOYEE,
   GET_DEPARTMENTS,
@@ -21,93 +10,16 @@ import {
   GET_POSITIONS,
   UPDATE_EMPLOYEE,
 } from '../constants/employee-management.constant';
-
-// const mockData: IEmployee[] = [
-//   {
-//     firstName: 'Erling',
-//     lastName: 'Haaland',
-//     gender: 1,
-//     dob: '01/01/1999',
-//     position: 'Frontend Developer',
-//     phone: '0123456789',
-//     email: 'test@gmail.com',
-//     address: 'manchester',
-//     status: 0,
-//     reportTo: 1,
-//     department: 'Software Development',
-//     currentContract: 'Full-time',
-//   },
-//   {
-//     firstName: 'Bernado',
-//     lastName: 'Silva',
-//     gender: 1,
-//     dob: '01/01/1999',
-//     position: 'Backend Developer',
-//     phone: '0123456789',
-//     email: 'test@gmail.com',
-//     address: 'manchester',
-//     status: 1,
-//     reportTo: 1,
-//     department: 'Software Development',
-//     currentContract: 'Full-time',
-//   },
-//   {
-//     firstName: 'Lionel',
-//     lastName: 'Messi',
-//     gender: 1,
-//     dob: '01/01/1999',
-//     position: 'Tester',
-//     phone: '0123456789',
-//     email: 'test@gmail.com',
-//     address: 'manchester',
-//     status: 1,
-//     reportTo: 1,
-//     department: 'Software Development',
-//     currentContract: 'Full-time',
-//   },
-//   {
-//     firstName: 'Erling',
-//     lastName: 'Haaland',
-//     gender: 1,
-//     dob: '01/01/1999',
-//     position: 'Frontend Developer',
-//     phone: '0123456789',
-//     email: 'test@gmail.com',
-//     address: 'manchester',
-//     status: 1,
-//     reportTo: 1,
-//     department: 'Software Development',
-//     currentContract: 'Full-time',
-//   },
-//   {
-//     firstName: 'Bernado',
-//     lastName: 'Silva',
-//     gender: 1,
-//     dob: '01/01/1999',
-//     position: 'Backend Developer',
-//     phone: '0123456789',
-//     email: 'test@gmail.com',
-//     address: 'manchester',
-//     status: 1,
-//     reportTo: 1,
-//     department: 'Software Development',
-//     currentContract: 'Full-time',
-//   },
-//   {
-//     firstName: 'Lionel',
-//     lastName: 'Messi',
-//     gender: 1,
-//     dob: '01/01/1999',
-//     position: 'Tester',
-//     phone: '0123456789',
-//     email: 'test@gmail.com',
-//     address: 'manchester',
-//     status: 1,
-//     reportTo: 1,
-//     department: 'Software Development',
-//     currentContract: 'Full-time',
-//   },
-// ];
+import {
+  IAddEmployeeApiResponse,
+  IDepartmentApiResponse,
+  IEmployeeApiResponse,
+  IEmployeeDetailApiResponse,
+  IEmployeeInput,
+  IEmployeeParams,
+  INewEmployeeApiResponse,
+  IPositionApiResponse
+} from '../models/employee-management.model';
 @Injectable({
   providedIn: 'root',
 })

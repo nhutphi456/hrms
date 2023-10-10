@@ -49,9 +49,15 @@
                 <p-dropdown styleClass="w-full" formControlName="position" [options]="positionOptions"
                     optionLabel="label" placeholder="Choose position"></p-dropdown>
             </div>
+            <div>
+                <label class="control-label" for="">Job Level</label>
+                <p-dropdown styleClass="w-full" formControlName="jobLevel" [options]="positionOptions"
+                    optionLabel="label" placeholder="Choose position"></p-dropdown>
+            </div>
             <div class="col-span-3">
                 <label class="control-label" for="">Profile Bio</label>
-                <textarea class="w-full" rows="3" cols="30" pInputTextarea formControlName="profileBio" placeholder="Enter your email"></textarea>
+                <textarea class="w-full" rows="3" cols="30" pInputTextarea formControlName="profileBio"
+                    placeholder="Enter your email"></textarea>
             </div>
             <div class="col-span-3">
                 <span class="control-label">Social Media</span>
@@ -59,23 +65,51 @@
                     <span class="p-input-icon-left">
                         <i class="pi pi-twitter"></i>
                         <input type="text" formControlName="twitterLink" pInputText
-                            placeholder="Enter your twitter account" />
+                            placeholder="Link to Twitter account" />
                     </span>
                     <span class="p-input-icon-left">
                         <i class="pi pi-facebook"></i>
                         <input type="text" formControlName="facebookLink" pInputText
-                            placeholder="Enter your twitter account" />
+                            placeholder="Link to Facebook account" />
                     </span>
                     <span class="p-input-icon-left">
                         <i class="pi pi-linkedin"></i>
                         <input type="text" formControlName="linkedinLink" pInputText
-                            placeholder="Enter your twitter account" />
+                            placeholder="Link to Linkedin account" />
                     </span>
                     <span class="p-input-icon-left">
-                        <i class="pi pi-github"></i>
+                        <i class="pi pi-instagram"></i>
                         <input type="text" formControlName="instagramLink" pInputText
-                            placeholder="Enter your twitter account" />
+                            placeholder="Link to Instagram account" />
                     </span>
+                </div>
+            </div>
+            <div class="col-span-3 emergency-contacts">
+                <span class="control-label">Emergency Contacts</span>
+                <div formArrayName="emergencyContacts" *ngFor="let contact of emergencyContacts.controls; let i = index"
+                    class="flex justify-between items-end" [class.gap-2]="emergencyContacts.length !==1">
+                    <div class="flex-1 grid grid-cols-3 gap-2" [formGroupName]="i">
+                        <div>
+                            <label for="firstName">First Name:</label>
+                            <input pInputText type="text" id="firstName" formControlName="firstName" />
+                        </div>
+                        <div>
+                            <label for="lastName">Last Name:</label>
+                            <input pInputText type="text" id="lastName" formControlName="lastName" />
+                        </div>
+                        <div>
+                            <label for="phoneNumber">Phone Number:</label>
+                            <input pInputText type="text" id="phoneNumber" formControlName="phoneNumber" />
+                        </div>
+                    </div>
+                    <div>
+                        <p-button *ngIf="emergencyContacts.length !== 1" icon="pi pi-minus-circle" styleClass="p-button-link"
+                            (onClick)="removeEmergencyContact(i)"></p-button>
+                    </div>
+                </div>
+                <div class="w-full text-right mt-1">
+                    <p-button (onClick)="addEmergencyContact()" icon="pi pi-plus"
+                        styleClass="p-button-sm add-contact-btn" class="w-2"></p-button>
                 </div>
             </div>
             <div>
@@ -95,13 +129,11 @@
                 <div class="flex items-center gap-4">
                     <div class="flex items-center">
                         <p-radioButton name="gender" value="Male" id="male" formControlName="gender"></p-radioButton>
-
                         <label for="male" class="ml-2 !text-base">Male</label>
                     </div>
                     <div class="flex items-center">
                         <p-radioButton name="gender" value="Female" id="female"
                             formControlName="gender"></p-radioButton>
-
                         <label for="female" class="ml-2 !text-base">Female</label>
                     </div>
                 </div>
@@ -109,7 +141,7 @@
 
         </div>
         <div class="mt-4 text-right">
-            <button type="submit" pButton label="Create" [disabled]="addEmployeeForm.invalid"> </button>
+            <button type="submit" pButton label="Create"> </button>
         </div>
     </form>
 </div>

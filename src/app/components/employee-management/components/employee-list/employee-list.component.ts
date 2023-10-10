@@ -9,11 +9,14 @@ import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.mode
 import { PaginatedData } from 'src/app/models/global.model';
 import {
   currentContracts,
-  departments,
   employeeLabelItems,
   employeeTableCols,
 } from '../../constants/employee-management.constant';
-import { Department, IEmployee } from '../../models/employee-management.model';
+import {
+  Department,
+  IEmployee,
+  IEmployeeParams,
+} from '../../models/employee-management.model';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 @Component({
@@ -43,7 +46,7 @@ export class EmployeeListComponent implements OnInit {
   departmentOptions!: { label: string; value: number }[];
   contractOptions = currentContracts;
   ref!: DynamicDialogRef;
-  employeeParams = { pageNo: 1 };
+  employeeParams: IEmployeeParams = { pageNo: 1 };
   gapPageNumber = 1;
 
   constructor(
@@ -111,16 +114,21 @@ export class EmployeeListComponent implements OnInit {
 
   onActiveItemChange(label: MenuItem): void {
     this.activeItem = label;
-    this.handleEmployeeParams(
-      'status',
-      this.activeItem.id === '1' ? true : false,
-    );
+    if (this.activeItem.id) {
+      this.handleEmployeeParams(
+        'status',
+        this.activeItem.id === '1' ? true : false,
+      );
+    } else {
+      delete this.employeeParams.status;
+    }
+
     this.getEmployees();
   }
 
   onFilter() {
     const formValues = this.filterForm.value;
-    console.log({ formValues });
+
     for (const key in formValues) {
       const value = formValues[key];
       if (value) {
@@ -149,10 +157,11 @@ export class EmployeeListComponent implements OnInit {
   }
 
   handleClearAll() {
-    this.filterForm.patchValue({
+    this.filterForm.setValue({
       departmentIds: [],
       currentContracts: [],
     });
+    this.onFilter();
   }
 
   isClearAllVisible() {

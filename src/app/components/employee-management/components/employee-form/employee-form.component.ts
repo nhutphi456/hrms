@@ -1,14 +1,10 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileUpload } from 'primeng/fileupload';
+import { HelperService } from 'src/app/services/helper.service';
 import { NotificationService } from 'src/app/shared/message/notification.service';
 import { EmployeeManagementService } from '../../services/employee-management.service';
-import { HelperService } from 'src/app/services/helper.service';
-import {
-  departments,
-  positions,
-} from '../../constants/employee-management.constant';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 
 @Component({
@@ -53,6 +49,11 @@ export class EmployeeFormComponent implements OnInit {
   get formControls() {
     return this.addEmployeeForm.controls;
   }
+
+  get emergencyContacts() {
+    return this.addEmployeeForm.get('emergencyContacts') as FormArray;
+  }
+
   ngOnInit(): void {
     this.initForm();
     this.employeeStore.getPositions();
@@ -91,8 +92,30 @@ export class EmployeeFormComponent implements OnInit {
       instagramLink: '',
       position: '',
       // profilePicture: '',
+      jobLevel: '',
       profileBio: '',
+      emergencyContacts: this.fb.array([
+        this.fb.group({
+          firstName: ['', Validators.required],
+          lastName: ['', Validators.required],
+          phoneNumber: ['', Validators.required],
+        }),
+      ]),
     });
+  }
+
+  addEmergencyContact() {
+    const newContact = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+    });
+    this.emergencyContacts.push(newContact);
+  }
+
+  // Remove an emergency contact from the FormArray
+  removeEmergencyContact(index: number) {
+    this.emergencyContacts.removeAt(index);
   }
 
   onUpload(f: File): void {
@@ -143,7 +166,7 @@ export class EmployeeFormComponent implements OnInit {
     delete employee.department;
     delete employee.position;
 
-    console.log({ employee: this.addEmployeeForm });
+    console.log({ employee });
 
     this.employeeService.addEmployee(employee).subscribe();
     // this.ref.close()

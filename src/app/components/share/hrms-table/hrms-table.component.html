@@ -2,9 +2,10 @@
     <p-table
       [value]="table.data.body"
       [columns]="table.data.header"
-      [tableStyle]="{ 'min-width': '50rem' }"
+      [tableStyle]="{ 'min-width': '80rem' }"
       [responsive]="true"
       [rowHover]="true"
+      responsiveLayout="stack"
       styleClass="p-datatable-sm"
     >
       <ng-template pTemplate="header" let-columns>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FileUpload } from 'primeng/fileupload';
 import { NotificationService } from 'src/app/shared/message/notification.service';
@@ -12,49 +12,6 @@ import {
   positions,
 } from '../../constants/employee-management.constant';
 import { EmployeeManagementService } from '../../services/employee-management.service';
-
-const mockEmployee = {
-  firstName: 'Russel',
-  lastName: 'Sims',
-  gender: 'MALE',
-  dob: '01/01/1999',
-  phone: '0313564644',
-  email: 'hello@gmail.com',
-  address: '12 Le Loi',
-  reportTo: 'Kirk Mitrolin',
-  manager: 'Drake Rogers',
-  position: 'Frontend Developer',
-  skillsTags: ['HTML', 'CSS', 'JAVASCRIPT'],
-  avatarImg:
-    'https://www.primefaces.org/paradise-ng/assets/demo/images/avatar/ivanmagalhaes.png',
-  joinedProjects: [
-    {
-      name: 'SAG',
-      workAs: 'Frontend Developer',
-      skillTags: ['HTML', 'CSS', 'JAVASCRIPT'],
-      contributedHours: 40,
-    },
-    {
-      name: 'SAG',
-      workAs: 'Frontend Developer',
-      skillTags: ['HTML', 'CSS', 'JAVASCRIPT'],
-      contributedHours: 40,
-    },
-  ],
-  emergencyContacts: [
-    {
-      firstName: 'Halley',
-      lastName: 'Sims',
-      phone: '0123456789',
-    },
-    {
-      firstName: 'Halley',
-      lastName: 'Sims',
-      phone: '0123456789',
-    },
-  ],
-  bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maio',
-};
 @Component({
   selector: 'employee-detail',
   templateUrl: './employee-detail.component.html',
@@ -82,6 +39,9 @@ export class EmployeeDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.employeeStore.getDepartments();
+    this.employeeStore.getPositions();
+
     this.route.queryParams.subscribe(params => {
       const editParam = params['mode'];
       this.isEditOn = editParam === 'edit' ? true : false;
@@ -98,6 +58,21 @@ export class EmployeeDetailComponent implements OnInit {
     this.employeeDetail$.subscribe(employee => {
       if (!employee) return;
       this.initEmployeeForm(employee);
+    });
+
+    this.employeeStore.departments$.subscribe(departments => {
+      this.departments = departments.map(dep => ({
+        label: dep.departmentName,
+        value: dep.id,
+      }));
+    });
+    this.employeeStore.positions$.subscribe(positions => {
+      this.positionOptions = positions.map(pos => {
+        return {
+          label: pos.positionName,
+          value: pos.id,
+        };
+      });
     });
   }
 
@@ -117,6 +92,7 @@ export class EmployeeDetailComponent implements OnInit {
       facebookLink,
       instagramLink,
       linkedinLink,
+      emergencyContacts,
     } = employee;
     this.profileForm = this.fb.group({
       firstName: [firstName, Validators.required],
@@ -126,7 +102,7 @@ export class EmployeeDetailComponent implements OnInit {
       phoneNumber: [phoneNumber, Validators.required],
       email: [email, [Validators.required, Validators.email]],
       address: [address, Validators.required],
-      avatarImg: '',
+      profilePicture: '',
       positionLevel: {
         label: positionLevel.position.positionName,
         value: positionLevel.position.id,
@@ -140,9 +116,40 @@ export class EmployeeDetailComponent implements OnInit {
       facebookLink,
       instagramLink,
       linkedinLink,
+      emergencyContacts: this.fb.array([
+        ...emergencyContacts.map(({id, firstName, lastName, phoneNumber }) => {
+          return this.fb.group({
+            id,
+            firstName: [firstName, Validators.required],
+            lastName: [lastName, Validators.required],
+            phoneNumber: [phoneNumber, Validators.required],
+          });
+        }),
+      ]),
     });
 
+    if (emergencyContacts.length === 0) {
+      this.addEmergencyContact();
+    }
+
     console.log({ profileForm: this.profileForm });
+  }
+  get emergencyContacts() {
+    return this.profileForm.get('emergencyContacts') as FormArray;
+  }
+
+  addEmergencyContact() {
+    const newContact = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+    });
+    this.emergencyContacts.push(newContact);
+  }
+
+  // Remove an emergency contact from the FormArray
+  removeEmergencyContact(index: number) {
+    this.emergencyContacts.removeAt(index);
   }
 
   openEdit() {
