@@ -10,6 +10,7 @@ import { IEmployee } from '../../models/employee-management.model';
 export class EmployeeCardComponent implements OnChanges {
   @Input() employee!: IEmployee;
   menuItems!: MenuItem[] 
+  defaultImg = "assets/images/avatar-default.jpg"
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('employee' in changes) {

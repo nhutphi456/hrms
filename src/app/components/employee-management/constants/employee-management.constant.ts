@@ -150,6 +150,7 @@ export const GET_EMPLOYEE = gql`
       profilePicture
       profileBio
       emergencyContacts {
+        id
         firstName
         lastName
         phoneNumber
@@ -251,6 +252,7 @@ export const GET_DEPARTMENTS = gql`
 export const GET_NEW_EMPLOYEES = gql`
   query GetEmployeesCarousel {
     employeeOfTheMonth {
+      id
       profilePicture
       firstName
       lastName

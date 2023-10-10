@@ -72,4 +72,7 @@
         @apply w-full;
         height: 2.35rem;
     }
+    .add-contact-btn .p-button.p-button-icon-only {
+        width: unset;
+    }
 }

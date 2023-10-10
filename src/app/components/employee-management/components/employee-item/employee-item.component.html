@@ -4,7 +4,7 @@
       <img class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;"
         [src]="employee.profilePicture || defaultImg" [alt]="employee.firstName">
 
-      <a class="text-black ml-4" [routerLink]="['detail', employee.id]">{{employee.firstName}} {{ employee.lastName
+      <a class="text-black ml-1" [routerLink]="['detail', employee.id]">{{employee.firstName}} {{ employee.lastName
         }}</a>
     </div>
   </td>

@@ -3,6 +3,7 @@ import {
   Department,
   IEmployee,
   IEmployeeParams,
+  IJobLevel,
   IPosition,
 } from '../models/employee-management.model';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
@@ -17,6 +18,7 @@ export interface IEmployeeMngmentState {
   departments: Department[];
   newEmployees: IEmployee[];
   positions: IPosition[];
+  jobLevels: IJobLevel[];
 }
 
 @Injectable({
@@ -39,6 +41,7 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
       departments: [],
       newEmployees: [],
       positions: [],
+      jobLevels: []
     });
   }
 
@@ -61,6 +64,10 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
 
   readonly positions$: Observable<IPosition[]> = this.select(
     state => state.positions,
+  );
+
+  readonly jobLevels$: Observable<IJobLevel[]> = this.select(
+    state => state.jobLevels,
   );
 
   //UPDATER
@@ -98,6 +105,11 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
   readonly setPositions = this.updater(
     (state: IEmployeeMngmentState, positions: IPosition[]) => {
       return { ...state, positions };
+    },
+  );
+  readonly setJobLevels = this.updater(
+    (state: IEmployeeMngmentState, jobLevels: IJobLevel[]) => {
+      return { ...state, jobLevels };
     },
   );
   //EFFECTS
