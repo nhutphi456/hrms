@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { IEmployeeAccount } from '../models/system-admin.model';
 import { MenuItem } from 'primeng/api';
 
@@ -8,9 +8,9 @@ import { MenuItem } from 'primeng/api';
   templateUrl: './user-item.component.html',
   styleUrls: ['./user-item.component.scss']
 })
-export class UserItemComponent implements OnChanges  {
+export class UserItemComponent {
   @HostBinding('class') hostClass = 'hrms-employee-item';
-  @Input() employeesAccount!: IEmployeeAccount;
+  @Input() employeeAccount!: IEmployeeAccount;
   checked = false;
   menuItems: MenuItem[] = [
     {
@@ -18,14 +18,9 @@ export class UserItemComponent implements OnChanges  {
       icon: 'pi pi-pencil',
     },
   ];
-  ngOnChanges(changes: SimpleChanges) {
-    if ('employeesAccount' in changes) {
-      this.checked = this.employeesAccount?.status === 0 ? true : false;
-    }
-  }
+  defaultImg = 'assets/images/avatar-default.jpg';
+
   handleEmployeeDetail() {
     return ''
   }
-
-
 }

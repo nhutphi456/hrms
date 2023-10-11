@@ -1,109 +1,33 @@
 import { Injectable } from '@angular/core';
-import { IEmployeeAccount } from '../models/system-admin.model';
-import { Observable, from } from 'rxjs';
-const mockData: IEmployeeAccount[] = [
-  {
-    firstName: 'Erling',
-    lastName: 'Haaland',
-    gender: 1,
-    dob: '01/01/1999',
-    position: 'Frontend Developer',
-    phone: '0123456789',
-    email: 'test@gmail.com',
-    address: 'manchester',
-    status: 1,
-    reportTo: 1,
-    images: '',
-    action: '',
-    role: 0,
-    createOn: '01/01/1999',
-  },
-  {
-    firstName: 'Bernado',
-    lastName: 'Silva',
-    gender: 1,
-    dob: '01/01/1999',
-    position: 'Backend Developer',
-    phone: '0123456789',
-    email: 'test@gmail.com',
-    address: 'manchester',
-    status: 1,
-    reportTo: 1,
-    images: '',
-    action: '',
-    role: 0,
-    createOn: '01/01/1999',
-  },
-  {
-    firstName: 'Lionel',
-    lastName: 'Messi',
-    gender: 1,
-    dob: '01/01/1999',
-    position: 'Tester',
-    phone: '0123456789',
-    email: 'test@gmail.com',
-    address: 'manchester',
-    status: 0,
-    reportTo: 1,
-    images: '',
-    action: '',
-    role: 1,
-    createOn: '01/01/1999',
-  },
-  {
-    firstName: 'Erling',
-    lastName: 'Haaland',
-    gender: 1,
-    dob: '01/01/1999',
-    position: 'Frontend Developer',
-    phone: '0123456789',
-    email: 'test@gmail.com',
-    address: 'manchester',
-    status: 1,
-    reportTo: 1,
-    images: '',
-    action: '',
-    role: 0,
-    createOn: '01/01/1999',
-  },
-  {
-    firstName: 'Bernado',
-    lastName: 'Silva',
-    gender: 1,
-    dob: '01/01/1999',
-    position: 'Backend Developer',
-    phone: '0123456789',
-    email: 'test@gmail.com',
-    address: 'manchester',
-    status: 0,
-    reportTo: 1,
-    images: '',
-    action: '',
-    role: 1,
-    createOn: '01/01/1999',
-  },
-  {
-    firstName: 'Lionel',
-    lastName: 'Messi',
-    gender: 1,
-    dob: '01/01/1999',
-    position: 'Tester',
-    phone: '0123456789',
-    email: 'test@gmail.com',
-    address: 'manchester',
-    status: 1,
-    reportTo: 1,
-    images: '',
-    action: '',
-    role: 1,
-    createOn: '01/01/1999',
-  },
-];
+import { Apollo, gql } from 'apollo-angular';
+import { Observable, map } from 'rxjs';
+import { GET_ROLES, GET_USERS } from '../constants/system-admin.constant';
+import {
+  IAccountApiResponse,
+  IAccountParams,
+  IEmployeeAccount,
+  IRoleApiResponse,
+} from '../models/system-admin.model';
+
 @Injectable({
   providedIn: 'root',
 })
 export class SystemAdminService {
-  getEmployees(): Observable<IEmployeeAccount[]> {
-    return from([mockData]);
+  constructor(private apollo: Apollo) {}
+  getEmployeeAccounts(params: IAccountParams): Observable<IAccountApiResponse> {
+    return this.apollo
+      .watchQuery<IAccountApiResponse>({
+        query: GET_USERS,
+        variables: params,
+      })
+      .valueChanges.pipe(map(res => res.data));
+  }
+
+  getRoles(): Observable<IRoleApiResponse> {
+    return this.apollo
+      .watchQuery<IRoleApiResponse>({
+        query: GET_ROLES,
+      })
+      .valueChanges.pipe(map(res => res.data));
   }
 }

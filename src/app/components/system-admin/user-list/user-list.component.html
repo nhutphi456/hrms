@@ -1,7 +1,24 @@
+<div class="flex flex-auto pt-3 items-end">
+  <div class="flex gap-3 items-center">
+    <!-- <button pButton type="submit" icon="pi pi-filter" label="Newest"> </button> -->
+    <hrms-screen-filter (getSearchValue)="searchValue($event)"></hrms-screen-filter>
+    <form class="flex items-center" [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm.value)">
+      <p-multiSelect display="chip" [options]="roleOptions" defaultLabel="Role" formControlName="roles"
+        (onChange)="onFilter()"></p-multiSelect>
+      <p-button *ngIf="isClearAllVisible()" (onClick)="handleClearAll()" styleClass="p-button-link" label="Clear all">
+      </p-button>
+    </form>
+  </div>
+  <div class="flex gap-4 flex-auto justify-end">
+    <hrms-tab-menu [labelItems]="labelItems" [activeItem]="activeItem"
+      (handleActiveItemChange)="onActiveItemChange($event)"></hrms-tab-menu>
+    <!-- <button pButton type="submit" icon="pi pi-plus" styleClass="p-button-sm" label="Create User"> </button> -->
+  </div>
+</div>
 <div class="mt-3">
-  <hrms-table (pagingInfo)="onPageChange()" [isPaginationShown]="true" [table]="tableData" [contentRef]="contentRef">
-      <ng-template #contentRef let-rowData>
-          <app-user-item [employeesAccount]="rowData"></app-user-item>
-      </ng-template>
+  <hrms-table (pagingInfo)="onPageChange($event)" [isPaginationShown]="true" [table]="tableData" [contentRef]="contentRef">
+    <ng-template #contentRef let-rowData>
+      <app-user-item [employeeAccount]="rowData"></app-user-item>
+    </ng-template>
   </hrms-table>
 </div>

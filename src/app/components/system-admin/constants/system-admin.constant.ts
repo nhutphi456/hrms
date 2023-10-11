@@ -1,11 +1,60 @@
-import { TableHeader } from "src/app/models/global.model";
+import { gql } from 'apollo-angular';
+import { MenuItem } from 'primeng/api';
+import { TableHeader } from 'src/app/models/global.model';
 
 export const userAccount: TableHeader[] = [
-  { col: 'Images', field: 'images' },
-  { col: 'Name', field: 'firstName' },
+  { col: 'Username', field: 'username' },
   { col: 'Status', field: 'status' },
-  { col: 'Email', field: 'email' },
-  { col: 'Created on ', field: 'createdOn ' },
+  { col: 'Created at', field: 'createdAt' },
   { col: 'Role', field: 'role' },
-  { col: 'Action', field: 'action' },
+  { col: '', field: 'action' },
 ];
+export const userLabelItems: MenuItem[] = [
+  {
+    label: 'all',
+    id: '',
+    title: 'All Employees',
+  },
+  {
+    label: 'active',
+    id: '1',
+    title: 'Active',
+  },
+  {
+    label: 'inactive',
+    id: '0',
+    title: 'Inactive',
+  },
+];
+
+export const GET_USERS = gql`
+  query GetUsers($search: String, $status: Boolean, $roles: [ID], $pageNo: Int) {
+    users(search: $search, roles: $roles, pageNo: $pageNo, status: $status) {
+      data {
+        name
+        username
+        createdAt
+        status
+        role {
+          roleId
+          name
+        }
+      }
+      pagination {
+        pageNo
+        pageSize
+        totalItems
+        totalPages
+      }
+    }
+  }
+`;
+
+export const GET_ROLES = gql`
+  query GetRoles {
+    roles {
+      roleId
+      name
+    }
+  }
+`;

@@ -1,29 +1,28 @@
 <tr class="mt-3 p-selectable-row" (click)="handleEmployeeDetail()">
-  <td>
-    <img
-      class="avatar-img"
-      src="https://www.primefaces.org/paradise-ng/assets/demo/images/avatar/ivanmagalhaes.png"
-      [alt]="employeesAccount.images"
-    />
+  <td>{{ employeeAccount.username }}</td>
+
+  <td class="user-item-row" [class.text-success]="employeeAccount.status" [class.text-danger]="!employeeAccount.status">
+    <div class="flex gap-2 items-center">
+      <i class="pi-circle-fill pi"></i>
+      <span>
+        {{ employeeAccount.status ? 'Active' : 'Inactive' | titlecase }}
+      </span>
+    </div>
   </td>
-  <td>{{ employeesAccount.firstName }} {{ employeesAccount.lastName }}</td>
-  <td><p-inputSwitch [(ngModel)]="checked"></p-inputSwitch></td>
-  <td>{{ employeesAccount.email }}</td>
-  <td>{{ employeesAccount.createOn }}</td>
+  <td>{{ employeeAccount.createdAt }}</td>
   <td>
     <span
+    *ngIf="employeeAccount.role"
       class="p-2 inline-flex items-center rounded-[50px] bg-blue-100 text-[12px] font-medium text-blue-500 ring-1 ring-inset ring-blue-300"
-      [class.text-primary]="employeesAccount.role === 0"
-      [class.text-green]="employeesAccount.role === 1"
     >
-    <span>
-      {{ employeesAccount.role === 1 ? 'User' && 'Admin' : 'Manager' | titlecase }}
+    <span >
+      {{ employeeAccount.role.name}}
     </span>
     </span
     >
   </td>
-  <td class="">
-    <p-button type="button" (click)="menu.toggle($event)" icon="pi pi-pencil" styleClass="p-button-link"></p-button>
+  <td class="text-right">
+    <p-button type="button" (click)="menu.toggle($event)" icon="pi pi-ellipsis-v" styleClass="p-button-link"></p-button>
     <p-menu #menu [model]="menuItems" [popup]="true" appendTo="body"></p-menu>
   </td>
 </tr>

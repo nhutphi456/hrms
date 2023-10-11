@@ -1,16 +1,30 @@
+import { PaginatedData } from 'src/app/models/global.model';
+
 export interface IEmployeeAccount {
-  images:string;
-  firstName: string;
-  lastName: string;
-  gender: number;
-  dob: string;
-  position: string;
-  phone: string;
-  email: string;
-  address: string;
-  status: number;
-  reportTo: number;
-  action: string;
-  role:number;
-  createOn: string;
+  id?: number;
+  name: string;
+  username: string;
+  role?: IAccountRole;
+  status: boolean;
+  createdAt: string;
+}
+
+export interface IAccountRole {
+  roleId: number;
+  name: string;
+}
+export interface IAccountParams {
+  pageNo?: number;
+  keyword?: string;
+  roles?: number[];
+  status?: boolean;
+  pageSize?: number;
+}
+
+export interface IAccountApiResponse {
+  users: PaginatedData<IEmployeeAccount>;
+}
+
+export interface IRoleApiResponse {
+  roles: IAccountRole[];
 }
