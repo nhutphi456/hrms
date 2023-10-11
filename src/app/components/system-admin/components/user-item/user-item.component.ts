@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { IEmployeeAccount } from '../models/system-admin.model';
+import { IEmployeeAccount } from '../../models/system-admin.model';
 import { MenuItem } from 'primeng/api';
 
 

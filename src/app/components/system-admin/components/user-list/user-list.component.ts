@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IAccountParams, IEmployeeAccount } from '../models/system-admin.model';
-import { HrmsTable } from '../../share/models/hrms-table.model';
+import { IAccountParams, IEmployeeAccount } from '../../models/system-admin.model';
+import { HrmsTable } from '../../../share/models/hrms-table.model';
 import {
   userAccount,
   userLabelItems,
-} from '../constants/system-admin.constant';
-import { EmployeeAccountStore } from '../store/userAccount.store.service';
+} from '../../constants/system-admin.constant';
+import { EmployeeAccountStore } from '../../store/userAccount.store.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import { PageChangeEvent } from '../../share/models/pagingInfo.model';
+import { PageChangeEvent } from '../../../share/models/pagingInfo.model';
 import { PaginatedData } from 'src/app/models/global.model';
 
 @Component({

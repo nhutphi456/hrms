@@ -4,8 +4,8 @@ import { SystemAdminRoutingModule } from './system-admin-routing.module';
 import { SystemAdminComponent } from './system-admin.component';
 import { ShareModule } from '../share/share.module';
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserItemComponent } from './user-item/user-item.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UserItemComponent } from './components/user-item/user-item.component';
 import { SystemAdminService } from './services/system-admin.service';
 import { EmployeeAccountStore } from './store/userAccount.store.service';
 import { MenuModule } from 'primeng/menu';
@@ -16,7 +16,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { SystemHeaderComponent } from './system-header/system-header.component';
+import { SystemHeaderComponent } from './components/system-header/system-header.component';
 
 
 
