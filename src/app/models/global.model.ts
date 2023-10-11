@@ -9,6 +9,11 @@ export interface PaginatedData<T> {
     pageSize: number;
     totalPages: number;
     totalItems: number;
-  }
-  data: T[]
+  };
+  data: T[];
+}
+
+export interface IDropdownItem {
+  label: string;
+  value: number;
 }

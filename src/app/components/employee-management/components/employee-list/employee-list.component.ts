@@ -104,7 +104,7 @@ export class EmployeeListComponent implements OnInit {
     });
   }
   searchValue(search: string): void {
-    this.handleEmployeeParams('keyword', search);
+    this.handleEmployeeParams('name', search);
     this.getEmployees();
   }
   onPageChange(e: PageChangeEvent): void {

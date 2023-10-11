@@ -49,10 +49,10 @@
                 <p-dropdown styleClass="w-full" formControlName="position" [options]="positionOptions"
                     optionLabel="label" placeholder="Choose position"></p-dropdown>
             </div>
-            <div>
+            <div *ngIf="position && position.hasLevel">
                 <label class="control-label" for="">Job Level</label>
-                <p-dropdown styleClass="w-full" formControlName="jobLevel" [options]="positionOptions"
-                    optionLabel="label" placeholder="Choose position"></p-dropdown>
+                <p-dropdown styleClass="w-full" formControlName="jobLevel" [options]="jobLevelOptions"
+                    optionLabel="label" placeholder="Choose level"></p-dropdown>
             </div>
             <div class="col-span-3">
                 <label class="control-label" for="">Profile Bio</label>
@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div>
-                <label class="control-label" for="">Avatar</label>
+                <label class="control-label" for="">Profile Image</label>
                 <div class="profile-img relative">
                     <div *ngIf="!tempImg" class="profile-image-container">
                         <img style="background: #CDE9EAFF; border-radius: 60px;" class="w-full"
@@ -141,7 +141,7 @@
 
         </div>
         <div class="mt-4 text-right">
-            <button type="submit" pButton label="Create"> </button>
+            <button [loading]="isLoading" type="submit" pButton label="Create"> </button>
         </div>
     </form>
 </div>

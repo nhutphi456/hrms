@@ -22,7 +22,7 @@ export interface IEmployeeMngmentState {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
   constructor(private employeeMngmentService: EmployeeManagementService) {
@@ -41,7 +41,7 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
       departments: [],
       newEmployees: [],
       positions: [],
-      jobLevels: []
+      jobLevels: [],
     });
   }
 
@@ -175,6 +175,19 @@ export class EmployeeStore extends ComponentStore<IEmployeeMngmentState> {
         this.employeeMngmentService.getPositions().pipe(
           tapResponse({
             next: res => this.setPositions(res.positions),
+            error: error => console.log(error),
+          }),
+        ),
+      ),
+    ),
+  );
+
+  readonly getJobLevels = this.effect<void>(trigger$ =>
+    trigger$.pipe(
+      switchMap(() =>
+        this.employeeMngmentService.getJobLevels().pipe(
+          tapResponse({
+            next: res => this.setJobLevels(res.jobLevels),
             error: error => console.log(error),
           }),
         ),

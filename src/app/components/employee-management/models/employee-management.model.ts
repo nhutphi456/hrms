@@ -6,7 +6,10 @@ export interface IEmployee {
   lastName: string;
   gender: number;
   dateOfBirth: string;
-  positionLevel: { position: { id: number; positionName: string } };
+  positionLevel: {
+    position: { id: number; positionName: string, hasLevel: boolean };
+    jobLevel: { id: number; jobLevelName: string };
+  };
   phoneNumber: string;
   email: string;
   address: string;
@@ -56,6 +59,7 @@ export interface Department {
 export interface IPosition {
   id: number;
   positionName: string;
+  hasLevel: boolean;
 }
 
 export interface IJobLevel {
@@ -103,11 +107,15 @@ export interface IAddEmployeeApiResponse {
 export interface IPositionApiResponse {
   positions: IPosition[];
 }
+
+export interface IJobLevelApiResponse {
+  jobLevels: IJobLevel[];
+}
 export interface IEmployeeParams {
   status?: boolean;
   departments?: number[];
   currentContracts?: number[];
-  keyword?: string;
+  name?: string;
   pageNo?: number;
 }
 

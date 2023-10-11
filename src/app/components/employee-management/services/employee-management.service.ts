@@ -6,6 +6,7 @@ import {
   GET_DEPARTMENTS,
   GET_EMPLOYEE,
   GET_EMPLOYEES,
+  GET_JOB_LEVELS,
   GET_NEW_EMPLOYEES,
   GET_POSITIONS,
   UPDATE_EMPLOYEE,
@@ -17,8 +18,9 @@ import {
   IEmployeeDetailApiResponse,
   IEmployeeInput,
   IEmployeeParams,
+  IJobLevelApiResponse,
   INewEmployeeApiResponse,
-  IPositionApiResponse
+  IPositionApiResponse,
 } from '../models/employee-management.model';
 @Injectable({
   providedIn: 'root',
@@ -57,7 +59,7 @@ export class EmployeeManagementService {
   ): Observable<MutationResult<IAddEmployeeApiResponse>> {
     return this.apollo.mutate<IAddEmployeeApiResponse>({
       mutation: ADD_EMPLOYEE,
-      variables: { ...employee },
+      variables: { input: employee },
     });
   }
 
@@ -81,6 +83,14 @@ export class EmployeeManagementService {
     return this.apollo
       .watchQuery<IPositionApiResponse>({
         query: GET_POSITIONS,
+      })
+      .valueChanges.pipe(map(res => res.data));
+  }
+
+  getJobLevels(): Observable<IJobLevelApiResponse> {
+    return this.apollo
+      .watchQuery<IJobLevelApiResponse>({
+        query: GET_JOB_LEVELS,
       })
       .valueChanges.pipe(map(res => res.data));
   }

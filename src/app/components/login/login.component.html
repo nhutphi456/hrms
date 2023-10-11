@@ -29,7 +29,7 @@
                 <i class="pi pi-envelope"></i>
               </label>
               <input
-                formControlName="userName"
+                formControlName="username"
                 placeholder="Your E-Mail"
                 type="text"
                 id="username"
@@ -39,21 +39,21 @@
 
               <ng-container
                 *ngIf="
-                  signInForm.get('userName')?.dirty ||
-                  signInForm.get('userName')?.touched
+                  signInForm.get('username')?.dirty ||
+                  signInForm.get('username')?.touched
                 "
               >
                 <div
-                  *ngIf="signInForm.get('userName')?.hasError('email')"
+                  *ngIf="signInForm.get('username')?.hasError('email')"
                   class="validate"
                 >
                   Invalid Email.
                 </div>
                 <div
-                  *ngIf="signInForm.get('userName')?.hasError('required')"
+                  *ngIf="signInForm.get('username')?.hasError('required')"
                   class="validate"
                 >
-                  Username is required.
+                  username is required.
                 </div>
               </ng-container>
             </div>
@@ -66,7 +66,7 @@
               </label>
               <input
                 required
-                formControlName="userPassword"
+                formControlName="password"
                 placeholder="Enter your password"
                 type="{{ showPassword ? 'text' : 'password' }}"
                 class="ml-2 bg-transparent outline-none w-[95%]"
@@ -86,12 +86,12 @@
 
               <ng-container
                 *ngIf="
-                  signInForm.get('userPassword')?.dirty ||
-                  signInForm.get('userPassword')?.touched
+                  signInForm.get('password')?.dirty ||
+                  signInForm.get('password')?.touched
                 "
               >
                 <div
-                  *ngIf="signInForm.get('userPassword')?.hasError('required')"
+                  *ngIf="signInForm.get('password')?.hasError('required')"
                   class="validate"
                 >
                   Password is required.

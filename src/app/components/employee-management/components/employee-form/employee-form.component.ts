@@ -2,6 +2,8 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileUpload } from 'primeng/fileupload';
+import { tap } from 'rxjs';
+import { IDropdownItem } from 'src/app/models/global.model';
 import { HelperService } from 'src/app/services/helper.service';
 import { NotificationService } from 'src/app/shared/message/notification.service';
 import { EmployeeManagementService } from '../../services/employee-management.service';
@@ -28,10 +30,11 @@ export class EmployeeFormComponent implements OnInit {
     { label: 'Internship', value: 2 },
   ];
 
-  departmentOptions!: { label: string; value: number }[];
-
-  positionOptions!: { label: string; value: number }[];
+  departmentOptions!: IDropdownItem[];
+  positionOptions!: { label: string; value: number; hasLevel: boolean }[];
+  jobLevelOptions!: IDropdownItem[];
   tempImg = '';
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -54,10 +57,16 @@ export class EmployeeFormComponent implements OnInit {
     return this.addEmployeeForm.get('emergencyContacts') as FormArray;
   }
 
+  get position() {
+    return this.addEmployeeForm.get('position')?.value;
+  }
+
   ngOnInit(): void {
     this.initForm();
     this.employeeStore.getPositions();
     this.employeeStore.getDepartments();
+    this.employeeStore.getJobLevels();
+
     this.employeeStore.departments$.subscribe(departments => {
       this.departmentOptions = departments.map(dep => {
         return {
@@ -71,6 +80,15 @@ export class EmployeeFormComponent implements OnInit {
         return {
           label: pos.positionName,
           value: pos.id,
+          hasLevel: pos.hasLevel,
+        };
+      });
+    });
+    this.employeeStore.jobLevels$.subscribe(jobLevels => {
+      this.jobLevelOptions = jobLevels.map(level => {
+        return {
+          label: level.jobLevelName,
+          value: level.id,
         };
       });
     });
@@ -146,29 +164,42 @@ export class EmployeeFormComponent implements OnInit {
   private parseToByteArray(base64: string) {
     const avaBytesArr = this.helperService.base64ToBytes(base64); // Convert base64 string to bytes
     const byteArr = Array.from(avaBytesArr);
-    console.log('parse');
     this.addEmployeeForm.patchValue({
       avatarImg: byteArr,
     });
   }
 
   onSubmit() {
-    const { department, position, dateOfBirth } = this.addEmployeeForm.value;
+    const { department, position, dateOfBirth, jobLevel } =
+      this.addEmployeeForm.value;
     const employee = {
       ...this.addEmployeeForm.value,
       departmentId: department.value,
       positionId: position.value,
+      jobLevelId: jobLevel.value ?? 0,
       dateOfBirth: new Date(dateOfBirth).toISOString(),
-      dateJoined: new Date().toISOString(),
       // avatarImg: '',
     };
 
     delete employee.department;
     delete employee.position;
+    delete employee.jobLevel;
 
+    console.log({ formvalue: this.addEmployeeForm.value });
     console.log({ employee });
 
-    this.employeeService.addEmployee(employee).subscribe();
-    // this.ref.close()
+    this.employeeService
+      .addEmployee(employee)
+      .pipe(o$ => {
+        this.isLoading = true;
+        return o$;
+      })
+      .subscribe(() => {
+        this.isLoading = false;
+        this.notificationService.successNotification(
+          $localize`Add new employee successfully`,
+        );
+        this.ref.close();
+      });
   }
 }

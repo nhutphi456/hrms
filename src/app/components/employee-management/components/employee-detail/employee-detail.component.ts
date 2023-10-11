@@ -2,16 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FileUpload } from 'primeng/fileupload';
-import { NotificationService } from 'src/app/shared/message/notification.service';
-import { EmployeeStore } from '../../store/employee-management.store.service';
-import { IEmployee } from '../../models/employee-management.model';
+import { IDropdownItem } from 'src/app/models/global.model';
 import { HelperService } from 'src/app/services/helper.service';
-import {
-  departments,
-  genders,
-  positions,
-} from '../../constants/employee-management.constant';
+import { NotificationService } from 'src/app/shared/message/notification.service';
+import { genders } from '../../constants/employee-management.constant';
+import { IEmployee } from '../../models/employee-management.model';
 import { EmployeeManagementService } from '../../services/employee-management.service';
+import { EmployeeStore } from '../../store/employee-management.store.service';
 @Component({
   selector: 'employee-detail',
   templateUrl: './employee-detail.component.html',
@@ -24,10 +21,12 @@ export class EmployeeDetailComponent implements OnInit {
   isEditOn = false;
   profileForm!: FormGroup;
   genderOptions = genders;
-  departments = departments;
-  positionOptions = positions;
+  departments!: IDropdownItem[];
+  positionOptions!: { label: string; value: number; hasLevel: boolean }[];
+  jobLevelOptions!: IDropdownItem[];
   tempImg = '';
   employeeId!: number;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -41,6 +40,7 @@ export class EmployeeDetailComponent implements OnInit {
   ngOnInit(): void {
     this.employeeStore.getDepartments();
     this.employeeStore.getPositions();
+    this.employeeStore.getJobLevels();
 
     this.route.queryParams.subscribe(params => {
       const editParam = params['mode'];
@@ -71,6 +71,15 @@ export class EmployeeDetailComponent implements OnInit {
         return {
           label: pos.positionName,
           value: pos.id,
+          hasLevel: pos.hasLevel,
+        };
+      });
+    });
+    this.employeeStore.jobLevels$.subscribe(jobLevel => {
+      this.jobLevelOptions = jobLevel.map(level => {
+        return {
+          label: level.jobLevelName,
+          value: level.id,
         };
       });
     });
@@ -93,6 +102,7 @@ export class EmployeeDetailComponent implements OnInit {
       instagramLink,
       linkedinLink,
       emergencyContacts,
+      currentContract,
     } = employee;
     this.profileForm = this.fb.group({
       firstName: [firstName, Validators.required],
@@ -102,10 +112,15 @@ export class EmployeeDetailComponent implements OnInit {
       phoneNumber: [phoneNumber, Validators.required],
       email: [email, [Validators.required, Validators.email]],
       address: [address, Validators.required],
-      profilePicture: '',
-      positionLevel: {
+      // profilePicture: '',
+      position: {
         label: positionLevel.position.positionName,
         value: positionLevel.position.id,
+        hasLevel: positionLevel.position.hasLevel,
+      },
+      jobLevel: {
+        label: positionLevel.jobLevel?.jobLevelName,
+        value: positionLevel.jobLevel?.id,
       },
       profileBio,
       department: {
@@ -116,8 +131,9 @@ export class EmployeeDetailComponent implements OnInit {
       facebookLink,
       instagramLink,
       linkedinLink,
+      currentContract,
       emergencyContacts: this.fb.array([
-        ...emergencyContacts.map(({id, firstName, lastName, phoneNumber }) => {
+        ...emergencyContacts.map(({ id, firstName, lastName, phoneNumber }) => {
           return this.fb.group({
             id,
             firstName: [firstName, Validators.required],
@@ -131,11 +147,12 @@ export class EmployeeDetailComponent implements OnInit {
     if (emergencyContacts.length === 0) {
       this.addEmergencyContact();
     }
-
-    console.log({ profileForm: this.profileForm });
   }
   get emergencyContacts() {
     return this.profileForm.get('emergencyContacts') as FormArray;
+  }
+  get position() {
+    return this.profileForm.get('position')?.value;
   }
 
   addEmergencyContact() {
@@ -164,26 +181,37 @@ export class EmployeeDetailComponent implements OnInit {
     // this.profileForm.patchValue({
     //   avatar: this.tempImg,
     // });
-    const { department, positionLevel, dateOfBirth } = this.profileForm.value;
+    const { department, position, dateOfBirth, jobLevel } =
+      this.profileForm.value;
     const updatedEmployee = {
       ...this.profileForm.value,
-      // departmentId: department.value,
-      // positionLevelId: positionLevel.value,
+      departmentId: department.value,
+      positionId: position.value,
       dateOfBirth: new Date(dateOfBirth).toISOString(),
+      jobLevelId: position.hasLevel ? jobLevel.value : 0,
       id: this.employeeId,
     };
 
     delete updatedEmployee.department;
-    delete updatedEmployee.positionLevel;
+    delete updatedEmployee.position;
+    delete updatedEmployee.jobLevel;
 
-    this.employeeService.updateEmployee(updatedEmployee).subscribe();
-    console.log({ updatedEmployee });
+    this.employeeService
+      .updateEmployee(updatedEmployee)
+      .pipe(o$ => {
+        this.isLoading = true;
+        return o$;
+      })
+      .subscribe(() => {
+        this.isLoading = false;
+        this.isEditOn = false;
+        this.employeeStore.getEmployee(this.employeeId);
+      });
   }
 
   onUpload(f: File): void {
     this.fileUpload.clear();
     this.fileUpload.choose();
-    console.log({ f });
     const reader = new FileReader();
 
     reader.onload = () => {

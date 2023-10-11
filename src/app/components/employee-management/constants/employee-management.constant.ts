@@ -84,6 +84,7 @@ export const GET_EMPLOYEES = gql`
     $currentContracts: [Int]
     $pageNo: Int!
     $pageSize: Int
+    $name: String
   ) {
     employees(
       status: $status
@@ -91,6 +92,7 @@ export const GET_EMPLOYEES = gql`
       currentContracts: $currentContracts
       pageNo: $pageNo
       pageSize: $pageSize
+      name: $name
     ) {
       pagination {
         pageNo
@@ -139,6 +141,11 @@ export const GET_EMPLOYEE = gql`
         position {
           id
           positionName
+          hasLevel
+        }
+        jobLevel {
+          id
+          jobLevelName
         }
       }
       currentContract
@@ -171,63 +178,9 @@ export const GET_EMPLOYEE = gql`
   }
 `;
 
-// export const ADD_EMPLOYEE = gql`
-//   mutation AddEmployee($input: EmployeeInput!) {
-//     addEmployee(input: $input) {
-//       firstName
-//       lastName
-//       dateOfBirth
-//       email
-//       phoneNumber
-//       address
-//       currentContract
-//       gender
-//       avatarImg
-//       facebookLink
-//       twitterLink
-//       instagramLink
-//       linkedinLink
-//     }
-//   }
-// `;
-
 export const ADD_EMPLOYEE = gql`
-  mutation AddEmployee(
-    $firstName: String!
-    $lastName: String!
-    $email: String!
-    $gender: String!
-    $dateOfBirth: String!
-    $phoneNumber: String!
-    $address: String!
-    $dateJoined: String!
-    $currentContract: Int!
-    $profileBio: String!
-    $facebookLink: String!
-    $twitterLink: String!
-    $linkedinLink: String!
-    $instagramLink: String!
-    $positionId: Int!
-    $departmentId: Int!
-  ) {
-    createProfile(
-      firstName: $firstName
-      lastName: $lastName
-      email: $email
-      gender: $gender
-      dateOfBirth: $dateOfBirth
-      phoneNumber: $phoneNumber
-      address: $address
-      dateJoined: $dateJoined
-      currentContract: $currentContract
-      profileBio: $profileBio
-      facebookLink: $facebookLink
-      twitterLink: $twitterLink
-      linkedinLink: $linkedinLink
-      instagramLink: $instagramLink
-      positionId: $positionLevelId
-      departmentId: $departmentId
-    ) {
+  mutation AddEmployee($input: EmployeeInput!) {
+    createProfile(input: $input) {
       firstName
       lastName
     }
@@ -235,8 +188,11 @@ export const ADD_EMPLOYEE = gql`
 `;
 
 export const UPDATE_EMPLOYEE = gql`
-  mutation UpdateEmployee($input: EmployeeUpdateInput!) {
-    updateEmployee(input: $input)
+  mutation UpdateEmployee($input: EmployeeInput!) {
+    updateEmployee(input: $input) {
+      firstName
+      lastName
+    }
   }
 `;
 
@@ -273,6 +229,16 @@ export const GET_POSITIONS = gql`
     positions {
       id
       positionName
+      hasLevel
+    }
+  }
+`;
+
+export const GET_JOB_LEVELS = gql`
+  query GetJobLevels {
+    jobLevels {
+      id
+      jobLevelName
     }
   }
 `;
