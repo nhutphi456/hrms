@@ -39,7 +39,7 @@ export class LoginComponent {
 
   onSubmit() {
     this.signInForm.markAllAsTouched();
-    const {username, password} = this.signInForm.value
+    const { username, password } = this.signInForm.value;
 
     if (!this.signInForm.valid) {
       console.log(this.signInForm);
@@ -48,15 +48,21 @@ export class LoginComponent {
       );
     } else {
       this.isLoading = true;
-      // this.router.navigate(['system-admin']);
-      // this.notificationService.successNotification($localize`Login Successful`);
-      this.apollo.watchQuery({
-        query: LOGIN,
-        variables: {
-          username,
-          password
-        }
-      }).valueChanges.pipe(map((res: any) => res.data)).subscribe();
+      this.apollo
+        .watchQuery({
+          query: LOGIN,
+          variables: {
+            username,
+            password,
+          },
+        })
+        .valueChanges.pipe(map(res => res.data))
+        .subscribe(() => {
+          this.router.navigate(['system-admin']);
+          this.notificationService.successNotification(
+            $localize`Login Successful`,
+          );
+        });
 
       // còn xử lý token ở đây....
     }

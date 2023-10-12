@@ -178,11 +178,15 @@
     @apply w-2;
   }
 
+  *::-webkit-scrollbar:horizontal {
+    @apply h-2;
+  }
+
   *::-webkit-scrollbar-track {
     @apply bg-transparent rounded;
   }
 
-  *::-webkit-scrollbar-thumb {
+  *::-webkit-scrollbar-thumb, *::-webkit-scrollbar-thumb:horizontal {
     @apply bg-primary border-2 border-white;
   }
 
@@ -271,4 +275,7 @@
   }
   .p-datatable-tbody td {
     @apply p-1 align-middle;
+  }
+  .p-datatable tr:hover {
+    background: #e9ecef!important;
   }

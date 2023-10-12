@@ -1,12 +1,12 @@
 <div class="bg-white rounded-md overflow-hidden">
   <p-table [value]="table.data.body" [columns]="table.data.header" [tableStyle]="{ 'min-width': '80rem' }"
-    [responsive]="true" [rowHover]="true" responsiveLayout="stack" styleClass="p-datatable-sm"
-    >
+    [responsive]="true" [rowHover]="true" responsiveLayout="stack" styleClass="p-datatable-sm">
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th style="width: 4rem" id="header-checkbox" *ngIf="isCheckboxShown">
           <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
-          <p-checkbox [(ngModel)]="headerChecked" [binary]="true" inputId="binary" (onChange)="onHeaderCheckboxChange($event)"></p-checkbox>
+          <p-checkbox [(ngModel)]="headerChecked" [binary]="true" inputId="binary"
+            (onChange)="onHeaderCheckboxChange($event)"></p-checkbox>
         </th>
 
         <th *ngFor="let col of columns" [id]="col.field" [pSortableColumn]="col.field">

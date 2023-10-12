@@ -2,13 +2,14 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Apollo } from 'apollo-angular';
+import { REGISTER } from './constants/register.constant';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   encapsulation: ViewEncapsulation.None,
-
 })
 export class RegisterComponent {
   @HostBinding('class') hostClass = 'oms-login-host';
@@ -23,16 +24,25 @@ export class RegisterComponent {
     // private authService: AuthService,
     private router: Router,
     // private notificationService: NotificationService
+    private apollo: Apollo,
   ) {}
 
   signInForm = new FormGroup({
-    userName: new FormControl('', [Validators.required,Validators.email]),
-    userPassword: new FormControl('', Validators.required),
+    username: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required),
   });
 
   onSubmit() {
     this.signInForm.markAllAsTouched();
 
+    const { username, password } = this.signInForm.value;
+    console.log({ username, password });
+    this.apollo
+      .mutate({
+        mutation: REGISTER,
+        variables: { signupDto: { username, password } },
+      })
+      .subscribe();
     // if (!this.signInForm.valid) {
     //   this.notificationService.errorNotification(
     //     $localize`Enter valid form value`

@@ -105,12 +105,12 @@ export class EmployeeDetailComponent implements OnInit {
       currentContract,
     } = employee;
     this.profileForm = this.fb.group({
-      firstName: [firstName, Validators.required],
-      lastName: [lastName, Validators.required],
+      firstName: [firstName, Validators.required, Validators.maxLength(100)],
+      lastName: [lastName, Validators.required, Validators.maxLength(100)],
       gender: [gender, Validators.required],
       dateOfBirth: [new Date(dateOfBirth), Validators.required],
       phoneNumber: [phoneNumber, Validators.required],
-      email: [email, [Validators.required, Validators.email]],
+      email: [email, [Validators.required, Validators.email, Validators.maxLength(100)]],
       address: [address, Validators.required],
       // profilePicture: '',
       position: {
@@ -136,8 +136,8 @@ export class EmployeeDetailComponent implements OnInit {
         ...emergencyContacts.map(({ id, firstName, lastName, phoneNumber }) => {
           return this.fb.group({
             id,
-            firstName: [firstName, Validators.required],
-            lastName: [lastName, Validators.required],
+            firstName: [firstName, Validators.required, Validators.maxLength(100)],
+            lastName: [lastName, Validators.required, Validators.maxLength(100)],
             phoneNumber: [phoneNumber, Validators.required],
           });
         }),

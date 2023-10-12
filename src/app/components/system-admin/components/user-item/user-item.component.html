@@ -11,7 +11,7 @@
       </span>
     </div>
   </td>
-  <td>{{ employeeAccount.createdAt | date }}</td>
+  <td>{{ employeeAccount.createdAt | date:'dd/MM/yyyy' }}</td>
   <td>
     <ng-container *ngIf="employeeAccount.roles?.length;else noRole">
       <ng-container *ngFor="let role of employeeAccount.roles">

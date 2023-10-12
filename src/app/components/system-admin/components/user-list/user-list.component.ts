@@ -69,7 +69,7 @@ export class UserListComponent implements OnInit {
 
       const data = {
         page: pageNo,
-        first: pageSize * (pageNo - 1),
+        first: pageSize * (pageNo - 1) + 1,
         rows: pageSize,
         pageCount: totalPages,
         totalRecord: totalItems,
