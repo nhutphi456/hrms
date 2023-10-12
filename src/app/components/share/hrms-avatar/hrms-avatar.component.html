@@ -1,0 +1,11 @@
+<p-avatar
+  *ngIf="!isLoading; else skeleton"
+  [image]="imgSrc"
+  [size]="size"
+  [shape]="shape"
+  [styleClass]="styleClass"
+></p-avatar>
+
+<ng-template #skeleton>
+  <p-skeleton size="3rem" styleClass="mb-2"></p-skeleton>
+</ng-template>
