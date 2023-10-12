@@ -1,0 +1,6 @@
+:host ::ng-deep{
+    p-button {
+        @apply block w-full text-center;
+        // display: contents;
+    }
+}

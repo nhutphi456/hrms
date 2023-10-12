@@ -1,0 +1,19 @@
+<p>({{selectedIdsCount}}) Accounts Selected</p>
+<div>
+    <form [formGroup]="activateUserForm" action="" (ngSubmit)="onActivate()">
+        <div class="mt-4">
+            <label class="block font-bold" for="roleSelect">Role</label>
+            <p-multiSelect styleClass="w-full mt-1" [options]="roleOptions" id="roleSelect" display="chip"
+                formControlName="roles" placeholder="Please choose user role">
+            </p-multiSelect>
+        </div>
+        <div class="mt-4">
+            <label class="block font-bold" for="accessSelect">Enable Login Access</label>
+            <p-dropdown styleClass="w-full mt-1" [options]="activateOptions" id="accessSelect" formControlName="status"
+                placeholder="Please choose status"></p-dropdown>
+        </div>
+        <div class="mt-16">
+            <p-button styleClass="w-full flex justify-center" type="submit">Update</p-button>
+        </div>
+    </form>
+</div>

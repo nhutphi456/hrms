@@ -1,19 +1,23 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MenuItem } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 import { Observable } from 'rxjs';
-import {
-  IAccountParams,
-  IEmployeeAccount,
-} from '../../models/system-admin.model';
+
+import { PaginatedData } from 'src/app/models/global.model';
 import { HrmsTable } from '../../../share/models/hrms-table.model';
+import { PageChangeEvent } from '../../../share/models/pagingInfo.model';
 import {
   userAccount,
   userLabelItems,
 } from '../../constants/system-admin.constant';
+import {
+  IAccountParams,
+  IEmployeeAccount,
+} from '../../models/system-admin.model';
 import { EmployeeAccountStore } from '../../store/userAccount.store.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MenuItem } from 'primeng/api';
-import { PageChangeEvent } from '../../../share/models/pagingInfo.model';
-import { PaginatedData } from 'src/app/models/global.model';
+import { UserActivateFormComponent } from '../user-activate-form/user-activate-form.component';
 
 @Component({
   selector: 'app-user-list',
@@ -42,10 +46,12 @@ export class UserListComponent implements OnInit {
   accountParams: IAccountParams = { pageNo: 1 };
   gapPageNumber = 1;
   headerChecked$ = this.accountStore.headerChecked$;
+  activateModalRef!: DynamicDialogRef;
 
   constructor(
     private fb: FormBuilder,
     private accountStore: EmployeeAccountStore,
+    public dialogService: DialogService,
   ) {
     this.filterForm = this.fb.group({
       roles: '',
@@ -145,12 +151,20 @@ export class UserListComponent implements OnInit {
     this.getAccounts();
   }
 
-  onCheck() {
+  onUpdateFields() {
     console.log({ selectedAccount: this.selectedAccountIds });
+    this.activateModalRef = this.dialogService.open(UserActivateFormComponent, {
+      header: 'Update Fields',
+      contentStyle: { overflow: 'visible' },
+      width: '30vw',
+      data: {
+        selectedIds: this.selectedAccountIds,
+      },
+    });
   }
 
   handleCheckAll(e: any) {
-    console.log({ handlecheckall: e });
+    // console.log({ handlecheckall: e });
     const { checked } = e;
 
     if (checked) {

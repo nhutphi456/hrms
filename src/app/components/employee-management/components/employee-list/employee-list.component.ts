@@ -52,7 +52,7 @@ export class EmployeeListComponent implements OnInit {
   constructor(
     private employeeStore: EmployeeStore,
     private fb: FormBuilder,
-    public dialogService: DialogService,
+    public dialogService: DialogService
   ) {}
 
   ngOnInit(): void {

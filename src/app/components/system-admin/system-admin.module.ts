@@ -20,6 +20,7 @@ import { SystemAdminService } from './services/system-admin.service';
 import { EmployeeAccountStore } from './store/userAccount.store.service';
 import { SystemAdminRoutingModule } from './system-admin-routing.module';
 import { SystemAdminComponent } from './system-admin.component';
+import { UserActivateFormComponent } from './components/user-activate-form/user-activate-form.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SystemAdminComponent } from './system-admin.component';
     UserItemComponent,
     SystemHeaderComponent,
     RoleBadgeComponent,
+    UserActivateFormComponent,
   ],
   imports: [
     CommonModule,
