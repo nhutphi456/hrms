@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { Observable, map } from 'rxjs';
+import { Observable, map, pipe } from 'rxjs';
 import {
   GET_ROLES,
+  GET_USER,
   GET_USERS,
+  UPDATE_USER,
   UPDATE_USERS,
 } from '../constants/system-admin.constant';
 import {
   IAccountApiResponse,
   IAccountParams,
   IEmployeeAccount,
+  IGetUserApiResponse,
   IRoleApiResponse,
+  IUpdateAccountInfoParams,
   IUpdateAccountParams,
 } from '../models/system-admin.model';
 
@@ -39,6 +43,22 @@ export class SystemAdminService {
   updateUsers(params: IUpdateAccountParams) {
     return this.apollo.mutate({
       mutation: UPDATE_USERS,
+      variables: { ...params },
+    });
+  }
+
+  getUser(id: number): Observable<IGetUserApiResponse> {
+    return this.apollo
+      .watchQuery<IGetUserApiResponse>({
+        query: GET_USER,
+        variables: { id },
+      })
+      .valueChanges.pipe(map(res => res.data));
+  }
+
+  updateUsernamePassword(params: IUpdateAccountInfoParams) {
+    return this.apollo.mutate({
+      mutation: UPDATE_USER,
       variables: { ...params },
     });
   }

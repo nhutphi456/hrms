@@ -66,11 +66,30 @@ export const GET_ROLES = gql`
 `;
 
 export const UPDATE_USERS = gql`
-  mutation UpdateUsers($ids: [Int]!, $status: Boolean, $roles: [Int]){
-    updateUsers(
-      ids: $ids
-      status: $status
-      roles: $roles
-    )
+  mutation UpdateUsers($ids: [Int]!, $status: Boolean, $roles: [Int]) {
+    updateUsers(ids: $ids, status: $status, roles: $roles)
   }
 `;
+
+export const GET_USER = gql`
+  query GetUser($id: Int) {
+    user(id: $id) {
+      userId
+      username
+    }
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation UpdateUserAccount(
+    $userId: Int!
+    $username: String!
+    $password: String!
+  ){
+    updateUsernamePassword(
+      userId: $userId
+      username: $username
+      password: $password
+    )
+  }
+`

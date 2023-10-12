@@ -55,6 +55,13 @@ export class UserItemComponent implements OnInit, OnChanges {
                   data: { userId: this.employeeAccount.userId },
                 },
               );
+
+              this.updateUserModal.onClose.subscribe(({ success }) => {
+                if (!success) return;
+                // this.accountStore.getEmployeeAccounts({
+                //   pageNo: 1
+                // });
+              });
             },
           },
         ];

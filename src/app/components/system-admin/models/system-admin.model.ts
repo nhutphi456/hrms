@@ -2,11 +2,12 @@ import { PaginatedData } from 'src/app/models/global.model';
 
 export interface IEmployeeAccount {
   userId: number;
-  name: string;
+  name?: string;
   username: string;
   roles?: IAccountRole[];
-  status: boolean;
-  createdAt: string;
+  status?: boolean;
+  createdAt?: string;
+  password?: string;
 }
 
 export interface IAccountRole {
@@ -39,4 +40,14 @@ export interface IUpdateAccountParams {
   roles: number[];
   ids: number[];
   status: boolean;
+}
+
+export interface IGetUserApiResponse {
+  user: IEmployeeAccount;
+}
+
+export interface IUpdateAccountInfoParams {
+  userId: number;
+  username: string;
+  password: string;
 }

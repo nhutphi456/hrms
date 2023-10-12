@@ -15,11 +15,12 @@ export interface IUserAccountState {
   roles: IAccountRole[];
   selectedAccountIds: number[];
   headerChecked: boolean;
+  user: IEmployeeAccount | null;
 }
 
 @Injectable()
 export class EmployeeAccountStore extends ComponentStore<IUserAccountState> {
-  constructor(private employeeMngmentService: SystemAdminService) {
+  constructor(private systemAdminService: SystemAdminService) {
     super({
       employeeAccounts: {
         pagination: {
@@ -34,6 +35,7 @@ export class EmployeeAccountStore extends ComponentStore<IUserAccountState> {
       roles: [],
       selectedAccountIds: [],
       headerChecked: false,
+      user: null,
     });
   }
 
@@ -48,6 +50,10 @@ export class EmployeeAccountStore extends ComponentStore<IUserAccountState> {
   );
   readonly headerChecked$: Observable<boolean> = this.select(
     state => state.headerChecked,
+  );
+
+  readonly user$: Observable<IEmployeeAccount | null> = this.select(
+    state => state.user,
   );
   //UPDATER
   readonly setLoading = this.updater(
@@ -124,12 +130,20 @@ export class EmployeeAccountStore extends ComponentStore<IUserAccountState> {
       };
     },
   );
+  readonly setUser = this.updater(
+    (state: IUserAccountState, user: IEmployeeAccount) => {
+      return {
+        ...state,
+        user,
+      };
+    },
+  );
   //EFFECTS
   readonly getEmployeeAccounts = this.effect(
     (params$: Observable<IAccountParams>) =>
       params$.pipe(
         switchMap(params =>
-          this.employeeMngmentService.getEmployeeAccounts(params).pipe(
+          this.systemAdminService.getEmployeeAccounts(params).pipe(
             tapResponse({
               next: res => this.setEmployeeAccounts(res.users),
               error: error => console.log(error),
@@ -142,9 +156,22 @@ export class EmployeeAccountStore extends ComponentStore<IUserAccountState> {
   readonly getRoles = this.effect<void>(trigger$ =>
     trigger$.pipe(
       switchMap(() =>
-        this.employeeMngmentService.getRoles().pipe(
+        this.systemAdminService.getRoles().pipe(
           tapResponse({
             next: res => this.setRoles(res.roles),
+            error: error => console.log(error),
+          }),
+        ),
+      ),
+    ),
+  );
+
+  readonly getUser = this.effect((id$: Observable<number>) =>
+    id$.pipe(
+      switchMap(id =>
+        this.systemAdminService.getUser(id).pipe(
+          tapResponse({
+            next: res => this.setUser(res.user),
             error: error => console.log(error),
           }),
         ),
