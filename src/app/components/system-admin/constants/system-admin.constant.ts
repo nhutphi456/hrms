@@ -28,7 +28,12 @@ export const userLabelItems: MenuItem[] = [
 ];
 
 export const GET_USERS = gql`
-  query GetUsers($search: String, $status: Boolean, $roles: [ID], $pageNo: Int) {
+  query GetUsers(
+    $search: String
+    $status: Boolean
+    $roles: [ID]
+    $pageNo: Int
+  ) {
     users(search: $search, roles: $roles, pageNo: $pageNo, status: $status) {
       data {
         userId
@@ -57,5 +62,15 @@ export const GET_ROLES = gql`
       roleId
       name
     }
+  }
+`;
+
+export const UPDATE_USERS = gql`
+  mutation UpdateUsers($ids: [Int]!, $status: Boolean, $roles: [Int]){
+    updateUsers(
+      ids: $ids
+      status: $status
+      roles: $roles
+    )
   }
 `;

@@ -124,6 +124,8 @@ export class UserListComponent implements OnInit {
     }
 
     this.getAccounts();
+    this.accountStore.removeAllAccount();
+    // this.accountStore.setHeaderChecked(false);
   }
   getAccounts() {
     this.accountStore.getEmployeeAccounts(this.accountParams);
@@ -160,6 +162,12 @@ export class UserListComponent implements OnInit {
       data: {
         selectedIds: this.selectedAccountIds,
       },
+    });
+
+    this.activateModalRef.onClose.subscribe(({success}) => {
+      if(!success) return
+      this.accountStore.removeAllAccount();
+      this.accountStore.getEmployeeAccounts(this.accountParams);
     });
   }
 

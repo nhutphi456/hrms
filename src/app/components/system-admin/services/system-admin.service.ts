@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { Observable, map } from 'rxjs';
-import { GET_ROLES, GET_USERS } from '../constants/system-admin.constant';
+import {
+  GET_ROLES,
+  GET_USERS,
+  UPDATE_USERS,
+} from '../constants/system-admin.constant';
 import {
   IAccountApiResponse,
   IAccountParams,
   IEmployeeAccount,
   IRoleApiResponse,
+  IUpdateAccountParams,
 } from '../models/system-admin.model';
 
 @Injectable({
@@ -29,5 +34,12 @@ export class SystemAdminService {
         query: GET_ROLES,
       })
       .valueChanges.pipe(map(res => res.data));
+  }
+
+  updateUsers(params: IUpdateAccountParams) {
+    return this.apollo.mutate({
+      mutation: UPDATE_USERS,
+      variables: { ...params },
+    });
   }
 }

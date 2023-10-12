@@ -9,6 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CheckboxModule } from 'primeng/checkbox';
+import { PasswordModule } from 'primeng/password';
 
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { ShareModule } from '../share/share.module';
@@ -21,6 +22,7 @@ import { EmployeeAccountStore } from './store/userAccount.store.service';
 import { SystemAdminRoutingModule } from './system-admin-routing.module';
 import { SystemAdminComponent } from './system-admin.component';
 import { UserActivateFormComponent } from './components/user-activate-form/user-activate-form.component';
+import { UpdaterUserFormComponent } from './components/updater-user-form/updater-user-form.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { UserActivateFormComponent } from './components/user-activate-form/user-
     SystemHeaderComponent,
     RoleBadgeComponent,
     UserActivateFormComponent,
+    UpdaterUserFormComponent,
   ],
   imports: [
     CommonModule,
@@ -45,7 +48,8 @@ import { UserActivateFormComponent } from './components/user-activate-form/user-
     FileUploadModule,
     InputSwitchModule,
     FormsModule,
-    CheckboxModule
+    CheckboxModule,
+    PasswordModule
   ],
   providers: [SystemAdminService, EmployeeAccountStore],
 })

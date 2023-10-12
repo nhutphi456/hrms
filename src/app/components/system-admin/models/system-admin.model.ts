@@ -34,3 +34,9 @@ export enum EAccountRole {
   User = 2,
   Manager = 3,
 }
+
+export interface IUpdateAccountParams {
+  roles: number[];
+  ids: number[];
+  status: boolean;
+}

@@ -1,31 +1,65 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 import { IEmployeeAccount } from '../../models/system-admin.model';
 import { EmployeeAccountStore } from '../../store/userAccount.store.service';
+import { UpdaterUserFormComponent } from '../updater-user-form/updater-user-form.component';
 @Component({
   selector: 'app-user-item',
   templateUrl: './user-item.component.html',
   styleUrls: ['./user-item.component.scss'],
 })
-export class UserItemComponent implements OnInit {
+export class UserItemComponent implements OnInit, OnChanges {
   @HostBinding('class') hostClass = 'hrms-employee-item';
   @Input() employeeAccount!: IEmployeeAccount;
-  menuItems: MenuItem[] = [
-    {
-      label: 'Update',
-      icon: 'pi pi-pencil',
-    },
-  ];
+  menuItems!: MenuItem[];
   defaultImg = 'assets/images/avatar-default.jpg';
   checked = false;
   selectedAccountIds$ = this.accountStore.selectedAccountIds$;
+  updateUserModal!: DynamicDialogRef;
 
-  constructor(private accountStore: EmployeeAccountStore) {}
+  constructor(
+    private accountStore: EmployeeAccountStore,
+    public dialogService: DialogService,
+  ) {}
 
   ngOnInit(): void {
     this.selectedAccountIds$.subscribe(accountIds => {
       this.checked = accountIds.includes(this.employeeAccount.userId);
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ('employeeAccount' in changes) {
+      const newAccount = changes['employeeAccount'].currentValue;
+      if (newAccount) {
+        this.menuItems = [
+          {
+            label: 'Update',
+            icon: 'pi pi-pencil',
+            command: () => {
+              this.updateUserModal = this.dialogService.open(
+                UpdaterUserFormComponent,
+                {
+                  header: 'Update user',
+                  contentStyle: { overflow: 'auto' },
+                  width: '30vw',
+                  data: { userId: this.employeeAccount.userId },
+                },
+              );
+            },
+          },
+        ];
+      }
+    }
   }
   handleEmployeeDetail() {
     return '';
@@ -33,7 +67,7 @@ export class UserItemComponent implements OnInit {
 
   onCheckChange(e: any) {
     const { checked } = e;
-    console.log({checked, id: this.employeeAccount.userId})
+    console.log({ checked, id: this.employeeAccount.userId });
     if (checked) {
       this.accountStore.addAccount(this.employeeAccount.userId);
     } else {
