@@ -62,7 +62,7 @@ export class EmployeeListComponent implements OnInit {
       const { pageNo, pageSize, totalItems, totalPages } = result.pagination;
       const tData = {
         page: pageNo,
-        first: pageSize * (pageNo - 1),
+        first: pageSize * (pageNo - 1) + 1,
         rows: pageSize,
         pageCount: totalPages,
         totalRecord: totalItems,

@@ -11,7 +11,6 @@ export interface IEmployee {
     jobLevel: { id: number; jobLevelName: string };
   };
   phoneNumber: string;
-  email: string;
   address: string;
   status: number;
   reportTo?: number;
@@ -27,7 +26,7 @@ export interface IEmployee {
   facebookLink: string;
   instagramLink: string;
   linkedinLink: string;
-  user: { isEnabled: boolean } | null;
+  user: { isEnabled: boolean, username: string } | null;
 }
 export interface IEmployeeInput {
   firstName: string;

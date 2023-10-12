@@ -110,7 +110,7 @@
 
                         <div class="info-field">
                             <p class="label">Birthday</p>
-                            <p *ngIf="!isEditOn; else dateInput">{{employee.dateOfBirth | date}}</p>
+                            <p *ngIf="!isEditOn; else dateInput">{{employee.dateOfBirth | date: 'dd/MM/yyyy'}}</p>
                             <ng-template #dateInput>
                                 <p-calendar class="block w-full" formControlName="dateOfBirth"></p-calendar>
                             </ng-template>
@@ -125,8 +125,8 @@
                         </div>
                         <div class="info-field">
                             <p class="label">Email</p>
-                            <p *ngIf="!isEditOn; else emailInput">{{employee.email}}</p>
-                            <ng-template #emailInput><input pInputText formControlName="email" /></ng-template>
+                            <p>{{employee.user?.username}}</p>
+                            <!-- <ng-template #emailInput><input pInputText formControlName="email" /></ng-template> -->
                         </div>
                         <div class="info-field col-span-3">
                             <p class="label">Address</p>

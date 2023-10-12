@@ -65,7 +65,11 @@ export class UpdaterUserFormComponent implements OnInit {
         this.notificationService.successNotification(
           $localize`Update account successfully`,
         );
-        this.ref.close({success: true});
+        this.ref.close({ success: true });
       });
+  }
+
+  onCloseModal() {
+    this.ref.close();
   }
 }

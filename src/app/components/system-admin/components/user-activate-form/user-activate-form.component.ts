@@ -19,11 +19,11 @@ export class UserActivateFormComponent implements OnInit {
   roleOptions!: IDropdownItem[];
   activateOptions = [
     {
-      label: 'Activate',
+      label: 'Enable',
       value: true,
     },
     {
-      label: 'Deactivate',
+      label: 'Disable',
       value: false,
     },
   ];

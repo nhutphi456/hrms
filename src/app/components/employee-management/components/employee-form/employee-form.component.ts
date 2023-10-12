@@ -2,7 +2,6 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileUpload } from 'primeng/fileupload';
-import { tap } from 'rxjs';
 import { IDropdownItem } from 'src/app/models/global.model';
 import { HelperService } from 'src/app/services/helper.service';
 import { NotificationService } from 'src/app/shared/message/notification.service';
@@ -95,10 +94,9 @@ export class EmployeeFormComponent implements OnInit {
   }
   initForm() {
     this.addEmployeeForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.maxLength(100)]],
+      lastName: ['', [Validators.required, Validators.maxLength(100)]],
       dateOfBirth: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required],
       address: ['', Validators.required],
       currentContract: [0, Validators.required],
@@ -114,8 +112,8 @@ export class EmployeeFormComponent implements OnInit {
       profileBio: '',
       emergencyContacts: this.fb.array([
         this.fb.group({
-          firstName: ['', Validators.required],
-          lastName: ['', Validators.required],
+          firstName: ['', [Validators.required, Validators.maxLength(100)]],
+          lastName: ['', [Validators.required, Validators.maxLength(100)]],
           phoneNumber: ['', Validators.required],
         }),
       ]),
@@ -124,8 +122,8 @@ export class EmployeeFormComponent implements OnInit {
 
   addEmergencyContact() {
     const newContact = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.maxLength(100)]],
+      lastName: ['', [Validators.required, Validators.maxLength(100)]],
       phoneNumber: ['', Validators.required],
     });
     this.emergencyContacts.push(newContact);

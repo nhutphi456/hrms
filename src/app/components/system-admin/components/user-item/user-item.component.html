@@ -1,5 +1,5 @@
 <tr class="mt-3 p-selectable-row" (click)="handleEmployeeDetail()">
-  <td>
+  <td class="text-center">
     <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="binary" (onChange)="onCheckChange($event)"></p-checkbox>
   </td>
   <td>{{ employeeAccount.username }}</td>
@@ -12,7 +12,7 @@
     </div>
   </td>
   <td>{{ employeeAccount.createdAt | date:'dd/MM/yyyy' }}</td>
-  <td>
+  <td class="text-sm">
     <ng-container *ngIf="employeeAccount.roles?.length;else noRole">
       <ng-container *ngFor="let role of employeeAccount.roles">
         <role-badge [role]="role.roleId"></role-badge>

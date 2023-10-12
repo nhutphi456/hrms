@@ -13,7 +13,9 @@
                 placeholder="Please choose status"></p-dropdown>
         </div>
         <div class="mt-16">
-            <p-button styleClass="w-full flex justify-center" type="submit" [loading]="isLoading">Update</p-button>
+            <p-button styleClass="w-full flex justify-center" type="submit" [loading]="isLoading"
+            [disabled]="activateUserForm.invalid"
+            >Update</p-button>
         </div>
     </form>
 </div>

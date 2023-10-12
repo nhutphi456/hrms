@@ -35,10 +35,7 @@
                 <label class="control-label" for="">Phone</label>
                 <p-inputMask mask="999-999-9999" formControlName="phoneNumber" placeholder="Enter your phone" />
             </div>
-            <div>
-                <label class="control-label" for="">Email</label>
-                <input pInputText formControlName="email" placeholder="Enter your email" />
-            </div>
+        
             <div>
                 <label class="control-label" for="">Department</label>
                 <p-dropdown styleClass="w-full" formControlName="department" [options]="departmentOptions"
@@ -99,7 +96,7 @@
                         </div>
                         <div>
                             <label for="phoneNumber">Phone Number:</label>
-                            <input pInputText type="text" id="phoneNumber" formControlName="phoneNumber" />
+                            <p-inputMask mask="999-999-9999" formControlName="phoneNumber" placeholder="Enter your phone" />
                         </div>
                     </div>
                     <div>

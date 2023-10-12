@@ -3,7 +3,7 @@
     [responsive]="true" [rowHover]="true" responsiveLayout="stack" styleClass="p-datatable-sm">
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th style="width: 4rem" id="header-checkbox" *ngIf="isCheckboxShown">
+        <th style="width: 4rem; text-align: center;" id="header-checkbox" *ngIf="isCheckboxShown">
           <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
           <p-checkbox [(ngModel)]="headerChecked" [binary]="true" inputId="binary"
             (onChange)="onHeaderCheckboxChange($event)"></p-checkbox>

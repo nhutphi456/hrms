@@ -9,7 +9,7 @@
     </div>
   </td>
   <td>{{ employee.positionLevel.position.positionName }}</td>
-  <td>{{ employee.email }}</td>
+  <td>{{ employee.user?.username }}</td>
   <td>{{ employee.department?.departmentName }}</td>
   <td>
     <contract-badge [currentContract]="employee.currentContract ?? 0"></contract-badge>

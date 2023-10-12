@@ -124,6 +124,7 @@ export class EmployeeAccountStore extends ComponentStore<IUserAccountState> {
   });
   readonly setHeaderChecked = this.updater(
     (state: IUserAccountState, headerChecked: boolean) => {
+      console.log({state})
       return {
         ...state,
         headerChecked,

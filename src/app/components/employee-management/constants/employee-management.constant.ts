@@ -7,7 +7,7 @@ export const employeeTableCols: TableHeader[] = [
   { col: 'Position', field: 'position' },
   { col: 'Email', field: 'email' },
   { col: 'Department', field: 'department' },
-  { col: 'Current Contract', field: 'currentContract' },
+  { col: 'Contract', field: 'currentContract' },
   { col: 'Status', field: 'status' },
   { col: '', field: '' },
 ];
@@ -106,7 +106,6 @@ export const GET_EMPLOYEES = gql`
         lastName
         currentContract
         profilePicture
-        email
         address
         phoneNumber
         positionLevel {
@@ -120,6 +119,7 @@ export const GET_EMPLOYEES = gql`
         }
         user {
           isEnabled
+          username
         }
       }
     }
@@ -135,7 +135,6 @@ export const GET_EMPLOYEE = gql`
       gender
       dateOfBirth
       phoneNumber
-      email
       address
       positionLevel {
         position {
@@ -174,6 +173,9 @@ export const GET_EMPLOYEE = gql`
       facebookLink
       instagramLink
       linkedinLink
+      user {
+        username
+      }
     }
   }
 `;
@@ -212,7 +214,9 @@ export const GET_NEW_EMPLOYEES = gql`
       profilePicture
       firstName
       lastName
-      email
+      user {
+        username
+      }
       positionLevel {
         position {
           positionName

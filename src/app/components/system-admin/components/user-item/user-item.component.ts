@@ -33,6 +33,7 @@ export class UserItemComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.selectedAccountIds$.subscribe(accountIds => {
+      console.log({accountIds})
       this.checked = accountIds.includes(this.employeeAccount.userId);
     });
   }
@@ -49,7 +50,7 @@ export class UserItemComponent implements OnInit, OnChanges {
               this.updateUserModal = this.dialogService.open(
                 UpdaterUserFormComponent,
                 {
-                  header: 'Update user',
+                  header: 'Update account information',
                   contentStyle: { overflow: 'auto' },
                   width: '30vw',
                   data: { userId: this.employeeAccount.userId },
