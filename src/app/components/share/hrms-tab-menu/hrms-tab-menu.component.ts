@@ -2,8 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  Output,
-  ViewEncapsulation,
+  Output
 } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
@@ -11,11 +10,11 @@ import { MenuItem } from 'primeng/api';
   selector: 'hrms-tab-menu',
   templateUrl: './hrms-tab-menu.component.html',
   styleUrls: ['./hrms-tab-menu.component.scss'],
-  // encapsulation: ViewEncapsulation.None
 })
 export class HrmsTabMenuComponent {
   @Input() labelItems!: MenuItem[];
   @Input() activeItem!: MenuItem;
+  @Input() isCheckboxShown = false;
   @Output() handleActiveItemChange = new EventEmitter();
 
   itemChanges(item: MenuItem): void {

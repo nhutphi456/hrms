@@ -1,16 +1,26 @@
-import { Component, EventEmitter, HostBinding, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+  TemplateRef,
+  ViewEncapsulation,
+} from '@angular/core';
 import { HrmsTable } from '../models/hrms-table.model';
 
 @Component({
   selector: 'hrms-table',
   templateUrl: './hrms-table.component.html',
   styleUrls: ['./hrms-table.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class HrmsTableComponent {
   @HostBinding('class') hostClass = 'hrms-table-host';
 
   @Output() pagingInfo = new EventEmitter();
+
+  @Output() headerCheckboxChange = new EventEmitter();
 
   @Input() isCheckboxShown = false;
 
@@ -31,6 +41,7 @@ export class HrmsTableComponent {
       body: [],
     },
   };
+  @Input() headerChecked: boolean | null = false;
 
   onPageChange(event: Event) {
     this.pagingInfo.emit(event);
@@ -38,5 +49,8 @@ export class HrmsTableComponent {
 
   isNumber(val: unknown): boolean {
     return typeof val === 'number';
+  }
+  onHeaderCheckboxChange(e: any) {
+    this.headerCheckboxChange.emit(e);
   }
 }

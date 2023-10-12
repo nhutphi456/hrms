@@ -2,7 +2,7 @@
   <div class="flex gap-3 items-center">
     <!-- <button pButton type="submit" icon="pi pi-filter" label="Newest"> </button> -->
     <hrms-screen-filter (getSearchValue)="searchValue($event)"></hrms-screen-filter>
-    <form class="flex items-center" [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm.value)">
+    <form class="flex items-center" [formGroup]="filterForm">
       <p-multiSelect display="chip" [options]="roleOptions" defaultLabel="Role" formControlName="roles"
         (onChange)="onFilter()"></p-multiSelect>
       <p-button *ngIf="isClearAllVisible()" (onClick)="handleClearAll()" styleClass="p-button-link" label="Clear all">
@@ -15,8 +15,13 @@
     <!-- <button pButton type="submit" icon="pi pi-plus" styleClass="p-button-sm" label="Create User"> </button> -->
   </div>
 </div>
+<div>
+  <p-button (onClick)="onCheck()">Check</p-button>
+</div>
 <div class="mt-3">
-  <hrms-table (pagingInfo)="onPageChange($event)" [isPaginationShown]="true" [table]="tableData" [contentRef]="contentRef">
+  <hrms-table (pagingInfo)="onPageChange($event)" [isPaginationShown]="true" [table]="tableData" [contentRef]="contentRef" [isCheckboxShown]="true"
+    (headerCheckboxChange)="handleCheckAll($event)" [headerChecked]="headerChecked$ | async"
+  >
     <ng-template #contentRef let-rowData>
       <app-user-item [employeeAccount]="rowData"></app-user-item>
     </ng-template>

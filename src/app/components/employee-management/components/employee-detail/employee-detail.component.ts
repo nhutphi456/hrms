@@ -185,7 +185,7 @@ export class EmployeeDetailComponent implements OnInit {
       this.profileForm.value;
     const updatedEmployee = {
       ...this.profileForm.value,
-      departmentId: department.value,
+      departmentId: department.value ?? 0,
       positionId: position.value,
       dateOfBirth: new Date(dateOfBirth).toISOString(),
       jobLevelId: position.hasLevel ? jobLevel.value : 0,
@@ -196,6 +196,7 @@ export class EmployeeDetailComponent implements OnInit {
     delete updatedEmployee.position;
     delete updatedEmployee.jobLevel;
 
+    console.log({ updatedEmployee });
     this.employeeService
       .updateEmployee(updatedEmployee)
       .pipe(o$ => {

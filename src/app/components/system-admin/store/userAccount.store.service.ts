@@ -13,6 +13,8 @@ export interface IUserAccountState {
   employeeAccounts: PaginatedData<IEmployeeAccount>;
   loading: boolean;
   roles: IAccountRole[];
+  selectedAccountIds: number[];
+  headerChecked: boolean;
 }
 
 @Injectable()
@@ -30,6 +32,8 @@ export class EmployeeAccountStore extends ComponentStore<IUserAccountState> {
       },
       loading: false,
       roles: [],
+      selectedAccountIds: [],
+      headerChecked: false,
     });
   }
 
@@ -38,6 +42,12 @@ export class EmployeeAccountStore extends ComponentStore<IUserAccountState> {
     this.select(state => state.employeeAccounts);
   readonly roles$: Observable<IAccountRole[]> = this.select(
     state => state.roles,
+  );
+  readonly selectedAccountIds$: Observable<number[]> = this.select(
+    state => state.selectedAccountIds,
+  );
+  readonly headerChecked$: Observable<boolean> = this.select(
+    state => state.headerChecked,
   );
   //UPDATER
   readonly setLoading = this.updater(
@@ -64,6 +74,53 @@ export class EmployeeAccountStore extends ComponentStore<IUserAccountState> {
       return {
         ...state,
         roles,
+      };
+    },
+  );
+  readonly addAccount = this.updater(
+    (state: IUserAccountState, accountId: number) => {
+      state.selectedAccountIds = [
+        ...new Set([...state.selectedAccountIds, accountId]),
+      ];
+
+      const { totalItems } = state.employeeAccounts.pagination;
+      if (totalItems === state.selectedAccountIds.length) {
+        this.setHeaderChecked(true);
+      }
+
+      return {
+        ...state,
+      };
+    },
+  );
+  readonly removeAccount = this.updater(
+    (state: IUserAccountState, accountId: number) => {
+      const { totalItems } = state.employeeAccounts.pagination;
+
+      state.selectedAccountIds = state.selectedAccountIds.filter(
+        id => id !== accountId,
+      );
+
+      if (totalItems !== state.selectedAccountIds.length) {
+        this.setHeaderChecked(false);
+      }
+
+      return {
+        ...state,
+      };
+    },
+  );
+  readonly removeAllAccount = this.updater((state: IUserAccountState) => {
+    state.selectedAccountIds = [];
+    return {
+      ...state,
+    };
+  });
+  readonly setHeaderChecked = this.updater(
+    (state: IUserAccountState, headerChecked: boolean) => {
+      return {
+        ...state,
+        headerChecked,
       };
     },
   );

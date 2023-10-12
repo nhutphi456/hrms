@@ -1,0 +1,8 @@
+<ng-container [ngSwitch]="role">
+    <span *ngSwitchCase="accountRole.Admin"
+        class="employment-tag inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+    <span *ngSwitchCase="accountRole.User"
+        class="employment-tag inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-sm font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">User</span>
+    <span *ngSwitchCase="accountRole.Manager"
+        class="employment-tag inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Manager</span>
+</ng-container>

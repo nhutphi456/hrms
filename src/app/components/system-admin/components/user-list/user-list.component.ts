@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IAccountParams, IEmployeeAccount } from '../../models/system-admin.model';
+import {
+  IAccountParams,
+  IEmployeeAccount,
+} from '../../models/system-admin.model';
 import { HrmsTable } from '../../../share/models/hrms-table.model';
 import {
   userAccount,
@@ -22,6 +25,7 @@ export class UserListComponent implements OnInit {
   activeItem: MenuItem = this.labelItems[0];
   employeeAccounts$: Observable<PaginatedData<IEmployeeAccount>> =
     this.accountStore.employeeAccounts$;
+  selectedAccountIds: number[] = [];
   tableData: HrmsTable<IEmployeeAccount> = {
     page: 0,
     first: 0,
@@ -34,10 +38,10 @@ export class UserListComponent implements OnInit {
     },
   };
   filterForm!: FormGroup;
-
   roleOptions!: { label: string; value: number }[];
   accountParams: IAccountParams = { pageNo: 1 };
   gapPageNumber = 1;
+  headerChecked$ = this.accountStore.headerChecked$;
 
   constructor(
     private fb: FormBuilder,
@@ -79,11 +83,11 @@ export class UserListComponent implements OnInit {
         };
       });
     });
+    this.accountStore.selectedAccountIds$.subscribe(accountIds => {
+      this.selectedAccountIds = accountIds;
+    });
   }
 
-  onSubmit(val: any) {
-    console.log({ val });
-  }
   handleClearAll() {
     this.filterForm.setValue({
       roles: [],
@@ -139,5 +143,26 @@ export class UserListComponent implements OnInit {
     }
 
     this.getAccounts();
+  }
+
+  onCheck() {
+    console.log({ selectedAccount: this.selectedAccountIds });
+  }
+
+  handleCheckAll(e: any) {
+    console.log({ handlecheckall: e });
+    const { checked } = e;
+
+    if (checked) {
+      this.employeeAccounts$.subscribe(accounts => {
+        const { data } = accounts;
+
+        data.forEach(acct => {
+          this.accountStore.addAccount(acct.userId);
+        });
+      });
+    } else {
+      this.accountStore.removeAllAccount();
+    }
   }
 }

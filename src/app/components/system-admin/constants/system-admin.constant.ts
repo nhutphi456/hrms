@@ -31,11 +31,12 @@ export const GET_USERS = gql`
   query GetUsers($search: String, $status: Boolean, $roles: [ID], $pageNo: Int) {
     users(search: $search, roles: $roles, pageNo: $pageNo, status: $status) {
       data {
+        userId
         name
         username
         createdAt
         status
-        role {
+        roles {
           roleId
           name
         }

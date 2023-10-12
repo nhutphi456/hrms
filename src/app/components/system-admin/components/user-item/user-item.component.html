@@ -1,6 +1,8 @@
 <tr class="mt-3 p-selectable-row" (click)="handleEmployeeDetail()">
+  <td>
+    <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="binary" (onChange)="onCheckChange($event)"></p-checkbox>
+  </td>
   <td>{{ employeeAccount.username }}</td>
-
   <td class="user-item-row" [class.text-success]="employeeAccount.status" [class.text-danger]="!employeeAccount.status">
     <div class="flex gap-2 items-center">
       <i class="pi-circle-fill pi"></i>
@@ -9,17 +11,14 @@
       </span>
     </div>
   </td>
-  <td>{{ employeeAccount.createdAt }}</td>
+  <td>{{ employeeAccount.createdAt | date }}</td>
   <td>
-    <span
-    *ngIf="employeeAccount.role"
-      class="p-2 inline-flex items-center rounded-[50px] bg-blue-100 text-[12px] font-medium text-blue-500 ring-1 ring-inset ring-blue-300"
-    >
-    <span >
-      {{ employeeAccount.role.name}}
-    </span>
-    </span
-    >
+    <ng-container *ngIf="employeeAccount.roles?.length;else noRole">
+      <ng-container *ngFor="let role of employeeAccount.roles">
+        <role-badge [role]="role.roleId"></role-badge>
+      </ng-container>
+    </ng-container>
+    <ng-template #noRole>This user has no role</ng-template>
   </td>
   <td class="text-right">
     <p-button type="button" (click)="menu.toggle($event)" icon="pi pi-ellipsis-v" styleClass="p-button-link"></p-button>

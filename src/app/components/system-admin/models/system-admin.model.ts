@@ -1,10 +1,10 @@
 import { PaginatedData } from 'src/app/models/global.model';
 
 export interface IEmployeeAccount {
-  id?: number;
+  userId: number;
   name: string;
   username: string;
-  role?: IAccountRole;
+  roles?: IAccountRole[];
   status: boolean;
   createdAt: string;
 }
@@ -27,4 +27,10 @@ export interface IAccountApiResponse {
 
 export interface IRoleApiResponse {
   roles: IAccountRole[];
+}
+
+export enum EAccountRole {
+  Admin = 1,
+  User = 2,
+  Manager = 3,
 }
