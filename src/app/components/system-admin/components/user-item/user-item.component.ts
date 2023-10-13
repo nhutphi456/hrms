@@ -21,7 +21,7 @@ export class UserItemComponent implements OnInit, OnChanges {
   @HostBinding('class') hostClass = 'hrms-employee-item';
   @Input() employeeAccount!: IEmployeeAccount;
   menuItems!: MenuItem[];
-  defaultImg = 'assets/images/avatar-default.jpg';
+  defaultImg = 'assets/images/profile-image-default.jpg';
   checked = false;
   selectedAccountIds$ = this.accountStore.selectedAccountIds$;
   updateUserModal!: DynamicDialogRef;

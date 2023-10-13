@@ -7,7 +7,7 @@ export interface IEmployee {
   gender: number;
   dateOfBirth: string;
   positionLevel: {
-    position: { id: number; positionName: string, hasLevel: boolean };
+    position: { id: number; positionName: string; hasLevel: boolean };
     jobLevel: { id: number; jobLevelName: string };
   };
   phoneNumber: string;
@@ -20,13 +20,13 @@ export interface IEmployee {
   skillsTags?: string[];
   joinedProjects?: Project[];
   emergencyContacts: EmergencyContact[];
-  profilePicture: string;
+  imageSource: { id: number; imagePath: string };
   employeeSkills: EmployeeSkill[];
   twitterLink: string;
   facebookLink: string;
   instagramLink: string;
   linkedinLink: string;
-  user: { isEnabled: boolean, username: string } | null;
+  user: { isEnabled: boolean; username: string } | null;
 }
 export interface IEmployeeInput {
   firstName: string;

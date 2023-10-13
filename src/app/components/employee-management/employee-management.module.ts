@@ -30,6 +30,7 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
 import { EmployeeCardComponent } from './components/employee-card/employee-card.component';
 import { EmployeeCarouselComponent } from './components/employee-carousel/employee-carousel.component';
 import { ContractBadgeComponent } from './components/contract-badge/contract-badge.component';
+import { HrmsAvatarComponent } from '../share/hrms-avatar/hrms-avatar.component';
 @NgModule({
   declarations: [
     EmployeeManagementComponent,
@@ -60,7 +61,8 @@ import { ContractBadgeComponent } from './components/contract-badge/contract-bad
     RadioButtonModule,
     InputMaskModule,
     InputTextareaModule,
-    CarouselModule
+    CarouselModule,
+    HrmsAvatarComponent
   ],
   providers: [EmployeeManagementService, EmployeeStore ],
 })

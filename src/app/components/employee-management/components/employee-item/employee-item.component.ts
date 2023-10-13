@@ -1,7 +1,16 @@
-import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ContractType, IEmployee } from '../../models/employee-management.model';
+import {
+  Component,
+  HostBinding,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { prependImage } from 'src/app/utils/prependImage';
+import {
+  ContractType,
+  IEmployee,
+} from '../../models/employee-management.model';
 
 @Component({
   selector: 'employee-item',
@@ -12,11 +21,10 @@ import { Router } from '@angular/router';
 export class EmployeeItemComponent implements OnChanges {
   @HostBinding('class') hostClass = 'hrms-employee-item';
   @Input() employee!: IEmployee;
-  defaultImg = 'assets/images/avatar-default.jpg';
-  constructor(private router: Router) {}
-
-  menuItems!: MenuItem[]
-  contractType = ContractType
+  defaultImg = 'assets/images/profile-image-default.jpg';
+  menuItems!: MenuItem[];
+  contractType = ContractType;
+  prependImage = prependImage
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('employee' in changes) {

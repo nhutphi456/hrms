@@ -1,9 +1,14 @@
 <tr class="mt-3 p-selectable-row">
   <td>
     <div class="flex items-center">
-      <img class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;"
-        [src]="employee.profilePicture || defaultImg" [alt]="employee.firstName">
 
+      <!-- <hrms-avatar [imgSrc]="prependImage(employee.imageSource.imagePath)" shape="circle" size="normal"></hrms-avatar> -->
+
+      <img *ngIf="employee.imageSource" class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;"
+        [src]="prependImage(employee.imageSource.imagePath)" [alt]="employee.firstName">
+
+      <img *ngIf="!employee.imageSource" class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;"
+        [src]="defaultImg" [alt]="employee.firstName">
       <a class="text-black ml-1" [routerLink]="['detail', employee.id]">{{employee.firstName}} {{ employee.lastName
         }}</a>
     </div>
@@ -14,7 +19,8 @@
   <td>
     <contract-badge [currentContract]="employee.currentContract ?? 0"></contract-badge>
   </td>
-  <td class="user-item-row" [class.text-success]="employee.user?.isEnabled" [class.text-danger]="!employee.user?.isEnabled">
+  <td class="user-item-row" [class.text-success]="employee.user?.isEnabled"
+    [class.text-danger]="!employee.user?.isEnabled">
     <div class="flex gap-2 items-center">
       <i class="pi-circle-fill pi"></i>
       <span>

@@ -279,3 +279,6 @@
   .p-datatable tr:hover {
     background: #e9ecef!important;
   }
+  .p-avatar img {
+    object-fit: cover;
+  }

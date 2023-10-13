@@ -9,6 +9,7 @@ import { genders } from '../../constants/employee-management.constant';
 import { IEmployee } from '../../models/employee-management.model';
 import { EmployeeManagementService } from '../../services/employee-management.service';
 import { EmployeeStore } from '../../store/employee-management.store.service';
+import { prependImage } from 'src/app/utils/prependImage';
 @Component({
   selector: 'employee-detail',
   templateUrl: './employee-detail.component.html',
@@ -17,7 +18,7 @@ import { EmployeeStore } from '../../store/employee-management.store.service';
 export class EmployeeDetailComponent implements OnInit {
   @ViewChild('fileUpload') fileUpload!: FileUpload;
   employeeDetail$ = this.employeeStore.employeeDetail$;
-  defaultImg = 'assets/images/avatar-default.jpg';
+  defaultImg = 'assets/images/profile-image-default.jpg';
   isEditOn = false;
   profileForm!: FormGroup;
   genderOptions = genders;
@@ -27,6 +28,7 @@ export class EmployeeDetailComponent implements OnInit {
   tempImg = '';
   employeeId!: number;
   isLoading = false;
+  prependImage = prependImage
 
   constructor(
     private fb: FormBuilder,

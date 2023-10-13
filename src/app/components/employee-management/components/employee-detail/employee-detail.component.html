@@ -6,8 +6,14 @@
                     <img class="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains">
                     <div class="profile-img relative">
                         <div *ngIf="!tempImg" class="profile-image-container">
-                            <img style="background: #CDE9EAFF; border-radius: 60px;" class="w-full"
-                                [src]="employee.profilePicture || defaultImg" alt="" />
+                            <img *ngIf="employee.imageSource; else defaultImage"
+                                style="background: #CDE9EAFF; border-radius: 60px; height: 120px; object-fit: cover;" class="w-full"
+                                [src]="prependImage(employee.imageSource.imagePath)" alt="" />
+
+                            <ng-template #defaultImage>
+                                <img style="background: #CDE9EAFF; border-radius: 60px;" class="w-full"
+                                    [src]="defaultImg" alt="" />
+                            </ng-template>
                         </div>
                         <p-avatar *ngIf="tempImg" [image]="tempImg" shape="circle" size="xlarge"></p-avatar>
                         <p-fileUpload #fileUpload *ngIf="isEditOn" mode="basic" chooseIcon="pi pi-pencil"
@@ -17,7 +23,6 @@
                 <div class="p-4 mt-16 pt-1">
                     <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
                     <p class="text-center">
-                        
                         {{employee.positionLevel.position.positionName}}
                     </p>
                     <div class="mt-3">
@@ -69,7 +74,7 @@
                         <ng-template #groupButtons>
                             <div>
                                 <p-button (click)="closeEdit()" styleClass="p-button-link" label="Cancel"> </p-button>
-                                <p-button [loading]="isLoading" type="submit" label="Save" icon="pi pi-save">
+                                <p-button [loading]="isLoading" type="submit" label="Save" icon="pi pi-save" [disabled]="profileForm.invalid">
                                 </p-button>
                             </div>
                         </ng-template>

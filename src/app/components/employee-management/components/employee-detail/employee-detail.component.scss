@@ -69,6 +69,9 @@
     .profile-image-container {
         width: 120px;
         height: 120px;
+        .profile-img {
+            object-fit: cover;
+        }
     }
 
     .info-field {

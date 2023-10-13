@@ -29,6 +29,8 @@ export class UserListComponent implements OnInit {
   activeItem: MenuItem = this.labelItems[0];
   employeeAccounts$: Observable<PaginatedData<IEmployeeAccount>> =
     this.accountStore.employeeAccounts$;
+  employeeAccounts!: PaginatedData<IEmployeeAccount>;
+
   selectedAccountIds: number[] = [];
   tableData: HrmsTable<IEmployeeAccount> = {
     page: 0,
@@ -66,7 +68,6 @@ export class UserListComponent implements OnInit {
 
     this.employeeAccounts$.subscribe(result => {
       const { pageNo, pageSize, totalItems, totalPages } = result.pagination;
-
       const data = {
         page: pageNo,
         first: pageSize * (pageNo - 1) + 1,
@@ -78,7 +79,9 @@ export class UserListComponent implements OnInit {
           body: result.data,
         },
       };
+
       this.tableData = data;
+      this.employeeAccounts = result;
     });
 
     this.accountStore.roles$.subscribe(roles => {
@@ -164,8 +167,8 @@ export class UserListComponent implements OnInit {
       },
     });
 
-    this.activateModalRef.onClose.subscribe(({success}) => {
-      if(!success) return
+    this.activateModalRef.onClose.subscribe(({ success }) => {
+      if (!success) return;
       this.accountStore.removeAllAccount();
       this.accountStore.getEmployeeAccounts(this.accountParams);
     });
@@ -176,13 +179,7 @@ export class UserListComponent implements OnInit {
     const { checked } = e;
 
     if (checked) {
-      this.employeeAccounts$.subscribe(accounts => {
-        const { data } = accounts;
-
-        data.forEach(acct => {
-          this.accountStore.addAccount(acct.userId);
-        });
-      });
+      this.employeeAccounts.data.forEach((account) => this.accountStore.addAccount(account.userId))
     } else {
       this.accountStore.removeAllAccount();
     }
