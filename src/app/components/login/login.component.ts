@@ -3,7 +3,6 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { catchError, map, tap } from 'rxjs';
 // import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/shared/message/notification.service';
 import { MessageService } from 'primeng/api';
@@ -42,7 +41,6 @@ export class LoginComponent {
     const { username, password } = this.signInForm.value;
 
     if (!this.signInForm.valid) {
-      console.log(this.signInForm);
       this.notificationService.errorNotification(
         $localize`Enter valid form value`,
       );
@@ -57,8 +55,6 @@ export class LoginComponent {
           },
         })
         .subscribe(res => {
-          console.log('login res', res);
-
           if (res.errors?.length) {
             const error = res.errors[0];
 

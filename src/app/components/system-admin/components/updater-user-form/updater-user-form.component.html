@@ -1,21 +1,17 @@
-<!-- <p>{{userId}}</p> -->
 <form [formGroup]="updateUserForm" action="" (ngSubmit)="onUpdateUser()">
-    <!-- <div class="mt-4">
-        <label class="block font-bold" for="name">Name</label>
-        <input class="w-full" pInputText type="text" id="name" placeholder="Enter name" formControlName="name">
-    </div> -->
     <div class="mt-4">
         <label class="block font-bold" for="username">Username</label>
         <input class="w-full" pInputText type="text" id="username" placeholder="Enter username"
-            formControlName="username">
+            formControlName="username" />
+            <!-- <p-inputText formControlName="username" [disabled]="true"></p-inputText> -->
     </div>
     <div class="mt-4">
         <label class="block font-bold" for="password">Password</label>
         <p-password styleClass="w-full" id="password" placeholder="Enter password" formControlName="password"
-            class="w-full"  [toggleMask]="true"></p-password>
+            class="w-full" [toggleMask]="true"></p-password>
     </div>
     <div class="mt-16 flex justify-end">
         <p-button styleClass="p-button-link" (onClick)="onCloseModal()">Cancel</p-button>
-        <p-button [loading]="isLoading" styleClass="w-full flex justify-center" type="submit" >Update</p-button>
+        <p-button [loading]="isLoading" styleClass="w-full flex justify-center" type="submit" [disabled]="updateUserForm.invalid">Update</p-button>
     </div>
 </form>

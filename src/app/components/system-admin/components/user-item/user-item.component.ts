@@ -50,7 +50,7 @@ export class UserItemComponent implements OnInit, OnChanges {
               this.updateUserModal = this.dialogService.open(
                 UpdaterUserFormComponent,
                 {
-                  header: 'Update account information',
+                  header: 'Change password',
                   contentStyle: { overflow: 'auto' },
                   width: '30vw',
                   data: { userId: this.employeeAccount.userId },

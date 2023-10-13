@@ -10,7 +10,6 @@ import { MenuModule } from 'primeng/menu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PasswordModule } from 'primeng/password';
-
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { ShareModule } from '../share/share.module';
 import { RoleBadgeComponent } from './components/role-badge/role-badge.component';
