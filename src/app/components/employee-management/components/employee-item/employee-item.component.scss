@@ -5,6 +5,9 @@
     }
     td {
       @apply p-1 align-middle;
+      a {
+        color: #495057;
+      }
     }
     .avatar-img {
       width: 3rem;

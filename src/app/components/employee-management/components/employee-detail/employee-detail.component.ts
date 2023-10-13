@@ -114,7 +114,6 @@ export class EmployeeDetailComponent implements OnInit {
       dateOfBirth: [new Date(dateOfBirth), Validators.required],
       phoneNumber: [phoneNumber, Validators.required],
       address: [address, Validators.required],
-      // profilePicture: '',
       position: {
         label: positionLevel?.position.positionName,
         value: positionLevel?.position.id,
@@ -172,7 +171,6 @@ export class EmployeeDetailComponent implements OnInit {
     this.emergencyContacts.push(newContact);
   }
 
-  // Remove an emergency contact from the FormArray
   removeEmergencyContact(index: number) {
     this.emergencyContacts.removeAt(index);
   }
@@ -186,9 +184,6 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   onUpdateEmployee(): void {
-    // this.profileForm.patchValue({
-    //   avatar: this.tempImg,
-    // });
     const { department, position, dateOfBirth, jobLevel } =
       this.profileForm.value;
     const updatedEmployee = {
@@ -198,12 +193,14 @@ export class EmployeeDetailComponent implements OnInit {
       dateOfBirth: new Date(dateOfBirth).toISOString(),
       jobLevelId: position.hasLevel ? jobLevel.value : 0,
       id: this.employeeId,
+      currentContract: 0,
     };
 
     delete updatedEmployee.department;
     delete updatedEmployee.position;
     delete updatedEmployee.jobLevel;
 
+    console.log({formvalue: this.profileForm.value})
     console.log({ updatedEmployee });
 
     this.employeeService

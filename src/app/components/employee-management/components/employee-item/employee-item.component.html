@@ -14,7 +14,7 @@
     </div>
   </td>
   <td>{{ employee.positionLevel?.position?.positionName }}</td>
-  <td>{{ employee.user?.username }}</td>
+  <td><a class="ml-1" [routerLink]="['detail', employee.id]">{{ employee.user?.username }}</a></td>
   <td>{{ employee.department?.departmentName }}</td>
   <td>
     <contract-badge *ngIf="employee.currentContract !== undefined && employee.currentContract !== null"
@@ -30,7 +30,8 @@
     </div>
   </td>
   <td class="action-col">
-    <p-button type="button" (click)="menu.toggle($event)" icon="pi pi-ellipsis-v" styleClass="p-button-link"></p-button>
+    <p-button type="button" (click)="menu.toggle($event)" icon="pi pi-ellipsis-v"
+      styleClass="p-button-link"></p-button>
     <p-menu #menu [model]="menuItems" [popup]="true" appendTo="body"></p-menu>
   </td>
 </tr>

@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
 export class NotificationService {
   service = inject(MessageService);
 
-    errorNotification(mes: string): void {
+  errorNotification(mes: string): void {
     this.service.add({
       severity: 'error',
       summary: 'Error',

@@ -22,10 +22,10 @@
                 </div>
                 <div class="p-4 mt-16 pt-1">
                     <div class="font-bold text-xl text-center">{{employee.firstName}} {{employee.lastName}}</div>
-                    <p class="text-center">
+                    <p class="text-center mt-2">
                         {{employee.positionLevel?.position?.positionName}}
                     </p>
-                    <div class="mt-3">
+                    <div class="mt-2">
                         <p *ngIf="!isEditOn; else bioInput" class="text-gray-700 text-base text-center">
                             {{employee.profileBio}}
                         </p>
@@ -34,7 +34,7 @@
                                 formControlName="profileBio"></textarea>
                         </ng-template>
                     </div>
-                    <div class="social-icons mt-5 flex justify-center gap-6">
+                    <div class="social-icons mt-4 flex justify-center gap-6">
                         <a *ngIf="employee.twitterLink" [href]="employee.twitterLink" target="_blank"><i
                                 class="pi pi-twitter"></i></a>
                         <a *ngIf="employee.linkedinLink" [href]="employee.linkedinLink" target="_blank"><i
@@ -45,7 +45,7 @@
                                 class="pi pi-github"></i></a>
                     </div>
                 </div>
-                <div *ngIf="employee.department" class="p-4 pb-8">
+                <div *ngIf="employee.department" class="p-4 pt-0">
                     <div class="flex gap-4 justify-between items-center">
                         <p class="label">Reporting to</p>
                         <p>{{employee.department.sum.firstName}} {{employee.department.sum.lastName}}</p>
@@ -55,10 +55,10 @@
                         </ng-template> -->
                     </div>
                     <div *ngIf="employee.employeeSkills.length" class="flex gap-2 justify-between items-start mt-2">
-                        <h1 class="text-md mb-1 font-bold">Skills</h1>
+                        <h1 class="text-md mb-1 mt-1 font-bold">Skills</h1>
                         <div class="text-right">
                             <span *ngFor="let employeeSkill of employee.employeeSkills"
-                                class="skill-tag inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 ml-1">{{employeeSkill.skill.skillName}}</span>
+                                class="skill-tag inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 ml-1 mt-1">{{employeeSkill.skill.skillName}}</span>
                         </div>
                     </div>
                 </div>
@@ -215,10 +215,10 @@
                     </div>
                 </div> -->
                 <div class="emergency-contact">
-                    <h1 class="text-xl mt-10 mb-1 font-bold">Emergency Contacts</h1>
+                    <h1 class="text-xl my-7 font-bold">Emergency Contacts</h1>
                     <div *ngIf="!isEditOn; else emergencyContactInput" class="card">
                         <p-table [value]="employee.emergencyContacts" [tableStyle]="{ 'min-width': '50rem' }"
-                            styleClass="p-datatable-gridlines">
+                            styleClass="p-datatable-gridlines p-datatable-sm">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>First Name</th>
@@ -231,7 +231,7 @@
                                     <td>{{ contact.firstName }}</td>
                                     <td>{{ contact.lastName }}</td>
                                     <td>
-                                        {{contact.phoneNumber}} <i class="pi pi-copy"></i>
+                                        {{contact.phoneNumber | phoneFormat}} <i class="pi pi-copy"></i>
                                     </td>
                                 </tr>
                             </ng-template>
@@ -260,7 +260,7 @@
                                     </div>
                                     <div>
                                         <label for="phoneNumber">Phone Number:</label>
-                                        <input pInputText type="text" id="phoneNumber" formControlName="phoneNumber" />
+                                        <p-inputMask mask="999-999-9999" formControlName="phoneNumber" id="phoneNumber"/>
                                     </div>
                                 </div>
                                 <div>

@@ -282,3 +282,19 @@
   .p-avatar img {
     object-fit: cover;
   }
+
+  .p-button.p-button-link,
+  .p-button.p-button-link:enabled:hover,
+  .p-multiselect.p-multiselect-chip .p-multiselect-token,
+  .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
+    @apply text-primary;
+  }
+
+  .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover,
+  .p-multiselect:not(.p-disabled):hover {
+    @apply border-primary;
+  }
+  .p-checkbox .p-checkbox-box.p-highlight,
+  .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+    @apply border-primary bg-primary;
+  }

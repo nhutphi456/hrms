@@ -12,12 +12,14 @@ import { HrmsTableComponent } from './hrms-table/hrms-table.component';
 import { HrmsPaginationComponent } from './hrms-pagination/hrms-pagination.component';
 import { HrmsScreenFilterComponent } from './hrms-screen-filter/hrms-screen-filter.component';
 import { HrmsTabMenuComponent } from './hrms-tab-menu/hrms-tab-menu.component';
+import { PhoneFormatPipe } from './pipes/phone-format.pipe';
 @NgModule({
   declarations: [
     HrmsTableComponent,
     HrmsPaginationComponent,
     HrmsScreenFilterComponent,
     HrmsTabMenuComponent,
+    PhoneFormatPipe,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { HrmsTabMenuComponent } from './hrms-tab-menu/hrms-tab-menu.component';
     HrmsTableComponent,
     HrmsTabMenuComponent,
     HrmsScreenFilterComponent,
+    PhoneFormatPipe
   ],
 })
 export class ShareModule {}

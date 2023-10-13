@@ -24,7 +24,7 @@ export class EmployeeItemComponent implements OnChanges {
   defaultImg = 'assets/images/profile-image-default.jpg';
   menuItems!: MenuItem[];
   contractType = ContractType;
-  prependImage = prependImage
+  prependImage = prependImage;
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('employee' in changes) {

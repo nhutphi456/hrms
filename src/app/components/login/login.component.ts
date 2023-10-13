@@ -49,22 +49,30 @@ export class LoginComponent {
     } else {
       this.isLoading = true;
       this.apollo
-        .watchQuery({
+        .query({
           query: LOGIN,
           variables: {
             username,
             password,
           },
         })
-        .valueChanges.pipe(map(res => res.data))
-        .subscribe(() => {
-          this.router.navigate(['system-admin']);
-          this.notificationService.successNotification(
-            $localize`Login Successful`,
-          );
-        });
+        .subscribe(res => {
+          console.log('login res', res);
 
-      // còn xử lý token ở đây....
+          if (res.errors?.length) {
+            const error = res.errors[0];
+
+            this.isLoading = false;
+            this.notificationService.errorNotification(
+              $localize`${error.message}`,
+            );
+          } else {
+            this.router.navigate(['system-admin']);
+            this.notificationService.successNotification(
+              $localize`Login Successful`,
+            );
+          }
+        });
     }
 
     // const values: Partial<{
