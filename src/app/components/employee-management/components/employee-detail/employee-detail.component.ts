@@ -10,6 +10,7 @@ import { IEmployee } from '../../models/employee-management.model';
 import { EmployeeManagementService } from '../../services/employee-management.service';
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { prependImage } from 'src/app/utils/prependImage';
+import { concatMap, of } from 'rxjs';
 @Component({
   selector: 'employee-detail',
   templateUrl: './employee-detail.component.html',
@@ -28,7 +29,8 @@ export class EmployeeDetailComponent implements OnInit {
   tempImg = '';
   employeeId!: number;
   isLoading = false;
-  prependImage = prependImage
+  prependImage = prependImage;
+  imageFile!: File;
 
   constructor(
     private fb: FormBuilder,
@@ -122,7 +124,7 @@ export class EmployeeDetailComponent implements OnInit {
         label: positionLevel.jobLevel?.jobLevelName,
         value: positionLevel.jobLevel?.id,
       },
-      profileBio,
+      profileBio: [profileBio, [Validators.maxLength(250)]],
       department: {
         label: department?.departmentName,
         value: department?.id,
@@ -203,12 +205,20 @@ export class EmployeeDetailComponent implements OnInit {
     delete updatedEmployee.jobLevel;
 
     console.log({ updatedEmployee });
+
     this.employeeService
       .updateEmployee(updatedEmployee)
-      .pipe(o$ => {
-        this.isLoading = true;
-        return o$;
-      })
+      .pipe(
+        concatMap(() => {
+          this.isLoading = true;
+
+          if (!this.imageFile) return of(undefined);
+          return this.employeeService.uploadProfileImage(
+            this.employeeId,
+            this.imageFile,
+          );
+        }),
+      )
       .subscribe(() => {
         this.isLoading = false;
         this.isEditOn = false;
@@ -220,12 +230,13 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   onUpload(f: File): void {
+    const reader = new FileReader();
     this.fileUpload.clear();
     this.fileUpload.choose();
-    const reader = new FileReader();
+    this.imageFile = f;
 
     reader.onload = () => {
-      const fileContent = reader.result as string; // Get the file content as base64 string
+      const fileContent = reader.result as string;
 
       this.tempImg = fileContent;
       this.notificationService.successNotification(
@@ -235,7 +246,7 @@ export class EmployeeDetailComponent implements OnInit {
       this.parseToByteArray(fileContent);
     };
 
-    reader.readAsDataURL(f); // Read the file as base64 data
+    reader.readAsDataURL(f);
   }
 
   private parseToByteArray(base64: string) {

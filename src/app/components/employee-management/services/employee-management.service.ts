@@ -22,11 +22,16 @@ import {
   INewEmployeeApiResponse,
   IPositionApiResponse,
 } from '../models/employee-management.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class EmployeeManagementService {
-  constructor(private apollo: Apollo) {}
+  constructor(
+    private apollo: Apollo,
+    private http: HttpClient,
+  ) {}
 
   getEmployees(params: IEmployeeParams): Observable<IEmployeeApiResponse> {
     // return from([mockData]);
@@ -93,5 +98,16 @@ export class EmployeeManagementService {
         query: GET_JOB_LEVELS,
       })
       .valueChanges.pipe(map(res => res.data));
+  }
+
+  uploadProfileImage(id: number, file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(
+      `${environment.apiUrl}/api/employees/${id}/upload`,
+      formData,
+      { responseType: 'text' },
+    );
   }
 }

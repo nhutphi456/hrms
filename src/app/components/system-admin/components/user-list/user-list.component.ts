@@ -171,6 +171,7 @@ export class UserListComponent implements OnInit {
       if (!success) return;
       this.accountStore.removeAllAccount();
       this.accountStore.getEmployeeAccounts(this.accountParams);
+      this.accountStore.setHeaderChecked(false);
     });
   }
 
