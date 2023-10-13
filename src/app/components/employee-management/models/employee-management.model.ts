@@ -6,10 +6,7 @@ export interface IEmployee {
   lastName?: string;
   gender: number;
   dateOfBirth: string;
-  positionLevel?: {
-    position: { id: number; positionName: string; hasLevel: boolean };
-    jobLevel: { id: number; jobLevelName: string };
-  };
+  positionLevel?: IPositionLevel;
   phoneNumber?: string;
   address?: string;
   status: number;
@@ -55,10 +52,16 @@ export interface Department {
   };
 }
 
+interface IPositionLevel {
+  position: IPosition;
+  jobLevel: IJobLevel;
+}
+
 export interface IPosition {
   id: number;
   positionName: string;
   hasLevel: boolean;
+  hasDepartment: boolean;
 }
 
 export interface IJobLevel {

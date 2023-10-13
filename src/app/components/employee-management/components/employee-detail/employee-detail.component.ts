@@ -24,7 +24,7 @@ export class EmployeeDetailComponent implements OnInit {
   profileForm!: FormGroup;
   genderOptions = genders;
   departments!: IDropdownItem[];
-  positionOptions!: { label: string; value: number; hasLevel: boolean }[];
+  positionOptions!: { label: string; value: number; hasLevel: boolean, hasDepartment: boolean }[];
   jobLevelOptions!: IDropdownItem[];
   tempImg = '';
   employeeId!: number;
@@ -76,6 +76,7 @@ export class EmployeeDetailComponent implements OnInit {
           label: pos.positionName,
           value: pos.id,
           hasLevel: pos.hasLevel,
+          hasDepartment: pos.hasDepartment
         };
       });
     });
@@ -118,6 +119,7 @@ export class EmployeeDetailComponent implements OnInit {
         label: positionLevel?.position.positionName,
         value: positionLevel?.position.id,
         hasLevel: positionLevel?.position.hasLevel,
+        hasDepartment: positionLevel?.position.hasDepartment
       },
       jobLevel: {
         label: positionLevel?.jobLevel?.jobLevelName,

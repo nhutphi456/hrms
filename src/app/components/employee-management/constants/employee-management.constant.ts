@@ -144,6 +144,7 @@ export const GET_EMPLOYEE = gql`
           id
           positionName
           hasLevel
+          hasDepartment
         }
         jobLevel {
           id
@@ -242,6 +243,7 @@ export const GET_POSITIONS = gql`
       id
       positionName
       hasLevel
+      hasDepartment
     }
   }
 `;

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Apollo } from 'apollo-angular';
 import { REGISTER } from './constants/register.constant';
+import { NotificationService } from 'src/app/shared/message/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,7 @@ export class RegisterComponent {
   constructor(
     // private authService: AuthService,
     private router: Router,
-    // private notificationService: NotificationService
+    private notificationService: NotificationService,
     private apollo: Apollo,
   ) {}
 
@@ -42,7 +43,21 @@ export class RegisterComponent {
         mutation: REGISTER,
         variables: { signupDto: { username, password } },
       })
-      .subscribe();
+      .subscribe(res => {
+        if (res.errors?.length) {
+          const error = res.errors[0];
+
+          this.isLoading = false;
+          this.notificationService.errorNotification(
+            $localize`${error.message}`,
+          );
+        } else {
+          this.router.navigate(['login']);
+          this.notificationService.successNotification(
+            $localize`Register Successfully`,
+          );
+        }
+      });
     // if (!this.signInForm.valid) {
     //   this.notificationService.errorNotification(
     //     $localize`Enter valid form value`

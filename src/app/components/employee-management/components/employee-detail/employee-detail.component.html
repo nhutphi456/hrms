@@ -7,8 +7,8 @@
                     <div class="profile-img relative">
                         <div *ngIf="!tempImg" class="profile-image-container">
                             <img *ngIf="employee.imageSource; else defaultImage"
-                                style="background: #CDE9EAFF; border-radius: 60px; height: 120px; object-fit: cover;" class="w-full"
-                                [src]="prependImage(employee.imageSource.imagePath)" alt="" />
+                                style="background: #CDE9EAFF; border-radius: 60px; height: 120px; object-fit: cover;"
+                                class="w-full" [src]="prependImage(employee.imageSource.imagePath)" alt="" />
 
                             <ng-template #defaultImage>
                                 <img style="background: #CDE9EAFF; border-radius: 60px;" class="w-full"
@@ -74,7 +74,8 @@
                         <ng-template #groupButtons>
                             <div>
                                 <p-button (click)="closeEdit()" styleClass="p-button-link" label="Cancel"> </p-button>
-                                <p-button [loading]="isLoading" type="submit" label="Save" icon="pi pi-save" [disabled]="profileForm.invalid">
+                                <p-button [loading]="isLoading" type="submit" label="Save" icon="pi pi-save"
+                                    [disabled]="profileForm.invalid">
                                 </p-button>
                             </div>
                         </ng-template>
@@ -140,24 +141,28 @@
                         </div>
                         <div class="info-field" [class.col-span-3]="!isEditOn">
                             <p class="label">Department</p>
-                            <p *ngIf="!isEditOn; else departmentSelect">{{employee.department?.departmentName ?? 'This
-                                employee is not associated with any department'}}
+                            <p *ngIf="!isEditOn; else departmentSelect">{{employee.department?.departmentName ?? 'This employee is not associated with any department'}}
                             </p>
                             <ng-template #departmentSelect>
-                                <p-dropdown styleClass="w-full" class="w-full flex-1" formControlName="department"
-                                    [options]="departments" optionLabel="label"></p-dropdown>
+                                <ng-container *ngIf="position.hasDepartment; else noDep">
+                                    <p-dropdown styleClass="w-full" class="w-full flex-1" formControlName="department"
+                                        [options]="departments" optionLabel="label" placeholder="Select department"></p-dropdown>
+                                </ng-container>
+                                <ng-template #noDep>
+                                    <span>This employee should belong to no department</span>
+                                </ng-template>
                             </ng-template>
                         </div>
                         <ng-container *ngIf="isEditOn">
                             <div class="info-field">
                                 <p class="label">Position</p>
                                 <p-dropdown styleClass="w-full" class="w-full flex-1" formControlName="position"
-                                    [options]="positionOptions" optionLabel="label"></p-dropdown>
+                                    [options]="positionOptions" optionLabel="label" placeholder="Select position"></p-dropdown>
                             </div>
                             <div class="info-field" *ngIf="position && position.hasLevel">
                                 <p class="label">Job Level</p>
                                 <p-dropdown styleClass="w-full" class="w-full flex-1" formControlName="jobLevel"
-                                    [options]="jobLevelOptions" optionLabel="label"></p-dropdown>
+                                    [options]="jobLevelOptions" optionLabel="label" placeholder="Select job level"></p-dropdown>
                             </div>
                         </ng-container>
                     </div>
@@ -260,7 +265,8 @@
                                     </div>
                                     <div>
                                         <label for="phoneNumber">Phone Number:</label>
-                                        <p-inputMask mask="999-999-9999" formControlName="phoneNumber" id="phoneNumber"/>
+                                        <p-inputMask mask="999-999-9999" formControlName="phoneNumber"
+                                            id="phoneNumber" />
                                     </div>
                                 </div>
                                 <div>
