@@ -116,13 +116,13 @@ export class EmployeeDetailComponent implements OnInit {
       address: [address, Validators.required],
       // profilePicture: '',
       position: {
-        label: positionLevel.position.positionName,
-        value: positionLevel.position.id,
-        hasLevel: positionLevel.position.hasLevel,
+        label: positionLevel?.position.positionName,
+        value: positionLevel?.position.id,
+        hasLevel: positionLevel?.position.hasLevel,
       },
       jobLevel: {
-        label: positionLevel.jobLevel?.jobLevelName,
-        value: positionLevel.jobLevel?.id,
+        label: positionLevel?.jobLevel?.jobLevelName,
+        value: positionLevel?.jobLevel?.id,
       },
       profileBio: [profileBio, [Validators.maxLength(250)]],
       department: {

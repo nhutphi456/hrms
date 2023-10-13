@@ -2,16 +2,16 @@ import { PaginatedData } from 'src/app/models/global.model';
 
 export interface IEmployee {
   id?: string;
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   gender: number;
   dateOfBirth: string;
-  positionLevel: {
+  positionLevel?: {
     position: { id: number; positionName: string; hasLevel: boolean };
     jobLevel: { id: number; jobLevelName: string };
   };
-  phoneNumber: string;
-  address: string;
+  phoneNumber?: string;
+  address?: string;
   status: number;
   reportTo?: number;
   department?: Department;

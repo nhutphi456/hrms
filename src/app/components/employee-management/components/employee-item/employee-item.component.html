@@ -13,11 +13,12 @@
         }}</a>
     </div>
   </td>
-  <td>{{ employee.positionLevel.position.positionName }}</td>
+  <td>{{ employee.positionLevel?.position?.positionName }}</td>
   <td>{{ employee.user?.username }}</td>
   <td>{{ employee.department?.departmentName }}</td>
   <td>
-    <contract-badge [currentContract]="employee.currentContract ?? 0"></contract-badge>
+    <contract-badge *ngIf="employee.currentContract !== undefined && employee.currentContract !== null"
+      [currentContract]="employee.currentContract"></contract-badge>
   </td>
   <td class="user-item-row" [class.text-success]="employee.user?.isEnabled"
     [class.text-danger]="!employee.user?.isEnabled">

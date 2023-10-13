@@ -22,7 +22,7 @@ import {
   INewEmployeeApiResponse,
   IPositionApiResponse,
 } from '../models/employee-management.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environment';
 @Injectable({
   providedIn: 'root',
