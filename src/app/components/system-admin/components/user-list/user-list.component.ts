@@ -132,7 +132,6 @@ export class UserListComponent implements OnInit {
   }
   getAccounts() {
     this.accountStore.getEmployeeAccounts(this.accountParams);
-    console.log({ accountParams: this.accountParams });
   }
   handleAccountParams(
     key: string,
@@ -157,7 +156,6 @@ export class UserListComponent implements OnInit {
   }
 
   onUpdateFields() {
-    console.log({ selectedAccount: this.selectedAccountIds });
     this.activateModalRef = this.dialogService.open(UserActivateFormComponent, {
       header: 'Update Fields',
       contentStyle: { overflow: 'visible' },
@@ -176,7 +174,6 @@ export class UserListComponent implements OnInit {
   }
 
   handleCheckAll(e: any) {
-    // console.log({ handlecheckall: e });
     const { checked } = e;
 
     if (checked) {

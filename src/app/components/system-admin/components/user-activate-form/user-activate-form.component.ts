@@ -61,15 +61,12 @@ export class UserActivateFormComponent implements OnInit {
   }
 
   onActivate() {
-    // console.log({ value: this.activateUserForm.value });
     const { roles, status } = this.activateUserForm.value;
     const updateData: IUpdateAccountParams = {
       roles,
       status,
       ids: this.selectedIds,
     };
-
-    console.log({ updateData });
 
     this.systemAdminService
       .updateUsers(updateData)

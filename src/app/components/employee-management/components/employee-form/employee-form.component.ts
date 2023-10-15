@@ -143,7 +143,6 @@ export class EmployeeFormComponent implements OnInit {
       const fileContent = reader.result as string; // Get the file content as base64 string
 
       this.tempImg = fileContent;
-      console.log({ temp: this.tempImg });
 
       this.notificationService.successNotification(
         $localize`Uploaded new photo`,
@@ -182,9 +181,6 @@ export class EmployeeFormComponent implements OnInit {
     delete employee.department;
     delete employee.position;
     delete employee.jobLevel;
-
-    console.log({ formvalue: this.addEmployeeForm.value });
-    console.log({ employee });
 
     this.employeeService
       .addEmployee(employee)

@@ -37,25 +37,24 @@ export class RegisterComponent {
     this.signInForm.markAllAsTouched();
 
     const { username, password } = this.signInForm.value;
-    console.log({ username, password });
+
     this.apollo
       .mutate({
         mutation: REGISTER,
         variables: { signupDto: { username, password } },
       })
-      .subscribe(res => {
-        if (res.errors?.length) {
-          const error = res.errors[0];
-
-          this.isLoading = false;
-          this.notificationService.errorNotification(
-            $localize`${error.message}`,
-          );
-        } else {
+      .subscribe({
+        next: () => {          
           this.router.navigate(['login']);
-          this.notificationService.successNotification(
-            $localize`Register Successfully`,
-          );
+            this.notificationService.successNotification(
+              $localize`Register Successfully`,
+            );
+        },
+        error: () => {
+          this.isLoading = false;
+            this.notificationService.errorNotification(
+              $localize`User already exists`,
+            );
         }
       });
     // if (!this.signInForm.valid) {

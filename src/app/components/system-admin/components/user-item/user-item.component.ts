@@ -33,7 +33,6 @@ export class UserItemComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.selectedAccountIds$.subscribe(accountIds => {
-      console.log({accountIds})
       this.checked = accountIds.includes(this.employeeAccount.userId);
     });
   }
@@ -75,7 +74,7 @@ export class UserItemComponent implements OnInit, OnChanges {
 
   onCheckChange(e: any) {
     const { checked } = e;
-    console.log({ checked, id: this.employeeAccount.userId });
+
     if (checked) {
       this.accountStore.addAccount(this.employeeAccount.userId);
     } else {

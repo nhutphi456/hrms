@@ -94,7 +94,6 @@ export class EmployeeListComponent implements OnInit {
 
   getEmployees() {
     this.employeeStore.getEmployees(this.employeeParams);
-    console.log({ params: this.employeeParams });
   }
 
   initFilterForm() {

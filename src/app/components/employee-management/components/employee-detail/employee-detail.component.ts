@@ -202,9 +202,6 @@ export class EmployeeDetailComponent implements OnInit {
     delete updatedEmployee.position;
     delete updatedEmployee.jobLevel;
 
-    console.log({formvalue: this.profileForm.value})
-    console.log({ updatedEmployee });
-
     this.employeeService
       .updateEmployee(updatedEmployee)
       .pipe(
