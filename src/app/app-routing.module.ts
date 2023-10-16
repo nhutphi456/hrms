@@ -26,7 +26,13 @@ const routes: Routes = [
             m => m.SystemAdminModule,
           ),
       },
-
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./components/hr-dashboard/hr-dashboard.module').then(
+            m => m.HrDashboardModule,
+          ),
+      },
     ],
   },
 

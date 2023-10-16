@@ -1,0 +1,18 @@
+<div class="card-container timeline-container">
+    <p class="card-title">Timeline</p>
+    <div class="mt-4 px-2">
+        <p-timeline [value]="events" align="left">
+            <ng-template pTemplate="marker" let-event>
+                <div class="custom-marker shadow-2" [class.active]="event.isActive">
+                    <i [ngClass]="event.icon" class="font-medium marker-icon"></i>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="content" let-event>
+               <div class="timeline-content flex gap-4">
+                  <p>{{event.status}}</p>  
+                  <p>{{event.description}}</p>  
+               </div>
+            </ng-template>
+        </p-timeline>
+    </div>
+</div>

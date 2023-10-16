@@ -1,0 +1,33 @@
+::ng-deep {
+    .timeline-container {
+        height: 415.5px;
+    }
+    .p-timeline-event-opposite {
+        display: none;
+    }
+    .custom-marker {
+        @apply relative;
+        width: 3rem;
+        height: 3rem;
+        background-color: #F3F4F6FF;
+        border-radius: 50px;
+        &.active {
+            @apply bg-primaryLight;
+        }
+        .marker-icon {
+            @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+            font-size: 1.25rem;
+        }
+    }
+    .p-timeline.p-timeline-vertical .p-timeline-event-connector {
+        @apply w-0 h-16;
+        border: 1px grey dashed;
+    }
+    .custom-marker.active + .p-timeline-event-connector {
+        @apply bg-primary border-none;
+        width: 2px;
+    }
+    .timeline-content {
+        margin-top: 12px;
+    }
+}
