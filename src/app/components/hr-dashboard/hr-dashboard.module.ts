@@ -7,6 +7,7 @@ import { ChartModule } from 'primeng/chart';
 import { TimelineModule } from 'primeng/timeline';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { DropdownModule } from 'primeng/dropdown';
+import { AvatarModule } from 'primeng/avatar';
 
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { HrDashboardRoutingModule } from './hr-dashboard-routing.module';
@@ -18,6 +19,8 @@ import { TopSkillsComponent } from './components/top-skills/top-skills.component
 import { ShareModule } from '../share/share.module';
 import { CompetencyReviewCycleComponent } from './components/competency-review-cycle/competency-review-cycle.component';
 import { TimeLineComponent } from './components/time-line/time-line.component';
+import { TopPerformersComponent } from './components/top-performers/top-performers.component';
+import { TopCompetenciesComponent } from './components/top-competencies/top-competencies.component';
 
 
 @NgModule({
@@ -28,7 +31,9 @@ import { TimeLineComponent } from './components/time-line/time-line.component';
     TimeLineComponent,
     CompetencyLevelComponent,
     CompetencyLevelByUnitComponent,
-    TopSkillsComponent
+    TopSkillsComponent,
+    TopPerformersComponent,
+    TopCompetenciesComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +45,8 @@ import { TimeLineComponent } from './components/time-line/time-line.component';
     TimelineModule,
     NgApexchartsModule,
     DropdownModule,
-    ShareModule
+    ShareModule,
+    AvatarModule
   ]
 })
 export class HrDashboardModule { }

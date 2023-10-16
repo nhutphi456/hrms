@@ -1,0 +1,23 @@
+<div class="card-container">
+    <p class="card-title mb-4">Top skills</p>
+    <hrms-table [table]="tableData" [tableStyle]="{'width': '100%'}" [contentRef]="contentRef">
+        <ng-template #contentRef let-rowData>
+            <tr>
+                <td>{{rowData.no}}</td>
+                <td>
+                    <div class="employee-rating bg-primaryLight p-2 relative">
+                        <span class="text-primary">
+                            {{rowData.rating}}
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="flex items-center">
+                        <p-avatar [image]="rowData.employee.profileImg" styleClass="mr-2" shape="circle"></p-avatar>
+                        <p>{{rowData.employee.firstName}} {{rowData.employee.lastName}}</p>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </hrms-table>
+</div>
