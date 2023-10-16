@@ -1,26 +1,18 @@
-<div class="card-container">
+<div class="card-container h-full">
     <div class="flex gap-4 items-center">
         <p class="card-title">Competency Review Cycle</p>
-        <p-calendar [(ngModel)]="date" [showIcon]="true"></p-calendar>
     </div>
-    <div class="mt-4 flex justify-between px-10">
-    </div>
-    <div class="mt-4 px-10 flex justify-between items-center">
+    <div class="mt-2 px-10 flex justify-between items-center">
         <div class="bar-chart-container">
             <p class="text-primary font-bold">Number of completed assessments per unit</p>
-            <p-chart type="bar" [data]="barChartData" [options]="barChartOptions" [plugins]="plugins" [height]="'300'"
-                [width]="'300'"></p-chart>
+            <hrms-chart type="bar" [data]="barChartData" [options]="barChartOptions" [plugins]="plugins" [height]="'250'"></hrms-chart>
         </div>
         <div class="relative">
-            <p class="completion-status font-bold text-primary text-center mb-4">Not completed</p>
-            <p-chart id="completion-progress" type="doughnut" [data]="pieData" [options]="pieOptions" [width]="'200'"
-                [height]="'200'">
-            </p-chart>
+            <p class="completion-status font-bold text-primary text-center">Overall</p>
+            <hrms-chart id="completion-progress" type="doughnut" [data]="pieData" [options]="pieOptions" [height]="'250'">
+            </hrms-chart>
             <div class="completion-percentage">
                 <span class="font-bold text-primary text-2xl">50%</span>
-            </div>
-            <div class="number-of-employees">
-                <span class="text-xl">30</span>
             </div>
         </div>
     </div>

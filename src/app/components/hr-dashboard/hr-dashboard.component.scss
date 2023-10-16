@@ -1,3 +1,7 @@
 .dashboard-row {
-    @apply mt-4 grid grid-cols-12 gap-4;
+    @apply mt-2 grid grid-cols-12 gap-2;
+
+    > div {
+        @apply h-full;
+    }
 }

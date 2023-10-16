@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { colorObj, pieChartColors } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 
 @Component({
   selector: 'competency-review-cycle',
@@ -17,59 +18,59 @@ export class CompetencyReviewCycleComponent implements OnInit {
   plugins: any = [ChartDataLabels];
 
   ngOnInit() {
-    // Chart.register(ChartDataLabels);
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue(
-      '--text-color-secondary',
-    );
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
     this.barChartData = {
       labels: ['Unit PM', 'Unit A', 'Unit B', 'Unit C', 'Unit shared service'],
       datasets: [
         {
-          label: 'My First dataset',
-          backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-          borderColor: documentStyle.getPropertyValue('--blue-500'),
+          label: 'Self',
+          backgroundColor: colorObj['primary'],
+          borderColor: colorObj['primary'],
           data: [65, 59, 80, 81, 56],
         },
+        {
+          type: 'bar',
+          label: 'Manager',
+          backgroundColor: colorObj['lightGreen'],
+          data: [21, 84, 24, 75, 37]
+      },
       ],
     };
 
     this.barChartOptions = {
       indexAxis: 'y',
+      responsive: true,
       maintainAspectRatio: false,
-      aspectRatio: 0.8,
+      aspectRatio: 1,
       plugins: {
         legend: {
-          display: false,
+          labels: {
+            usePointStyle: true,
+          },
         },
         datalabels: {
           display: true,
-          align: 'end',
-          anchor: 'end',
+          align: 'center',
+          anchor: 'center',
           color: 'black', // Customize label text color
           font: {
             weight: 'bold',
           },
-          formatter: function(value: any) {
-            return `${value}%`
-          }
+          formatter: function (value: any) {
+            return `${value}%`;
+          },
         },
       },
       scales: {
         x: {
+          stacked: true,
           display: false,
           grid: {
             display: false,
           },
         },
         y: {
+          stacked: true,
           position: 'left',
-          ticks: {
-            color: textColorSecondary,
-          },
           grid: {
             display: false,
           },
@@ -78,18 +79,12 @@ export class CompetencyReviewCycleComponent implements OnInit {
     };
 
     this.pieData = {
-      labels: ['A', 'B'],
+      labels: ['Completed', 'Incompleted'],
       datasets: [
         {
           data: [300, 50],
-          backgroundColor: [
-            documentStyle.getPropertyValue('--blue-500'),
-            documentStyle.getPropertyValue('--yellow-500'),
-          ],
-          hoverBackgroundColor: [
-            documentStyle.getPropertyValue('--blue-400'),
-            documentStyle.getPropertyValue('--yellow-400'),
-          ],
+          backgroundColor: pieChartColors,
+          hoverBackgroundColor: pieChartColors
         },
       ],
     };
@@ -98,7 +93,9 @@ export class CompetencyReviewCycleComponent implements OnInit {
       cutout: '60%',
       plugins: {
         legend: {
-          display: false,
+          labels: {
+            usePointStyle: true,
+          },
         },
       },
     };

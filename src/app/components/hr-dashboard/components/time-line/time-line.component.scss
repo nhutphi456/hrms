@@ -1,6 +1,6 @@
 ::ng-deep {
     .timeline-container {
-        height: 415.5px;
+        // height: 415.5px;
     }
     .p-timeline-event-opposite {
         display: none;
@@ -20,7 +20,7 @@
         }
     }
     .p-timeline.p-timeline-vertical .p-timeline-event-connector {
-        @apply w-0 h-16;
+        @apply w-0 h-8;
         border: 1px grey dashed;
     }
     .custom-marker.active + .p-timeline-event-connector {

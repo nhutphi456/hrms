@@ -1,0 +1,21 @@
+<ng-container [ngSwitch]="type">
+    <!-- <ng-container
+      *ngSwitchCase="'heatmap'"
+      [ngTemplateOutlet]="chart1"
+    ></ng-container>
+    <ng-container
+      *ngSwitchCase="'treemap'"
+      [ngTemplateOutlet]="chart1"
+    ></ng-container>
+    <ng-container
+      *ngSwitchCase="'geomap'"
+      [ngTemplateOutlet]="geomap"
+    ></ng-container> -->
+    <ng-container *ngSwitchDefault [ngTemplateOutlet]="defaultChart"></ng-container>
+</ng-container>
+
+<ng-template #defaultChart>
+    <p-chart #chartJS class="flex-1" [type]="type" [data]="data" [options]="options" [plugins]="plugins"
+        (onDataSelect)="onDataSelect($event)" [width]="width" [height]="height">
+    </p-chart>
+</ng-template>
