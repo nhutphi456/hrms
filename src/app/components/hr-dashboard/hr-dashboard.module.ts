@@ -22,6 +22,7 @@ import { TimeLineComponent } from './components/time-line/time-line.component';
 import { TopPerformersComponent } from './components/top-performers/top-performers.component';
 import { TopCompetenciesComponent } from './components/top-competencies/top-competencies.component';
 import { EmployeePerformanceGridBoxComponent } from './components/employee-performance-grid-box/employee-performance-grid-box.component';
+import { PerformanceByJobLevelComponent } from './components/performance-by-job-level/performance-by-job-level.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { EmployeePerformanceGridBoxComponent } from './components/employee-perfo
     TopSkillsComponent,
     TopPerformersComponent,
     TopCompetenciesComponent,
-    EmployeePerformanceGridBoxComponent
+    EmployeePerformanceGridBoxComponent,
+    PerformanceByJobLevelComponent
   ],
   imports: [
     CommonModule,

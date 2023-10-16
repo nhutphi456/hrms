@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-
-
 @Component({
   selector: 'competency-review-cycle',
   templateUrl: './competency-review-cycle.component.html',

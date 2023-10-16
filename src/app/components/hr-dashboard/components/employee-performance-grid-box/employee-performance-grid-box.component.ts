@@ -23,7 +23,6 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
       labels: ['Q1', 'Q2', 'Q3', 'Q4'],
       datasets: [
         {
-          label: 'Sales',
           data: [
             {
               x: 10,
@@ -33,6 +32,16 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
             {
               x: 23,
               y: 57,
+              image: 'assets/images/profile-image-default.jpg',
+            },
+            {
+              x: 70,
+              y: 30,
+              image: 'assets/images/profile-image-default.jpg',
+            },
+            {
+              x: 60,
+              y: 60,
               image: 'assets/images/profile-image-default.jpg',
             },
           ],

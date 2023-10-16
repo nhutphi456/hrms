@@ -18,10 +18,9 @@ export const topCompetenciesTableCol: TableHeader[] = [
 
 export const nineGridLabels = {
   id: 'nineGridLabels',
-  beforeDatasetsDraw: (chart: any, args: any, plugins: any) => {
+  beforeDatasetsDraw: (chart: any) => {
     const {
       ctx,
-      chartArea: { top, bottom, left, right },
       scales: { x, y },
     } = chart;
 
@@ -63,19 +62,19 @@ export const nineGridLabels = {
     ctx.fillText('High', x.getPixelForValue(83.25), y.getPixelForValue(-4));
 
     ctx.save();
-    ctx.translate(x.getPixelForValue(-2), y.getPixelForValue(16.65));
+    ctx.translate(x.getPixelForValue(-1), y.getPixelForValue(16.65));
     ctx.rotate(-Math.PI / 2);
     ctx.fillText('Low', 0, 0);
     ctx.restore();
 
     ctx.save();
-    ctx.translate(x.getPixelForValue(-2), y.getPixelForValue(49.95));
+    ctx.translate(x.getPixelForValue(-1), y.getPixelForValue(49.95));
     ctx.rotate(-Math.PI / 2);
     ctx.fillText('Moderate', 0, 0);
     ctx.restore();
 
     ctx.save();
-    ctx.translate(x.getPixelForValue(-2), y.getPixelForValue(83.25));
+    ctx.translate(x.getPixelForValue(-1), y.getPixelForValue(83.25));
     ctx.rotate(-Math.PI / 2);
     ctx.fillText('High', 0, 0);
     ctx.restore();
