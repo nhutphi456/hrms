@@ -21,6 +21,7 @@ import { CompetencyReviewCycleComponent } from './components/competency-review-c
 import { TimeLineComponent } from './components/time-line/time-line.component';
 import { TopPerformersComponent } from './components/top-performers/top-performers.component';
 import { TopCompetenciesComponent } from './components/top-competencies/top-competencies.component';
+import { EmployeePerformanceGridBoxComponent } from './components/employee-performance-grid-box/employee-performance-grid-box.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { TopCompetenciesComponent } from './components/top-competencies/top-comp
     CompetencyLevelByUnitComponent,
     TopSkillsComponent,
     TopPerformersComponent,
-    TopCompetenciesComponent
+    TopCompetenciesComponent,
+    EmployeePerformanceGridBoxComponent
   ],
   imports: [
     CommonModule,

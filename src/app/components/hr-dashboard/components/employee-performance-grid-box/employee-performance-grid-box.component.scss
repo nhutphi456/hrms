@@ -1,0 +1,16 @@
+:host ::ng-deep {
+    .employee-performance-container {
+        p-chart {
+            div {
+                @apply flex items-center flex-col;
+            }
+            canvas {
+                height: 600px!important;
+            }
+        }
+        .chart-container {
+            // width: 90%;
+            margin: auto;
+        }
+    }
+}
