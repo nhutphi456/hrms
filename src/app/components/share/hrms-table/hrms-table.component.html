@@ -1,5 +1,5 @@
 <div class="bg-white rounded-md overflow-hidden">
-  <p-table [value]="table.data.body" [columns]="table.data.header" [tableStyle]="{ 'min-width': '80rem' }"
+  <p-table [value]="table.data.body" [columns]="table.data.header" [tableStyle]="tableStyle"
     [responsive]="true" [rowHover]="true" responsiveLayout="stack" styleClass="p-datatable-sm">
     <ng-template pTemplate="header" let-columns>
       <tr>

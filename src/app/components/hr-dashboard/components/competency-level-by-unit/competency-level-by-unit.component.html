@@ -1,0 +1,14 @@
+<div class="card-container by-unit-container">
+    <p class="card-title">Competency Level (AVG)</p>
+    <div class="flex justify-between">
+        <p>By Unit</p>
+        <p-dropdown
+            [options]="departmentOptions"
+            [(ngModel)]="selectedDepartment" optionLabel="label"
+            placeholder="Select unit"
+        ></p-dropdown>
+    </div>
+    <div>
+        <p-chart type="radar" [data]="data" [options]="options"></p-chart>
+    </div>
+</div>

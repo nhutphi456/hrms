@@ -42,6 +42,7 @@ export class HrmsTableComponent {
     },
   };
   @Input() headerChecked: boolean | null = false;
+  @Input() tableStyle: any = { 'min-width': '80rem' };
 
   onPageChange(event: Event) {
     this.pagingInfo.emit(event);

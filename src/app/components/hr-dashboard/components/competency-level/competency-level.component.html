@@ -1,0 +1,21 @@
+<div class="card-container">
+    <p class="card-title">Competency Level (AVG)</p>
+    <div class="flex justify-between items-center">
+        <p>by Job level and Position</p>
+        <p-dropdown
+            [options]="positionOptions"
+            [(ngModel)]="selectedPosition" optionLabel="label"
+            placeholder="Select position"
+        ></p-dropdown>
+    </div>
+    <div id="chart">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [dataLabels]="chartOptions.dataLabels"
+          [colors]="chartOptions.colors"
+          [plotOptions]="chartOptions.plotOptions"
+          [grid]="chartOptions.grid"
+        ></apx-chart>
+      </div>
+</div>

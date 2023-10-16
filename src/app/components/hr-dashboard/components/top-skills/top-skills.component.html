@@ -1,0 +1,12 @@
+<div class="card-container">
+    <p class="card-title">Top skills</p>
+    <hrms-table [table]="tableData" [tableStyle]="{'width': '100%'}" [contentRef]="contentRef">
+        <ng-template #contentRef let-rowData>
+            <tr>
+                <td>{{rowData.no}}</td>
+                <td>{{rowData.avgScore}}</td>
+                <td>{{rowData.skill}}</td>
+            </tr>
+        </ng-template>
+    </hrms-table>
+</div>
