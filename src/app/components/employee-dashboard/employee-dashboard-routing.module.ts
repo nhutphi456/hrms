@@ -13,25 +13,37 @@ const routes: Routes = [
     data: { breadcrumbs: ['My Dashboard'] },
     children: [
       {
-        path: '', // This is the empty path
-        redirectTo: 'summary', // Redirect to the 'summary' route
-        pathMatch: 'full', // Ensure a full match
+        path: '',
+        redirectTo: 'summary',
+        pathMatch: 'full',
       },
       {
         path: 'summary',
-        component: EmployeeSummaryDashboardComponent,
+        loadChildren: () =>
+          import(
+            './components/employee-summary-dashboard/employee-summary-dashboard.module'
+          ).then(m => m.EmployeeSummaryDashboardModule),
       },
       {
         path: 'skills',
-        component: EmployeeSkillsComponent,
+        loadChildren: () =>
+          import('./components/employee-skills/employee-skills.module').then(
+            m => m.EmployeeSkillsModule,
+          ),
       },
       {
         path: 'qualifications',
-        component: EmployeeQualificationsComponent,
+        loadChildren: () =>
+          import(
+            './components/employee-qualifications/employee-qualifications.module'
+          ).then(m => m.EmployeeQualificationsModule),
       },
       {
         path: 'assessment',
-        component: EmployeeAssessmentComponent,
+        loadChildren: () =>
+          import(
+            './components/employee-assessment/employee-assessment.module'
+          ).then(m => m.EmployeeAssessmentModule),
       },
     ],
   },

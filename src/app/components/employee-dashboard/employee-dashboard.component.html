@@ -1,7 +1,10 @@
 <app-topbar></app-topbar>
 <employee-info-card></employee-info-card>
-<div class="mt-2">
-    <hrms-tab-menu [labelItems]="labelItems" [activeItem]="activeItem"
-        (handleActiveItemChange)="onActiveItemChange($event)"></hrms-tab-menu>
+<div class="mt-4">
+    <hrms-tab-menu 
+        [labelItems]="labelItems" 
+        [activeItem]="activeItem"
+        (handleActiveItemChange)="onActiveItemChange($event)"
+    ></hrms-tab-menu>
 </div>
 <router-outlet></router-outlet>
