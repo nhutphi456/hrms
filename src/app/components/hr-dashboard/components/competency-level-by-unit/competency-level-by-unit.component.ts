@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 
 @Component({
   selector: 'competency-level-by-unit',
@@ -40,9 +41,8 @@ export class CompetencyLevelByUnitComponent implements OnInit {
       datasets: [
         {
           label: '2022',
-          borderColor: documentStyle.getPropertyValue('--bluegray-400'),
-          pointBackgroundColor:
-            documentStyle.getPropertyValue('--bluegray-400'),
+          borderColor: colorObj.lightGreen,
+          pointBackgroundColor: colorObj.lightGreen,
           pointBorderColor: documentStyle.getPropertyValue('--bluegray-400'),
           pointHoverBackgroundColor: textColor,
           pointHoverBorderColor:
@@ -51,9 +51,10 @@ export class CompetencyLevelByUnitComponent implements OnInit {
         },
         {
           label: '2023',
-          borderColor: documentStyle.getPropertyValue('--pink-400'),
-          pointBackgroundColor: documentStyle.getPropertyValue('--pink-400'),
-          pointBorderColor: documentStyle.getPropertyValue('--pink-400'),
+          backgroundColor: 'rgba(205, 233, 234, 0.5)',
+          borderColor: colorObj.primaryLight2,
+          pointBackgroundColor: colorObj.primaryLight3,
+          pointBorderColor: colorObj.primaryLight3,
           pointHoverBackgroundColor: textColor,
           pointHoverBorderColor: documentStyle.getPropertyValue('--pink-400'),
           data: [28, 48, 40, 19, 96, 27, 100],
@@ -66,12 +67,16 @@ export class CompetencyLevelByUnitComponent implements OnInit {
         legend: {
           labels: {
             color: textColor,
+            usePointStyle: true,
           },
           position: 'bottom',
         },
       },
       scales: {
         r: {
+          angleLines: {
+            display: false,
+          },
           grid: {
             color: textColorSecondary,
           },

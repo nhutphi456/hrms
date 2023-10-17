@@ -1,10 +1,7 @@
 :host ::ng-deep {
-    .by-unit-container {
-        height: 450px;
-    }
     p-chart {
         div {
-            height: 26rem;
+            height: 25rem;
             @apply flex justify-center;
         }
     }

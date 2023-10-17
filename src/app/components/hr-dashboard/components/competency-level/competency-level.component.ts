@@ -4,21 +4,24 @@ import {
   ApexTitleSubtitle,
   ApexDataLabels,
   ApexChart,
+  ApexLegend,
 } from 'ng-apexcharts';
 import {
   ApexGrid,
   ApexPlotOptions,
   ChartComponent,
 } from 'ng-apexcharts/public_api';
+import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   dataLabels: ApexDataLabels;
   title: ApexTitleSubtitle;
-  colors: any;
+  colors?: any;
   plotOptions: ApexPlotOptions;
   grid: ApexGrid;
+  legend?: ApexLegend;
 };
 @Component({
   selector: 'competency-level',
@@ -48,61 +51,85 @@ export class CompetencyLevelComponent {
     this.chartOptions = {
       series: [
         {
-          name: 'Junior',
-          data: this.generateData(8, { min: 1, max: 5 }),
+          name: "Junior",
+          data: this.generateData(8, {
+            min: 1,
+            max: 4
+          })
         },
         {
-          name: 'Professional',
-          data: this.generateData(8, { min: 1, max: 5 }),
+          name: "Professional",
+          data: this.generateData(8, {
+            min: 1,
+            max: 4
+          })
         },
         {
-          name: 'Senior',
-          data: this.generateData(8, { min: 1, max: 5 }),
+          name: "Senior",
+          data: this.generateData(8, {
+            min: 1,
+            max: 4
+          })
         },
         {
-          name: 'Expert',
-          data: this.generateData(8, { min: 1, max: 5 }),
+          name: "Expert",
+          data: this.generateData(8, {
+            min: 1,
+            max: 4
+          })
         },
       ],
       chart: {
-        height: 350,
-        type: 'heatmap',
-        toolbar: {
-          show: false,
-        },
-        redrawOnWindowResize: true
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      colors: ['#008FFB'],
-      title: {
-        text: '',
+        height: 300,
+        width: '90%',
+        type: "heatmap",
+        toolbar: { show: false },
+        offsetX: 20,  
       },
       plotOptions: {
         heatmap: {
-          radius: 6,
-        },
+          enableShades: false,
+          shadeIntensity: 0,
+          radius: 10,
+          colorScale: {
+            ranges: [
+              {
+                from: 1,
+                to: 1.5,
+                name: "Basic",
+                color: colorObj.primaryLight
+              },
+              {
+                from: 1.6,
+                to: 2.5,
+                name: "Proficient",
+                color: colorObj.primary
+              },
+              {
+                from: 2.6,
+                to: 3.5,
+                name: "Advanced",
+                color: colorObj.primaryLight2
+              },
+              {
+                from: 3.6,
+                to: 4,
+                name: "Expert",
+                color: colorObj.primaryLight3
+              }
+            ]
+          }
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      title: {
+        text: "HeatMap Chart with Color Range"
       },
       grid: {
-        show: true,
-        xaxis: {
-          lines: {
-            show: false,
-          },
-        },
-        yaxis: {
-          lines: {
-            show: false,
-          },
-        },
-        padding: {
-          top: 20,
-          right: 20,
-          bottom: 20,
-          left: 20,
-        },
-      },
+        show: false,
+      }
     };
   }
 

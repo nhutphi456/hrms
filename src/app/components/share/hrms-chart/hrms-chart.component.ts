@@ -10,9 +10,9 @@ import { UIChart } from 'primeng/chart';
 import {
   ChartOptions,
   Plugin,
-  PluginChartOptions,
 } from 'chart.js/dist/types/index';
 import { themeColors as colors } from '../constants/share.constants';
+
 export const pieChartColors: string[] = [
   colors.primary,
   colors.primaryLight,
@@ -20,9 +20,13 @@ export const pieChartColors: string[] = [
   colors.primaryLight2,
   colors.primaryLight3,
 ];
-export const colorObj: { [key: string]: string } = {
+export const colorObj = {
   primary: colors.primary,
   secondary: colors.secondary,
+  primaryLight: colors.primaryLight,
+  primaryLight1: colors.primaryLight1,
+  primaryLight2: colors.primaryLight2,
+  primaryLight3: colors.primaryLight3,
   third: colors.third,
   forth: colors.forth,
   fifth: colors.fifth,
@@ -30,7 +34,7 @@ export const colorObj: { [key: string]: string } = {
   warning: colors.warning,
   success: colors.success,
   danger: colors.danger,
-  lightGreen: colors.lightGreen
+  lightGreen: colors.lightGreen,
 };
 @Component({
   selector: 'hrms-chart',
