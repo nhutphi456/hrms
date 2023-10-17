@@ -11,6 +11,11 @@ const dummies: MenuItem[] = [
     path: 'dashboard',
   },
   {
+    name: 'My Dashboard',
+    icon: '',
+    path: 'my-dashboard',
+  },
+  {
     name: 'User Management',
     icon: '',
     path: 'user-management',

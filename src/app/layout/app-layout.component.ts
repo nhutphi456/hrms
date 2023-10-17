@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-layout',
   templateUrl: './app-layout.component.html',
+  styleUrls: ['./app-layout.style.scss']
 })
 export class AppLayoutComponent {
   isNavbarOn!: boolean;

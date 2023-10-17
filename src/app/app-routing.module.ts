@@ -33,6 +33,10 @@ const routes: Routes = [
             m => m.HrDashboardModule,
           ),
       },
+      {
+        path: 'my-dashboard',
+        loadChildren: () => import('./components/employee-dashboard/employee-dashboard.module').then(m => m.EmployeeDashboardModule)
+      }
     ],
   },
 

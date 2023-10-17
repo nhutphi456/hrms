@@ -1,0 +1,58 @@
+<div class="card-container">
+    <div class="p-4 flex justify-between">
+        <div class="flex gap-8">
+            <div class="w-40 h-40">
+                <img class="avatar-img" style="background: #CDE9EAFF; border-radius: 50%;" [src]="defaultImg"
+                [alt]="'default-image'">
+            </div>
+            <div>
+                <div class="personal-info mb-12 flex flex-col gap-1">
+                    <p class="font-bold text-2xl">Jason Weaver</p>
+                    <p>Professional UI/UX Design</p>
+                    <p>
+                        <i class="pi pi-map-marker"></i>
+                        <span class="ml-2">United States, New York</span>
+                    </p>
+                </div>
+                <div class="job-info flex flex-col gap-8">
+                    <div class="flex gap-4">
+                        <div class="flex gap-4 items-center">
+                            <i class="pi pi-user"></i>
+                            <p>Skill</p>
+                        </div>
+                        <div class="tags-container">
+                            <job-tag
+                                *ngFor="let skill of skillTags"
+                                [label]="skill"
+                            ></job-tag>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex gap-4 items-center">
+                            <i class="pi pi-heart"></i>
+                            <p>Interest</p>
+                        </div>
+                        <div class="tags-container">
+                            <job-tag
+                            *ngFor="let interest of interests"
+                            [label]="interest"
+                        ></job-tag>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex gap-4 items-center">
+                            <i class="pi pi-verified"></i>
+                            <p>Certificate</p>
+                        </div>
+                        <div class="tags-container">
+                            Bachelor's Graphic Design
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p-button icon="pi pi-user-edit" label="Edit profile"></p-button>
+        </div>
+    </div>
+</div>

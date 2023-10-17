@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { CalendarModule } from 'primeng/calendar';
-import { ChartModule } from 'primeng/chart';
 import { TimelineModule } from 'primeng/timeline';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { DropdownModule } from 'primeng/dropdown';
@@ -43,7 +42,6 @@ import { PerformanceByJobLevelComponent } from './components/performance-by-job-
     CommonModule,
     HrDashboardRoutingModule,
     AppTopbarModule,
-    ChartModule,
     CalendarModule,
     FormsModule,
     TimelineModule,
