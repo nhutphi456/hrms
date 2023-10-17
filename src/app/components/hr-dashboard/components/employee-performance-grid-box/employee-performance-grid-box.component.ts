@@ -10,15 +10,19 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
   basicData: any;
   plugins: any;
   basicOptions: any;
+  departmentOptions = [
+    {
+      label: 'Unit A',
+      value: 1,
+    },
+    {
+      label: 'Unit B',
+      value: 2,
+    },
+  ];
+  selectedDepartment!: any;
 
   ngOnInit() {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue(
-      '--text-color-secondary',
-    );
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
     this.basicData = {
       labels: ['Q1', 'Q2', 'Q3', 'Q4'],
       datasets: [
@@ -61,7 +65,7 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
           usePointStyle: true,
           pointRadius: 50,
           pointStyle: (ctx: any) => {
-            const pointImage = new Image(30, 30);
+            const pointImage = new Image(40, 40);
             pointImage.src = ctx.raw.image;
 
             return pointImage;

@@ -1,3 +1,6 @@
-.top-skills-container {
-    height: 348px;
+:host ::ng-deep {
+    .p-datatable .p-datatable-thead > tr > th,
+    .p-datatable .p-datatable-tbody > tr > td {
+        @apply text-center;
+    }
 }

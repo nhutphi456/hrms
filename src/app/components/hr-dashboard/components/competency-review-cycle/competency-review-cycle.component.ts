@@ -51,7 +51,7 @@ export class CompetencyReviewCycleComponent implements OnInit {
           display: true,
           align: 'center',
           anchor: 'center',
-          color: 'black', // Customize label text color
+          color: 'black',
           font: {
             weight: 'bold',
           },

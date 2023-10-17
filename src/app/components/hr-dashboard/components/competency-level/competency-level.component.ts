@@ -80,7 +80,7 @@ export class CompetencyLevelComponent {
         },
       ],
       chart: {
-        height: 300,
+        height: 320,
         width: '90%',
         type: "heatmap",
         toolbar: { show: false },

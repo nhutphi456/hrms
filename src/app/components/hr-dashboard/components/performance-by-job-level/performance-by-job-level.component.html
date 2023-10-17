@@ -1,6 +1,15 @@
 <div class="card-container">
-    <p class="card-title">Performance by Job Level</p>
+    <div class="flex justify-between">
+        <div>
+          <p class="card-title">Competency Level (AVG)</p>
+          <p>by Job level and Position</p>
+        </div>
+        <p-dropdown [options]="positionOptions" [(ngModel)]="selectedPosition" optionLabel="label"
+          placeholder="Select position" [dropdownIcon]="'pi pi-filter'">
+        </p-dropdown>
+      </div>
     <p-chart type="bar" [data]="data" [options]="options"
         [plugins]="plugins"
+        [height]="'250'"
     ></p-chart>
 </div>

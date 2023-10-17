@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 
 @Component({
   selector: 'performance-by-job-level',
@@ -10,35 +11,60 @@ export class PerformanceByJobLevelComponent implements OnInit {
   data: any;
   options: any;
   plugins: any = [ChartDataLabels];
-
+  positionOptions = [
+    {
+      label: 'Frontend',
+      value: 1,
+    },
+    {
+      label: 'Backend',
+      value: 2,
+    },
+    {
+      label: 'Business Analyst',
+      value: 3,
+    },
+  ];
+  selectedPosition!: any;
   ngOnInit() {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue(
-      '--text-color-secondary',
-    );
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
     this.data = {
       labels: ['Expert', 'Senior Level', 'Professional Level', 'Junior Level'],
       datasets: [
         {
           type: 'bar',
-          label: 'Dataset 1',
-          backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-          data: [30, 30, 45, 10],
+          label: 'Too early to evaluate',
+          backgroundColor: colorObj.primary,
+          data: [10, 20, 10, 30],
         },
         {
           type: 'bar',
-          label: 'Dataset 2',
-          backgroundColor: documentStyle.getPropertyValue('--green-500'),
-          data: [30, 20, 35, 20],
+          label: 'Unsatisfactory',
+          backgroundColor: colorObj.primaryLight,
+          data: [20, 20, 10, 8],
         },
         {
           type: 'bar',
-          label: 'Dataset 3',
-          backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
-          data: [40, 50, 20, 70],
+          label: 'Partially meet expectation',
+          backgroundColor: colorObj.primaryLight1,
+          data: [30, 20, 10, 20],
+        },
+        {
+          type: 'bar',
+          label: 'Meet expectation',
+          backgroundColor: colorObj.primaryLight4,
+          data: [12, 20, 20, 20],
+        },
+        {
+          type: 'bar',
+          label: 'Partially exceed expectation',
+          backgroundColor: colorObj.primaryLight2,
+          data: [8, 12, 30, 10],
+        },
+        {
+          type: 'bar',
+          label: 'Oustanding',
+          backgroundColor: colorObj.primaryLight3,
+          data: [20, 8, 20, 12],
         },
       ],
     };
@@ -54,37 +80,38 @@ export class PerformanceByJobLevelComponent implements OnInit {
         },
         legend: {
           labels: {
-            color: textColor,
+            usePointStyle: true,
+            color: '#000',
           },
         },
-        dataLabels: {
+        datalabels: {
           display: true,
           align: 'center',
+          anchor: 'center',
+          color: 'black',
           font: {
             weight: 'bold',
           },
-          formatter: function(value: any) {
-            return `${value}%`
-          }
-        }
+          formatter: function (value: any) {
+            return `${value}%`;
+          },
+        },
       },
       scales: {
         x: {
           stacked: true,
-          ticks: {
-            color: textColorSecondary,
-          },
+          display: false,
           grid: {
-            display: false
+            display: false,
           },
         },
         y: {
           stacked: true,
           ticks: {
-            color: textColorSecondary,
+            color: '#000',
           },
           grid: {
-            display: false
+            display: false,
           },
         },
       },

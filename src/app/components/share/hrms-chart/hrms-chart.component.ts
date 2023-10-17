@@ -27,6 +27,7 @@ export const colorObj = {
   primaryLight1: colors.primaryLight1,
   primaryLight2: colors.primaryLight2,
   primaryLight3: colors.primaryLight3,
+  primaryLight4: colors.primaryLight4,
   third: colors.third,
   forth: colors.forth,
   fifth: colors.fifth,

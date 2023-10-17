@@ -4,6 +4,7 @@ export const themeColors = {
   primaryLight1: '#a5d8d9',
   primaryLight2: '#3F9396',
   primaryLight3: '#2E6C6E',
+  primaryLight4: '#7EC6C9',
   'primary-1': '#b4c5e7',
   'primary-2': '#f3f6fb',
   secondary: '#FCA310',
