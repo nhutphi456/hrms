@@ -70,6 +70,7 @@ export class PerformanceByJobLevelComponent implements OnInit {
     };
 
     this.options = {
+      responsive: true,
       indexAxis: 'y',
       maintainAspectRatio: false,
       aspectRatio: 1,

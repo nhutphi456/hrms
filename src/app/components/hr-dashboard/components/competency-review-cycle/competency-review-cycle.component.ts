@@ -25,13 +25,13 @@ export class CompetencyReviewCycleComponent implements OnInit {
           label: 'Self',
           backgroundColor: colorObj['primary'],
           borderColor: colorObj['primary'],
-          data: [65, 59, 80, 81, 56],
+          data: [65, 59, 80, 100, 56],
         },
         {
           type: 'bar',
           label: 'Manager',
           backgroundColor: colorObj['lightGreen'],
-          data: [21, 84, 24, 75, 37]
+          data: [21, 84, 24, 100, 37]
       },
       ],
     };
@@ -90,6 +90,7 @@ export class CompetencyReviewCycleComponent implements OnInit {
     };
 
     this.pieOptions = {
+      responsive: true,
       cutout: '60%',
       plugins: {
         legend: {

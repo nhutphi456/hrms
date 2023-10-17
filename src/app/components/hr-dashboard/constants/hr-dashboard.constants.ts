@@ -1,17 +1,18 @@
+import { gql } from 'apollo-angular';
 import { TableHeader } from 'src/app/models/global.model';
 
 export const topSkillsTableCol: TableHeader[] = [
-  { col: 'No', field: 'no' },
+  { col: 'No.', field: 'no' },
   { col: 'AVG Score', field: 'avgScore' },
   { col: 'Skill', field: 'skill' },
 ];
 export const topPerformersTableCol: TableHeader[] = [
-  { col: 'No', field: 'no' },
+  { col: 'No.', field: 'no' },
   { col: 'Rating', field: 'rating' },
   { col: 'Employee', field: 'employee' },
 ];
 export const topCompetenciesTableCol: TableHeader[] = [
-  { col: 'No', field: 'no' },
+  { col: 'No.', field: 'no' },
   { col: 'Rating', field: 'rating' },
   { col: 'Employee', field: 'employee' },
 ];
@@ -80,3 +81,18 @@ export const nineGridLabels = {
     ctx.restore();
   },
 };
+
+export const GET_TOP_PERFORMERS = gql`
+  query GetTopPerformers($performanceCycleId: Int, $limit: Int) {
+    topEmployeePerformance(
+      performanceCycleId: $performanceCycleId
+      limit: $limit
+    ) {
+      employee {
+        firstName
+        lastName
+      }
+      finalAssessment
+    }
+  }
+`;

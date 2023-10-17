@@ -75,6 +75,7 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
     };
     this.plugins = [nineGridLabels];
     this.basicOptions = {
+      responsive: true,
       plugins: {
         legend: {
           display: false,

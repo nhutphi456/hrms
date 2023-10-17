@@ -1,13 +1,17 @@
 <div class="card-container h-full">
-    <div class="flex gap-4 items-center">
+    <div class="flex gap-8 items-center">
         <p class="card-title">Competency Review Cycle</p>
+        <div class="flex gap-1 items-center text-sm py-2 border-b border-primary">
+            <i class="pi pi-calendar"></i>
+            <span>09 Feb 2021 - 16 Feb 2021</span>
+        </div>
     </div>
-    <div class="mt-2 px-10 flex justify-between items-center">
-        <div class="bar-chart-container">
+    <div class="mt-4 md:px-0 lg:px-10 flex justify-between items-center md:flex-col lg:flex-row">
+        <div class="bar-chart-container md:w-full lg:w-1/2">
             <p class="text-primary font-bold">Number of completed assessments per unit</p>
             <hrms-chart type="bar" [data]="barChartData" [options]="barChartOptions" [plugins]="plugins" [height]="'250'"></hrms-chart>
         </div>
-        <div class="relative">
+        <div class="relative md:mt-8 lg:mt-0">
             <p class="completion-status font-bold text-primary text-center">Overall</p>
             <hrms-chart id="completion-progress" type="doughnut" [data]="pieData" [options]="pieOptions" [height]="'250'">
             </hrms-chart>
