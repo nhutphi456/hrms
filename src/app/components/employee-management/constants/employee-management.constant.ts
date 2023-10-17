@@ -16,7 +16,7 @@ export const employeeLabelItems: MenuItem[] = [
   {
     label: 'all',
     id: '',
-    title: 'All Employees',
+    title: 'All',
   },
   {
     label: 'active',

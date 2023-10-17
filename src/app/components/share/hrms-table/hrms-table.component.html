@@ -1,6 +1,6 @@
 <div class="bg-white rounded-md overflow-hidden">
   <p-table [value]="table.data.body" [columns]="table.data.header" [tableStyle]="tableStyle"
-    [responsive]="true" [rowHover]="true" responsiveLayout="stack" styleClass="p-datatable-sm">
+    [responsive]="true" [rowHover]="true" styleClass="p-datatable-sm">
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th style="width: 4rem; text-align: center;" id="header-checkbox" *ngIf="isCheckboxShown">

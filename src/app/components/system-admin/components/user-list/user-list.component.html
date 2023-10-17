@@ -7,7 +7,7 @@
     <hrms-screen-filter (getSearchValue)="searchValue($event)"></hrms-screen-filter>
     <form class="flex items-center" [formGroup]="filterForm">
       <p-multiSelect display="chip" [options]="roleOptions" defaultLabel="Role" formControlName="roles"
-        (onChange)="onFilter()"></p-multiSelect>
+        (onChange)="onFilter()" [dropdownIcon]="'pi pi-filter'"></p-multiSelect>
       <p-button *ngIf="isClearAllVisible()" (onClick)="handleClearAll()" styleClass="p-button-link" label="Clear all">
       </p-button>
     </form>
