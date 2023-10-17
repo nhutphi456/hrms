@@ -11,11 +11,18 @@
             <label class="block font-bold" for="accessSelect">Enable Login Access</label>
             <p-dropdown styleClass="w-full mt-1" [options]="activateOptions" id="accessSelect" formControlName="status"
                 placeholder="Please choose status"></p-dropdown>
+            <!-- <div class="flex items-center">
+                <p-radioButton name="status" value="enable" id="enable" formControlName="status"></p-radioButton>
+                <label for="enable" class="ml-2 !text-base">Enable</label>
+            </div>
+            <div class="flex items-center">
+                <p-radioButton name="status" value="disable" id="disable" formControlName="status"></p-radioButton>
+                <label for="disable" class="ml-2 !text-base">Disable</label>
+            </div> -->
         </div>
         <div class="mt-16">
             <p-button styleClass="w-full flex justify-center" type="submit" [loading]="isLoading"
-            [disabled]="activateUserForm.invalid"
-            >Update</p-button>
+                [disabled]="activateUserForm.invalid">Update</p-button>
         </div>
     </form>
 </div>

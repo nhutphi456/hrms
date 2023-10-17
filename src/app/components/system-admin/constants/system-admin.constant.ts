@@ -13,7 +13,7 @@ export const userLabelItems: MenuItem[] = [
   {
     label: 'all',
     id: '',
-    title: 'All Employees',
+    title: 'All',
   },
   {
     label: 'active',
@@ -76,6 +76,11 @@ export const GET_USER = gql`
     user(id: $id) {
       userId
       username
+      status  
+      roles {
+        roleId
+        name
+      }
     }
   }
 `;

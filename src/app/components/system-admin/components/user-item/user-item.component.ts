@@ -18,7 +18,7 @@ import { UpdaterUserFormComponent } from '../updater-user-form/updater-user-form
   styleUrls: ['./user-item.component.scss'],
 })
 export class UserItemComponent implements OnInit, OnChanges {
-  @HostBinding('class') hostClass = 'hrms-employee-item';
+  @HostBinding('class') hostClass = 'hrms-user-item';
   @Input() employeeAccount!: IEmployeeAccount;
   menuItems!: MenuItem[];
   defaultImg = 'assets/images/profile-image-default.jpg';

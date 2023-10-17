@@ -29,6 +29,7 @@ export class UserActivateFormComponent implements OnInit {
   ];
   activateUserForm!: FormGroup;
   isLoading = false;
+  user$ = this.accountStore.user$;
 
   constructor(
     private accountStore: EmployeeAccountStore,
@@ -51,6 +52,15 @@ export class UserActivateFormComponent implements OnInit {
     });
 
     this.initForm();
+    if(this.selectedIdsCount === 1) {
+      this.accountStore.getUser(this.selectedIds[0]);
+      this.user$.subscribe(user => {
+        this.activateUserForm.patchValue({
+          roles: user?.roles?.map(r => r.roleId),
+          status: user?.status
+        });
+      });
+    }
   }
 
   initForm() {
@@ -62,6 +72,7 @@ export class UserActivateFormComponent implements OnInit {
 
   onActivate() {
     const { roles, status } = this.activateUserForm.value;
+
     const updateData: IUpdateAccountParams = {
       roles,
       status,
