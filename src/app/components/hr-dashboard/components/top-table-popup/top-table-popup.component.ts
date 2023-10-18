@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import * as _ from "lodash"
-
-import { topPerformersTableCol } from '../../constants/hr-dashboard.constants';
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
+import { topPerformersTableCol } from '../../constants/hr-dashboard.constants';
 import { TopPerformersStore } from '../../store/top-performers-store.service';
-import { TopTablePopupComponent } from '../top-table-popup/top-table-popup.component';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
 
 @Component({
-  selector: 'top-performers',
-  templateUrl: './top-performers.component.html',
-  styleUrls: ['./top-performers.component.scss'],
+  selector: 'app-top-table-popup',
+  templateUrl: './top-table-popup.component.html',
+  styleUrls: ['./top-table-popup.component.scss'],
 })
-export class TopPerformersComponent implements OnInit {
+export class TopTablePopupComponent implements OnInit {
   defaultImg = 'assets/images/profile-image-default.jpg';
   topPerformers$ = this.topPerformerStore.topPerformers$;
   tableData: HrmsTable<any> = {
@@ -26,16 +24,16 @@ export class TopPerformersComponent implements OnInit {
       body: [],
     },
   };
-  popUpTableRef!: DynamicDialogRef;
-  paginationParams = { pageNo: 1, pageSize: 10 }
+  paginationParams = this.config.data.paginationParams;
+  gapPageNumber = 1;
 
   constructor(
     private topPerformerStore: TopPerformersStore,
-    private dialogService: DialogService,
+    private ref: DynamicDialogRef,
+    private config: DynamicDialogConfig,
   ) {}
 
   ngOnInit(): void {
-    this.topPerformerStore.getTopPerformers(this.paginationParams);
     this.topPerformers$.subscribe(result => {
       const { pageNo, pageSize, totalItems, totalPages } = result.pagination;
       const topPerformers = result.data.map((p, i) => {
@@ -45,6 +43,7 @@ export class TopPerformersComponent implements OnInit {
           profileImg: this.defaultImg,
         };
       });
+      console.log(result.pagination)
       const tData = {
         page: pageNo,
         first: pageSize * (pageNo - 1) + 1,
@@ -53,21 +52,18 @@ export class TopPerformersComponent implements OnInit {
         totalRecord: totalItems,
         data: {
           header: [...this.tableData.data.header],
-          body: _.take(topPerformers, 5),
+          body: topPerformers,
         },
       };
       this.tableData = tData;
     });
   }
 
-  onOpenPopupTable() {
-    this.popUpTableRef = this.dialogService.open(TopTablePopupComponent, {
-      header: 'Top Performers',
-      contentStyle: { overflow: 'visible' },
-      width: '50vw',
-      data: {
-        paginationParams: this.paginationParams,
-      },
-    });
+  onPageChange(e: PageChangeEvent): void {
+    this.paginationParams = {
+      ...this.paginationParams,
+      pageNo: e.page + this.gapPageNumber,
+    };
+    this.topPerformerStore.getTopPerformers(this.paginationParams);
   }
 }

@@ -83,16 +83,24 @@ export const nineGridLabels = {
 };
 
 export const GET_TOP_PERFORMERS = gql`
-  query GetTopPerformers($performanceCycleId: Int, $limit: Int) {
-    topEmployeePerformance(
-      performanceCycleId: $performanceCycleId
-      limit: $limit
+  query GetTopPerformers($pageNo: Int, $pageSize: Int) {
+    employeesPerformance(
+      pageNo: $pageNo
+      pageSize: $pageSize
     ) {
-      employee {
-        firstName
-        lastName
+      data {
+        employee {
+          firstName
+          lastName
+        }
+        finalAssessment
       }
-      finalAssessment
+      pagination {
+        pageNo
+        pageSize
+        totalItems
+        totalPages
+      }
     }
   }
 `;

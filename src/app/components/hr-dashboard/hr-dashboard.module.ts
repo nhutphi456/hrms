@@ -22,6 +22,7 @@ import { TopPerformersComponent } from './components/top-performers/top-performe
 import { TopCompetenciesComponent } from './components/top-competencies/top-competencies.component';
 import { EmployeePerformanceGridBoxComponent } from './components/employee-performance-grid-box/employee-performance-grid-box.component';
 import { PerformanceByJobLevelComponent } from './components/performance-by-job-level/performance-by-job-level.component';
+import { TopTablePopupComponent } from './components/top-table-popup/top-table-popup.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { PerformanceByJobLevelComponent } from './components/performance-by-job-
     TopPerformersComponent,
     TopCompetenciesComponent,
     EmployeePerformanceGridBoxComponent,
-    PerformanceByJobLevelComponent
+    PerformanceByJobLevelComponent,
+    TopTablePopupComponent
   ],
   imports: [
     CommonModule,

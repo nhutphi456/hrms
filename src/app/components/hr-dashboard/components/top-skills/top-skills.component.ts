@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { topSkillsTableCol } from '../../constants/hr-dashboard.constants';
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
 

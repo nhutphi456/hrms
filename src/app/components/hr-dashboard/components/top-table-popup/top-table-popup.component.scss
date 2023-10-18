@@ -1,0 +1,14 @@
+:host ::ng-deep {
+    .p-datatable .p-datatable-thead > tr > th,
+    .p-datatable .p-datatable-tbody > tr > td {
+        @apply text-center;
+    }
+    .employee-rating {
+        width: 3rem;
+        height: 2.25rem;
+        border-radius: 50px;
+        span {
+            @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+        }
+    }
+}

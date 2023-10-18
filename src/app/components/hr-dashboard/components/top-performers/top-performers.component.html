@@ -1,6 +1,6 @@
 <div class="card-container h-full">
     <div class="card-title mb-4 flex items-center">
-        <p-button icon="pi pi-external-link" styleClass="p-button-link"></p-button>
+        <p-button (onClick)="onOpenPopupTable()" icon="pi pi-external-link" styleClass="p-button-link"></p-button>
         <span>Top performers</span>
     </div>
     <hrms-table [table]="tableData" [tableStyle]="{'width': '100%'}" [contentRef]="contentRef">
@@ -10,13 +10,13 @@
                 <td class="flex justify-center">
                     <div class="employee-rating bg-primaryLight p-2 relative">
                         <span class="text-primary">
-                            {{rowData.rating}}
+                            {{rowData.finalAssessment}}
                         </span>
                     </div>
                 </td>
-                <td>
-                    <div class="flex items-center justify-center">
-                        <p-avatar [image]="rowData.employee.profileImg" styleClass="mr-2" shape="circle"></p-avatar>
+                <td class="pl-4">
+                    <div class="flex items-center justify-start">
+                        <p-avatar [image]="rowData.profileImg" styleClass="mr-2" shape="circle"></p-avatar>
                         <p>{{rowData.employee.firstName}} {{rowData.employee.lastName}}</p>
                     </div>
                 </td>

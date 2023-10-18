@@ -45,13 +45,13 @@ export class TopPerformersStore extends ComponentStore<ITopPerformerState> {
     },
   );
   //EFFECT
-  readonly getEmployees = this.effect(
+  readonly getTopPerformers = this.effect(
     (params$: Observable<ITopPerformerParams>) =>
       params$.pipe(
         switchMap(params =>
           this.hrDashboardService.getTopPerformers(params).pipe(
             tapResponse({
-              next: res => this.setTopPerformers(res.employeePerformance),
+              next: res => this.setTopPerformers(res.employeesPerformance),
               error: error => console.log(error),
             }),
           ),

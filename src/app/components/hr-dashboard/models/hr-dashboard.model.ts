@@ -1,8 +1,8 @@
 import { PaginatedData } from 'src/app/models/global.model';
 
 export interface ITopPerformerParams {
-  performanceCycleId?: number;
-  limit?: number;
+  pageNo?: number;
+  pageSize?: number;
 }
 
 export interface ITopPerformer {
@@ -14,5 +14,5 @@ export interface ITopPerformer {
 }
 
 export interface ITopPerformerApiResponse {
-  employeePerformance: PaginatedData<ITopPerformer>;
+  employeesPerformance: PaginatedData<ITopPerformer>;
 }
