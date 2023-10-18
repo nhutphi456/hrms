@@ -3,6 +3,7 @@ import { Apollo } from 'apollo-angular';
 import {
   GET_COMPETENCY_BY_LEVEL_AND_POSITION,
   GET_COMPETENCY_BY_UNIT,
+  GET_COMPETENCY_CYCLES,
   GET_COMPETENCY_CYCLE_STATUS,
   GET_COMPETENCY_TIMELINE,
   GET_TOP_PERFORMERS,
@@ -15,6 +16,7 @@ import {
   ICompetencyByUnitParams,
   ICompetencyIncompletionApiResponse,
   ICompetencyTimelineApiResponse,
+  ICptCyclesApiResponse,
   ITopPerformerApiResponse,
   ITopPerformerParams,
   ITopSkillsetApiResponse,
@@ -88,5 +90,11 @@ export class HrDashboardService {
         variables: { competencyCycleId },
       })
       .valueChanges.pipe(map(res => res.data));
+  }
+
+  getCompetencyCycles(): Observable<ICptCyclesApiResponse>{
+    return this.apollo.watchQuery<ICptCyclesApiResponse>({
+      query: GET_COMPETENCY_CYCLES
+    }).valueChanges.pipe(map(res => res.data));
   }
 }

@@ -83,7 +83,6 @@ export interface ITopSkillset {
     score: number;
   };
 }
-
 export interface ITopskillsetParams {
   pageNo?: number;
   pageSize?: number;
@@ -91,4 +90,12 @@ export interface ITopskillsetParams {
 }
 export interface ITopSkillsetApiResponse {
   topHighestSkillSet: PaginatedData<ITopSkillset>;
+}
+
+export interface ICompetencyCycle {
+  id: number;
+  competencyCycleName: string;
+}
+export interface ICptCyclesApiResponse {
+  competencyCycles: ICompetencyCycle[];
 }

@@ -82,6 +82,8 @@ export class CompetencyLevelByUnitComponent implements OnInit {
           angleLines: {
             display: true,
           },
+          suggestedMin: 1,
+          suggestedMax: 4, 
           grid: {
             color: textColorSecondary,
           },

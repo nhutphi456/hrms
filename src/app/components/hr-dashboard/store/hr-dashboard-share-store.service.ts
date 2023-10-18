@@ -6,13 +6,14 @@ import {
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, switchMap } from 'rxjs';
 import { EmployeeManagementService } from '../../employee-management/services/employee-management.service';
-import { ICompetencyTimeline } from '../models/hr-dashboard.model';
+import { ICompetencyCycle, ICompetencyTimeline } from '../models/hr-dashboard.model';
 import { HrDashboardService } from '../services/hr-dashboard.service';
 
 export interface IHRDashboardShareState {
   departments: Department[];
   positions: IPosition[];
   competencyTimeline: ICompetencyTimeline[];
+  competencyCycles: ICompetencyCycle[];
 }
 
 @Injectable({
@@ -23,21 +24,25 @@ export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardSha
     super({
       departments: [],
       positions: [],
-      competencyTimeline: []
+      competencyTimeline: [],
+      competencyCycles: []
     });
   }
 
+  //SELECTOR
   readonly departments$: Observable<Department[]> = this.select(
     state => state.departments,
   );
-
   readonly positions$: Observable<IPosition[]> = this.select(
     state => state.positions,
   );
   readonly competencyTimeline$: Observable<ICompetencyTimeline[]> = this.select(
     state => state.competencyTimeline,
   );
-
+  readonly competencyCycles$: Observable<ICompetencyCycle[]> = this.select(
+    state => state.competencyCycles,
+  );
+  //UPDATER
   readonly setDepartments = this.updater(
     (state: IHRDashboardShareState, departments: Department[]) => {
       return { ...state, departments };
@@ -56,7 +61,13 @@ export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardSha
       };
     },
   );
+  readonly setCompetencyCycles = this.updater(
+    (state: IHRDashboardShareState, competencyCycles: ICompetencyCycle[]) => {
+      return { ...state, competencyCycles };
+    },
+  );
 
+  //EFFECT
   readonly getDepartments = this.effect<void>(trigger$ =>
     trigger$.pipe(
       switchMap(() =>
@@ -95,5 +106,17 @@ export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardSha
           ),
         ),
       ),
+  );
+  readonly getCompetencyCycles = this.effect<void>(trigger$ =>
+    trigger$.pipe(
+      switchMap(() =>
+        this.hrDashboardService.getCompetencyCycles().pipe(
+          tapResponse({
+            next: res => this.setCompetencyCycles(res.competencyCycles),
+            error: error => console.log(error),
+          }),
+        ),
+      ),
+    ),
   );
 }

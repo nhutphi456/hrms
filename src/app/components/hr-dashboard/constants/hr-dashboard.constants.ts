@@ -163,17 +163,17 @@ export const GET_COMPETENCY_TIMELINE = gql`
 `;
 
 export const GET_TOP_SKILL_SETS = gql`
-  query GetTopSkillset($competencyCycleId: Int!){
-    topHighestSkillSet(competencyCycleId: $competencyCycleId){
-      data{
-        skillSet{
+  query GetTopSkillset($competencyCycleId: Int!) {
+    topHighestSkillSet(competencyCycleId: $competencyCycleId) {
+      data {
+        skillSet {
           skillSetName
         }
-        proficiencyLevel{
+        proficiencyLevel {
           score
         }
       }
-      pagination{
+      pagination {
         pageNo
         pageSize
         totalItems
@@ -181,4 +181,13 @@ export const GET_TOP_SKILL_SETS = gql`
       }
     }
   }
-`
+`;
+
+export const GET_COMPETENCY_CYCLES = gql`
+  query GetCompetencyCyles {
+    competencyCycles {
+      id
+      competencyCycleName
+    }
+  }
+`;
