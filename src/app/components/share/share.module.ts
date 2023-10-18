@@ -8,6 +8,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ChartModule } from 'primeng/chart';
+import { ButtonModule } from 'primeng/button';
 
 import { HrmsTableComponent } from './hrms-table/hrms-table.component';
 import { HrmsPaginationComponent } from './hrms-pagination/hrms-pagination.component';
@@ -15,6 +16,7 @@ import { HrmsScreenFilterComponent } from './hrms-screen-filter/hrms-screen-filt
 import { HrmsTabMenuComponent } from './hrms-tab-menu/hrms-tab-menu.component';
 import { PhoneFormatPipe } from './pipes/phone-format.pipe';
 import { HrmsChartComponent } from './hrms-chart/hrms-chart.component';
+import { DashboardRankTableComponent } from './dashboard-rank-table/dashboard-rank-table.component';
 @NgModule({
   declarations: [
     HrmsTableComponent,
@@ -23,6 +25,7 @@ import { HrmsChartComponent } from './hrms-chart/hrms-chart.component';
     HrmsTabMenuComponent,
     PhoneFormatPipe,
     HrmsChartComponent,
+    DashboardRankTableComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { HrmsChartComponent } from './hrms-chart/hrms-chart.component';
     ReactiveFormsModule,
     InputTextModule,
     CheckboxModule,
-    ChartModule
+    ChartModule,
+    ButtonModule
   ],
   exports: [
     HrmsTableComponent,

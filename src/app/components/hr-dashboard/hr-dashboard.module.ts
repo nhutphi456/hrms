@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import { TimelineModule } from 'primeng/timeline';
 import { NgApexchartsModule } from "ng-apexcharts";
@@ -59,7 +59,8 @@ import { DashboardDepartmentFilterComponent } from './components/dashboard-depar
     AvatarModule,
     OverlayPanelModule,
     RadioButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DialogModule
   ]
 })
 export class HrDashboardModule { }

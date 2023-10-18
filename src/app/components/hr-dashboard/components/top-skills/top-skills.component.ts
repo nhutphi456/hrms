@@ -8,6 +8,7 @@ import { topSkillsTableCol } from '../../constants/hr-dashboard.constants';
 import { TopFiguresStore } from '../../store/top-performers-store.service';
 import { defaultTableConfig } from '../../../../constants/app.constant';
 import { ITopskillsetParams } from '../../models/hr-dashboard.model';
+import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
 
 @Component({
   selector: 'top-skills',
@@ -15,44 +16,6 @@ import { ITopskillsetParams } from '../../models/hr-dashboard.model';
   styleUrls: ['./top-skills.component.scss'],
 })
 export class TopSkillsComponent implements OnInit {
-  // tableData: HrmsTable<any> = {
-  //   page: 0,
-  //   first: 0,
-  //   rows: 0,
-  //   pageCount: 0,
-  //   totalRecord: 0,
-  //   data: {
-  //     header: topSkillsTableCol,
-  //     body: [
-  //       {
-  //         no: 1,
-  //         avgScore: 3,
-  //         skill: 'Business process analysis',
-  //       },
-  //       {
-  //         no: 2,
-  //         avgScore: 3,
-  //         skill: 'Business process analysis',
-  //       },
-  //       {
-  //         no: 3,
-  //         avgScore: 3,
-  //         skill: 'Business process analysis',
-  //       },
-  //       {
-  //         no: 4,
-  //         avgScore: 3,
-  //         skill: 'Business process analysis',
-  //       },
-  //       {
-  //         no: 5,
-  //         avgScore: 3,
-  //         skill: 'Business process analysis',
-  //       },
-  //     ],
-  //   },
-  // };
-
   tableData: HrmsTable<any> = {
     ...defaultTableConfig,
     data: {
@@ -60,17 +23,19 @@ export class TopSkillsComponent implements OnInit {
       body: [],
     },
   };
-  skillSetParams: ITopskillsetParams = {
+  tableParams: ITopskillsetParams = {
     pageNo: 1,
     pageSize: 10,
     competencyCycleId: 7,
   };
   topSkillsets$ = this.topFigureStore.topSkillsets$;
+  isFullTableShown = false;
+  gapPageNumber = 1;
 
   constructor(private topFigureStore: TopFiguresStore) {}
 
   ngOnInit(): void {
-    this.topFigureStore.getTopSkillsets(this.skillSetParams);
+    this.topFigureStore.getTopSkillsets(this.tableParams);
     this.topSkillsets$.subscribe(result => {
       const pagination = configPagination(result.pagination);
       const topSkillsets = result.data.map((s, i) => {
@@ -90,5 +55,16 @@ export class TopSkillsComponent implements OnInit {
 
       this.tableData = tData;
     });
+  }
+
+  showFullTable() {
+    this.isFullTableShown = true;
+  }
+  onPageChange(e: PageChangeEvent): void {
+    this.tableParams = {
+      ...this.tableParams,
+      pageNo: e.page + this.gapPageNumber,
+    };
+    this.topFigureStore.getTopSkillsets(this.tableParams);
   }
 }

@@ -1,0 +1,29 @@
+<div class="card-container top-skills-container h-full">
+    <div class="card-title mb-4 flex items-center">
+        <p-button icon="pi pi-external-link" styleClass="p-button-link"></p-button>
+        <span>{{tableTitle}}</span>
+    </div>
+    <p-table styleClass="p-datatable-sm" [value]="table.data.body" [columns]="table.data.header" [responsive]="true"
+        [rowHover]="true">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [id]="col.field" [pSortableColumn]="col.field">
+                    {{ col.col }}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-columns="columns">
+            <tr>
+                <td>{{rowData.no}}</td>
+                <td class="flex justify-center">
+                    <div class="employee-rating bg-primaryLight p-2 relative">
+                        <span class="text-primary">
+                            {{rowData.avgScore}}
+                        </span>
+                    </div>
+                </td>
+                <td>{{rowData.skill}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
