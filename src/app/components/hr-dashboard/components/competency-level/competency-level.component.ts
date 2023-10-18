@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -9,11 +9,14 @@ import {
 import {
   ApexGrid,
   ApexPlotOptions,
+  ApexXAxis,
   ChartComponent,
 } from 'ng-apexcharts/public_api';
 import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 import { IDropdownItem } from 'src/app/models/global.model';
 import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
+import { CompetencyScoreStoreService as CompetencyScoreStore } from '../../store/competency-score-store.service';
+import * as _ from 'lodash';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -24,51 +27,65 @@ export type ChartOptions = {
   plotOptions: ApexPlotOptions;
   grid: ApexGrid;
   legend?: ApexLegend;
+  xaxis?: ApexXAxis;
 };
 @Component({
   selector: 'competency-level',
   templateUrl: './competency-level.component.html',
   styleUrls: ['./competency-level.component.scss'],
 })
-export class CompetencyLevelComponent {
+export class CompetencyLevelComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: ChartOptions;
-
-
-  constructor(private shareStore: HrDashboardShareStoreService) {
-    this.chartOptions = {
-      series: [
+  scoreByLevelAndPosition$ = this.competencyScoreStore.scoreByLevelAndPosition$;
+  data = [
+    {
+      name: 'Junior',
+      data: [
         {
-          name: 'Junior',
-          data: this.generateData(8, {
-            min: 1,
-            max: 4,
-          }),
-        },
-        {
-          name: 'Professional',
-          data: this.generateData(8, {
-            min: 1,
-            max: 4,
-          }),
-        },
-        {
-          name: 'Senior',
-          data: this.generateData(8, {
-            min: 1,
-            max: 4,
-          }),
-        },
-        {
-          name: 'Expert',
-          data: this.generateData(8, {
-            min: 1,
-            max: 4,
-          }),
+          x: 'Job Knowledge',
+          y: 3,
         },
       ],
+    },
+  ];
+  dataSeries: { name: string; data: { x: string; y: number }[] }[] = [];
+
+  params = { positionId: 1, competencyCycleId: 8 };
+  constructor(private competencyScoreStore: CompetencyScoreStore) {
+    this.chartOptions = {
+      series: [
+        // {
+        //   name: 'Junior',
+        //   data: this.generateData(8, {
+        //     min: 1,
+        //     max: 4,
+        //   }),
+        // },
+        // {
+        //   name: 'Professional',
+        //   data: this.generateData(8, {
+        //     min: 1,
+        //     max: 4,
+        //   }),
+        // },
+        // {
+        //   name: 'Senior',
+        //   data: this.generateData(8, {
+        //     min: 1,
+        //     max: 4,
+        //   }),
+        // },
+        // {
+        //   name: 'Expert',
+        //   data: this.generateData(8, {
+        //     min: 1,
+        //     max: 4,
+        //   }),
+        // },
+      ],
       chart: {
-        height: 320,
+        height: 350,
         width: '90%',
         type: 'heatmap',
         toolbar: { show: false },
@@ -82,7 +99,7 @@ export class CompetencyLevelComponent {
           colorScale: {
             ranges: [
               {
-                from: 1,
+                from: 0,
                 to: 1.5,
                 name: 'Basic',
                 color: colorObj.primaryLight,
@@ -119,7 +136,33 @@ export class CompetencyLevelComponent {
       grid: {
         show: false,
       },
+      xaxis: {
+        labels: {
+          rotate: 45,
+          // maxWidth: 100,
+        },
+      },
     };
+  }
+
+  ngOnInit(): void {
+    this.competencyScoreStore.getScoreByLevelAndPosition(this.params);
+    this.scoreByLevelAndPosition$.subscribe(result => {
+      console.log({ result });
+      const series = _(result)
+        .groupBy('jobLevel.jobLevelName')
+        .map((values, key) => ({
+          name: key,
+          data: values.map(({ competency: { competencyName }, average }) => ({
+            x: competencyName,
+            y: average,
+          })),
+        }))
+        .value();
+      this.dataSeries = series;
+      console.log({ series: this.dataSeries });
+      this.initHeatmapData();
+    });
   }
 
   public generateData(count: number, yrange: { min: number; max: number }) {
@@ -141,5 +184,12 @@ export class CompetencyLevelComponent {
 
   onSelectPosition(e: IDropdownItem) {
     console.log({ e });
+  }
+
+  initHeatmapData() {
+    this.chartOptions = {
+      ...this.chartOptions,
+      series: this.dataSeries,
+    };
   }
 }

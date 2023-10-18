@@ -44,7 +44,7 @@ import { DashboardDepartmentFilterComponent } from './components/dashboard-depar
     PerformanceByJobLevelComponent,
     TopTablePopupComponent,
     PositionFilterComponent,
-    DashboardDepartmentFilterComponent
+    DashboardDepartmentFilterComponent,
   ],
   imports: [
     CommonModule,

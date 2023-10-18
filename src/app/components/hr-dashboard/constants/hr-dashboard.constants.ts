@@ -112,9 +112,44 @@ export const GET_COMPETENCY_CYCLE_STATUS = gql`
       evaluatorPercentage
     }
 
-    companyInComplete(competencyCycleId: $competencyCycleId){
+    companyInComplete(competencyCycleId: $competencyCycleId) {
       label
       data
+    }
+  }
+`;
+
+export const GET_COMPETENCY_BY_LEVEL_AND_POSITION = gql`
+  query GetCmptByLevelAndPosition($positionId: Int!, $competencyCycleId: Int!) {
+    avgCompetencyScore(
+      positionId: $positionId
+      competencyCycleId: $competencyCycleId
+    ) {
+      jobLevel {
+        jobLevelName
+      }
+      competency {
+        competencyName
+      }
+      average
+    }
+  }
+`;
+
+export const GET_COMPETENCY_BY_UNIT = gql`
+  query GetCompetencyByUnit(
+    $competencyCyclesId: [Int]!
+    $departmentId: Int!
+  ) {
+    competencyRadarChart(
+      competencyCyclesId: $competencyCyclesId
+      departmentId: $departmentId
+    ) {
+      labels
+      datasets {
+        lineName
+        datasets
+      }
     }
   }
 `;

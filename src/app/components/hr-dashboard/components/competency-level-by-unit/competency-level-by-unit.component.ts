@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
+import { CompetencyScoreStoreService } from '../../store/competency-score-store.service';
 
 @Component({
   selector: 'competency-level-by-unit',
@@ -21,9 +22,15 @@ export class CompetencyLevelByUnitComponent implements OnInit {
     },
   ];
   selectedDepartment!: any;
-  filterForm!:FormGroup;
+  filterForm!: FormGroup;
+  scoreByUnit$ = this.competencyScoreStore.scoreByUnit$;
+  lebels: string[] = [];
+  scoreParams = { competencyCyclesId: [1], departmentId: 1 };
 
-  constructor(private fb: FormBuilder){}
+  constructor(
+    private fb: FormBuilder,
+    private competencyScoreStore: CompetencyScoreStoreService,
+  ) {}
 
   ngOnInit(): void {
     const documentStyle = getComputedStyle(document.documentElement);
@@ -31,40 +38,34 @@ export class CompetencyLevelByUnitComponent implements OnInit {
     const textColorSecondary = documentStyle.getPropertyValue(
       '--text-color-secondary',
     );
-
-    this.data = {
-      labels: [
-        'Problem solving',
-        'Willingness to learn',
-        'Communication',
-        'Team spirit',
-        'English',
-        'Job knowledge',
-        'Work quality',
-      ],
-      datasets: [
-        {
-          label: '2022',
-          borderColor: colorObj.lightGreen,
-          pointBackgroundColor: colorObj.lightGreen,
-          pointBorderColor: documentStyle.getPropertyValue('--bluegray-400'),
-          pointHoverBackgroundColor: textColor,
-          pointHoverBorderColor:
-            documentStyle.getPropertyValue('--bluegray-400'),
-          data: [65, 59, 90, 81, 56, 55, 40],
-        },
-        {
-          label: '2023',
-          backgroundColor: 'rgba(205, 233, 234, 0.5)',
-          borderColor: colorObj.primaryLight2,
-          pointBackgroundColor: colorObj.primaryLight3,
-          pointBorderColor: colorObj.primaryLight3,
-          pointHoverBackgroundColor: textColor,
-          pointHoverBorderColor: documentStyle.getPropertyValue('--pink-400'),
-          data: [28, 48, 40, 19, 96, 27, 100],
-        },
-      ],
-    };
+    this.competencyScoreStore.getScoreByUnit(this.scoreParams);
+    this.scoreByUnit$.subscribe(result => {
+      this.data = {
+        labels: result.labels,
+        datasets: [
+          {
+            label: result.datasets[0]?.lineName,
+            borderColor: colorObj.lightGreen,
+            pointBackgroundColor: colorObj.lightGreen,
+            pointBorderColor: documentStyle.getPropertyValue('--bluegray-400'),
+            pointHoverBackgroundColor: textColor,
+            pointHoverBorderColor:
+              documentStyle.getPropertyValue('--bluegray-400'),
+            data: result.datasets[0]?.datasets,
+          },
+          // {
+          //   label: result.datasets[1]?.lineName,
+          //   backgroundColor: 'rgba(205, 233, 234, 0.5)',
+          //   borderColor: colorObj.primaryLight2,
+          //   pointBackgroundColor: colorObj.primaryLight3,
+          //   pointBorderColor: colorObj.primaryLight3,
+          //   pointHoverBackgroundColor: textColor,
+          //   pointHoverBorderColor: documentStyle.getPropertyValue('--pink-400'),
+          //   data: result.datasets[1]?.datasets,
+          // },
+        ],
+      };
+    });
 
     this.options = {
       plugins: {
@@ -88,18 +89,18 @@ export class CompetencyLevelByUnitComponent implements OnInit {
             color: textColorSecondary,
           },
           ticks: {
-            suggestedMin: 0,    
-            suggestedMax: 100, 
-            stepSize: 20,        
+            suggestedMin: 0,
+            suggestedMax: 4,
+            stepSize: 1,
           },
         },
       },
     };
   }
 
-  initForm(){
+  initForm() {
     this.filterForm = this.fb.group({
-      department: ''
-    })
+      department: '',
+    });
   }
 }

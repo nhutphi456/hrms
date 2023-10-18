@@ -105,7 +105,7 @@ export class EmployeeManagementService {
     formData.append('file', file);
 
     return this.http.post(
-      `${environment.apiUrl}/api/employees/${id}/upload`,
+      `${environment.apiUrl}/dam/upload/${id}`,
       formData,
       { responseType: 'text' },
     );

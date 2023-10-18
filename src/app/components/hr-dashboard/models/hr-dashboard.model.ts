@@ -1,4 +1,5 @@
 import { PaginatedData } from 'src/app/models/global.model';
+import { IJobLevel } from '../../employee-management/models/employee-management.model';
 
 export interface ITopPerformerParams {
   pageNo?: number;
@@ -24,10 +25,41 @@ export interface ICompetencyIncompletionStatus {
 }
 
 export interface ICompanyCompletion {
-  label: string,
-  data: number
+  label: string;
+  data: number;
 }
 export interface ICompetencyIncompletionApiResponse {
   departmentInComplete: ICompetencyIncompletionStatus[];
   companyInComplete: ICompanyCompletion[];
+}
+
+export interface ICompetencyByLevelAndPositionParams {
+  positionId?: number;
+  competencyCycleId?: number;
+}
+export interface IAvgCompetencyScore {
+  jobLevel: IJobLevel;
+  competency: {
+    competencyName: string;
+  };
+  average: number;
+}
+export interface IAvgCompetencyScoreApiResponse {
+  avgCompetencyScore: IAvgCompetencyScore[];
+}
+
+export interface ICompetencyByUnitParams {
+  competencyCyclesId: number[];
+  departmentId: number;
+}
+
+export interface ICompetencyByUnitApiResponse {
+  competencyRadarChart: ICompetencyByUnit;
+}
+export interface ICompetencyByUnit {
+  labels: string[];
+  datasets: {
+    lineName: string;
+    datasets: number[];
+  }[];
 }
