@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 
-import { configPagination } from 'src/app/utils/configPagination';
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
+import { configPagination } from 'src/app/utils/configPagination';
 
-import { topSkillsTableCol } from '../../constants/hr-dashboard.constants';
-import { TopFiguresStore } from '../../store/top-performers-store.service';
-import { defaultTableConfig } from '../../../../constants/app.constant';
-import { ITopskillsetParams } from '../../models/hr-dashboard.model';
 import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
+import { defaultTableConfig } from '../../../../constants/app.constant';
+import { topSkillsTableCol } from '../../constants/hr-dashboard.constants';
+import { ITopskillsetParams } from '../../models/hr-dashboard.model';
+import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
+import { TopFiguresStore } from '../../store/top-performers-store.service';
 
 @Component({
   selector: 'top-skills',
@@ -26,16 +27,23 @@ export class TopSkillsComponent implements OnInit {
   tableParams: ITopskillsetParams = {
     pageNo: 1,
     pageSize: 10,
-    competencyCycleId: 7,
   };
   topSkillsets$ = this.topFigureStore.topSkillsets$;
   isFullTableShown = false;
   gapPageNumber = 1;
 
-  constructor(private topFigureStore: TopFiguresStore) {}
+  constructor(
+    private topFigureStore: TopFiguresStore,
+    private shareStore: HrDashboardShareStoreService,
+  ) {}
 
   ngOnInit(): void {
-    this.topFigureStore.getTopSkillsets(this.tableParams);
+    this.shareStore.activeCycle$.subscribe(cycleId => {
+      if (!cycleId) return;
+      this.tableParams = { ...this.tableParams, competencyCycleId: cycleId };
+      this.topFigureStore.getTopSkillsets(this.tableParams);
+    });
+    // this.topFigureStore.getTopSkillsets(this.tableParams);
     this.topSkillsets$.subscribe(result => {
       const pagination = configPagination(result.pagination);
       const topSkillsets = result.data.map((s, i) => {

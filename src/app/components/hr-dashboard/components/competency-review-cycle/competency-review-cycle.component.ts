@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import * as _ from "lodash";
-import {
-  colorObj
-} from 'src/app/components/share/hrms-chart/hrms-chart.component';
+import * as _ from 'lodash';
+import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 import { CompetencyCycleStore } from '../../store/competency-cycle-store.service';
+import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
 @Component({
   selector: 'competency-review-cycle',
   templateUrl: './competency-review-cycle.component.html',
@@ -16,7 +15,7 @@ export class CompetencyReviewCycleComponent implements OnInit {
   barChartOptions: any;
   pieData: any;
   pieOptions: any;
-  plugins: any = [ChartDataLabels];
+  plugins = [ChartDataLabels];
   cycleStatus$ = this.competencyCycleStore.cycleStatus$;
   barChartLabel: string[] = [];
   selfEvalData: number[] = [];
@@ -24,27 +23,31 @@ export class CompetencyReviewCycleComponent implements OnInit {
   pieLabels: string[] = [];
   pieChartData: number[] = [];
   completionPercentage = 0;
+  cycleId!: number;
 
-  constructor(private competencyCycleStore: CompetencyCycleStore) {}
+  constructor(
+    private competencyCycleStore: CompetencyCycleStore,
+    private shareStore: HrDashboardShareStoreService,
+  ) {}
 
   ngOnInit() {
-    this.competencyCycleStore.getDepartmentIncomplete(1);
+    this.shareStore.activeCycle$.subscribe(cycle => {
+      if(!cycle) return
+      this.competencyCycleStore.getDepartmentIncomplete(cycle);
+    })
     this.cycleStatus$.subscribe(result => {
       const { departmentInComplete, companyInComplete } = result;
 
-      this.barChartLabel = departmentInComplete.map(
-        dep => dep.department.departmentName,
+      this.barChartLabel = _.map(
+        departmentInComplete,
+        'department.departmentName',
       );
-      this.selfEvalData = departmentInComplete.map(
-        dep => dep.employeePercentage,
-      );
-      this.managerEvalData = departmentInComplete.map(
-        dep => dep.evaluatorPercentage,
-      );
+      this.selfEvalData = _.map(departmentInComplete, 'employeePercentage');
+      this.managerEvalData = _.map(departmentInComplete, 'evaluatorPercentage');
       this.pieLabels = companyInComplete.map(c => c.label);
       this.pieChartData = companyInComplete.map(c => c.data);
-      this.completionPercentage = _.find(companyInComplete, { label: "completed" })?.data ?? 0
-
+      this.completionPercentage =
+        _.find(companyInComplete, { label: 'completed' })?.data ?? 0;
       this.initBarChartData();
       this.initPieChartData();
     });

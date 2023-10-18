@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
-import { CompetencyScoreStoreService } from '../../store/competency-score-store.service';
+import { CompetencyScoreStoreService as CompetencyScoreStore } from '../../store/competency-score-store.service';
+import { IDropdownItem } from 'src/app/models/global.model';
+import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
 
 @Component({
   selector: 'competency-level-by-unit',
@@ -11,25 +13,16 @@ import { CompetencyScoreStoreService } from '../../store/competency-score-store.
 export class CompetencyLevelByUnitComponent implements OnInit {
   data: any;
   options: any;
-  departmentOptions = [
-    {
-      label: 'Unit A',
-      value: 1,
-    },
-    {
-      label: 'Unit B',
-      value: 2,
-    },
-  ];
-  selectedDepartment!: any;
   filterForm!: FormGroup;
   scoreByUnit$ = this.competencyScoreStore.scoreByUnit$;
   lebels: string[] = [];
-  scoreParams = { competencyCyclesId: [7,8], departmentId: 2 };
+  scoreParams = { competencyCyclesId: [7, 8], departmentId: 2 };
+  cycleOptions!: IDropdownItem[];
 
   constructor(
     private fb: FormBuilder,
-    private competencyScoreStore: CompetencyScoreStoreService,
+    private competencyScoreStore: CompetencyScoreStore,
+    private shareStore: HrDashboardShareStoreService,
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +31,15 @@ export class CompetencyLevelByUnitComponent implements OnInit {
     const textColorSecondary = documentStyle.getPropertyValue(
       '--text-color-secondary',
     );
+    // this.shareStore.getCompetencyCycles();
+    this.shareStore.competencyCycles$.subscribe(cycles => {
+      this.cycleOptions = cycles.map(c => {
+        return {
+          label: c.competencyCycleName,
+          value: c.id,
+        };
+      });
+    });
     this.competencyScoreStore.getScoreByUnit(this.scoreParams);
     this.scoreByUnit$.subscribe(result => {
       this.data = {
@@ -83,7 +85,7 @@ export class CompetencyLevelByUnitComponent implements OnInit {
             display: true,
           },
           suggestedMin: 1,
-          suggestedMax: 4, 
+          suggestedMax: 4,
           grid: {
             color: textColorSecondary,
           },

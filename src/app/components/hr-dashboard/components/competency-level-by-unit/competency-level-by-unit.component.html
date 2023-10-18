@@ -9,9 +9,16 @@
             <p-button icon="pi pi-filter" iconPos="right" (click)="op.toggle($event)" label="Filter"></p-button>
             <p-overlayPanel #op>
                 <ng-template pTemplate="content">
-                    <form [formGroup]="filterForm">
+                    <form [formGroup]="filterForm" class="flex flex-col gap-2">
                         <h4>Custom Content</h4>
                         <dashboard-department-filter [filterType]="'radio'"></dashboard-department-filter>
+
+                        <p-multiSelect [options]="cycleOptions" [showHeader]="false" styleClass="w-full"></p-multiSelect>
+
+                        <div>
+                            <p-button styleClass="p-button-link" label="Cancel"></p-button>
+                            <p-button label="Save"></p-button>
+                        </div>
                     </form>
                 </ng-template>
             </p-overlayPanel>

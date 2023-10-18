@@ -5,4 +5,7 @@
             @apply flex justify-center;
         }
     }
+    .p-overlaypanel .p-overlaypanel-content {
+        @apply p-2;
+    }
 }

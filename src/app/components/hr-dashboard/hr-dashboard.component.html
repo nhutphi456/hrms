@@ -3,7 +3,9 @@
     <h1 class="text-2xl">Dashboard</h1>
     <p-dropdown
         [dropdownIcon]="'pi pi-filter'"
+        [(ngModel)]="selectedCycle"
         [options]="cycleOptions"
+        (onChange)="onSelectCycle($event)"
     ></p-dropdown>
 </div>
 <hr-overview></hr-overview>

@@ -18,12 +18,13 @@ export class PositionFilterComponent implements OnInit {
   ngOnInit(): void {
     this.shareStore.getPositions();
     this.shareStore.positions$.subscribe(positions => {
-      this.positionOptions = positions.map(pos => {
+      this.positionOptions = positions.map((pos) => {
         return {
           label: pos.positionName,
           value: pos.id,
         };
       });
+      this.selectedPosition = this.positionOptions[0]
     });
   }
 

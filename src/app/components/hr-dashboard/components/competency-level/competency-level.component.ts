@@ -16,6 +16,7 @@ import {
 import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 import { IDropdownItem } from 'src/app/models/global.model';
 import { CompetencyScoreStoreService as CompetencyScoreStore } from '../../store/competency-score-store.service';
+import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -37,21 +38,13 @@ export class CompetencyLevelComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: ChartOptions;
   scoreByLevelAndPosition$ = this.competencyScoreStore.scoreByLevelAndPosition$;
-  data = [
-    {
-      name: 'Junior',
-      data: [
-        {
-          x: 'Job Knowledge',
-          y: 3,
-        },
-      ],
-    },
-  ];
   dataSeries: { name: string; data: { x: string; y: number }[] }[] = [];
-
   params = { positionId: 1, competencyCycleId: 7 };
-  constructor(private competencyScoreStore: CompetencyScoreStore) {
+
+  constructor(
+    private competencyScoreStore: CompetencyScoreStore,
+    private shareStore: HrDashboardShareStoreService,
+  ) {
     this.chartOptions = {
       series: [
         // {
@@ -135,19 +128,18 @@ export class CompetencyLevelComponent implements OnInit {
       grid: {
         show: false,
       },
-      xaxis: {
-        labels: {
-          rotate: 45,
-          // maxWidth: 100,
-        },
-      },
     };
   }
 
   ngOnInit(): void {
-    this.competencyScoreStore.getScoreByLevelAndPosition(this.params);
+    this.shareStore.activeCycle$.subscribe(cycleId => {
+      if (!cycleId) return;
+      this.params = { ...this.params, competencyCycleId: cycleId };
+      this.competencyScoreStore.getScoreByLevelAndPosition(this.params);
+    });
+
+    // this.competencyScoreStore.getScoreByLevelAndPosition(this.params);
     this.scoreByLevelAndPosition$.subscribe(result => {
-      console.log({ result });
       const series = _(result)
         .groupBy('jobLevel.jobLevelName')
         .map((values, key) => ({
@@ -159,7 +151,6 @@ export class CompetencyLevelComponent implements OnInit {
         }))
         .value();
       this.dataSeries = series;
-      console.log({ series: this.dataSeries });
       this.initHeatmapData();
     });
   }
@@ -182,7 +173,8 @@ export class CompetencyLevelComponent implements OnInit {
   }
 
   onSelectPosition(e: IDropdownItem) {
-    console.log({ e });
+    this.params = { ...this.params, positionId: e.value };
+    this.competencyScoreStore.getScoreByLevelAndPosition(this.params);
   }
 
   initHeatmapData() {

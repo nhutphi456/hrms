@@ -14,6 +14,7 @@ export interface IHRDashboardShareState {
   positions: IPosition[];
   competencyTimeline: ICompetencyTimeline[];
   competencyCycles: ICompetencyCycle[];
+  activeCycle: number | null;
 }
 
 @Injectable({
@@ -25,7 +26,8 @@ export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardSha
       departments: [],
       positions: [],
       competencyTimeline: [],
-      competencyCycles: []
+      competencyCycles: [],
+      activeCycle: null
     });
   }
 
@@ -42,6 +44,9 @@ export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardSha
   readonly competencyCycles$: Observable<ICompetencyCycle[]> = this.select(
     state => state.competencyCycles,
   );
+  readonly activeCycle$: Observable<number | null> = this.select(
+    state => state.activeCycle
+  )
   //UPDATER
   readonly setDepartments = this.updater(
     (state: IHRDashboardShareState, departments: Department[]) => {
@@ -64,6 +69,11 @@ export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardSha
   readonly setCompetencyCycles = this.updater(
     (state: IHRDashboardShareState, competencyCycles: ICompetencyCycle[]) => {
       return { ...state, competencyCycles };
+    },
+  );
+  readonly setActiveCycle = this.updater(
+    (state: IHRDashboardShareState, activeCycle: number | null) => {
+      return { ...state, activeCycle };
     },
   );
 

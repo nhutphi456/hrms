@@ -9,6 +9,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AvatarModule } from 'primeng/avatar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { HrDashboardRoutingModule } from './hr-dashboard-routing.module';
@@ -60,7 +61,8 @@ import { DashboardDepartmentFilterComponent } from './components/dashboard-depar
     OverlayPanelModule,
     RadioButtonModule,
     ReactiveFormsModule,
-    DialogModule
+    DialogModule,
+    MultiSelectModule
   ]
 })
 export class HrDashboardModule { }
