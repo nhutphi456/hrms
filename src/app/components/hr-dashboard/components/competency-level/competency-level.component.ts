@@ -127,6 +127,7 @@ export class CompetencyLevelComponent {
       title: {
         text: "HeatMap Chart with Color Range"
       },
+      // colors: [colorObj.primaryLight3],
       grid: {
         show: false,
       }
