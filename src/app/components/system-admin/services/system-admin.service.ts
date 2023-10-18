@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
-import { Observable, map, pipe } from 'rxjs';
+import { Apollo } from 'apollo-angular';
+import { Observable, map } from 'rxjs';
 import {
   GET_ROLES,
   GET_USER,
@@ -11,11 +11,10 @@ import {
 import {
   IAccountApiResponse,
   IAccountParams,
-  IEmployeeAccount,
   IGetUserApiResponse,
   IRoleApiResponse,
   IUpdateAccountInfoParams,
-  IUpdateAccountParams,
+  IUpdateAccountParams
 } from '../models/system-admin.model';
 
 @Injectable({

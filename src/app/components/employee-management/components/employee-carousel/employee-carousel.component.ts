@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeStore } from '../../store/employee-management.store.service';
 import { Observable } from 'rxjs';
 import { IEmployee } from '../../models/employee-management.model';
-import { PaginatedData } from 'src/app/models/global.model';
+import { EmployeeStore } from '../../store/employee-management.store.service';
 
 const mockCarouselData = [
   {

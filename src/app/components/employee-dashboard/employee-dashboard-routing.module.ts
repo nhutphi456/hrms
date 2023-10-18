@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeDashboardComponent } from './employee-dashboard.component';
-import { EmployeeSummaryDashboardComponent } from './components/employee-summary-dashboard/employee-summary-dashboard.component';
-import { EmployeeSkillsComponent } from './components/employee-skills/employee-skills.component';
-import { EmployeeQualificationsComponent } from './components/employee-qualifications/employee-qualifications.component';
-import { EmployeeAssessmentComponent } from './components/employee-assessment/employee-assessment.component';
 
 const routes: Routes = [
   {

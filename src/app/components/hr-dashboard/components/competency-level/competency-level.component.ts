@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import * as _ from 'lodash';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -14,9 +15,7 @@ import {
 } from 'ng-apexcharts/public_api';
 import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 import { IDropdownItem } from 'src/app/models/global.model';
-import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
 import { CompetencyScoreStoreService as CompetencyScoreStore } from '../../store/competency-score-store.service';
-import * as _ from 'lodash';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
