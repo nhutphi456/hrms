@@ -4,7 +4,7 @@ import * as _ from "lodash"
 
 import { topPerformersTableCol } from '../../constants/hr-dashboard.constants';
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
-import { TopPerformersStore } from '../../store/top-performers-store.service';
+import { TopFiguresStore } from '../../store/top-performers-store.service';
 import { TopTablePopupComponent } from '../top-table-popup/top-table-popup.component';
 
 @Component({
@@ -30,7 +30,7 @@ export class TopPerformersComponent implements OnInit {
   paginationParams = { pageNo: 1, pageSize: 10 }
 
   constructor(
-    private topPerformerStore: TopPerformersStore,
+    private topPerformerStore: TopFiguresStore,
     private dialogService: DialogService,
   ) {}
 

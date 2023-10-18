@@ -68,9 +68,27 @@ export interface ICompetencyTimeline {
   competencyTimeLineName: string;
   startDate: string;
   dueDate: string;
-  isDone: boolean
+  isDone: boolean;
 }
 
 export interface ICompetencyTimelineApiResponse {
-  competencyTimeLine: ICompetencyTimeline[]
+  competencyTimeLine: ICompetencyTimeline[];
+}
+
+export interface ITopSkillset {
+  skillSet: {
+    skillSetName: string;
+  };
+  proficiencyLevel: {
+    score: number;
+  };
+}
+
+export interface ITopskillsetParams {
+  pageNo?: number;
+  pageSize?: number;
+  competencyCycleId?: number;
+}
+export interface ITopSkillsetApiResponse {
+  topHighestSkillSet: PaginatedData<ITopSkillset>;
 }

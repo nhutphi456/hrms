@@ -6,6 +6,7 @@ import {
   GET_COMPETENCY_CYCLE_STATUS,
   GET_COMPETENCY_TIMELINE,
   GET_TOP_PERFORMERS,
+  GET_TOP_SKILL_SETS,
 } from '../constants/hr-dashboard.constants';
 import {
   IAvgCompetencyScoreApiResponse,
@@ -16,6 +17,8 @@ import {
   ICompetencyTimelineApiResponse,
   ITopPerformerApiResponse,
   ITopPerformerParams,
+  ITopSkillsetApiResponse,
+  ITopskillsetParams,
 } from '../models/hr-dashboard.model';
 import { Observable, map } from 'rxjs';
 
@@ -34,6 +37,13 @@ export class HrDashboardService {
         variables: { ...params },
       })
       .valueChanges.pipe(map(res => res.data));
+  }
+
+  getTopSkillset(params: ITopskillsetParams): Observable<ITopSkillsetApiResponse> {
+    return this.apollo.watchQuery<ITopSkillsetApiResponse>({
+      query: GET_TOP_SKILL_SETS,
+      variables: {...params}
+    }).valueChanges.pipe(map(res => res.data))
   }
 
   getCompetencyIncompletionStatus(

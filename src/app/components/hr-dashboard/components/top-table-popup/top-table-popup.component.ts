@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
-import { topPerformersTableCol } from '../../constants/hr-dashboard.constants';
-import { TopPerformersStore } from '../../store/top-performers-store.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
 import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
+import { topPerformersTableCol } from '../../constants/hr-dashboard.constants';
+import { TopFiguresStore } from '../../store/top-performers-store.service';
 
 @Component({
   selector: 'app-top-table-popup',
@@ -28,7 +28,7 @@ export class TopTablePopupComponent implements OnInit {
   gapPageNumber = 1;
 
   constructor(
-    private topPerformerStore: TopPerformersStore,
+    private topPerformerStore: TopFiguresStore,
     private ref: DynamicDialogRef,
     private config: DynamicDialogConfig,
   ) {}

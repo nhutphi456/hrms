@@ -161,3 +161,24 @@ export const GET_COMPETENCY_TIMELINE = gql`
     }
   }
 `;
+
+export const GET_TOP_SKILL_SETS = gql`
+  query GetTopSkillset($competencyCycleId: Int!){
+    topHighestSkillSet(competencyCycleId: $competencyCycleId){
+      data{
+        skillSet{
+          skillSetName
+        }
+        proficiencyLevel{
+          score
+        }
+      }
+      pagination{
+        pageNo
+        pageSize
+        totalItems
+        totalPages
+      }
+    }
+  }
+`

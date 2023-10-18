@@ -4,13 +4,15 @@ export interface TableHeader {
 }
 
 export interface PaginatedData<T> {
-  pagination: {
-    pageNo: number;
-    pageSize: number;
-    totalPages: number;
-    totalItems: number;
-  };
+  pagination: IPagination
   data: T[];
+}
+
+export interface IPagination {
+  pageNo: number,
+  pageSize: number,
+  totalItems: number,
+  totalPages: number
 }
 
 export interface IDropdownItem {
