@@ -111,5 +111,10 @@ export const GET_COMPETENCY_CYCLE_STATUS = gql`
       employeePercentage
       evaluatorPercentage
     }
+
+    companyInComplete(competencyCycleId: $competencyCycleId){
+      label
+      data
+    }
   }
 `;

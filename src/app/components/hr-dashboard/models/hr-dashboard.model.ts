@@ -22,6 +22,12 @@ export interface ICompetencyIncompletionStatus {
   employeePercentage: number;
   evaluatorPercentage: number;
 }
+
+export interface ICompanyCompletion {
+  label: string,
+  data: number
+}
 export interface ICompetencyIncompletionApiResponse {
   departmentInComplete: ICompetencyIncompletionStatus[];
+  companyInComplete: ICompanyCompletion[];
 }

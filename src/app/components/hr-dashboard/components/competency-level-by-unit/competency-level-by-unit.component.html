@@ -11,15 +11,7 @@
                 <ng-template pTemplate="content">
                     <form [formGroup]="filterForm">
                         <h4>Custom Content</h4>
-                        <p-dropdown [options]="departmentOptions" [(ngModel)]="selectedDepartment" optionLabel="label"
-                            placeholder="Select unit" [dropdownIcon]="'pi pi-filter'"></p-dropdown>
-                        <div class="flex flex-col gap-2">
-                            <div *ngFor="let department of departmentOptions" class="flex align-items-center">
-                                <p-radioButton [name]="department.label" [value]="department.value"
-                                    formControlName="department" [inputId]="department.label"></p-radioButton>
-                                <label [for]="department.label" class="ml-2">{{department.label}}</label>
-                            </div>
-                        </div>
+                        <dashboard-department-filter [filterType]="'radio'"></dashboard-department-filter>
                     </form>
                 </ng-template>
             </p-overlayPanel>

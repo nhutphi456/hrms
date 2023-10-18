@@ -1,5 +1,22 @@
-<p-dropdown [options]="departmentOptions" [(ngModel)]="selectedDepartment" optionLabel="label" placeholder="Unit"
-    [dropdownIcon]="'pi pi-filter'"
-    (onChange)="onSelectItem()"
-    >
-</p-dropdown>
+<ng-container [ngSwitch]="filterType">
+    <ng-container *ngSwitchCase="'dropdown'" [ngTemplateOutlet]="dropdown">
+    </ng-container>
+    <ng-container *ngSwitchCase="'radio'" [ngTemplateOutlet]="radio">
+    </ng-container>
+</ng-container>
+
+<ng-template #dropdown>
+    <p-dropdown [options]="departmentOptions" [(ngModel)]="selectedDepartment" optionLabel="label" placeholder="Unit"
+        [dropdownIcon]="'pi pi-filter'" (onChange)="onSelectItem()">
+    </p-dropdown>
+</ng-template>
+
+<ng-template #radio>
+    <div class="flex flex-col gap-2">
+        <div *ngFor="let department of departmentOptions" class="flex align-items-center">
+            <p-radioButton [name]="department.label" [value]="department.value" [(ngModel)]="selectedDepartment"
+                [inputId]="department.label"></p-radioButton>
+            <label [for]="department.label" class="ml-2">{{department.label}}</label>
+        </div>
+    </div>
+</ng-template>

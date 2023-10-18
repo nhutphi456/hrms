@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ICompetencyIncompletionStatus } from '../models/hr-dashboard.model';
+import {
+  ICompanyCompletion,
+  ICompetencyIncompletionStatus,
+} from '../models/hr-dashboard.model';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, switchMap } from 'rxjs';
 import { HrDashboardService } from '../services/hr-dashboard.service';
 
 export interface ICompetencyCyleState {
-  departmentInComplete: ICompetencyIncompletionStatus[];
+  cycleStatus: {
+    departmentInComplete: ICompetencyIncompletionStatus[];
+    companyInComplete: ICompanyCompletion[];
+  };
 }
 @Injectable({
   providedIn: 'root',
@@ -13,22 +19,30 @@ export interface ICompetencyCyleState {
 export class CompetencyCycleStore extends ComponentStore<ICompetencyCyleState> {
   constructor(private hrDashboardService: HrDashboardService) {
     super({
-      departmentInComplete: [],
+      cycleStatus: {
+        departmentInComplete: [],
+        companyInComplete: [],
+      },
     });
   }
 
   //SELECTOR
-  readonly departmentInComplete$: Observable<ICompetencyIncompletionStatus[]> =
-    this.select(state => state.departmentInComplete);
+  readonly cycleStatus$: Observable<{
+    departmentInComplete: ICompetencyIncompletionStatus[];
+    companyInComplete: ICompanyCompletion[];
+  }> = this.select(state => state.cycleStatus);
   //UPDATER
-  readonly setDepartmentIncomplete = this.updater(
+  readonly setCycleStatus = this.updater(
     (
       state: ICompetencyCyleState,
-      departmentInComplete: ICompetencyIncompletionStatus[],
+      cycleStatus: {
+        departmentInComplete: ICompetencyIncompletionStatus[];
+        companyInComplete: ICompanyCompletion[];
+      },
     ) => {
       return {
         ...state,
-        departmentInComplete,
+        cycleStatus,
       };
     },
   );
@@ -39,7 +53,11 @@ export class CompetencyCycleStore extends ComponentStore<ICompetencyCyleState> {
         switchMap(params =>
           this.hrDashboardService.getCompetencyIncompletionStatus(params).pipe(
             tapResponse({
-              next: res => this.setDepartmentIncomplete(res.departmentInComplete),
+              next: res =>
+                this.setCycleStatus({
+                  departmentInComplete: res.departmentInComplete,
+                  companyInComplete: res.companyInComplete,
+                }),
               error: error => console.log(error),
             }),
           ),
