@@ -16,3 +16,12 @@ export interface ITopPerformer {
 export interface ITopPerformerApiResponse {
   employeesPerformance: PaginatedData<ITopPerformer>;
 }
+
+export interface ICompetencyIncompletionStatus {
+  department: { departmentName: string };
+  employeePercentage: number;
+  evaluatorPercentage: number;
+}
+export interface ICompetencyIncompletionApiResponse {
+  departmentInComplete: ICompetencyIncompletionStatus[];
+}

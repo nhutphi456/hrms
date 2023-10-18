@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { colorObj, pieChartColors } from 'src/app/components/share/hrms-chart/hrms-chart.component';
+import {
+  colorObj,
+  pieChartColors,
+} from 'src/app/components/share/hrms-chart/hrms-chart.component';
+import { CompetencyCycleStore } from '../../store/competency-cycle-store.service';
+import { ICompetencyIncompletionStatus } from '../../models/hr-dashboard.model';
 
 @Component({
   selector: 'competency-review-cycle',
@@ -11,30 +16,33 @@ export class CompetencyReviewCycleComponent implements OnInit {
   date!: Date;
   barChartData: any;
   barChartOptions: any;
-
   pieData: any;
   pieOptions: any;
-
   plugins: any = [ChartDataLabels];
+  departmentInComplete$ = this.competencyCycleStore.departmentInComplete$;
+  departmentIncomplete: ICompetencyIncompletionStatus[] = [];
+  barChartLabel: string[] = [];
+  selfEvalData: number[] = [];
+  managerEvalData: number[] = [];
+
+  constructor(private competencyCycleStore: CompetencyCycleStore) {}
 
   ngOnInit() {
-    this.barChartData = {
-      labels: ['Unit PM', 'Unit A', 'Unit B', 'Unit C', 'Unit shared service'],
-      datasets: [
-        {
-          label: 'Self',
-          backgroundColor: colorObj['primary'],
-          borderColor: colorObj['primary'],
-          data: [65, 59, 80, 100, 56],
-        },
-        {
-          type: 'bar',
-          label: 'Manager',
-          backgroundColor: colorObj['lightGreen'],
-          data: [21, 84, 24, 100, 37]
-      },
-      ],
-    };
+    this.competencyCycleStore.getDepartmentIncomplete(1);
+    this.departmentInComplete$.subscribe(result => {
+      this.departmentIncomplete = result;
+      this.barChartLabel = this.departmentIncomplete.map(
+        dep => dep.department.departmentName,
+      );
+      this.selfEvalData = this.departmentIncomplete.map(
+        dep => dep.employeePercentage,
+      );
+      this.managerEvalData = this.departmentIncomplete.map(
+        dep => dep.evaluatorPercentage,
+      );
+
+      this.initChartData();
+    });
 
     this.barChartOptions = {
       indexAxis: 'y',
@@ -84,7 +92,7 @@ export class CompetencyReviewCycleComponent implements OnInit {
         {
           data: [300, 50],
           backgroundColor: pieChartColors,
-          hoverBackgroundColor: pieChartColors
+          hoverBackgroundColor: pieChartColors,
         },
       ],
     };
@@ -99,6 +107,26 @@ export class CompetencyReviewCycleComponent implements OnInit {
           },
         },
       },
+    };
+  }
+
+  private initChartData() {
+    this.barChartData = {
+      labels: this.barChartLabel,
+      datasets: [
+        {
+          label: 'Self',
+          backgroundColor: colorObj['primary'],
+          borderColor: colorObj['primary'],
+          data: this.selfEvalData,
+        },
+        {
+          type: 'bar',
+          label: 'Manager',
+          backgroundColor: colorObj['lightGreen'],
+          data: this.managerEvalData,
+        },
+      ],
     };
   }
 }

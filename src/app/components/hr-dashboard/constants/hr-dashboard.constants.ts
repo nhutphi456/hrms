@@ -84,10 +84,7 @@ export const nineGridLabels = {
 
 export const GET_TOP_PERFORMERS = gql`
   query GetTopPerformers($pageNo: Int, $pageSize: Int) {
-    employeesPerformance(
-      pageNo: $pageNo
-      pageSize: $pageSize
-    ) {
+    employeesPerformance(pageNo: $pageNo, pageSize: $pageSize) {
       data {
         employee {
           firstName
@@ -101,6 +98,18 @@ export const GET_TOP_PERFORMERS = gql`
         totalItems
         totalPages
       }
+    }
+  }
+`;
+
+export const GET_COMPETENCY_CYCLE_STATUS = gql`
+  query GetCompetencyCycleStatus($competencyCycleId: Int!) {
+    departmentInComplete(competencyCycleId: $competencyCycleId) {
+      department {
+        departmentName
+      }
+      employeePercentage
+      evaluatorPercentage
     }
   }
 `;
