@@ -63,3 +63,14 @@ export interface ICompetencyByUnit {
     datasets: number[];
   }[];
 }
+
+export interface ICompetencyTimeline {
+  competencyTimeLineName: string;
+  startDate: string;
+  dueDate: string;
+  isDone: boolean
+}
+
+export interface ICompetencyTimelineApiResponse {
+  competencyTimeLine: ICompetencyTimeline[]
+}

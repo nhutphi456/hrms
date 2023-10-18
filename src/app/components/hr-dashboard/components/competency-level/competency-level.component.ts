@@ -51,7 +51,7 @@ export class CompetencyLevelComponent implements OnInit {
   ];
   dataSeries: { name: string; data: { x: string; y: number }[] }[] = [];
 
-  params = { positionId: 1, competencyCycleId: 8 };
+  params = { positionId: 1, competencyCycleId: 7 };
   constructor(private competencyScoreStore: CompetencyScoreStore) {
     this.chartOptions = {
       series: [

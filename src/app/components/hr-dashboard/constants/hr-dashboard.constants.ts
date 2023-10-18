@@ -137,10 +137,7 @@ export const GET_COMPETENCY_BY_LEVEL_AND_POSITION = gql`
 `;
 
 export const GET_COMPETENCY_BY_UNIT = gql`
-  query GetCompetencyByUnit(
-    $competencyCyclesId: [Int]!
-    $departmentId: Int!
-  ) {
+  query GetCompetencyByUnit($competencyCyclesId: [Int]!, $departmentId: Int!) {
     competencyRadarChart(
       competencyCyclesId: $competencyCyclesId
       departmentId: $departmentId
@@ -150,6 +147,17 @@ export const GET_COMPETENCY_BY_UNIT = gql`
         lineName
         datasets
       }
+    }
+  }
+`;
+
+export const GET_COMPETENCY_TIMELINE = gql`
+  query GetTimeline($competencyCycleId: Int!) {
+    competencyTimeLine(competencyCycleId: $competencyCycleId) {
+      competencyTimeLineName
+      startDate
+      dueDate
+      isDone
     }
   }
 `;

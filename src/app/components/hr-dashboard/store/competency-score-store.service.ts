@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { IAvgCompetencyScore, ICompetencyByLevelAndPositionParams, ICompetencyByUnit, ICompetencyByUnitParams } from '../models/hr-dashboard.model';
+import {
+  IAvgCompetencyScore,
+  ICompetencyByLevelAndPositionParams,
+  ICompetencyByUnit,
+  ICompetencyByUnitParams,
+} from '../models/hr-dashboard.model';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, switchMap } from 'rxjs';
 import { HrDashboardService } from '../services/hr-dashboard.service';
@@ -17,16 +22,17 @@ export class CompetencyScoreStoreService extends ComponentStore<ICompetencyScore
       scoreByLevelAndPosition: [],
       scoreByUnit: {
         labels: [],
-        datasets: []
-      }
+        datasets: [],
+      },
     });
   }
 
   //SELECTOR
   readonly scoreByLevelAndPosition$: Observable<IAvgCompetencyScore[]> =
     this.select(state => state.scoreByLevelAndPosition);
-    readonly scoreByUnit$: Observable<ICompetencyByUnit> =
-    this.select(state => state.scoreByUnit);
+  readonly scoreByUnit$: Observable<ICompetencyByUnit> = this.select(
+    state => state.scoreByUnit,
+  );
   //UPDATER
   readonly setScoreByLevelAndPosition = this.updater(
     (
@@ -40,10 +46,7 @@ export class CompetencyScoreStoreService extends ComponentStore<ICompetencyScore
     },
   );
   readonly setScoreByUnit = this.updater(
-    (
-      state: ICompetencyScoreState,
-      scoreByUnit: ICompetencyByUnit,
-    ) => {
+    (state: ICompetencyScoreState, scoreByUnit: ICompetencyByUnit) => {
       return {
         ...state,
         scoreByUnit,
@@ -57,7 +60,8 @@ export class CompetencyScoreStoreService extends ComponentStore<ICompetencyScore
         switchMap(params =>
           this.hrDashboardService.getCompetencyByLevelAndPosition(params).pipe(
             tapResponse({
-              next: res => this.setScoreByLevelAndPosition(res.avgCompetencyScore),
+              next: res =>
+                this.setScoreByLevelAndPosition(res.avgCompetencyScore),
               error: error => console.log(error),
             }),
           ),

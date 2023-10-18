@@ -25,7 +25,7 @@ export class CompetencyLevelByUnitComponent implements OnInit {
   filterForm!: FormGroup;
   scoreByUnit$ = this.competencyScoreStore.scoreByUnit$;
   lebels: string[] = [];
-  scoreParams = { competencyCyclesId: [1], departmentId: 1 };
+  scoreParams = { competencyCyclesId: [7,8], departmentId: 2 };
 
   constructor(
     private fb: FormBuilder,
@@ -53,16 +53,16 @@ export class CompetencyLevelByUnitComponent implements OnInit {
               documentStyle.getPropertyValue('--bluegray-400'),
             data: result.datasets[0]?.datasets,
           },
-          // {
-          //   label: result.datasets[1]?.lineName,
-          //   backgroundColor: 'rgba(205, 233, 234, 0.5)',
-          //   borderColor: colorObj.primaryLight2,
-          //   pointBackgroundColor: colorObj.primaryLight3,
-          //   pointBorderColor: colorObj.primaryLight3,
-          //   pointHoverBackgroundColor: textColor,
-          //   pointHoverBorderColor: documentStyle.getPropertyValue('--pink-400'),
-          //   data: result.datasets[1]?.datasets,
-          // },
+          {
+            label: result.datasets[1]?.lineName,
+            backgroundColor: 'rgba(205, 233, 234, 0.5)',
+            borderColor: colorObj.primaryLight2,
+            pointBackgroundColor: colorObj.primaryLight3,
+            pointBorderColor: colorObj.primaryLight3,
+            pointHoverBackgroundColor: textColor,
+            pointHoverBorderColor: documentStyle.getPropertyValue('--pink-400'),
+            data: result.datasets[1]?.datasets,
+          },
         ],
       };
     });
@@ -89,9 +89,9 @@ export class CompetencyLevelByUnitComponent implements OnInit {
             color: textColorSecondary,
           },
           ticks: {
-            suggestedMin: 0,
+            suggestedMin: 1,
             suggestedMax: 4,
-            stepSize: 1,
+            stepSize: 0.5,
           },
         },
       },

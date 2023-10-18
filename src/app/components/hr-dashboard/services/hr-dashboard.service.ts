@@ -4,6 +4,7 @@ import {
   GET_COMPETENCY_BY_LEVEL_AND_POSITION,
   GET_COMPETENCY_BY_UNIT,
   GET_COMPETENCY_CYCLE_STATUS,
+  GET_COMPETENCY_TIMELINE,
   GET_TOP_PERFORMERS,
 } from '../constants/hr-dashboard.constants';
 import {
@@ -12,6 +13,7 @@ import {
   ICompetencyByUnitApiResponse,
   ICompetencyByUnitParams,
   ICompetencyIncompletionApiResponse,
+  ICompetencyTimelineApiResponse,
   ITopPerformerApiResponse,
   ITopPerformerParams,
 } from '../models/hr-dashboard.model';
@@ -56,10 +58,25 @@ export class HrDashboardService {
       .valueChanges.pipe(map(res => res.data));
   }
 
-  getCompetencyByUnit(params: ICompetencyByUnitParams): Observable<ICompetencyByUnitApiResponse> {
-    return this.apollo.watchQuery<ICompetencyByUnitApiResponse>({
-      query: GET_COMPETENCY_BY_UNIT,
-      variables: {...params}
-    }).valueChanges.pipe(map(res => res.data));
+  getCompetencyByUnit(
+    params: ICompetencyByUnitParams,
+  ): Observable<ICompetencyByUnitApiResponse> {
+    return this.apollo
+      .watchQuery<ICompetencyByUnitApiResponse>({
+        query: GET_COMPETENCY_BY_UNIT,
+        variables: { ...params },
+      })
+      .valueChanges.pipe(map(res => res.data));
+  }
+
+  getCompetencyTimeline(
+    competencyCycleId: number,
+  ): Observable<ICompetencyTimelineApiResponse> {
+    return this.apollo
+      .watchQuery<ICompetencyTimelineApiResponse>({
+        query: GET_COMPETENCY_TIMELINE,
+        variables: { competencyCycleId },
+      })
+      .valueChanges.pipe(map(res => res.data));
   }
 }
