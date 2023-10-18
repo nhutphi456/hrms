@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import {
   ApexAxisChartSeries,
-  ApexTitleSubtitle,
-  ApexDataLabels,
   ApexChart,
+  ApexDataLabels,
   ApexLegend,
+  ApexTitleSubtitle,
 } from 'ng-apexcharts';
 import {
   ApexGrid,
@@ -12,6 +12,8 @@ import {
   ChartComponent,
 } from 'ng-apexcharts/public_api';
 import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
+import { IDropdownItem } from 'src/app/models/global.model';
+import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -31,60 +33,46 @@ export type ChartOptions = {
 export class CompetencyLevelComponent {
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: ChartOptions;
-  positionOptions = [
-    {
-      label: 'Frontend',
-      value: 1,
-    },
-    {
-      label: 'Backend',
-      value: 2,
-    },
-    {
-      label: 'Business Analyst',
-      value: 3,
-    },
-  ];
-  selectedPosition!: any;
 
-  constructor() {
+
+  constructor(private shareStore: HrDashboardShareStoreService) {
     this.chartOptions = {
       series: [
         {
-          name: "Junior",
+          name: 'Junior',
           data: this.generateData(8, {
             min: 1,
-            max: 4
-          })
+            max: 4,
+          }),
         },
         {
-          name: "Professional",
+          name: 'Professional',
           data: this.generateData(8, {
             min: 1,
-            max: 4
-          })
+            max: 4,
+          }),
         },
         {
-          name: "Senior",
+          name: 'Senior',
           data: this.generateData(8, {
             min: 1,
-            max: 4
-          })
+            max: 4,
+          }),
         },
         {
-          name: "Expert",
+          name: 'Expert',
           data: this.generateData(8, {
             min: 1,
-            max: 4
-          })
+            max: 4,
+          }),
         },
       ],
       chart: {
         height: 320,
         width: '90%',
-        type: "heatmap",
+        type: 'heatmap',
         toolbar: { show: false },
-        offsetX: 20,  
+        offsetX: 20,
       },
       plotOptions: {
         heatmap: {
@@ -96,41 +84,41 @@ export class CompetencyLevelComponent {
               {
                 from: 1,
                 to: 1.5,
-                name: "Basic",
-                color: colorObj.primaryLight
+                name: 'Basic',
+                color: colorObj.primaryLight,
               },
               {
                 from: 1.6,
                 to: 2.5,
-                name: "Proficient",
-                color: colorObj.primary
+                name: 'Proficient',
+                color: colorObj.primary,
               },
               {
                 from: 2.6,
                 to: 3.5,
-                name: "Advanced",
-                color: colorObj.primaryLight2
+                name: 'Advanced',
+                color: colorObj.primaryLight2,
               },
               {
                 from: 3.6,
                 to: 4,
-                name: "Expert",
-                color: colorObj.primaryLight3
-              }
-            ]
-          }
-        }
+                name: 'Expert',
+                color: colorObj.primaryLight3,
+              },
+            ],
+          },
+        },
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       title: {
-        text: "HeatMap Chart with Color Range"
+        text: 'HeatMap Chart with Color Range',
       },
       // colors: [colorObj.primaryLight3],
       grid: {
         show: false,
-      }
+      },
     };
   }
 
@@ -149,5 +137,9 @@ export class CompetencyLevelComponent {
       i++;
     }
     return series;
+  }
+
+  onSelectPosition(e: IDropdownItem) {
+    console.log({ e });
   }
 }

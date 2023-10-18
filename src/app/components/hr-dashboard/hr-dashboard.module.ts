@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CalendarModule } from 'primeng/calendar';
 import { TimelineModule } from 'primeng/timeline';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { DropdownModule } from 'primeng/dropdown';
 import { AvatarModule } from 'primeng/avatar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 import { AppTopbarModule } from 'src/app/layout/app-topbar.module';
 import { HrDashboardRoutingModule } from './hr-dashboard-routing.module';
@@ -23,6 +25,8 @@ import { TopCompetenciesComponent } from './components/top-competencies/top-comp
 import { EmployeePerformanceGridBoxComponent } from './components/employee-performance-grid-box/employee-performance-grid-box.component';
 import { PerformanceByJobLevelComponent } from './components/performance-by-job-level/performance-by-job-level.component';
 import { TopTablePopupComponent } from './components/top-table-popup/top-table-popup.component';
+import { PositionFilterComponent } from './components/position-filter/position-filter.component';
+import { DashboardDepartmentFilterComponent } from './components/dashboard-department-filter/dashboard-department-filter.component';
 
 
 @NgModule({
@@ -38,7 +42,9 @@ import { TopTablePopupComponent } from './components/top-table-popup/top-table-p
     TopCompetenciesComponent,
     EmployeePerformanceGridBoxComponent,
     PerformanceByJobLevelComponent,
-    TopTablePopupComponent
+    TopTablePopupComponent,
+    PositionFilterComponent,
+    DashboardDepartmentFilterComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +56,10 @@ import { TopTablePopupComponent } from './components/top-table-popup/top-table-p
     NgApexchartsModule,
     DropdownModule,
     ShareModule,
-    AvatarModule
+    AvatarModule,
+    OverlayPanelModule,
+    RadioButtonModule,
+    ReactiveFormsModule
   ]
 })
 export class HrDashboardModule { }

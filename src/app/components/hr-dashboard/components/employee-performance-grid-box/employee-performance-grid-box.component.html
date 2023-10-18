@@ -4,8 +4,7 @@
             <p class="card-title">Competency Level (AVG)</p>
             <p class="text-sm">by Unit</p>
         </div>
-        <p-dropdown [options]="departmentOptions" [(ngModel)]="selectedDepartment" optionLabel="label"
-            placeholder="Select unit" [dropdownIcon]="'pi pi-filter'"></p-dropdown>
+        <dashboard-department-filter></dashboard-department-filter>
     </div>
     <div class="chart-container">
         <hrms-chart type="scatter" 

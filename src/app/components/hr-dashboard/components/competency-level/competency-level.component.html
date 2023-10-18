@@ -4,9 +4,8 @@
       <p class="card-title">Competency Level (AVG)</p>
       <p class="text-sm">by Job level and Position</p>
     </div>
-    <p-dropdown [options]="positionOptions" [(ngModel)]="selectedPosition" optionLabel="label"
-      placeholder="Select position" [dropdownIcon]="'pi pi-filter'">
-    </p-dropdown>
+    <position-filter (handleSelectItem)="onSelectPosition($event)">
+    </position-filter>
   </div>
   <div id="chart">
     <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [dataLabels]="chartOptions.dataLabels"

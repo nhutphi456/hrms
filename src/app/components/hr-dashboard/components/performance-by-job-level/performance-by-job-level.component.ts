@@ -11,21 +11,7 @@ export class PerformanceByJobLevelComponent implements OnInit {
   data: any;
   options: any;
   plugins: any = [ChartDataLabels];
-  positionOptions = [
-    {
-      label: 'Frontend',
-      value: 1,
-    },
-    {
-      label: 'Backend',
-      value: 2,
-    },
-    {
-      label: 'Business Analyst',
-      value: 3,
-    },
-  ];
-  selectedPosition!: any;
+  
   ngOnInit() {
     this.data = {
       labels: ['Expert', 'Senior Level', 'Professional Level', 'Junior Level'],

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 
 @Component({
@@ -20,6 +21,9 @@ export class CompetencyLevelByUnitComponent implements OnInit {
     },
   ];
   selectedDepartment!: any;
+  filterForm!:FormGroup;
+
+  constructor(private fb: FormBuilder){}
 
   ngOnInit(): void {
     const documentStyle = getComputedStyle(document.documentElement);
@@ -75,7 +79,7 @@ export class CompetencyLevelByUnitComponent implements OnInit {
       scales: {
         r: {
           angleLines: {
-            display: false,
+            display: true,
           },
           grid: {
             color: textColorSecondary,
@@ -83,8 +87,19 @@ export class CompetencyLevelByUnitComponent implements OnInit {
           pointLabels: {
             color: textColorSecondary,
           },
+          ticks: {
+            suggestedMin: 0,    
+            suggestedMax: 100, 
+            stepSize: 20,        
+          },
         },
       },
     };
+  }
+
+  initForm(){
+    this.filterForm = this.fb.group({
+      department: ''
+    })
   }
 }

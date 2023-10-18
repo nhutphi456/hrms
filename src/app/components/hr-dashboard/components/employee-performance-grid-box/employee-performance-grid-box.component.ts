@@ -10,18 +10,7 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
   basicData: any;
   plugins: any;
   basicOptions: any;
-  departmentOptions = [
-    {
-      label: 'Unit A',
-      value: 1,
-    },
-    {
-      label: 'Unit B',
-      value: 2,
-    },
-  ];
-  selectedDepartment!: any;
-
+  
   ngOnInit() {
     this.basicData = {
       labels: ['Q1', 'Q2', 'Q3', 'Q4'],
