@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { nineGridLabels } from '../../constants/hr-dashboard.constants';
+import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
+import _ from 'lodash';
 
 @Component({
   selector: 'employee-performance-grid-box',
@@ -10,8 +12,11 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
   basicData: any;
   plugins: any;
   basicOptions: any;
-  
-  ngOnInit() {
+  labels: string[] = [];
+  data: { x: number; y: number; image: string }[] = [];
+
+  // employeesPotentialPerformance$ =
+  constructor(private shareStore: HrDashboardShareStore) {
     this.basicData = {
       labels: ['Q1', 'Q2', 'Q3', 'Q4'],
       datasets: [
@@ -54,7 +59,10 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
           usePointStyle: true,
           pointRadius: 50,
           pointStyle: (ctx: any) => {
-            const pointImage = new Image(40, 40);
+            if (!ctx.raw || !ctx.raw.image) {
+              return; // or provide a default point style
+            }
+            const pointImage = new Image(35, 35);
             pointImage.src = ctx.raw.image;
 
             return pointImage;
@@ -123,6 +131,42 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
           },
         },
       },
+    };
+  }
+
+  ngOnInit() {
+    this.shareStore.getPotentialPerformance({ departmentId: 1 });
+    this.shareStore.employeesPotentialPerformance$.subscribe(res => {
+      this.labels = _.map(
+        res,
+        item => `${item.employee.firstName} ${item.employee.lastName}`,
+      );
+
+      this.data = _.map(res, item => {
+        return {
+          x: item.potential,
+          y: item.performance,
+          image: item.profileImgUri,
+        };
+      });
+
+      this.initChartData()
+      console.log({basicdata: this.basicData})
+    });
+  }
+
+  initChartData() {
+    const setItem = this.basicData.datasets[0];
+
+    this.basicData = {
+      ...this.basicData,
+      labels: this.labels,
+      datasets: [
+        {
+          ...setItem,
+          data: this.data,
+        },
+      ],
     };
   }
 }

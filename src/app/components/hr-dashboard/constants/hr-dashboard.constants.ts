@@ -211,3 +211,17 @@ export const GET_COMPETENCY_CYCLES = gql`
     }
   }
 `;
+
+export const GET_POTENTIAL_PERFORMANCE = gql`
+  query GetPotentialPerformance($departmentId: Int) {
+    employeesPotentialPerformance(departmentId: $departmentId) {
+      employee {
+        lastName
+        firstName
+      }
+      profileImgUri
+      potential
+      performance
+    }
+  }
+`

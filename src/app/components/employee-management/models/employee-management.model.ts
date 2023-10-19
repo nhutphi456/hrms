@@ -1,7 +1,7 @@
 import { PaginatedData } from 'src/app/models/global.model';
 
 export interface IEmployee {
-  id?: string;
+  id: number;
   firstName?: string;
   lastName?: string;
   gender: number;

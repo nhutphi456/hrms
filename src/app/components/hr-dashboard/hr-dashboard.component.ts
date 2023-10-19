@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HrDashboardShareStoreService as HrDashboardShareStore } from './store/hr-dashboard-share-store.service';
+import { HrDashboardShareStore as HrDashboardShareStore } from './store/hr-dashboard-share-store.service';
 import { IDropdownItem } from 'src/app/models/global.model';
 import { SelectItem } from 'primeng/api';
 

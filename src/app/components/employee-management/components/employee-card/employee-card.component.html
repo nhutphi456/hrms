@@ -5,7 +5,7 @@
                 <p-avatar
                     *ngIf="employee.damId"
                     styleClass="mr-2" size="xlarge" shape="circle"
-                    [image]="prependImage(employee.damId)"></p-avatar>
+                    [image]="prependImage(employee.id)"></p-avatar>
                 <img
                     *ngIf="!employee.damId" 
                     class="avatar-img mr-2"

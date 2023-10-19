@@ -5,7 +5,7 @@
       <!-- <hrms-avatar [imgSrc]="prependImage(employee.imageSource.imagePath)" shape="circle" size="normal"></hrms-avatar> -->
 
       <img *ngIf="employee.damId" class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;"
-        [src]="prependImage(employee.damId)" [alt]="employee.firstName">
+        [src]="prependImage(employee.id)" [alt]="employee.firstName">
 
       <img *ngIf="!employee.damId" class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;"
         [src]="defaultImg" [alt]="employee.firstName">

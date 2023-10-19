@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 import { CompetencyScoreStoreService as CompetencyScoreStore } from '../../store/competency-score-store.service';
 import { IDropdownItem } from 'src/app/models/global.model';
-import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
+import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
 
 @Component({
   selector: 'competency-level-by-unit',
@@ -22,7 +22,7 @@ export class CompetencyLevelByUnitComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private competencyScoreStore: CompetencyScoreStore,
-    private shareStore: HrDashboardShareStoreService,
+    private shareStore: HrDashboardShareStore,
   ) {}
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IDropdownItem } from 'src/app/models/global.model';
-import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
+import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
 
 @Component({
   selector: 'dashboard-department-filter',
@@ -13,7 +13,7 @@ export class DashboardDepartmentFilterComponent implements OnInit {
   @Input() filterType!: 'radio' | 'dropdown'
   @Output() handleSelectItem = new EventEmitter();
 
-  constructor(private shareStore: HrDashboardShareStoreService) {}
+  constructor(private shareStore: HrDashboardShareStore) {}
 
   ngOnInit(): void {
     this.shareStore.getDepartments();

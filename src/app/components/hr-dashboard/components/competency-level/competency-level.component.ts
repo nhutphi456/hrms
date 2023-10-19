@@ -16,7 +16,7 @@ import {
 import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 import { IDropdownItem } from 'src/app/models/global.model';
 import { CompetencyScoreStoreService as CompetencyScoreStore } from '../../store/competency-score-store.service';
-import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
+import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -43,7 +43,7 @@ export class CompetencyLevelComponent implements OnInit {
 
   constructor(
     private competencyScoreStore: CompetencyScoreStore,
-    private shareStore: HrDashboardShareStoreService,
+    private shareStore: HrDashboardShareStore,
   ) {
     this.chartOptions = {
       series: [

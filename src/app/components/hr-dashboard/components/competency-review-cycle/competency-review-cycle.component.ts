@@ -3,7 +3,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import * as _ from 'lodash';
 import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 import { CompetencyCycleStore } from '../../store/competency-cycle-store.service';
-import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
+import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
 @Component({
   selector: 'competency-review-cycle',
   templateUrl: './competency-review-cycle.component.html',
@@ -27,7 +27,7 @@ export class CompetencyReviewCycleComponent implements OnInit {
 
   constructor(
     private competencyCycleStore: CompetencyCycleStore,
-    private shareStore: HrDashboardShareStoreService,
+    private shareStore: HrDashboardShareStore,
   ) {}
 
   ngOnInit() {

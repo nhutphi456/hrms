@@ -6,6 +6,7 @@ import {
   GET_COMPETENCY_CYCLES,
   GET_COMPETENCY_CYCLE_STATUS,
   GET_COMPETENCY_TIMELINE,
+  GET_POTENTIAL_PERFORMANCE,
   GET_TOP_COMPETENCIES,
   GET_TOP_PERFORMERS,
   GET_TOP_SKILL_SETS,
@@ -18,6 +19,8 @@ import {
   ICompetencyIncompletionApiResponse,
   ICompetencyTimelineApiResponse,
   ICptCyclesApiResponse,
+  IPotentialPerformanceApiResponse,
+  IPotentialPerformanceParams,
   ITopCompetencyApiResponse,
   ITopCompetencyParams,
   ITopPerformerApiResponse,
@@ -113,6 +116,17 @@ export class HrDashboardService {
     return this.apollo
       .watchQuery<ITopCompetencyApiResponse>({
         query: GET_TOP_COMPETENCIES,
+        variables: { ...params },
+      })
+      .valueChanges.pipe(map(res => res.data));
+  }
+
+  getPotentialPerformance(
+    params: IPotentialPerformanceParams,
+  ): Observable<IPotentialPerformanceApiResponse> {
+    return this.apollo
+      .watchQuery<IPotentialPerformanceApiResponse>({
+        query: GET_POTENTIAL_PERFORMANCE,
         variables: { ...params },
       })
       .valueChanges.pipe(map(res => res.data));

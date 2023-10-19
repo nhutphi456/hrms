@@ -6,7 +6,12 @@ import {
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, switchMap } from 'rxjs';
 import { EmployeeManagementService } from '../../employee-management/services/employee-management.service';
-import { ICompetencyCycle, ICompetencyTimeline } from '../models/hr-dashboard.model';
+import {
+  ICompetencyCycle,
+  ICompetencyTimeline,
+  IPotentialPerformance,
+  IPotentialPerformanceParams,
+} from '../models/hr-dashboard.model';
 import { HrDashboardService } from '../services/hr-dashboard.service';
 
 export interface IHRDashboardShareState {
@@ -15,19 +20,24 @@ export interface IHRDashboardShareState {
   competencyTimeline: ICompetencyTimeline[];
   competencyCycles: ICompetencyCycle[];
   activeCycle: number | null;
+  employeesPotentialPerformance: IPotentialPerformance[];
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardShareState> {
-  constructor(private employeeMngmentService: EmployeeManagementService, private hrDashboardService: HrDashboardService) {
+export class HrDashboardShareStore extends ComponentStore<IHRDashboardShareState> {
+  constructor(
+    private employeeMngmentService: EmployeeManagementService,
+    private hrDashboardService: HrDashboardService,
+  ) {
     super({
       departments: [],
       positions: [],
       competencyTimeline: [],
       competencyCycles: [],
-      activeCycle: null
+      activeCycle: null,
+      employeesPotentialPerformance: [],
     });
   }
 
@@ -45,8 +55,10 @@ export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardSha
     state => state.competencyCycles,
   );
   readonly activeCycle$: Observable<number | null> = this.select(
-    state => state.activeCycle
-  )
+    state => state.activeCycle,
+  );
+  readonly employeesPotentialPerformance$: Observable<IPotentialPerformance[]> =
+    this.select(state => state.employeesPotentialPerformance);
   //UPDATER
   readonly setDepartments = this.updater(
     (state: IHRDashboardShareState, departments: Department[]) => {
@@ -59,7 +71,10 @@ export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardSha
     },
   );
   readonly setCompetencyTimeline = this.updater(
-    (state: IHRDashboardShareState, competencyTimeline: ICompetencyTimeline[]) => {
+    (
+      state: IHRDashboardShareState,
+      competencyTimeline: ICompetencyTimeline[],
+    ) => {
       return {
         ...state,
         competencyTimeline,
@@ -74,6 +89,15 @@ export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardSha
   readonly setActiveCycle = this.updater(
     (state: IHRDashboardShareState, activeCycle: number | null) => {
       return { ...state, activeCycle };
+    },
+  );
+
+  readonly setPotentialPerformance = this.updater(
+    (
+      state: IHRDashboardShareState,
+      employeesPotentialPerformance: IPotentialPerformance[],
+    ) => {
+      return { ...state, employeesPotentialPerformance };
     },
   );
 
@@ -103,19 +127,17 @@ export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardSha
     ),
   );
 
-  readonly getCompetencyTimeline = this.effect(
-    (params$: Observable<number>) =>
-      params$.pipe(
-        switchMap(params =>
-          this.hrDashboardService.getCompetencyTimeline(params).pipe(
-            tapResponse({
-              next: res =>
-                this.setCompetencyTimeline(res.competencyTimeLine),
-              error: error => console.log(error),
-            }),
-          ),
+  readonly getCompetencyTimeline = this.effect((params$: Observable<number>) =>
+    params$.pipe(
+      switchMap(params =>
+        this.hrDashboardService.getCompetencyTimeline(params).pipe(
+          tapResponse({
+            next: res => this.setCompetencyTimeline(res.competencyTimeLine),
+            error: error => console.log(error),
+          }),
         ),
       ),
+    ),
   );
   readonly getCompetencyCycles = this.effect<void>(trigger$ =>
     trigger$.pipe(
@@ -129,4 +151,17 @@ export class HrDashboardShareStoreService extends ComponentStore<IHRDashboardSha
       ),
     ),
   );
+
+  readonly getPotentialPerformance = this.effect((params$: Observable<IPotentialPerformanceParams>) =>
+  params$.pipe(
+    switchMap(params =>
+      this.hrDashboardService.getPotentialPerformance(params).pipe(
+        tapResponse({
+          next: res => this.setPotentialPerformance(res.employeesPotentialPerformance),
+          error: error => console.log(error),
+        }),
+      ),
+    ),
+  ),
+);
 }

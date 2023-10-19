@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
+import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
 import { IDropdownItem } from 'src/app/models/global.model';
 
 @Component({
@@ -13,7 +13,7 @@ export class PositionFilterComponent implements OnInit {
 
   @Output() handleSelectItem = new EventEmitter();
 
-  constructor(private shareStore: HrDashboardShareStoreService) {}
+  constructor(private shareStore: HrDashboardShareStore) {}
 
   ngOnInit(): void {
     this.shareStore.getPositions();

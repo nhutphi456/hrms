@@ -8,7 +8,7 @@ import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.mode
 import { defaultTableConfig } from '../../../../constants/app.constant';
 import { topSkillsTableCol } from '../../constants/hr-dashboard.constants';
 import { ITopskillsetParams } from '../../models/hr-dashboard.model';
-import { HrDashboardShareStoreService } from '../../store/hr-dashboard-share-store.service';
+import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
 import { TopFiguresStore } from '../../store/top-performers-store.service';
 
 @Component({
@@ -34,7 +34,7 @@ export class TopSkillsComponent implements OnInit {
 
   constructor(
     private topFigureStore: TopFiguresStore,
-    private shareStore: HrDashboardShareStoreService,
+    private shareStore: HrDashboardShareStore,
   ) {}
 
   ngOnInit(): void {

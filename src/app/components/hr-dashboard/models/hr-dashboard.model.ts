@@ -1,5 +1,8 @@
 import { PaginatedData } from 'src/app/models/global.model';
-import { IEmployee, IJobLevel } from '../../employee-management/models/employee-management.model';
+import {
+  IEmployee,
+  IJobLevel,
+} from '../../employee-management/models/employee-management.model';
 
 export interface ITopPerformerParams {
   pageNo?: number;
@@ -110,5 +113,20 @@ export interface ITopCompetencyParams {
   pageSize: number;
 }
 export interface ITopCompetencyApiResponse {
-  employeesCompetency: PaginatedData<ITopCompetency>
+  employeesCompetency: PaginatedData<ITopCompetency>;
+}
+
+export interface IPotentialPerformance {
+  employee: IEmployee;
+  profileImgUri: string;
+  potential: number;
+  performance: number;
+}
+
+export interface IPotentialPerformanceParams {
+  departmentId: number;
+}
+
+export interface IPotentialPerformanceApiResponse {
+  employeesPotentialPerformance: IPotentialPerformance[];
 }
