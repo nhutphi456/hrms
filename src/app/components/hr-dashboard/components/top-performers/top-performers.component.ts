@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import * as _ from "lodash"
 
-import { topPerformersTableCol } from '../../constants/hr-dashboard.constants';
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
+import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
+import { configPagination } from 'src/app/utils/configPagination';
+import { defaultTableConfig } from '../../../../constants/app.constant';
+import { topPerformersTableCol } from '../../constants/hr-dashboard.constants';
 import { TopFiguresStore } from '../../store/top-performers-store.service';
-import { TopTablePopupComponent } from '../top-table-popup/top-table-popup.component';
 
 @Component({
   selector: 'top-performers',
@@ -14,30 +16,29 @@ import { TopTablePopupComponent } from '../top-table-popup/top-table-popup.compo
 })
 export class TopPerformersComponent implements OnInit {
   defaultImg = 'assets/images/profile-image-default.jpg';
-  topPerformers$ = this.topPerformerStore.topPerformers$;
+  topPerformers$ = this.topFigureScore.topPerformers$;
   tableData: HrmsTable<any> = {
-    page: 0,
-    first: 0,
-    rows: 0,
-    pageCount: 0,
-    totalRecord: 0,
+    ...defaultTableConfig,
     data: {
       header: topPerformersTableCol,
       body: [],
     },
   };
   popUpTableRef!: DynamicDialogRef;
-  paginationParams = { pageNo: 1, pageSize: 10 }
+  tableParams = { pageNo: 1, pageSize: 10 };
+  isFullTableShown = false;
+  gapPageNumber = 1;
 
   constructor(
-    private topPerformerStore: TopFiguresStore,
+    private topFigureScore: TopFiguresStore,
     private dialogService: DialogService,
   ) {}
 
   ngOnInit(): void {
-    this.topPerformerStore.getTopPerformers(this.paginationParams);
+    this.topFigureScore.getTopPerformers(this.tableParams);
     this.topPerformers$.subscribe(result => {
-      const { pageNo, pageSize, totalItems, totalPages } = result.pagination;
+      const pagination = configPagination(result.pagination);
+
       const topPerformers = result.data.map((p, i) => {
         return {
           ...p,
@@ -46,11 +47,7 @@ export class TopPerformersComponent implements OnInit {
         };
       });
       const tData = {
-        page: pageNo,
-        first: pageSize * (pageNo - 1) + 1,
-        rows: pageSize,
-        pageCount: totalPages,
-        totalRecord: totalItems,
+        ...pagination,
         data: {
           header: [...this.tableData.data.header],
           body: _.take(topPerformers, 5),
@@ -60,14 +57,15 @@ export class TopPerformersComponent implements OnInit {
     });
   }
 
-  onOpenPopupTable() {
-    this.popUpTableRef = this.dialogService.open(TopTablePopupComponent, {
-      header: 'Top Performers',
-      contentStyle: { overflow: 'visible' },
-      width: '50vw',
-      data: {
-        paginationParams: this.paginationParams,
-      },
-    });
+  showFullTable() {
+    this.isFullTableShown = true;
+  }
+
+  onPageChange(e: PageChangeEvent): void {
+    this.tableParams = {
+      ...this.tableParams,
+      pageNo: e.page + this.gapPageNumber,
+    };
+    this.topFigureScore.getTopSkillsets(this.tableParams);
   }
 }

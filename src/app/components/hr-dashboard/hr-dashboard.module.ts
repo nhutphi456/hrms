@@ -25,7 +25,6 @@ import { TopPerformersComponent } from './components/top-performers/top-performe
 import { TopCompetenciesComponent } from './components/top-competencies/top-competencies.component';
 import { EmployeePerformanceGridBoxComponent } from './components/employee-performance-grid-box/employee-performance-grid-box.component';
 import { PerformanceByJobLevelComponent } from './components/performance-by-job-level/performance-by-job-level.component';
-import { TopTablePopupComponent } from './components/top-table-popup/top-table-popup.component';
 import { PositionFilterComponent } from './components/position-filter/position-filter.component';
 import { DashboardDepartmentFilterComponent } from './components/dashboard-department-filter/dashboard-department-filter.component';
 
@@ -43,7 +42,6 @@ import { DashboardDepartmentFilterComponent } from './components/dashboard-depar
     TopCompetenciesComponent,
     EmployeePerformanceGridBoxComponent,
     PerformanceByJobLevelComponent,
-    TopTablePopupComponent,
     PositionFilterComponent,
     DashboardDepartmentFilterComponent,
   ],

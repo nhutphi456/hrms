@@ -1,6 +1,6 @@
 <div class="card-container h-full">
     <div class="card-title mb-4 flex items-center">
-        <p-button (onClick)="onOpenPopupTable()" icon="pi pi-external-link" styleClass="p-button-link"></p-button>
+        <p-button (onClick)="showFullTable()" icon="pi pi-external-link" styleClass="p-button-link"></p-button>
         <span>Top performers</span>
     </div>
     <hrms-table [table]="tableData" [tableStyle]="{'width': '100%'}" [contentRef]="contentRef">
@@ -24,3 +24,22 @@
         </ng-template>
     </hrms-table>
 </div>
+<p-dialog header="Top performers" [(visible)]="isFullTableShown" [modal]="true" [style]="{ width: '50vw' }"
+    [draggable]="false" [resizable]="false">
+    <hrms-table [table]="tableData" [tableStyle]="{'width': '100%'}" [contentRef]="contentRef"
+        [isPaginationShown]="true" (pagingInfo)="onPageChange($event)" >
+        <ng-template #contentRef let-rowData>
+            <tr>
+                <td>{{rowData.no}}</td>
+                <td class="flex justify-center">
+                    <div class="employee-rating bg-primaryLight p-2 relative">
+                        <span class="text-primary">
+                            {{rowData.avgScore}}
+                        </span>
+                    </div>
+                </td>
+                <td>{{rowData.skill}}</td>
+            </tr>
+        </ng-template>
+    </hrms-table>
+</p-dialog>
