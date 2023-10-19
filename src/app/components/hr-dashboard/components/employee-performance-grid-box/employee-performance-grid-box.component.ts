@@ -146,8 +146,8 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
 
       this.data = _.map(res, item => {
         return {
-          x: item.potential,
-          y: item.performance,
+          x: item.performance,
+          y: item.potential,
           image: item.profileImgUri,
         };
       });

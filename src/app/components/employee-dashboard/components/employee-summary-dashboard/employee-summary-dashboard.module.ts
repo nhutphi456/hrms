@@ -6,10 +6,11 @@ import { EmployeeSummaryDashboardComponent } from './employee-summary-dashboard.
 import { ShareModule } from 'src/app/components/share/share.module';
 import { EmployeeAtGlanceComponent } from './components/employee-at-glance/employee-at-glance.component';
 import { EmployeeCompetencyOverallScoreComponent } from './components/employee-competency-overall-score/employee-competency-overall-score.component';
+import { EmployeePerformanceScoreChartComponent } from './components/employee-performance-score-chart/employee-performance-score-chart.component';
 
 
 @NgModule({
-  declarations: [EmployeeSummaryDashboardComponent, EmployeeAtGlanceComponent, EmployeeCompetencyOverallScoreComponent],
+  declarations: [EmployeeSummaryDashboardComponent, EmployeeAtGlanceComponent, EmployeeCompetencyOverallScoreComponent, EmployeePerformanceScoreChartComponent],
   imports: [
     CommonModule,
     EmployeeSummaryDashboardRoutingModule,
