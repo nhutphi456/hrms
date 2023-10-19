@@ -20,7 +20,7 @@ export class CompetencyLevelByUnitComponent implements OnInit {
   scoreParams = { competencyCyclesId: [7, 8], departmentId: 2 };
   cycleOptions!: IDropdownItem[];
   departmentOptions!: IDropdownItem[];
-  
+
   constructor(
     private fb: FormBuilder,
     private competencyScoreStore: CompetencyScoreStore,
@@ -69,17 +69,17 @@ export class CompetencyLevelByUnitComponent implements OnInit {
 
     this.competencyScoreStore.getScoreByUnit(this.scoreParams);
     this.scoreByUnit$.subscribe(result => {
-      const datasets = result.datasets.map(data => {
-        const dataColor = _.sample(radarChartColors)
-        
+      const datasets = result.datasets.map((data, i) => {
+        const colorObj = radarChartColors[i];
+
         return {
           label: data.lineName,
-          borderColor: dataColor,
-          pointBackgroundColor: dataColor,
-          pointBorderColor: dataColor,
+          borderColor: colorObj.borderColor,
+          backgroundColor: colorObj.backgroundColor,
+          pointBackgroundColor: colorObj.borderColor,
+          pointBorderColor: colorObj.borderColor,
           pointHoverBackgroundColor: textColor,
-          pointHoverBorderColor:
-            dataColor,
+          pointHoverBorderColor: colorObj.borderColor,
           data: data.datasets,
         };
       });

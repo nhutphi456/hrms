@@ -44,7 +44,7 @@ export class CompetencyReviewCycleComponent implements OnInit {
       );
       this.selfEvalData = _.map(departmentInComplete, 'employeePercentage');
       this.managerEvalData = _.map(departmentInComplete, 'evaluatorPercentage');
-      this.pieLabels = companyInComplete.map(c => c.label);
+      this.pieLabels = _.reverse(companyInComplete).map(c => c.label);
       this.pieChartData = companyInComplete.map(c => c.data);
       this.completionPercentage =
         _.find(companyInComplete, { label: 'Completed' })?.data ?? 0;
@@ -134,8 +134,8 @@ export class CompetencyReviewCycleComponent implements OnInit {
       datasets: [
         {
           data: this.pieChartData,
-          backgroundColor: [colorObj.primaryLight, colorObj.primary],
-          hoverBackgroundColor: [colorObj.primaryLight, colorObj.primary],
+          backgroundColor: [colorObj.primaryLight2,colorObj.primaryLight],
+          hoverBackgroundColor: [colorObj.primaryLight2,colorObj.primaryLight],
         },
       ],
     };

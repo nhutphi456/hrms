@@ -17,13 +17,22 @@ export const pieChartColors: string[] = [
   colors.primaryLight2,
   colors.primaryLight3,
 ];
-
-export const radarChartColors: string[] = [
-  colors.primaryLight1,
-  colors.primaryLight2,
-  colors.primaryLight3,
-  colors.lightGreen,
-];
+export const radarChartColors = [
+  {
+    borderColor: colors.primaryLight3,
+    backgroundColor: 'rgba(205, 233, 234, 0.2)'
+  },
+  {
+    borderColor: colors.lightGreen,
+    backgroundColor: 'rgba(130, 196, 90, 0.2)'
+  }
+]
+// export const radarChartColors: string[] = [
+//   colors.primaryLight1,
+//   colors.primaryLight2,
+//   colors.primaryLight3,
+//   colors.lightGreen,
+// ];
 export const colorObj = {
   primary: colors.primary,
   secondary: colors.secondary,
