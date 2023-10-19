@@ -4,10 +4,14 @@
             div {
                 @apply flex items-center flex-col;
             }
+
             canvas {
-                height: 550px!important;
+                @media (min-width: 1024px) {
+                    height: 550px !important;
+                }
             }
         }
+
         .chart-container {
             // width: 90%;
             margin: auto;

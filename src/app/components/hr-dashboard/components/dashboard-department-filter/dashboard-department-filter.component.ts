@@ -10,7 +10,7 @@ import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.serv
 export class DashboardDepartmentFilterComponent implements OnInit {
   departmentOptions!: IDropdownItem[];
   selectedDepartment!: IDropdownItem;
-  @Input() filterType!: 'radio' | 'dropdown'
+  @Input() filterType!: 'radio' | 'dropdown';
   @Output() handleSelectItem = new EventEmitter();
 
   constructor(private shareStore: HrDashboardShareStore) {}
@@ -18,12 +18,14 @@ export class DashboardDepartmentFilterComponent implements OnInit {
   ngOnInit(): void {
     this.shareStore.getDepartments();
     this.shareStore.departments$.subscribe(departments => {
-      this.departmentOptions = departments.map(dep => {
+      this.departmentOptions = departments.map((dep, i) => {
         return {
           label: dep.departmentName,
           value: dep.id,
         };
       });
+
+      this.selectedDepartment = this.departmentOptions[0];
     });
   }
 

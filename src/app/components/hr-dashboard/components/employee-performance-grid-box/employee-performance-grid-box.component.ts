@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { nineGridLabels } from '../../constants/hr-dashboard.constants';
 import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
 import _ from 'lodash';
+import { IDropdownItem } from 'src/app/models/global.model';
 
 @Component({
   selector: 'employee-performance-grid-box',
@@ -14,7 +15,7 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
   basicOptions: any;
   labels: string[] = [];
   data: { x: number; y: number; image: string }[] = [];
-
+  params = { departmentId: 1 };
   // employeesPotentialPerformance$ =
   constructor(private shareStore: HrDashboardShareStore) {
     this.basicData = {
@@ -82,11 +83,11 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
       scales: {
         x: {
           min: 0,
-          max: 100,
+          max: 5,
           afterTickToLabelConversion: (ctx: any) => {
             ctx.ticks = [];
-            ctx.ticks.push({ value: 33.3, label: '' });
-            ctx.ticks.push({ value: 66.6, label: '' });
+            ctx.ticks.push({ value: 1.66, label: '' });
+            ctx.ticks.push({ value: 3.33, label: '' });
           },
 
           grid: {
@@ -107,11 +108,11 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
         },
         y: {
           min: 0,
-          max: 100,
+          max: 5,
           afterTickToLabelConversion: (ctx: any) => {
             ctx.ticks = [];
-            ctx.ticks.push({ value: 33.3, label: '' });
-            ctx.ticks.push({ value: 66.6, label: '' });
+            ctx.ticks.push({ value: 1.66, label: '' });
+            ctx.ticks.push({ value: 3.33, label: '' });
           },
           grid: {
             drawTicks: false,
@@ -135,7 +136,7 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.shareStore.getPotentialPerformance({ departmentId: 1 });
+    this.shareStore.getPotentialPerformance(this.params);
     this.shareStore.employeesPotentialPerformance$.subscribe(res => {
       this.labels = _.map(
         res,
@@ -150,8 +151,7 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
         };
       });
 
-      this.initChartData()
-      console.log({basicdata: this.basicData})
+      this.initChartData();
     });
   }
 
@@ -168,5 +168,9 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
         },
       ],
     };
+  }
+  onSelectDepartment(e: IDropdownItem) {
+    this.params = { ...this.params, departmentId: e.value };
+    this.shareStore.getPotentialPerformance(this.params);
   }
 }

@@ -26,16 +26,27 @@ export const nineGridLabels = {
     } = chart;
 
     const nineLabels = {
+      // labels: [
+      //   { name: 'D', x: 16.65, y: 16.65 },
+      //   { name: 'C', x: 16.65, y: 49.95 },
+      //   { name: 'B', x: 16.65, y: 83.25 },
+      //   { name: 'C', x: 49.95, y: 16.65 },
+      //   { name: 'B', x: 49.95, y: 49.95 },
+      //   { name: 'A', x: 49.95, y: 83.25 },
+      //   { name: 'B', x: 83.25, y: 16.65 },
+      //   { name: 'A', x: 83.25, y: 49.95 },
+      //   { name: 'A', x: 83.25, y: 83.25 },
+      // ],
       labels: [
-        { name: 'D', x: 16.65, y: 16.65 },
-        { name: 'C', x: 16.65, y: 49.95 },
-        { name: 'B', x: 16.65, y: 83.25 },
-        { name: 'C', x: 49.95, y: 16.65 },
-        { name: 'B', x: 49.95, y: 49.95 },
-        { name: 'A', x: 49.95, y: 83.25 },
-        { name: 'B', x: 83.25, y: 16.65 },
-        { name: 'A', x: 83.25, y: 49.95 },
-        { name: 'A', x: 83.25, y: 83.25 },
+        { name: 'D', x: 0.83125, y: 0.83125 },
+        { name: 'C', x: 0.83125, y: 2.4975 },
+        { name: 'B', x: 0.83125, y: 4.1625 },
+        { name: 'C', x: 2.4975, y: 0.83125 },
+        { name: 'B', x: 2.4975, y: 2.4975 },
+        { name: 'A', x: 2.4975, y: 4.1625 },
+        { name: 'B', x: 4.1625, y: 0.83125 },
+        { name: 'A', x: 4.1625, y: 2.4975 },
+        { name: 'A', x: 4.1625, y: 4.1625 },
       ],
     };
 
@@ -58,24 +69,28 @@ export const nineGridLabels = {
     ctx.textAlign = 'center';
     ctx.font = 'bold 12px sans-serif';
 
-    ctx.fillText('Low', x.getPixelForValue(16.65), y.getPixelForValue(-4));
-    ctx.fillText('Moderate', x.getPixelForValue(49.95), y.getPixelForValue(-4));
-    ctx.fillText('High', x.getPixelForValue(83.25), y.getPixelForValue(-4));
+    ctx.fillText('Low', x.getPixelForValue(0.83125), y.getPixelForValue(-0.02));
+    ctx.fillText(
+      'Moderate',
+      x.getPixelForValue(2.4975),
+      y.getPixelForValue(-0.02),
+    );
+    ctx.fillText('High', x.getPixelForValue(4.1625), y.getPixelForValue(-0.02));
 
     ctx.save();
-    ctx.translate(x.getPixelForValue(-1), y.getPixelForValue(16.65));
+    ctx.translate(x.getPixelForValue(-0.05), y.getPixelForValue(0.83125));
     ctx.rotate(-Math.PI / 2);
     ctx.fillText('Low', 0, 0);
     ctx.restore();
 
     ctx.save();
-    ctx.translate(x.getPixelForValue(-1), y.getPixelForValue(49.95));
+    ctx.translate(x.getPixelForValue(-0.05), y.getPixelForValue(2.4975));
     ctx.rotate(-Math.PI / 2);
     ctx.fillText('Moderate', 0, 0);
     ctx.restore();
 
     ctx.save();
-    ctx.translate(x.getPixelForValue(-1), y.getPixelForValue(83.25));
+    ctx.translate(x.getPixelForValue(-0.05), y.getPixelForValue(4.1625));
     ctx.rotate(-Math.PI / 2);
     ctx.fillText('High', 0, 0);
     ctx.restore();
@@ -184,7 +199,7 @@ export const GET_TOP_SKILL_SETS = gql`
 `;
 
 export const GET_TOP_COMPETENCIES = gql`
-  query GetTopCompetencies($pageNo: Int!, $pageSize: Int!){
+  query GetTopCompetencies($pageNo: Int!, $pageSize: Int!) {
     employeesCompetency(pageNo: $pageNo, pageSize: $pageSize) {
       data {
         employee {
@@ -201,7 +216,7 @@ export const GET_TOP_COMPETENCIES = gql`
       }
     }
   }
-`
+`;
 
 export const GET_COMPETENCY_CYCLES = gql`
   query GetCompetencyCyles {
@@ -224,4 +239,4 @@ export const GET_POTENTIAL_PERFORMANCE = gql`
       performance
     }
   }
-`
+`;

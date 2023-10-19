@@ -3,7 +3,9 @@
         <div>
             <p class="card-title">Employee Performance and Potential</p>
         </div>
-        <dashboard-department-filter [filterType]="'dropdown'"></dashboard-department-filter>
+        <dashboard-department-filter [filterType]="'dropdown'"
+            (handleSelectItem)="onSelectDepartment($event)"
+        ></dashboard-department-filter>
     </div>
     <div class="chart-container">
         <hrms-chart type="scatter" 
