@@ -55,13 +55,13 @@ export const nineGridLabels = {
     ctx.fillStyle = '#0D78C9FF';
     ctx.textAlign = 'center';
 
-    nineLabels.labels.forEach(label => {
-      ctx.fillText(
-        label.name,
-        x.getPixelForValue(label.x),
-        y.getPixelForValue(label.y),
-      );
-    });
+    // nineLabels.labels.forEach(label => {
+    //   ctx.fillText(
+    //     label.name,
+    //     x.getPixelForValue(label.x),
+    //     y.getPixelForValue(label.y),
+    //   );
+    // });
 
     ctx.restore();
 
@@ -69,13 +69,13 @@ export const nineGridLabels = {
     ctx.textAlign = 'center';
     ctx.font = 'bold 12px sans-serif';
 
-    ctx.fillText('Low', x.getPixelForValue(0.83125), y.getPixelForValue(-0.02));
+    ctx.fillText('Low', x.getPixelForValue(0.83125), y.getPixelForValue(-0.3));
     ctx.fillText(
       'Moderate',
       x.getPixelForValue(2.4975),
-      y.getPixelForValue(-0.02),
+      y.getPixelForValue(-0.3),
     );
-    ctx.fillText('High', x.getPixelForValue(4.1625), y.getPixelForValue(-0.02));
+    ctx.fillText('High', x.getPixelForValue(4.1625), y.getPixelForValue(-0.3));
 
     ctx.save();
     ctx.translate(x.getPixelForValue(-0.05), y.getPixelForValue(0.83125));
