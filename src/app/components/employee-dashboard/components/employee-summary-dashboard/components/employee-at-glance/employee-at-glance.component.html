@@ -1,1 +1,15 @@
-<p>employee-at-glance works!</p>
+<div class="card-container h-full flex flex-col">
+    <p class="card-title">At glance</p>
+    <div class="grid grid-cols-2 gap-4 flex-1">
+        <div class="flex justify-center items-center">
+            <div class="w-1/2">
+                <hrms-chart type="bar" [data]="barData" [options]="barOptions" [plugins]="plugins"></hrms-chart>
+            </div>
+        </div>
+        <div class="flex justify-center items-center">
+            <div class="w-1/2">
+                <hrms-chart type="doughnut" [data]="pieData" [options]="pieOptions"></hrms-chart>
+            </div>
+        </div>
+    </div>
+</div>
