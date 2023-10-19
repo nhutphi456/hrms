@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
-import { CompetencyScoreStoreService as CompetencyScoreStore } from '../../store/competency-score-store.service';
+import _ from 'lodash';
+import { radarChartColors } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 import { IDropdownItem } from 'src/app/models/global.model';
+import { CompetencyScoreStoreService as CompetencyScoreStore } from '../../store/competency-score-store.service';
 import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
 
 @Component({
@@ -18,12 +19,15 @@ export class CompetencyLevelByUnitComponent implements OnInit {
   lebels: string[] = [];
   scoreParams = { competencyCyclesId: [7, 8], departmentId: 2 };
   cycleOptions!: IDropdownItem[];
-
+  departmentOptions!: IDropdownItem[];
+  
   constructor(
     private fb: FormBuilder,
     private competencyScoreStore: CompetencyScoreStore,
     private shareStore: HrDashboardShareStore,
-  ) {}
+  ) {
+    this.initForm();
+  }
 
   ngOnInit(): void {
     const documentStyle = getComputedStyle(document.documentElement);
@@ -39,33 +43,50 @@ export class CompetencyLevelByUnitComponent implements OnInit {
           value: c.id,
         };
       });
+
+      if (!this.cycleOptions.length) return;
+      this.filterForm.patchValue({
+        competencyCyclesId: [
+          this.cycleOptions[0].value,
+          this.cycleOptions[1].value,
+        ],
+      });
     });
+
+    this.shareStore.departments$.subscribe(departments => {
+      this.departmentOptions = departments.map(dep => {
+        return {
+          label: dep.departmentName,
+          value: dep.id,
+        };
+      });
+
+      if (!this.departmentOptions.length) return;
+      this.filterForm.patchValue({
+        departmentId: this.departmentOptions[0].value,
+      });
+    });
+
     this.competencyScoreStore.getScoreByUnit(this.scoreParams);
     this.scoreByUnit$.subscribe(result => {
+      const datasets = result.datasets.map(data => {
+        const dataColor = _.sample(radarChartColors)
+        
+        return {
+          label: data.lineName,
+          borderColor: dataColor,
+          pointBackgroundColor: dataColor,
+          pointBorderColor: dataColor,
+          pointHoverBackgroundColor: textColor,
+          pointHoverBorderColor:
+            dataColor,
+          data: data.datasets,
+        };
+      });
+
       this.data = {
         labels: result.labels,
-        datasets: [
-          {
-            label: result.datasets[0]?.lineName,
-            borderColor: colorObj.lightGreen,
-            pointBackgroundColor: colorObj.lightGreen,
-            pointBorderColor: documentStyle.getPropertyValue('--bluegray-400'),
-            pointHoverBackgroundColor: textColor,
-            pointHoverBorderColor:
-              documentStyle.getPropertyValue('--bluegray-400'),
-            data: result.datasets[0]?.datasets,
-          },
-          {
-            label: result.datasets[1]?.lineName,
-            backgroundColor: 'rgba(205, 233, 234, 0.5)',
-            borderColor: colorObj.primaryLight2,
-            pointBackgroundColor: colorObj.primaryLight3,
-            pointBorderColor: colorObj.primaryLight3,
-            pointHoverBackgroundColor: textColor,
-            pointHoverBorderColor: documentStyle.getPropertyValue('--pink-400'),
-            data: result.datasets[1]?.datasets,
-          },
-        ],
+        datasets,
       };
     });
 
@@ -104,7 +125,13 @@ export class CompetencyLevelByUnitComponent implements OnInit {
 
   initForm() {
     this.filterForm = this.fb.group({
-      department: '',
+      departmentId: '',
+      competencyCyclesId: '',
     });
+  }
+
+  onFilter() {
+    const params = this.filterForm.value;
+    this.competencyScoreStore.getScoreByUnit(params);
   }
 }

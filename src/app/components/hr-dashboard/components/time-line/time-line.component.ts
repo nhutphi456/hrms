@@ -15,12 +15,10 @@ export class TimeLineComponent implements OnInit {
   ngOnInit(): void {
     this.shareStore.getCompetencyTimeline(8);
     this.competencyTimeline$.subscribe(result => {
-      console.log({result})
       this.events = result.map((r, i) => ({
         ...r,
         icon: this.getTimelineIcon(i)
       }))
-      console.log({events: this.events})
     });
   }
 

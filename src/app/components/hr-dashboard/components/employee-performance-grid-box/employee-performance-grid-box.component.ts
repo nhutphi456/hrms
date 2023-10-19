@@ -63,7 +63,7 @@ export class EmployeePerformanceGridBoxComponent implements OnInit {
             if (!ctx.raw || !ctx.raw.image) {
               return; // or provide a default point style
             }
-            const pointImage = new Image(35, 35);
+            const pointImage = new Image(40, 40);
             pointImage.src = ctx.raw.image;
 
             return pointImage;

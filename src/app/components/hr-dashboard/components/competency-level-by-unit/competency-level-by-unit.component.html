@@ -9,15 +9,29 @@
             <p-button icon="pi pi-filter" iconPos="right" (click)="op.toggle($event)" label="Filter"></p-button>
             <p-overlayPanel #op>
                 <ng-template pTemplate="content">
-                    <form [formGroup]="filterForm" class="flex flex-col gap-2">
-                        <h4>Custom Content</h4>
-                        <dashboard-department-filter [filterType]="'radio'"></dashboard-department-filter>
+                    <form [formGroup]="filterForm" (ngSubmit)="onFilter()" class="flex flex-col gap-2">
+                        <h4>Filter Options</h4>
 
-                        <p-multiSelect [options]="cycleOptions" [showHeader]="false" styleClass="w-full"></p-multiSelect>
+                        <div class="mt-2">
+                            <p>Unit</p>
+                            <div class="flex flex-col gap-2 mt-2">
+                                <div *ngFor="let department of departmentOptions" class="flex items-center">
+                                    <p-radioButton name="departmentId" [value]="department.value"
+                                        [inputId]="department.label" formControlName="departmentId"></p-radioButton>
+                                    <label [for]="department.label" class="ml-2">{{department.label}}</label>
+                                </div>
+                            </div>
+                        </div>
 
-                        <div>
-                            <p-button styleClass="p-button-link" label="Cancel"></p-button>
-                            <p-button label="Save"></p-button>
+                        <div class="mt-2">
+                            <p>Period</p>
+                            <p-multiSelect formControlName="competencyCyclesId" [options]="cycleOptions"
+                                [showHeader]="false" styleClass="w-full" [maxSelectedLabels]="2"></p-multiSelect>
+
+                        </div>
+                        <div class="w-full flex justify-end">
+                            <p-button styleClass="p-button-link" label="Cancel" (onClick)="op.hide()"></p-button>
+                            <p-button label="Save" type="submit" (onClick)="onFilter()"></p-button>
                         </div>
                     </form>
                 </ng-template>

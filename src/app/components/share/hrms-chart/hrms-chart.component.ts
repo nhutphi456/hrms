@@ -7,10 +7,7 @@ import {
 } from '@angular/core';
 import { ChartData, ChartType } from 'chart.js';
 import { UIChart } from 'primeng/chart';
-import {
-  ChartOptions,
-  Plugin,
-} from 'chart.js/dist/types/index';
+import { ChartOptions, Plugin } from 'chart.js/dist/types/index';
 import { themeColors as colors } from '../constants/share.constants';
 
 export const pieChartColors: string[] = [
@@ -19,6 +16,13 @@ export const pieChartColors: string[] = [
   colors.primaryLight1,
   colors.primaryLight2,
   colors.primaryLight3,
+];
+
+export const radarChartColors: string[] = [
+  colors.primaryLight1,
+  colors.primaryLight2,
+  colors.primaryLight3,
+  colors.lightGreen,
 ];
 export const colorObj = {
   primary: colors.primary,

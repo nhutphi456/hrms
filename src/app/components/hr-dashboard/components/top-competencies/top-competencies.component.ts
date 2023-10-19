@@ -21,53 +21,7 @@ export class TopCompetenciesComponent implements OnInit {
     ...defaultTableConfig,
     data: {
       header: topCompetenciesTableCol,
-      body: [
-        {
-          no: 1,
-          rating: 3.5,
-          employee: {
-            profileImg: 'assets/images/profile-image-default.jpg',
-            firstName: 'Jason',
-            lastName: 'Hud',
-          },
-        },
-        {
-          no: 2,
-          rating: 3,
-          employee: {
-            profileImg: 'assets/images/profile-image-default.jpg',
-            firstName: 'Jason',
-            lastName: 'Hud',
-          },
-        },
-        {
-          no: 3,
-          rating: 3,
-          employee: {
-            profileImg: 'assets/images/profile-image-default.jpg',
-            firstName: 'Jason',
-            lastName: 'Hud',
-          },
-        },
-        {
-          no: 4,
-          rating: 3,
-          employee: {
-            profileImg: 'assets/images/profile-image-default.jpg',
-            firstName: 'Jason',
-            lastName: 'Hud',
-          },
-        },
-        {
-          no: 5,
-          rating: 3,
-          employee: {
-            profileImg: 'assets/images/profile-image-default.jpg',
-            firstName: 'Jason',
-            lastName: 'Hud',
-          },
-        },
-      ],
+      body: [],
     },
   };
   tableParams: ITopCompetencyParams = { pageNo: 1, pageSize: 10 };
@@ -77,6 +31,7 @@ export class TopCompetenciesComponent implements OnInit {
   defaultImg = defaultImg;
 
   constructor(private topFigureStore: TopFiguresStore) {}
+  
   ngOnInit(): void {
     this.topFigureStore.getTopCompetencies(this.tableParams);
     this.topCompetencies$.subscribe(res => {

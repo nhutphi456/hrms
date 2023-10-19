@@ -1,7 +1,7 @@
 :host ::ng-deep {
     .overview-card {
-        @apply p-8 w-96 rounded-lg flex-1;
-        background-color: #F4FAFAFF;
+        @apply p-8 w-96 rounded-lg flex-1 bg-primaryLight w-full;
+        // background-color: #F4FAFAFF;
     }
     .employee-difference {
         line-height: 1.75rem;
