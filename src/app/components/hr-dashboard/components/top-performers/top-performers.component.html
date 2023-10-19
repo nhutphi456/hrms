@@ -34,11 +34,16 @@
                 <td class="flex justify-center">
                     <div class="employee-rating bg-primaryLight p-2 relative">
                         <span class="text-primary">
-                            {{rowData.avgScore}}
+                            {{rowData.finalAssessment}}
                         </span>
                     </div>
                 </td>
-                <td>{{rowData.skill}}</td>
+                <td class="pl-4">
+                    <div class="flex items-center justify-start">
+                        <p-avatar [image]="rowData.profileImg" styleClass="mr-2" shape="circle"></p-avatar>
+                        <p>{{rowData.employee.firstName}} {{rowData.employee.lastName}}</p>
+                    </div>
+                </td>
             </tr>
         </ng-template>
     </hrms-table>

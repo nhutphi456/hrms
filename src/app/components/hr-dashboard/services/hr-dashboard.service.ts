@@ -6,6 +6,7 @@ import {
   GET_COMPETENCY_CYCLES,
   GET_COMPETENCY_CYCLE_STATUS,
   GET_COMPETENCY_TIMELINE,
+  GET_TOP_COMPETENCIES,
   GET_TOP_PERFORMERS,
   GET_TOP_SKILL_SETS,
 } from '../constants/hr-dashboard.constants';
@@ -17,6 +18,8 @@ import {
   ICompetencyIncompletionApiResponse,
   ICompetencyTimelineApiResponse,
   ICptCyclesApiResponse,
+  ITopCompetencyApiResponse,
+  ITopCompetencyParams,
   ITopPerformerApiResponse,
   ITopPerformerParams,
   ITopSkillsetApiResponse,
@@ -41,11 +44,15 @@ export class HrDashboardService {
       .valueChanges.pipe(map(res => res.data));
   }
 
-  getTopSkillset(params: ITopskillsetParams): Observable<ITopSkillsetApiResponse> {
-    return this.apollo.watchQuery<ITopSkillsetApiResponse>({
-      query: GET_TOP_SKILL_SETS,
-      variables: {...params}
-    }).valueChanges.pipe(map(res => res.data))
+  getTopSkillset(
+    params: ITopskillsetParams,
+  ): Observable<ITopSkillsetApiResponse> {
+    return this.apollo
+      .watchQuery<ITopSkillsetApiResponse>({
+        query: GET_TOP_SKILL_SETS,
+        variables: { ...params },
+      })
+      .valueChanges.pipe(map(res => res.data));
   }
 
   getCompetencyIncompletionStatus(
@@ -92,9 +99,22 @@ export class HrDashboardService {
       .valueChanges.pipe(map(res => res.data));
   }
 
-  getCompetencyCycles(): Observable<ICptCyclesApiResponse>{
-    return this.apollo.watchQuery<ICptCyclesApiResponse>({
-      query: GET_COMPETENCY_CYCLES
-    }).valueChanges.pipe(map(res => res.data));
+  getCompetencyCycles(): Observable<ICptCyclesApiResponse> {
+    return this.apollo
+      .watchQuery<ICptCyclesApiResponse>({
+        query: GET_COMPETENCY_CYCLES,
+      })
+      .valueChanges.pipe(map(res => res.data));
+  }
+
+  getTopCompetencies(
+    params: ITopCompetencyParams,
+  ): Observable<ITopCompetencyApiResponse> {
+    return this.apollo
+      .watchQuery<ITopCompetencyApiResponse>({
+        query: GET_TOP_COMPETENCIES,
+        variables: { ...params },
+      })
+      .valueChanges.pipe(map(res => res.data));
   }
 }

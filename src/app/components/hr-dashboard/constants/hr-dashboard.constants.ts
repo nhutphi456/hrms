@@ -183,6 +183,26 @@ export const GET_TOP_SKILL_SETS = gql`
   }
 `;
 
+export const GET_TOP_COMPETENCIES = gql`
+  query GetTopCompetencies($pageNo: Int!, $pageSize: Int!){
+    employeesCompetency(pageNo: $pageNo, pageSize: $pageSize) {
+      data {
+        employee {
+          lastName
+          firstName
+        }
+        rating
+      }
+      pagination {
+        pageNo
+        pageSize
+        totalPages
+        totalItems
+      }
+    }
+  }
+`
+
 export const GET_COMPETENCY_CYCLES = gql`
   query GetCompetencyCyles {
     competencyCycles {

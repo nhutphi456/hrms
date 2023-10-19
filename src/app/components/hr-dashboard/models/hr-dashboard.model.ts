@@ -1,5 +1,5 @@
 import { PaginatedData } from 'src/app/models/global.model';
-import { IJobLevel } from '../../employee-management/models/employee-management.model';
+import { IEmployee, IJobLevel } from '../../employee-management/models/employee-management.model';
 
 export interface ITopPerformerParams {
   pageNo?: number;
@@ -98,4 +98,17 @@ export interface ICompetencyCycle {
 }
 export interface ICptCyclesApiResponse {
   competencyCycles: ICompetencyCycle[];
+}
+
+export interface ITopCompetency {
+  employee: IEmployee;
+  rating: number;
+}
+
+export interface ITopCompetencyParams {
+  pageNo: number;
+  pageSize: number;
+}
+export interface ITopCompetencyApiResponse {
+  employeesCompetency: PaginatedData<ITopCompetency>
 }

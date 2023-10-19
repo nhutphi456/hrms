@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
 import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
 import { configPagination } from 'src/app/utils/configPagination';
-import { defaultTableConfig } from '../../../../constants/app.constant';
+import { defaultTableConfig, defaultImg } from '../../../../constants/app.constant';
 import { topPerformersTableCol } from '../../constants/hr-dashboard.constants';
 import { TopFiguresStore } from '../../store/top-performers-store.service';
 
@@ -15,7 +15,7 @@ import { TopFiguresStore } from '../../store/top-performers-store.service';
   styleUrls: ['./top-performers.component.scss'],
 })
 export class TopPerformersComponent implements OnInit {
-  defaultImg = 'assets/images/profile-image-default.jpg';
+  defaultImg = defaultImg;
   topPerformers$ = this.topFigureScore.topPerformers$;
   tableData: HrmsTable<any> = {
     ...defaultTableConfig,
@@ -31,7 +31,6 @@ export class TopPerformersComponent implements OnInit {
 
   constructor(
     private topFigureScore: TopFiguresStore,
-    private dialogService: DialogService,
   ) {}
 
   ngOnInit(): void {
