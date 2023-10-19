@@ -47,7 +47,8 @@ export class CompetencyReviewCycleComponent implements OnInit {
       this.pieLabels = companyInComplete.map(c => c.label);
       this.pieChartData = companyInComplete.map(c => c.data);
       this.completionPercentage =
-        _.find(companyInComplete, { label: 'completed' })?.data ?? 0;
+        _.find(companyInComplete, { label: 'Completed' })?.data ?? 0;
+
       this.initBarChartData();
       this.initPieChartData();
     });

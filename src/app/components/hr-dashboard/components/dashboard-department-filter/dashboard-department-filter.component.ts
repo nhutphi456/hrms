@@ -16,7 +16,6 @@ export class DashboardDepartmentFilterComponent implements OnInit {
   constructor(private shareStore: HrDashboardShareStore) {}
 
   ngOnInit(): void {
-    console.log({selected: this.selectedDepartment})
     this.shareStore.getDepartments();
     this.shareStore.departments$.subscribe(departments => {
       this.departmentOptions = departments.map((dep, i) => {
