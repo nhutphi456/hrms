@@ -4,10 +4,10 @@
 
       <!-- <hrms-avatar [imgSrc]="prependImage(employee.imageSource.imagePath)" shape="circle" size="normal"></hrms-avatar> -->
 
-      <img *ngIf="employee.imageSource" class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;"
-        [src]="prependImage(employee.imageSource.imagePath)" [alt]="employee.firstName">
+      <img *ngIf="employee.damId" class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;"
+        [src]="prependImage(employee.damId)" [alt]="employee.firstName">
 
-      <img *ngIf="!employee.imageSource" class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;"
+      <img *ngIf="!employee.damId" class="avatar-img" style="background: #CDE9EAFF; border-radius: 60px;"
         [src]="defaultImg" [alt]="employee.firstName">
       <a class="text-black ml-1" [routerLink]="['detail', employee.id]">{{employee.firstName}} {{ employee.lastName
         }}</a>

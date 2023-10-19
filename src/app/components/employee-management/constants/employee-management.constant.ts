@@ -105,10 +105,7 @@ export const GET_EMPLOYEES = gql`
         firstName
         lastName
         currentContract
-        imageSource {
-          id
-          imagePath
-        }
+        damId
         address
         phoneNumber
         positionLevel {
@@ -157,10 +154,7 @@ export const GET_EMPLOYEE = gql`
           skillName
         }
       }
-      imageSource {
-        id
-        imagePath
-      }
+      damId
       profileBio
       emergencyContacts {
         id
@@ -218,9 +212,7 @@ export const GET_NEW_EMPLOYEES = gql`
   query GetEmployeesCarousel {
     employeeOfTheMonth {
       id
-      imageSource {
-        imagePath
-      }
+      damId
       firstName
       lastName
       user {

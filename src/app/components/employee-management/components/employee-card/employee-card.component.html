@@ -3,11 +3,11 @@
         <div class="flex flex-1">
             <div class="mb-4">
                 <p-avatar
-                    *ngIf="employee.imageSource"
+                    *ngIf="employee.damId"
                     styleClass="mr-2" size="xlarge" shape="circle"
-                    [image]="prependImage(employee.imageSource.imagePath)"></p-avatar>
+                    [image]="prependImage(employee.damId)"></p-avatar>
                 <img
-                    *ngIf="!employee.imageSource" 
+                    *ngIf="!employee.damId" 
                     class="avatar-img mr-2"
                     style="background: #CDE9EAFF; border-radius: 60px; width: 56px; height: 56px;" [src]="defaultImg"
                     [alt]="employee.firstName">
