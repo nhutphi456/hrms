@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IDropdownItem } from 'src/app/models/global.model';
 import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
+import { mapToDropdownOptions } from 'src/app/utils/mapToDropdownOptions';
 
 @Component({
   selector: 'dashboard-department-filter',
@@ -18,17 +19,12 @@ export class DashboardDepartmentFilterComponent implements OnInit {
   ngOnInit(): void {
     this.shareStore.getDepartments();
     this.shareStore.departments$.subscribe(departments => {
-      this.departmentOptions = departments.map((dep) => {
-        return {
-          label: dep.departmentName,
-          value: dep.id,
-        };
-      });
+      this.departmentOptions = mapToDropdownOptions(departments, 'departmentName', 'id');
 
       this.selectedDepartment = this.departmentOptions[0];
     });
   }
-
+  
   onSelectItem() {
     this.handleSelectItem.emit(this.selectedDepartment);
   }

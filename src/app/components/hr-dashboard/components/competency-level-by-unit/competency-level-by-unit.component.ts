@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import _ from 'lodash';
 import { radarChartColors } from 'src/app/components/share/hrms-chart/hrms-chart.component';
 import { IDropdownItem } from 'src/app/models/global.model';
 import { CompetencyScoreStoreService as CompetencyScoreStore } from '../../store/competency-score-store.service';
 import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
+import { mapToDropdownOptions } from 'src/app/utils/mapToDropdownOptions';
 
 @Component({
   selector: 'competency-level-by-unit',
@@ -37,12 +37,11 @@ export class CompetencyLevelByUnitComponent implements OnInit {
     );
     // this.shareStore.getCompetencyCycles();
     this.shareStore.competencyCycles$.subscribe(cycles => {
-      this.cycleOptions = cycles.map(c => {
-        return {
-          label: c.competencyCycleName,
-          value: c.id,
-        };
-      });
+      this.cycleOptions = mapToDropdownOptions(
+        cycles,
+        'competencyCycleName',
+        'id',
+      );
 
       if (!this.cycleOptions.length) return;
       this.filterForm.patchValue({
@@ -54,12 +53,11 @@ export class CompetencyLevelByUnitComponent implements OnInit {
     });
 
     this.shareStore.departments$.subscribe(departments => {
-      this.departmentOptions = departments.map(dep => {
-        return {
-          label: dep.departmentName,
-          value: dep.id,
-        };
-      });
+      this.departmentOptions = mapToDropdownOptions(
+        departments,
+        'departmentName',
+        'id',
+      );
 
       if (!this.departmentOptions.length) return;
       this.filterForm.patchValue({

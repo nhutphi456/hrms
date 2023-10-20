@@ -7,6 +7,7 @@ import { HelperService } from 'src/app/services/helper.service';
 import { NotificationService } from 'src/app/shared/message/notification.service';
 import { EmployeeManagementService } from '../../services/employee-management.service';
 import { EmployeeStore } from '../../store/employee-management.store.service';
+import { mapToDropdownOptions } from 'src/app/utils/mapToDropdownOptions';
 
 @Component({
   selector: 'employee-form',
@@ -67,12 +68,7 @@ export class EmployeeFormComponent implements OnInit {
     this.employeeStore.getJobLevels();
 
     this.employeeStore.departments$.subscribe(departments => {
-      this.departmentOptions = departments.map(dep => {
-        return {
-          label: dep.departmentName,
-          value: dep.id,
-        };
-      });
+      this.departmentOptions = mapToDropdownOptions(departments, 'departmentName', 'id');
     });
     this.employeeStore.positions$.subscribe(positions => {
       this.positionOptions = positions.map(pos => {
@@ -84,12 +80,7 @@ export class EmployeeFormComponent implements OnInit {
       });
     });
     this.employeeStore.jobLevels$.subscribe(jobLevels => {
-      this.jobLevelOptions = jobLevels.map(level => {
-        return {
-          label: level.jobLevelName,
-          value: level.id,
-        };
-      });
+      this.jobLevelOptions = mapToDropdownOptions(jobLevels, "jobLevelName", "id")
     });
   }
   initForm() {
@@ -156,14 +147,6 @@ export class EmployeeFormComponent implements OnInit {
     };
 
     reader.readAsDataURL(f); // Read the file as base64 data
-  }
-
-  private parseToByteArray(base64: string) {
-    const avaBytesArr = this.helperService.base64ToBytes(base64); // Convert base64 string to bytes
-    const byteArr = Array.from(avaBytesArr);
-    this.addEmployeeForm.patchValue({
-      avatarImg: byteArr,
-    });
   }
 
   onSubmit() {

@@ -11,6 +11,7 @@ import { EmployeeManagementService } from '../../services/employee-management.se
 import { EmployeeStore } from '../../store/employee-management.store.service';
 import { prependImage } from 'src/app/utils/prependImage';
 import { concatMap, of } from 'rxjs';
+import { mapToDropdownOptions } from 'src/app/utils/mapToDropdownOptions';
 @Component({
   selector: 'employee-detail',
   templateUrl: './employee-detail.component.html',
@@ -65,10 +66,7 @@ export class EmployeeDetailComponent implements OnInit {
     });
 
     this.employeeStore.departments$.subscribe(departments => {
-      this.departments = departments.map(dep => ({
-        label: dep.departmentName,
-        value: dep.id,
-      }));
+      this.departments = mapToDropdownOptions(departments, 'departmentName', 'id');
     });
     this.employeeStore.positions$.subscribe(positions => {
       this.positionOptions = positions.map(pos => {
@@ -80,13 +78,8 @@ export class EmployeeDetailComponent implements OnInit {
         };
       });
     });
-    this.employeeStore.jobLevels$.subscribe(jobLevel => {
-      this.jobLevelOptions = jobLevel.map(level => {
-        return {
-          label: level.jobLevelName,
-          value: level.id,
-        };
-      });
+    this.employeeStore.jobLevels$.subscribe(jobLevels => {
+      this.jobLevelOptions = mapToDropdownOptions(jobLevels, "jobLevelName", "id")
     });
   }
 
