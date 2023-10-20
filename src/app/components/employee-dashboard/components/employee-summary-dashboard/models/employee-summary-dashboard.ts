@@ -1,6 +1,6 @@
 import { PaginatedData } from "src/app/models/global.model";
 
-export interface IEmployeeScore {
+export interface IEmployeeScoreTable {
   no: number;
   score: number;
   skillsetName: string;
@@ -12,7 +12,7 @@ export interface IEmployeeScoreParams {
     employeeId?: number;
 }
 
-export interface IEmployeeHighestSkill {
+export interface IEmployeeSkillScore {
     skillSet: {
         skillSetName: string
     }
@@ -22,5 +22,12 @@ export interface IEmployeeHighestSkill {
 }
 
 export interface IEmployeeHighestSkillApiResponse {
-    topHighestSkillSetEmployee: PaginatedData<IEmployeeHighestSkill>
+    topHighestSkillSetEmployee: PaginatedData<IEmployeeSkillScore>
+}
+
+export interface IEmployeeImproveSkillApiResponse {
+    topKeenSkillSetEmployee: PaginatedData<IEmployeeSkillScore>
+}
+export interface IEmployeeTargetSkillApiResponse {
+    topHighestSkillSetTargetEmployee: PaginatedData<IEmployeeSkillScore>
 }

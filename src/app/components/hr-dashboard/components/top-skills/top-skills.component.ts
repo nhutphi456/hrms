@@ -9,7 +9,7 @@ import { defaultTableConfig } from '../../../../constants/app.constant';
 import { topSkillsTableCol } from '../../constants/hr-dashboard.constants';
 import { ITopskillsetParams } from '../../models/hr-dashboard.model';
 import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
-import { TopFiguresStore } from '../../store/top-performers-store.service';
+import { TopFiguresStore } from '../../store/top-figures-store.service';
 
 @Component({
   selector: 'top-skills',

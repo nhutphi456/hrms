@@ -7,7 +7,7 @@ import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.mode
 import { configPagination } from 'src/app/utils/configPagination';
 import { defaultTableConfig, defaultImg } from '../../../../constants/app.constant';
 import { topPerformersTableCol } from '../../constants/hr-dashboard.constants';
-import { TopFiguresStore } from '../../store/top-performers-store.service';
+import { TopFiguresStore } from '../../store/top-figures-store.service';
 
 @Component({
   selector: 'top-performers',

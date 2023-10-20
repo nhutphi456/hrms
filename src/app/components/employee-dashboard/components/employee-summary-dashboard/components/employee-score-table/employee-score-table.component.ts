@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HrmsTable } from 'src/app/components/share/models/hrms-table.model';
 import { PageChangeEvent } from 'src/app/components/share/models/pagingInfo.model';
 import { defaultTableConfig } from 'src/app/constants/app.constant';
@@ -18,12 +18,14 @@ export class EmployeeScoreTableComponent<IEmployeeScore> {
     },
   };
   @Input() tableHeader!: string;
+  @Output() pageChage = new EventEmitter();
   
   isFullTableShown = false;
   pageGapNumber = 1;
 
   onPageChange(e: PageChangeEvent) {
     console.log({ e });
+    this.pageChage.emit(e)
   }
 
   showFullTable() {

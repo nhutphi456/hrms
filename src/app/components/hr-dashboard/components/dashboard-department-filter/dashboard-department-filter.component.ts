@@ -18,7 +18,7 @@ export class DashboardDepartmentFilterComponent implements OnInit {
   ngOnInit(): void {
     this.shareStore.getDepartments();
     this.shareStore.departments$.subscribe(departments => {
-      this.departmentOptions = departments.map((dep, i) => {
+      this.departmentOptions = departments.map((dep) => {
         return {
           label: dep.departmentName,
           value: dep.id,

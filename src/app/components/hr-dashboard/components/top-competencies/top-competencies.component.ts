@@ -5,7 +5,7 @@ import {
   defaultTableConfig,
   defaultImg,
 } from '../../../../constants/app.constant';
-import { TopFiguresStore } from '../../store/top-performers-store.service';
+import { TopFiguresStore } from '../../store/top-figures-store.service';
 import { ITopCompetencyParams } from '../../models/hr-dashboard.model';
 import { configPagination } from 'src/app/utils/configPagination';
 import _ from 'lodash';
