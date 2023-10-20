@@ -11,6 +11,6 @@ export class EmDashboardSummaryService {
   ) { }
 
   getTopSkillset(){
-    
+    return null
   }
 }
