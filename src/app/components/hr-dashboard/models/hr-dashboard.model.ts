@@ -130,3 +130,16 @@ export interface IPotentialPerformanceParams {
 export interface IPotentialPerformanceApiResponse {
   employeesPotentialPerformance: IPotentialPerformance[];
 }
+
+export interface IPerformanceByLevelParams {
+  performanceCycleId: number;
+  positionId: 1;
+}
+export interface IPerformanceByLevel {
+  labels: IJobLevel[];
+  datasets: number[][];
+  categories: string[];
+}
+export interface IPerformanceByLevelApiResponse {
+  performanceByJobLevel: IPerformanceByLevel;
+}

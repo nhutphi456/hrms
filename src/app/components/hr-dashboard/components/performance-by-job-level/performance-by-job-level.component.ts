@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.component';
+import { HrDashboardShareStore } from '../../store/hr-dashboard-share-store.service';
 
 @Component({
   selector: 'performance-by-job-level',
@@ -10,7 +11,11 @@ import { colorObj } from 'src/app/components/share/hrms-chart/hrms-chart.compone
 export class PerformanceByJobLevelComponent implements OnInit {
   data: any;
   options: any;
-  plugins: any = [ChartDataLabels];
+  plugins = [ChartDataLabels];
+
+  constructor(private shareStore: HrDashboardShareStore) {
+    
+  }
   
   ngOnInit() {
     this.data = {

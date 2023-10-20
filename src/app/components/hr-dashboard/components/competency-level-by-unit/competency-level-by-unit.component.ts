@@ -105,7 +105,7 @@ export class CompetencyLevelByUnitComponent implements OnInit {
           angleLines: {
             display: true,
           },
-          suggestedMin: 1,
+          suggestedMin: 0,
           suggestedMax: 4,
           grid: {
             color: textColorSecondary,
@@ -114,9 +114,9 @@ export class CompetencyLevelByUnitComponent implements OnInit {
             color: textColorSecondary,
           },
           ticks: {
-            suggestedMin: 1,
+            suggestedMin: 0,
             suggestedMax: 4,
-            stepSize: 0.5,
+            stepSize: 1,
           },
         },
       },

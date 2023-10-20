@@ -9,6 +9,8 @@ import { EmployeeManagementService } from '../../employee-management/services/em
 import {
   ICompetencyCycle,
   ICompetencyTimeline,
+  IPerformanceByLevel,
+  IPerformanceByLevelParams,
   IPotentialPerformance,
   IPotentialPerformanceParams,
 } from '../models/hr-dashboard.model';
@@ -21,6 +23,7 @@ export interface IHRDashboardShareState {
   competencyCycles: ICompetencyCycle[];
   activeCycle: number | null;
   employeesPotentialPerformance: IPotentialPerformance[];
+  performanceByJobLevel: IPerformanceByLevel | null;
 }
 
 @Injectable({
@@ -38,6 +41,7 @@ export class HrDashboardShareStore extends ComponentStore<IHRDashboardShareState
       competencyCycles: [],
       activeCycle: null,
       employeesPotentialPerformance: [],
+      performanceByJobLevel: null,
     });
   }
 
@@ -59,6 +63,10 @@ export class HrDashboardShareStore extends ComponentStore<IHRDashboardShareState
   );
   readonly employeesPotentialPerformance$: Observable<IPotentialPerformance[]> =
     this.select(state => state.employeesPotentialPerformance);
+
+  readonly performanceByJobLevel$: Observable<IPerformanceByLevel | null> =
+    this.select(state => state.performanceByJobLevel);
+    
   //UPDATER
   readonly setDepartments = this.updater(
     (state: IHRDashboardShareState, departments: Department[]) => {
@@ -98,6 +106,15 @@ export class HrDashboardShareStore extends ComponentStore<IHRDashboardShareState
       employeesPotentialPerformance: IPotentialPerformance[],
     ) => {
       return { ...state, employeesPotentialPerformance };
+    },
+  );
+
+  readonly setPerformanceByLevel = this.updater(
+    (
+      state: IHRDashboardShareState,
+      performanceByJobLevel: IPerformanceByLevel,
+    ) => {
+      return { ...state, performanceByJobLevel };
     },
   );
 
@@ -152,16 +169,33 @@ export class HrDashboardShareStore extends ComponentStore<IHRDashboardShareState
     ),
   );
 
-  readonly getPotentialPerformance = this.effect((params$: Observable<IPotentialPerformanceParams>) =>
-  params$.pipe(
-    switchMap(params =>
-      this.hrDashboardService.getPotentialPerformance(params).pipe(
-        tapResponse({
-          next: res => this.setPotentialPerformance(res.employeesPotentialPerformance),
-          error: error => console.log(error),
-        }),
+  readonly getPotentialPerformance = this.effect(
+    (params$: Observable<IPotentialPerformanceParams>) =>
+      params$.pipe(
+        switchMap(params =>
+          this.hrDashboardService.getPotentialPerformance(params).pipe(
+            tapResponse({
+              next: res =>
+                this.setPotentialPerformance(res.employeesPotentialPerformance),
+              error: error => console.log(error),
+            }),
+          ),
+        ),
       ),
-    ),
-  ),
-);
+  );
+
+  readonly getPerformanceByLevel = this.effect(
+    (params$: Observable<IPerformanceByLevelParams>) =>
+      params$.pipe(
+        switchMap(params =>
+          this.hrDashboardService.getPerformanceByLevel(params).pipe(
+            tapResponse({
+              next: res =>
+                this.setPerformanceByLevel(res.performanceByJobLevel),
+              error: error => console.log(error),
+            }),
+          ),
+        ),
+      ),
+  );
 }

@@ -240,3 +240,15 @@ export const GET_POTENTIAL_PERFORMANCE = gql`
     }
   }
 `;
+
+export const GET_PERFORMANCE_BY_JOB_LEVEL = gql`
+  query GetPerformanceByJobLevel($performanceCycleId: Int!, $positionId: Int!) {
+    performanceByJobLevel(performanceCycleId: $performanceCycleId , positionId: $positionId) {
+      labels {
+        jobLevelName
+      }
+      datasets
+      categories
+    }
+  }
+`
